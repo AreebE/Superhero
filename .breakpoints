@@ -1,0 +1,20 @@
+{
+  "files": {
+    "Game/HerosAndAbilities/TypesOfAbilities/AttackAbility.java": [
+      {
+        "id": "2ae98c4e-0ff1-4a99-bbda-1f0290688b08",
+        "line": 29,
+        "version": 388,
+        "index": 1013
+      }
+    ],
+    "ablilites/SupportAbility.java": [
+      {
+        "id": "47022145-3afd-43e7-95bc-81bab47c684d",
+        "line": 15,
+        "version": 346,
+        "index": 314
+      }
+    ]
+  }
+}
