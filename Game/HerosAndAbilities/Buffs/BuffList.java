@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class BuffList {
 
   public static enum BuffType{
-    ATTACK, DEFENSE, SUPPORT
+    ATTACK, DEFENSE, SUPPORT, NONE
   } 
 
   private BuffList(){

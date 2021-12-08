@@ -25,5 +25,17 @@ public class AttackAbility extends Ability{
   public Ability copyAbility(){
     return new AttackAbility(getName(), getDescription(), getCooldown(), strength, getID(), getElement(), ignoresBaseDefense, isPiercing);
   }
+
+  @Override
+  public String toString(){
+    StringBuilder sBuilder = new StringBuilder(super.toString());
+    if (ignoresBaseDefense){
+      sBuilder.append(" (It ignores the base defense) ");
+    }
+    if (isPiercing){
+      sBuilder.append(" (It pierces the sheild) ");
+    }
+    return sBuilder.toString();
+  }
 }
 // 

@@ -94,7 +94,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   }
   //
 
-  /* Methods involving a player's ability
+  /* Methods involving a player's ability/abilities
   */
   public void addAbility(Ability newAbility){
     abilities.add(newAbility);
@@ -225,6 +225,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
     useBuffs();
     reduceCooldowns();
   }
+
+
 
   public void useBuffs(){
     for (int i = buffs.size() - 1; i >= 0; i--){

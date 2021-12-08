@@ -33,8 +33,8 @@ public class AbilityList {
   private final static HashMap<Integer, Ability> LIST_OF_ABILITIES = new HashMap<>(){{
     // Attack abilities
     put(FIREBALL, new AttackAbility("Fireball", "Launches a ball of fire", 1, 3, FIREBALL, new Element("Fire", "fire"), false, false));
-    put(SNOWBALL, new AttackAbility("Snowball", "Launches a few snowballs. May cause frost or blindness.", 1, 3, SNOWBALL, new Element("Ice", "ice"), false, false));
-    put(LIGHTNING_STRIKE, new AttackAbility("Lightning Strike", "Has a chance to shock the enemy.", 1, 3, LIGHTNING_STRIKE, new Element("Electricity", "electric"), false, false));
+    put(SNOWBALL, new AttackAbility("Snowball", "Launches a few snowballs. May cause frost or blindness.", 1, 3, SNOWBALL, new Element("Ice", "ice"), false, true));
+    put(LIGHTNING_STRIKE, new AttackAbility("Lightning Strike", "Has a chance to shock the enemy.", 1, 3, LIGHTNING_STRIKE, new Element("Electricity", "electric"), true, false));
     put(PASS_TURN, new AttackAbility("Pass turn", "Allows the user to skip their turn", 0, 0, PASS_TURN, new Element("null", "null"), false, false));
 
     // Defense abilities
