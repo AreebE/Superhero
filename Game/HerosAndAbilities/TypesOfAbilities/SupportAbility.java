@@ -5,18 +5,18 @@ public class SupportAbility extends Ability{
   private int type;
   private int amount;
 
-  // Buff types
-  private Buff template;
+  // Effect types
+  private Effect template;
  
   
-  public SupportAbility(String name, String desc, int cooldown, Buff template, AbilityList.AbilityNames enumName, Element em){
+  public SupportAbility(String name, String desc, int cooldown, Effect template, AbilityList.AbilityNames enumName, Element em){
     super(name, desc, cooldown, AbilityList.AbilityType.SUPPORT, enumName, em);
     this.template = template;
   }
 
   @Override
   protected void castAbility(Superhero target, Superhero caster){
-    target.addBuff(template.copyBuff());
+    target.addEffect(template.copyEffect());
   }
   
   @Override
@@ -27,5 +27,5 @@ public class SupportAbility extends Ability{
 
 //Ideas: arena elemental affects, any sort of effect that causes a player to be at an advantage/disadvantage
 
-//if attack buff --> all attack plus 1
-//if defense buff --> all attacks minus 1
+//if attack Effect --> all attack plus 1
+//if defense Effect --> all attacks minus 1

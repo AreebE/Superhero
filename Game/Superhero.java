@@ -9,7 +9,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   private String name;
   private int freeWill;
   private ArrayList<Ability> abilities;
-  private ArrayList<Buff> buffs;
+  private ArrayList<Effect> Effects;
   private int health;
   private int maxHealth;
   private int sheildHealth;
@@ -23,7 +23,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
     this.maxHealth = health;
     this.sheildHealth = sheildHealth;
     this.abilities = new ArrayList<>();
-    this.buffs = new ArrayList<>();
+    this.Effects = new ArrayList<>();
     this.baseAttack = 0;
     this.baseDefense = 0;
     AbilityList.giveAbility(this, AbilityList.AbilityNames.PASS_TURN);
@@ -69,13 +69,13 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
 // moved it down
 
     superheroString.append("\u001B[31m");
-    if (buffs.size() == 0){
-      superheroString.append("No buffs/ debuffs applied.\n");
+    if (Effects.size() == 0){
+      superheroString.append("No Effects/ deEffects applied.\n");
     } else {
-      superheroString.append("The buffs/debuffs are:\n");
-      for (int i = 0; i < buffs.size(); i++){
+      superheroString.append("The Effects/deEffects are:\n");
+      for (int i = 0; i < Effects.size(); i++){
         superheroString.append("* ")
-            .append(buffs.get(i))
+            .append(Effects.get(i))
             .append("\n");
       }
     }
@@ -211,14 +211,14 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
 
   
 
-  /* Methods for adding/removing buffs
+  /* Methods for adding/removing Effects
   */
-  public void addBuff(Buff newBuff){
-    buffs.add(newBuff);
+  public void addEffect(Effect newEffect){
+    Effects.add(newEffect);
   }
    
-  public void removeBuff(Buff removed){
-    buffs.remove(removed);
+  public void removeEffect(Effect removed){
+    Effects.remove(removed);
   }
   //
   
@@ -247,19 +247,19 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   */
   @Override
   public void endOfTurn(){
-    useBuffs();
+    useEffects();
     reduceCooldowns();
   }
 
 
 
-  public void useBuffs(){
-    for (int i = buffs.size() - 1; i >= 0; i--){
-      Buff b = buffs.get(i);
-      b.applyBuff(this);
+  public void useEffects(){
+    for (int i = Effects.size() - 1; i >= 0; i--){
+      Effect b = Effects.get(i);
+      b.applyEffect(this);
     }
   }
-// test
+
   public void reduceCooldowns(){
     for (Ability a: abilities){
       a.reduceCooldown();

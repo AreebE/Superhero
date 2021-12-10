@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.EnumMap;
@@ -47,15 +46,15 @@ public class AbilityList {
     put(AbilityNames.COUNTERSTRIKE, new DefenseAbility("Counterstrike", "Will counter any attack that comes forth", 5, 50, AbilityNames.COUNTERSTRIKE, ElementList.getElement(ElementList.ElementNames.NULL)));
 
     // Support abilities
-    // System.out.println(listOfBuffs);
-    put(AbilityNames.ATTACK_UP, new SupportAbility("attack up", "boosts damage for x amount of time", 5, BuffList.getBuff(BuffList.BuffNames.ATTACK_BOOST), AbilityNames.ATTACK_UP, ElementList.getElement(ElementList.ElementNames.NULL
+    // System.out.println(listOfEffects);
+    put(AbilityNames.ATTACK_UP, new SupportAbility("attack up", "boosts damage for x amount of time", 5, EffectList.getEffect(EffectList.EffectNames.ATTACK_BOOST), AbilityNames.ATTACK_UP, ElementList.getElement(ElementList.ElementNames.NULL
     )));
     
-    put(AbilityNames.DEFENSE_UP, new SupportAbility("defense up", "boosts defense for x amount of time", 5, BuffList.getBuff(BuffList.BuffNames.DEFENSE_BOOST), AbilityNames.DEFENSE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
+    put(AbilityNames.DEFENSE_UP, new SupportAbility("defense up", "boosts defense for x amount of time", 5, EffectList.getEffect(EffectList.EffectNames.DEFENSE_BOOST), AbilityNames.DEFENSE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
     
-    put(AbilityNames.FLARE_UP, new SupportAbility("flare up", "Makes the user charge up their attacks", 10, BuffList.getBuff(BuffList.BuffNames.CHARGE), AbilityNames.FLARE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
+    put(AbilityNames.FLARE_UP, new SupportAbility("flare up", "Makes the user charge up their attacks", 10, EffectList.getEffect(EffectList.EffectNames.CHARGE), AbilityNames.FLARE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
 
-    put(AbilityNames.POISON, new SupportAbility("Poison", "Will poison the person targeted", 5, BuffList.getBuff(BuffList.BuffNames.POISON), AbilityNames.POISON, ElementList.getElement(ElementList.ElementNames.NULL)));
+    put(AbilityNames.POISON, new SupportAbility("Poison", "Will poison the person targeted", 5, EffectList.getEffect(EffectList.EffectNames.POISON), AbilityNames.POISON, ElementList.getElement(ElementList.ElementNames.NULL)));
   }};
 
 
@@ -108,7 +107,7 @@ public class AbilityList {
   }
 
   public interface AbilityModifier {
-    public void applyEffect
+    public void applyEffect();
   }
 
 }
