@@ -17,7 +17,6 @@
 # --TO DO-- 
 
 * Give abilities elements (or several elements)
-* add cooldown counter
 * Assign stage buffs for elements 
 * Allow a file to be read to produce a card
 * Maybe let users create their own superhero, with an appropiate balance system

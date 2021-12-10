@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.EnumMap;
 
 public class AbilityList {
   // Prevents any instances of this class from being made
@@ -13,79 +14,101 @@ public class AbilityList {
     ATTACK, DEFENSE, SUPPORT
   }
 
-  
-  // Attack ability indexes 
-  public final static int FIREBALL = 0000;
-  public final static int SNOWBALL = 0001;
-  public final static int LIGHTNING_STRIKE = 0002;
-  public final static int PASS_TURN = 0003;
+  public static enum AbilityNames {
+    // Attack
+    FIREBALL, 
+    SNOWBALL, 
+    LIGHTNING_STRIKE, 
+    PASS_TURN,
 
-  // Defense indexes 
-  public final static int HEAL_PULSE = 1000;
-  public final static int PROTECT = 1001;
-  public final static int COUNTERSTRIKE = 1002;
+    // Defense 
+    HEAL_PULSE,
+    PROTECT,
+    COUNTERSTRIKE,
 
-  // Support indexes
-  public final static int ATTACK_UP = 2000;
-  public final static int DEFENSE_UP = 2001;
-  public final static int FLARE_UP = 2002;
+    // Support
+    ATTACK_UP,
+    DEFENSE_UP,
+    FLARE_UP,
+    POISON
+  }
 
-  private final static HashMap<Integer, Ability> LIST_OF_ABILITIES = new HashMap<>(){{
-    // Attack abilities
-    put(FIREBALL, new AttackAbility("Fireball", "Launches a ball of fire", 1, 3, FIREBALL, new Element("Fire", "fire"), false, false));
-    put(SNOWBALL, new AttackAbility("Snowball", "Launches a few snowballs. May cause frost or blindness.", 1, 3, SNOWBALL, new Element("Ice", "ice"), false, true));
-    put(LIGHTNING_STRIKE, new AttackAbility("Lightning Strike", "Has a chance to shock the enemy.", 1, 3, LIGHTNING_STRIKE, new Element("Electricity", "electric"), true, false));
-    put(PASS_TURN, new AttackAbility("Pass turn", "Allows the user to skip their turn", 0, 0, PASS_TURN, new Element("null", "null"), false, false));
+  private final static EnumMap<AbilityNames, Ability> LIST_OF_ABILITIES = new EnumMap<>(AbilityNames.class){{
+    put(AbilityNames.FIREBALL, new AttackAbility("Fireball", "Launches a ball of fire", 1, 3, AbilityNames.FIREBALL, ElementList.getElement(ElementList.ElementNames.FIRE), false, false));
+    put(AbilityNames.SNOWBALL, new AttackAbility("Snowball", "Launches a few snowballs. May cause frost or blindness.", 1, 3, AbilityNames.SNOWBALL, ElementList.getElement(ElementList.ElementNames.ICE), false, true));
+    put(AbilityNames.LIGHTNING_STRIKE, new AttackAbility("Lightning Strike", "Has a chance to shock the enemy.", 1, 3, AbilityNames.LIGHTNING_STRIKE, ElementList.getElement(ElementList.ElementNames.ELECTRICITY), true, false));
+    put(AbilityNames.PASS_TURN, new AttackAbility("Pass turn", "Allows the user to skip their turn", 0, 0, AbilityNames.PASS_TURN, ElementList.getElement(ElementList.ElementNames.NULL), false, false));
 
     // Defense abilities
-    put(HEAL_PULSE, new DefenseAbility("Heal pulse", "heals oneself", 2, 5, HEAL_PULSE, new Element("null", "null")));
-    put(PROTECT, new DefenseAbility("Protect", "protects the user from any hit.", 3, 5, PROTECT, new Element("null", "null")));
-    put(COUNTERSTRIKE, new DefenseAbility("Counterstrike", "Will counter any attack that comes forth", 5, 50, COUNTERSTRIKE, new Element("null", "null")));
+    put(AbilityNames.HEAL_PULSE, new HealAbility("Heal pulse", "heals oneself", 1, 10, AbilityNames.HEAL_PULSE, ElementList.getElement(ElementList.ElementNames.NULL)));
+
+    put(AbilityNames.PROTECT, new DefenseAbility("Protect", "protects the user from any hit.", 3, 5, AbilityNames.PROTECT, ElementList.getElement(ElementList.ElementNames.NULL)));
+    
+    put(AbilityNames.COUNTERSTRIKE, new DefenseAbility("Counterstrike", "Will counter any attack that comes forth", 5, 50, AbilityNames.COUNTERSTRIKE, ElementList.getElement(ElementList.ElementNames.NULL)));
 
     // Support abilities
     // System.out.println(listOfBuffs);
-    put(ATTACK_UP, new SupportAbility("attack up", "boosts damage for x amount of time", 5, BuffList.getBuff(BuffList.ATTACK_BOOST), ATTACK_UP, new Element("null", "null")));
-    put(DEFENSE_UP, new SupportAbility("defense up", "boosts defense for x amount of time", 5, BuffList.getBuff(BuffList.DEFENSE_BOOST), DEFENSE_UP, new Element("null", "null")));
-    put(FLARE_UP, new SupportAbility("flare up", "Makes the user charge up their attacks", 10, BuffList.getBuff(BuffList.CHARGE), FLARE_UP, new Element("null", "null")));
+    put(AbilityNames.ATTACK_UP, new SupportAbility("attack up", "boosts damage for x amount of time", 5, BuffList.getBuff(BuffList.BuffNames.ATTACK_BOOST), AbilityNames.ATTACK_UP, ElementList.getElement(ElementList.ElementNames.NULL
+    )));
+    
+    put(AbilityNames.DEFENSE_UP, new SupportAbility("defense up", "boosts defense for x amount of time", 5, BuffList.getBuff(BuffList.BuffNames.DEFENSE_BOOST), AbilityNames.DEFENSE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
+    
+    put(AbilityNames.FLARE_UP, new SupportAbility("flare up", "Makes the user charge up their attacks", 10, BuffList.getBuff(BuffList.BuffNames.CHARGE), AbilityNames.FLARE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
+
+    put(AbilityNames.POISON, new SupportAbility("Poison", "Will poison the person targeted", 5, BuffList.getBuff(BuffList.BuffNames.POISON), AbilityNames.POISON, ElementList.getElement(ElementList.ElementNames.NULL)));
   }};
-  
 
 
   // Getting an ability's id, based on a name given
-  private final static HashMap<String, Integer> namesToAbility = new HashMap<>(){{
-    put("fireball", FIREBALL);
+  private final static HashMap<String, AbilityNames> namesToAbility = new HashMap<>(){{
+    put("fireball", AbilityNames.FIREBALL);
 
-    put("snowball", SNOWBALL);
+    put("snowball", AbilityNames.SNOWBALL);
 
-    put("lightning", LIGHTNING_STRIKE);
+    put("lightning", AbilityNames.LIGHTNING_STRIKE);
 
-    put("protect", PROTECT);
+    put("protect", AbilityNames.PROTECT);
 
-    put("counterstrike", COUNTERSTRIKE);
+    put("counterstrike", AbilityNames.COUNTERSTRIKE);
 
-    put("attack_up", ATTACK_UP);
+    put("attack_up", AbilityNames.ATTACK_UP);
 
-    put("defense_up", DEFENSE_UP);
+    put("defense_up", AbilityNames.DEFENSE_UP);
 
-    put("pass", PASS_TURN);
+    put("pass", AbilityNames.PASS_TURN);
 
-    put("flare_up", FLARE_UP);
+    put("flare_up", AbilityNames.FLARE_UP);
+
+    put("heal", AbilityNames.HEAL_PULSE);
+
+    put("poison", AbilityNames.POISON);
   }};
 
   // returns an ability's id
-  public static Integer getID(String name){
+  public static AbilityNames getName(String name){
     // System.out.println(name)
     // System.out.println(name + namesToAbility);
-    Integer id = namesToAbility.get(
+    AbilityNames enumName = namesToAbility.get(
       name.toLowerCase());
-    return id;
+    return enumName;
   }
 
   /**
   */
-  public static void giveAbility(Superhero target, int ... ids){
-    for (int i: ids){
-      target.addAbility(LIST_OF_ABILITIES.get(i).copyAbility());
+  // public static void giveAbility(Superhero target, int ... ids){
+  //   for (int i: ids){
+  //     target.addAbility(LIST_OF_ABILITIES_2.get(i).copyAbility());
+  //   }
+  // }
+
+  public static void giveAbility(Superhero target, AbilityNames ... names){
+    for (AbilityNames name: names){
+      target.addAbility(LIST_OF_ABILITIES.get(name).copyAbility());
     }
   }
+
+  public interface AbilityModifier {
+    public void applyEffect
+  }
+
 }

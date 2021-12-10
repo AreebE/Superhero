@@ -11,6 +11,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   private ArrayList<Ability> abilities;
   private ArrayList<Buff> buffs;
   private int health;
+  private int maxHealth;
   private int sheildHealth;
   private int baseAttack;
   private int baseDefense;
@@ -19,12 +20,13 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
     this.name = name;
     this.freeWill = freeWill;
     this.health = health;
+    this.maxHealth = health;
     this.sheildHealth = sheildHealth;
     this.abilities = new ArrayList<>();
     this.buffs = new ArrayList<>();
     this.baseAttack = 0;
     this.baseDefense = 0;
-    AbilityList.giveAbility(this, AbilityList.PASS_TURN);
+    AbilityList.giveAbility(this, AbilityList.AbilityNames.PASS_TURN);
   }
   
   /** Methods involving free will
@@ -46,6 +48,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   @Override 
   public String toString(){
     StringBuilder superheroString = new StringBuilder(name).append(" - will of ").append(freeWill).append(". \n");
+    superheroString.append("\u001B[35m");
     if (abilities.size() == 0){
       superheroString.append("There are no abilities.\n");
     } 
@@ -63,7 +66,9 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
         superheroString.append("\n");
       }
     }
+// moved it down
 
+    superheroString.append("\u001B[31m");
     if (buffs.size() == 0){
       superheroString.append("No buffs/ debuffs applied.\n");
     } else {
@@ -74,6 +79,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
             .append("\n");
       }
     }
+
+    superheroString.append("\u001B[34m");
     superheroString.append("* health - ")
         .append(health)
         .append("\n")
@@ -86,7 +93,21 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
         .append("* base defense - ")
         .append(baseDefense)
         .append("\n");
+    superheroString.append("\u001B[0m");
     return superheroString.append("\n").toString();
+  }
+
+   /*Writes this superhero to a Single Line so that its usable by Fileiothing 
+    also should health/sheildHealth be persistent?
+    // not entirely sure, maybe for only the base health/ base sheild?
+    as in all heros get 100 health and x shield at the beggingn of each round
+    // for now, that could work. but for more customizability, we may remove that set health later on
+    */
+  public String ToSaveable(){
+    String out = "";
+
+    out =(out+name+freeWill);
+    return out;
   }
 
   public String getName(){
@@ -104,13 +125,13 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
     return this.abilities;
   }
   
-  public Ability getAbility(Integer id){
+  public Ability getAbility(AbilityList.AbilityNames enumName){
     // System.out.println(this);
     for (Ability a: abilities){
       // System.out.println(a);
       // System.out.println(a.getID());
       // // System.out.println(id);
-      if (a.getID().equals(id)){
+      if (a.getEnumName().equals(enumName)){
         if (a.ableToUseAbility()){
           return a;
         } else {
@@ -137,7 +158,11 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   }
 
   public void healHealth(int healed){
+    System.out.println("called the heal health");
     health += healed;
+    if (health > maxHealth){
+      health = maxHealth;
+    }
   }
   
   public int getHealth(){

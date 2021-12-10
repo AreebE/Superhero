@@ -1,20 +1,32 @@
 
+
 public abstract class Ability{
   private String name;
   private String description;
   private int cooldown;
   private int turnsSinceUse;
   private AbilityList.AbilityType type;
-  private Integer id;
+  private AbilityList.AbilityNames enumName;
   private Element em;
 
-  public Ability(String name, String desc, int cooldown, AbilityList.AbilityType type, Integer id, Element em){
+  public Ability(String name, String desc, int cooldown, AbilityList.AbilityType type, AbilityList.AbilityNames enumName, Element em){
     this.name = name;
     this.description = desc;
     this.cooldown = cooldown;
     this.type = type;
     this.turnsSinceUse = cooldown;
-    this.id = id;
+    this.enumName = enumName;
+    this.em = em;
+  }
+  //alt const. for customMaker
+  // Note: AbilityType is only in the ability list
+  public Ability(String name, String desc){
+    this.name = name;
+    this.description = desc;
+    this.cooldown = 2;
+    this.type = AbilityList.AbilityType.ATTACK;
+    this.turnsSinceUse = cooldown;
+    this.enumName = enumName;
     this.em = em;
   }
 
@@ -30,12 +42,14 @@ public abstract class Ability{
     return cooldown;
   }
 
-  public Integer getID(){
-    return id;
-  }
+
 
   public Element getElement(){
     return em;
+  }
+
+  public AbilityList.AbilityNames getEnumName(){
+    return enumName;
   }
 
   public boolean useAbility(Superhero target, Superhero caster){

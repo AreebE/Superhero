@@ -9,8 +9,8 @@ public class SupportAbility extends Ability{
   private Buff template;
  
   
-  public SupportAbility(String name, String desc, int cooldown, Buff template, Integer id, Element em){
-    super(name, desc, cooldown, AbilityList.AbilityType.SUPPORT, id, em);
+  public SupportAbility(String name, String desc, int cooldown, Buff template, AbilityList.AbilityNames enumName, Element em){
+    super(name, desc, cooldown, AbilityList.AbilityType.SUPPORT, enumName, em);
     this.template = template;
   }
 
@@ -21,7 +21,7 @@ public class SupportAbility extends Ability{
   
   @Override
   public Ability copyAbility(){
-    return new SupportAbility(getName(), getDescription(), getCooldown(), template, getID(), getElement());
+    return new SupportAbility(getName(), getDescription(), getCooldown(), template, getEnumName(), getElement());
   }
 }
 

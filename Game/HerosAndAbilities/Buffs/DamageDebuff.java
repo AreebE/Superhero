@@ -13,8 +13,14 @@ public class DamageDebuff extends Buff{
 
   @Override 
   public void applyBuff(Superhero target){
+   
     target.dealDamage(super.getStrength(), isPiercing, ignoresDefense);
+    reduceDuration(target);
   }
 
+  @Override 
+  public Buff copyBuff(){
+    return new DamageDebuff(super.getStrength(), super.getDuration(), super.isPermanent(), super.getName(), super.getDesc(), this.isPiercing, this.ignoresDefense);
+  }
   
 }
