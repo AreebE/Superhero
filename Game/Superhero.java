@@ -259,7 +259,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
       b.applyBuff(this);
     }
   }
-
+// test
   public void reduceCooldowns(){
     for (Ability a: abilities){
       a.reduceCooldown();
