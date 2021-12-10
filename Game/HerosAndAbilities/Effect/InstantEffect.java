@@ -7,24 +7,8 @@ public class InstantEffect extends Effect {
   }
 
   @Override
-  public void applyEffect(Superhero hero){
-    // System.out.println("called instant");
-    EffectList.EffectType typeOfEffect = getEffectType();
-    System.out.println(typeOfEffect);
-    int strength = this.getStrength();
-    switch(typeOfEffect){
-      case ATTACK:
-      // System.out.println("Adding attack");
-        hero.addAttack(strength);
-        break; 
-      case DEFENSE:
-        hero.addDefense(strength);      
-        break;
-      case SUPPORT:
-        hero.healHealth(strength);
-        break;
-    }
-    hero.removeEffect(this); 
+  public void reduceDuration(Superhero target){
+    target.removeEffect(this);
   }
 
   @Override

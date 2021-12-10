@@ -13,24 +13,16 @@ public class Effect {
   private EffectList.EffectType typeOfEffect;
   private int duration;
   private boolean permanent;
-  private boolean used = false;
   private String name;
   private String desc;
   private boolean[] pierces; 
 
 
   public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc){
-    
-    this.strength = strength;
-    this.typeOfEffect = type;
-    this.duration = duration;
-    this.permanent = permanent;
-    this.name = name;
-    this.desc = desc;
-    this.pierces = pierces;
+    this(strength, type, duration, permanent, name, desc, null);
   }
 
-  public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc, boolean[] pierces){
+  public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc, boolean... pierces){
     this.strength = strength;
     this.typeOfEffect = type;
     this.duration = duration;
@@ -44,7 +36,11 @@ public class Effect {
   */
   public void applyEffect(Superhero target){
     // System.out.println("called super");
-    
+    applyEffect(typeOfEffect, target);
+    reduceDuration(target);
+  }
+
+  protected void applyEffect(EffectList.EffectType type, Superhero target){
     switch(typeOfEffect){
       case ATTACK:
         // System.out.println("updating attack");
@@ -53,24 +49,38 @@ public class Effect {
       case DEFENSE:
         target.addDefense(strength);      
         break;
-      case SUPPORT:
+      case HEALTH:
         target.healHealth(strength);
         break;
+      case DAMAGE:
+        target.dealDamage(strength, pierces[PIERCES_DEFENSE_INDEX], pierces[PIERCES_SHEILD_INDEX]);
     }
-    reduceDuration(target);
   }
 
   public void reduceDuration(Superhero target){
      duration--;
     if (duration == 0){
-      target.removeEffect(this);
-      return;
+      removeEffect(target);
     }
+  }
+
+  protected void removeEffect(Superhero target){
+    if (!permanent){
+      switch (typeOfEffect){
+        case ATTACK:
+          target.addAttack(-strength * duration);
+          break;
+        case DEFENSE:
+          target.addDefense(-strength * duration);
+          break;
+      }
+    }
+    target.removeEffect(this);
   }
   /* Creates a copy of the Effect so that two people wouldn't share the same one
   */
   public Effect copyEffect(){
-    return new Effect(strength, typeOfEffect, duration, permanent, name, desc);
+    return new Effect(strength, typeOfEffect, duration, permanent, name, desc, pierces);
   }
 
 
@@ -88,6 +98,10 @@ public class Effect {
   
   protected boolean isPermanent(){
     return permanent;
+  }
+
+  protected boolean[] getPierces(){
+    return pierces;
   }
 
   public String getName(){
