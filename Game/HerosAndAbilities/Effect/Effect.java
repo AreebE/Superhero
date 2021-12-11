@@ -39,6 +39,7 @@ public class Effect {
     applyEffect(typeOfEffect, target);
     reduceDuration(target);
   }
+  
 
   protected void applyEffect(EffectList.EffectType type, Superhero target){
     switch(typeOfEffect){

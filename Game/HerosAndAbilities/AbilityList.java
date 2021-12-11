@@ -36,7 +36,7 @@ public class AbilityList {
     DEFENSE_UP,
     FLARE_UP,
     POISON,
-    ANCIENT_RITUAL,
+    SACRIFICE,
     DEFENSIVE_STANCE,
     
   }
@@ -65,6 +65,8 @@ public class AbilityList {
     put(AbilityNames.FLARE_UP, new SupportAbility("flare up", "Makes the user charge up their attacks", 10, EffectList.getEffect(EffectList.EffectNames.CHARGE), AbilityNames.FLARE_UP, ElementList.getElement(ElementList.ElementNames.NULL)));
 
     put(AbilityNames.POISON, new SupportAbility("Poison", "Will poison the person targeted", 5, EffectList.getEffect(EffectList.EffectNames.POISON), AbilityNames.POISON, ElementList.getElement(ElementList.ElementNames.NULL)));
+
+    put(AbilityNames.SACRIFICE, new SupportAbility("Sacrifice", "Injures the user to cause more damage later", 4, EffectList.getEffect(ElementList.ElementNames.NULL), AbilityNames.SACRIFICE, EffectList.getElement(ElementList.ElementNames.CURSE), new RecoilModifier()))
   }};
 
 

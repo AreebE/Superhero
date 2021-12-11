@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class EffectList {
 
   public static enum EffectType{
-    ATTACK, DEFENSE, HEALTH, DAMAGE
+    ATTACK, DEFENSE, HEALTH, DAMAGE, GROUP
   } 
 
   private EffectList(){
