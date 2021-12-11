@@ -3,14 +3,13 @@
 
 public class SupportAbility extends Ability{
   private int type;
-  private int amount;
 
   // Effect types
   private Effect template;
  
   
-  public SupportAbility(String name, String desc, int cooldown, Effect template, AbilityList.AbilityNames enumName, Element em){
-    super(name, desc, cooldown, AbilityList.AbilityType.SUPPORT, enumName, em);
+  public SupportAbility(String name, String desc, int cooldown, Effect template, AbilityList.AbilityNames enumName, Element em, AbilityModifier... modifiers){
+    super(name, desc, cooldown, 0, AbilityList.AbilityType.SUPPORT, enumName, em, modifiers);
     this.template = template;
   }
 

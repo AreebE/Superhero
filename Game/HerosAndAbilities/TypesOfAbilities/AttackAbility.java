@@ -1,13 +1,9 @@
-
-
 public class AttackAbility extends Ability{
-  private int strength;
   private boolean isPiercing;
   private boolean ignoresBaseDefense;
 
-  public AttackAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, boolean ignoresBaseDefense, boolean isPiercing){
-    super(name, desc, cooldown, AbilityList.AbilityType.ATTACK, enumName, em);
-    this.strength = strength;
+  public AttackAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, boolean ignoresBaseDefense, boolean isPiercing, AbilityModifier... modifiers){
+    super(name, desc, cooldown, strength, AbilityList.AbilityType.ATTACK, enumName, em, modifiers);
     this.isPiercing= isPiercing;
     this.ignoresBaseDefense = ignoresBaseDefense;
   }
@@ -18,7 +14,7 @@ public class AttackAbility extends Ability{
     if (getEnumName().equals(AbilityList.AbilityNames.PASS_TURN)){
       return;
     }
-    int attackStrength = this.strength + caster.getBaseAttack();
+    int attackStrength = getStrength() + caster.getBaseAttack();
     if (attackStrength < 0){
       attackStrength = 0;
     }
@@ -27,7 +23,7 @@ public class AttackAbility extends Ability{
 
   @Override
   public Ability copyAbility(){
-    return new AttackAbility(getName(), getDescription(), getCooldown(), strength, getEnumName(), getElement(), ignoresBaseDefense, isPiercing);
+    return new AttackAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement(), ignoresBaseDefense, isPiercing);
   }
 
   @Override

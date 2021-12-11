@@ -9,6 +9,12 @@ public class AbilityList {
 
   private AbilityList(){}
 
+  public static enum AbilityModifierNames{
+    RANDOM,
+    RECOIL,
+    GROUP
+  }
+
   public static enum AbilityType{
     ATTACK, DEFENSE, SUPPORT
   }
@@ -29,9 +35,13 @@ public class AbilityList {
     ATTACK_UP,
     DEFENSE_UP,
     FLARE_UP,
-    POISON
+    POISON,
+    ANCIENT_RITUAL,
+    DEFENSIVE_STANCE,
+    
   }
-
+  public static int MAX_CHANCE = 256;
+  
   private final static EnumMap<AbilityNames, Ability> LIST_OF_ABILITIES = new EnumMap<>(AbilityNames.class){{
     put(AbilityNames.FIREBALL, new AttackAbility("Fireball", "Launches a ball of fire", 1, 3, AbilityNames.FIREBALL, ElementList.getElement(ElementList.ElementNames.FIRE), false, false));
     put(AbilityNames.SNOWBALL, new AttackAbility("Snowball", "Launches a few snowballs. May cause frost or blindness.", 1, 3, AbilityNames.SNOWBALL, ElementList.getElement(ElementList.ElementNames.ICE), false, true));
@@ -106,8 +116,6 @@ public class AbilityList {
     }
   }
 
-  public interface AbilityModifier {
-    public void applyEffect();
-  }
+ 
 
 }

@@ -47,7 +47,7 @@ public class Effect {
         target.addAttack(strength);
         break; 
       case DEFENSE:
-        target.addDefense(strength);      
+        target.addDefense(strength);   
         break;
       case HEALTH:
         target.healHealth(strength);
