@@ -14,16 +14,17 @@ public class ElementList{
     FIRE,
     ELECTRICITY,
     ICE,
-    NULL
+    NULL,
+    ALL
   }
 
    private final static EnumMap<ElementNames, Element> LIST_OF_ELEMENTS = new EnumMap<>(ElementNames.class){{
 
-     put(ElementNames.FIRE, new Element("fire", "---"));
-     put(ElementNames.ELECTRICITY, new Element("electricity", "---"));
-     put(ElementNames.ICE, new Element("Ice", "---"));
-     put(ElementNames.NULL, new Element("Null", "normal/nothing"));
-     
+     put(ElementNames.FIRE, new Element("fire", "---", ElementNames.FIRE));
+     put(ElementNames.ELECTRICITY, new Element("electricity", "---", ElementNames.ELECTRICITY));
+     put(ElementNames.ICE, new Element("Ice", "---", ElementNames.ICE));
+     put(ElementNames.NULL, new Element("Null", "normal/nothing", ElementNames.NULL));
+     put(ElementNames.ALL, new Element("All", "Will trigger for anything", ElementNames.ALL));
    }};
 
   public static Element getElement(ElementNames name){

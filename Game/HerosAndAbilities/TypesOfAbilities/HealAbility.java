@@ -1,5 +1,11 @@
+import java.util.EnumMap;
+
 public class HealAbility extends DefenseAbility{
   public HealAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, AbilityModifier... modifiers){
+    super(name, desc, cooldown, strength, enumName, em, modifiers);
+  }
+
+  public HealAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers){
     super(name, desc, cooldown, strength, enumName, em, modifiers);
   }
 
@@ -10,6 +16,6 @@ public class HealAbility extends DefenseAbility{
 
   @Override
   public Ability copyAbility(){
-    return new HealAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement());
+    return new HealAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement(), getModifiers());
   }
 }

@@ -1,7 +1,11 @@
-
+import java.util.EnumMap;
 
 public class DefenseAbility extends Ability {
   public DefenseAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, AbilityModifier... modifiers){
+    super(name, desc, cooldown, strength, AbilityList.AbilityType.DEFENSE, enumName, em, modifiers);
+  }
+
+  public DefenseAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers){
     super(name, desc, cooldown, strength, AbilityList.AbilityType.DEFENSE, enumName, em, modifiers);
   }
 
@@ -12,7 +16,7 @@ public class DefenseAbility extends Ability {
 
   @Override
   public Ability copyAbility(){
-    return new DefenseAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement());
+    return new DefenseAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement(), getModifiers());
   }
 }
 

@@ -1,6 +1,6 @@
 public class DelayedEffect extends Effect {
-  public DelayedEffect(int strength, EffectList.EffectType type, int timer, String name, String desc, boolean... pierces){
-    super(strength, type, timer, true, name, desc, pierces);
+  public DelayedEffect(int strength, EffectList.EffectType type, int timer, String name, String desc, Element element, boolean... pierces){
+    super(strength, type, timer, true, name, desc, element, pierces);
   }
 
   @Override
@@ -16,6 +16,6 @@ public class DelayedEffect extends Effect {
 
   @Override
   public Effect copyEffect(){
-    return new DelayedEffect(getStrength(), getEffectType(), getDuration(), getName(), getDesc(), getPierces());
+    return new DelayedEffect(getStrength(), getEffectType(), getDuration(), getName(), getDesc(), getElement(), getPierces());
   }
 }

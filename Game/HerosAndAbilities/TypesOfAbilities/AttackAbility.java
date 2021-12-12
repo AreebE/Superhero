@@ -1,8 +1,16 @@
+import java.util.EnumMap;
+
 public class AttackAbility extends Ability{
   private boolean isPiercing;
   private boolean ignoresBaseDefense;
 
   public AttackAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, boolean ignoresBaseDefense, boolean isPiercing, AbilityModifier... modifiers){
+    super(name, desc, cooldown, strength, AbilityList.AbilityType.ATTACK, enumName, em, modifiers);
+    this.isPiercing= isPiercing;
+    this.ignoresBaseDefense = ignoresBaseDefense;
+  }
+
+  public AttackAbility(String name, String desc, int cooldown, int strength, AbilityList.AbilityNames enumName, Element em, boolean ignoresBaseDefense, boolean isPiercing, EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers){
     super(name, desc, cooldown, strength, AbilityList.AbilityType.ATTACK, enumName, em, modifiers);
     this.isPiercing= isPiercing;
     this.ignoresBaseDefense = ignoresBaseDefense;
@@ -23,7 +31,7 @@ public class AttackAbility extends Ability{
 
   @Override
   public Ability copyAbility(){
-    return new AttackAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement(), ignoresBaseDefense, isPiercing);
+    return new AttackAbility(getName(), getDescription(), getCooldown(), getStrength(), getEnumName(), getElement(), ignoresBaseDefense, isPiercing, getModifiers());
   }
 
   @Override
@@ -36,6 +44,14 @@ public class AttackAbility extends Ability{
       sBuilder.append(" (It pierces the sheild) ");
     }
     return sBuilder.toString();
+  }
+
+  protected boolean doesIgnoreBaseDefense(){
+    return ignoresBaseDefense;
+  }
+
+  protected boolean isPiercing(){
+    return isPiercing;
   }
 }
 // 

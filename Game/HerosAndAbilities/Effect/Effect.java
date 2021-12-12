@@ -15,20 +15,22 @@ public class Effect {
   private boolean permanent;
   private String name;
   private String desc;
+  private Element element;
   private boolean[] pierces; 
 
 
-  public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc){
-    this(strength, type, duration, permanent, name, desc, null);
+  public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc, Element element){
+    this(strength, type, duration, permanent, name, desc, element, null);
   }
 
-  public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc, boolean... pierces){
+  public Effect(int strength, EffectList.EffectType type, int duration, boolean permanent, String name, String desc, Element element, boolean... pierces){
     this.strength = strength;
     this.typeOfEffect = type;
     this.duration = duration;
     this.permanent = permanent;
     this.name = name;
     this.desc = desc;
+    this.element = element;
     this.pierces = pierces;
   }
 
@@ -81,9 +83,12 @@ public class Effect {
   /* Creates a copy of the Effect so that two people wouldn't share the same one
   */
   public Effect copyEffect(){
-    return new Effect(strength, typeOfEffect, duration, permanent, name, desc, pierces);
+    return new Effect(strength, typeOfEffect, duration, permanent, name, desc, element, pierces);
   }
 
+  public boolean isRemovable(){
+    return true;
+  }
 
   protected EffectList.EffectType getEffectType(){
     return this.typeOfEffect;      
@@ -113,8 +118,12 @@ public class Effect {
     return this.desc;
   }
 
+  public Element getElement(){
+    return this.element;
+  }
+
   @Override
   public String toString(){
-    return name + " - " + desc + " (" + duration + " turns left)";
+    return name + " - " + desc + " (" + getDuration() + " turns left)";
   }
 }

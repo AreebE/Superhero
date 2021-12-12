@@ -26,8 +26,15 @@ public abstract class Ability{
     this.em = em;
     this.modifiers = new EnumMap<>(AbilityList.AbilityModifierNames.class);
     for (AbilityModifier m: modifiers){
+      // System.out.println(m + ", " + m.getModifier());
       this.modifiers.put(m.getModifier(), m);
     }
+    System.out.println(this.modifiers);
+  }
+
+  public Ability(String name, String desc, int cooldown, int strength, AbilityList.AbilityType type, AbilityList.AbilityNames enumName, Element em, EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers){
+    this(name, desc, cooldown, strength, type, enumName, em);
+    this.modifiers = modifiers;
   }
   //alt const. for customMaker
   // Note: AbilityType is only in the ability list
@@ -67,13 +74,23 @@ public abstract class Ability{
     return enumName;
   }
 
+  protected EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> getModifiers(){
+    return modifiers;
+  }
+
   public boolean useAbility(Superhero target, Superhero caster){
     turnsSinceUse = 0;
+    RecoilModifier recoil = (RecoilModifier) modifiers.get(AbilityList.AbilityModifierNames.RECOIL);
     RandomModifier random = (RandomModifier) modifiers.get(AbilityList.AbilityModifierNames.RANDOM);
+    System.out.println(random + ", " + recoil);
     if (random == null || random.triggerModifier(target, caster)){
+      if (recoil != null){
+        recoil.triggerModifier(target, caster);
+      }
       castAbility(target, caster);
+      return true;
     }
-    return true;
+    return false;
   }
   
   protected abstract void castAbility(Superhero target, Superhero caster);

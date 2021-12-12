@@ -1,5 +1,4 @@
-
-
+import java.util.EnumMap;
 
 public class SupportAbility extends Ability{
   private int type;
@@ -13,6 +12,11 @@ public class SupportAbility extends Ability{
     this.template = template;
   }
 
+  public SupportAbility(String name, String desc, int cooldown, Effect template, AbilityList.AbilityNames enumName, Element em, EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers){
+    super(name, desc, cooldown, 0, AbilityList.AbilityType.SUPPORT, enumName, em, modifiers);
+    this.template = template;
+  }
+
   @Override
   protected void castAbility(Superhero target, Superhero caster){
     target.addEffect(template.copyEffect());
@@ -20,7 +24,7 @@ public class SupportAbility extends Ability{
   
   @Override
   public Ability copyAbility(){
-    return new SupportAbility(getName(), getDescription(), getCooldown(), template, getEnumName(), getElement());
+    return new SupportAbility(getName(), getDescription(), getCooldown(), template, getEnumName(), getElement(), getModifiers());
   }
 }
 
