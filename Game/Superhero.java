@@ -32,7 +32,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         this.effects = new ArrayList<>();
         this.baseAttack = 0;
         this.baseDefense = 0;
-        AbilityList.giveAbility(this, AbilityList.AbilityNames.PASS_TURN);
+        AbilityList.giveAbility(this, AbilityList.Name.PASS_TURN);
     }
 
 
@@ -114,7 +114,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
                         .append("\n")
                         .append("* base defense - ")
                         .append(baseDefense)
-                        .append("\n");
+                        .append("\n")
                         .append("\u001B[0m")
                         .append("\n");
         return superheroString.toString();
@@ -159,7 +159,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
 
 
     public Ability getAbility(
-        AbilityList.AbilityNames enumName) 
+        AbilityList.Name enumName) 
     {
         // System.out.println(this);
         for (Ability a : abilities) 
@@ -300,14 +300,14 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
 
 
     public void removeEffects(
-        ElementList.ElementNames elementID)
+        ElementList.Name elementID)
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
             Effect e = effects.get(i);
             if (e.isRemovable()
                     &&  ( 
-                            elementID.equals(ElementList.ElementNames.ALL) 
+                            elementID.equals(ElementList.Name.ALL) 
                             || elementID.equals(e.getElement().getID())
                         )
                 ) 

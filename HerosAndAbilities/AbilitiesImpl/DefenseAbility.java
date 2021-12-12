@@ -7,7 +7,7 @@ public class DefenseAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -17,7 +17,7 @@ public class DefenseAbility extends Ability
             desc,
             cooldown, 
             strength, 
-            AbilityList.AbilityType.DEFENSE, 
+            AbilityList.Type.DEFENSE, 
             enumName, 
             em,
             modifiers
@@ -30,7 +30,7 @@ public class DefenseAbility extends Ability
         String desc, 
         int cooldown,
         int strength, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         EnumMap<AbilityList.AbilityModifierNames, 
         AbilityModifier> modifiers) 
@@ -41,7 +41,7 @@ public class DefenseAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            AbilityList.AbilityType.DEFENSE, 
+            AbilityList.Type.DEFENSE, 
             enumName, 
             em, 
             modifiers

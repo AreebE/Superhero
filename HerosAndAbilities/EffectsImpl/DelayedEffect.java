@@ -1,8 +1,9 @@
-public class DelayedEffect extends Effect {
+public class DelayedEffect extends Effect 
+{
+
     public DelayedEffect(
         int strength, 
-        EffectList.EffectType 
-        type, 
+        EffectList.Type type, 
         int timer, 
         String name, 
         String desc, 
@@ -35,7 +36,7 @@ public class DelayedEffect extends Effect {
     protected void removeEffect(
         Superhero target) 
     {
-        applyEffect(super.getEffectType(), target);
+        applyEffect(super.getType(), target);
         target.removeEffect(this);
     }
 
@@ -46,7 +47,7 @@ public class DelayedEffect extends Effect {
         return new DelayedEffect
                     (
                         getStrength(), 
-                        getEffectType(), 
+                        getType(), 
                         getDuration(), 
                         getName(), 
                         getDesc(), 

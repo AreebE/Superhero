@@ -5,7 +5,7 @@ public class EffectList
 {
 
 
-    public static enum EffectType
+    public static enum Type
     {
         ATTACK, 
         DEFENSE, 
@@ -20,7 +20,7 @@ public class EffectList
     }
 
 
-    public static enum EffectNames
+    public static enum Name
     {
         // Base stat Effects
         ATTACK_BOOST,
@@ -44,81 +44,81 @@ public class EffectList
 
     // Hashmap of Effects
     // private final static HashMap<Integer, Effect> listOfEffects = new HashMap<>(){{
-    //   put(ATTACK_BOOST, new InstantEffect(2, EffectType.ATTACK, "attack up", "Boosts the base attack of all abilities by 2, except Pass"));
-    //   put(DEFENSE_BOOST,  new InstantEffect(2, EffectType.DEFENSE, "defense up", "Reduces all future damage the character takes by 2"));
-    //   put(CHARGE, new Effect(1, EffectType.ATTACK, 5, true, "Charge", "Will increase the base attack of the user by one each turn"));
+    //   put(ATTACK_BOOST, new InstantEffect(2, Type.ATTACK, "attack up", "Boosts the base attack of all abilities by 2, except Pass"));
+    //   put(DEFENSE_BOOST,  new InstantEffect(2, Type.DEFENSE, "defense up", "Reduces all future damage the character takes by 2"));
+    //   put(CHARGE, new Effect(1, Type.ATTACK, 5, true, "Charge", "Will increase the base attack of the user by one each turn"));
     //   // put(1, 3, POISON, new Effect("poison", "The user takes one damage per turn, piercing sheild, over 3 turns"));
         
     // }};
 
-    private final static EnumMap<EffectNames, Effect> EFFECTS = new EnumMap<>(EffectNames.class)
+    private final static EnumMap<Name, Effect> EFFECTS = new EnumMap<>(Name.class)
     {{
         put
         (
-            EffectNames.ATTACK_BOOST, 
+            Name.ATTACK_BOOST, 
             new InstantEffect
             (
                 2, 
-                EffectType.ATTACK, 
+                Type.ATTACK, 
                 "attack up", 
                 "Boosts the base attack of all abilities by 2, except Pass", 
-                ElementList.getElement(ElementList.ElementNames.NULL)
+                ElementList.getElement(ElementList.Name.NULL)
             )
         );
 
         put
         (
-            EffectNames.DEFENSE_BOOST,  
+            Name.DEFENSE_BOOST,  
             new InstantEffect
             (
                 2, 
-                EffectType.DEFENSE, 
+                Type.DEFENSE, 
                 "defense up", 
                 "Reduces all future damage the character takes by 2", 
-                ElementList.getElement(ElementList.ElementNames.NULL)
+                ElementList.getElement(ElementList.Name.NULL)
             )
         );
         
         put(
-            EffectNames.CHARGE, 
+            Name.CHARGE, 
             new Effect
             (
                 1, 
-                EffectType.ATTACK, 
+                Type.ATTACK, 
                 5, 
                 true, 
                 "Charge", 
                 "Will increase the base attack of the user by one each turn", 
-                ElementList.getElement(ElementList.ElementNames.NULL)
+                ElementList.getElement(ElementList.Name.NULL)
             )
         );
         
         put(
-            EffectNames.REGEN, 
+            Name.REGEN, 
             new Effect
             (
                 1, 
-                EffectType.HEALTH,
+                Type.HEALTH,
                 5, 
                 true, 
                 "Regen", 
                 "The player will recover health for ten turns, 1 health per turn. ", 
-                ElementList.getElement(ElementList.ElementNames.NULL)
+                ElementList.getElement(ElementList.Name.NULL)
             )
         );
         
         put
         (
-            EffectNames.POISON, 
+            Name.POISON, 
             new Effect
             (
                 1, 
-                EffectType.DAMAGE, 
+                Type.DAMAGE, 
                 5, 
                 true, 
                 "Poison", 
                 "Will decrease the health of the player by one.", 
-                ElementList.getElement(ElementList.ElementNames.NULL), 
+                ElementList.getElement(ElementList.Name.NULL), 
                 true, 
                 true
             )
@@ -126,29 +126,29 @@ public class EffectList
 
         put
         (
-            EffectNames.GUARD, 
+            Name.GUARD, 
             new OneTimeEffect
             (
                 4, 
-                EffectType.DEFENSE, 
+                Type.DEFENSE, 
                 5, 
                 "Guard", 
                 "Will let the user adopt a defensive stance", 
-                ElementList.getElement(ElementList.ElementNames.NULL)
+                ElementList.getElement(ElementList.Name.NULL)
             )
         );
 
         put
         (
-            EffectNames.CURSE, 
+            Name.CURSE, 
             new DelayedEffect
             (
                 20, 
-                EffectType.DAMAGE, 
+                Type.DAMAGE, 
                 4, 
                 "Curse", 
                 "Deals a hefty amount of damage after some time has passed", 
-                ElementList.getElement(ElementList.ElementNames.NULL),  
+                ElementList.getElement(ElementList.Name.NULL),  
                 false, 
                 false
             )
@@ -156,14 +156,14 @@ public class EffectList
 
         put
         (
-            EffectNames.PERMAGEN, 
-            new Passive
+            Name.PERMAGEN, 
+            new PassiveEffect
             (
                 1, 
-                EffectType.HEALTH, 
+                Type.HEALTH, 
                 "Permanent regeneration", 
                 "Just as the name says.", 
-                ElementList.getElement(ElementList.ElementNames.NULL), 
+                ElementList.getElement(ElementList.Name.NULL), 
                 true, 
                 true
             )
@@ -171,19 +171,19 @@ public class EffectList
 
         put
         (
-            EffectNames.BUILD_UP, 
+            Name.BUILD_UP, 
             new GroupEffect
             (
                 "Build up", 
                 "The target begins to increase all of their stats.", 
-                ElementList.getElement(ElementList.ElementNames.NULL), 
-                this.get(EffectNames.CHARGE), 
-                this.get(EffectNames.DEFENSE_BOOST), 
-                this.get(EffectNames.REGEN)
+                ElementList.getElement(ElementList.Name.NULL), 
+                this.get(Name.CHARGE), 
+                this.get(Name.DEFENSE_BOOST), 
+                this.get(Name.REGEN)
             )
         );
         // template
-        // put(EffectNames., new __Effect(1, EffectType., 1, "", "", ElementList.getElement(ElementList.ElementNames.), true, true));
+        // put(Name., new __Effect(1, Type., 1, "", "", ElementList.getElement(ElementList.Name.), true, true));
     }};
 
 
@@ -195,7 +195,7 @@ public class EffectList
     * @return  the Effect that corresponds to the given index
     */
     public static Effect getEffect(
-        EffectNames name)
+        Name name)
     {
         return EFFECTS.get(name);
     }

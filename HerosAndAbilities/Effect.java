@@ -7,7 +7,7 @@ public class Effect
     private final static int PIERCES_DEFENSE_INDEX = 0;
     private final static int PIERCES_SHEILD_INDEX = 1;
     private int strength;
-    private EffectList.EffectType typeOfEffect;
+    private EffectList.Type typeOfEffect;
     private int duration;
     private boolean permanent;
     private String name;
@@ -18,7 +18,7 @@ public class Effect
 
     public Effect(
         int strength, 
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         int duration, 
         boolean permanent, 
         String name, 
@@ -41,7 +41,7 @@ public class Effect
 
     public Effect(
         int strength, 
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         int duration, 
         boolean permanent, 
         String name, 
@@ -73,7 +73,7 @@ public class Effect
 
 
     protected void applyEffect(
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         Superhero target) 
     {
         switch (typeOfEffect) 
@@ -154,7 +154,7 @@ public class Effect
     }
 
 
-    protected EffectList.EffectType getEffectType() 
+    protected EffectList.Type getType() 
     {
         return this.typeOfEffect;
     }

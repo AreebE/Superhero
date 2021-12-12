@@ -5,7 +5,7 @@ public class InstantEffect extends Effect
 
     public InstantEffect(
         int strength, 
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         String name, 
         String desc, 
         Element element) 
@@ -36,7 +36,7 @@ public class InstantEffect extends Effect
         return new InstantEffect
                     (
                         getStrength(), 
-                        getEffectType(),
+                        getType(),
                         getName(), 
                         getDesc(), 
                         getElement()

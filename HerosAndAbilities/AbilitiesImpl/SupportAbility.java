@@ -2,8 +2,6 @@ import java.util.EnumMap;
 
 public class SupportAbility extends Ability 
 {
-    private int type;
-
     // Effect types
     private Effect template;
 
@@ -13,7 +11,7 @@ public class SupportAbility extends Ability
         String desc, 
         int cooldown, 
         Effect template, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -22,7 +20,7 @@ public class SupportAbility extends Ability
             desc, 
             cooldown, 
             0, 
-            AbilityList.AbilityType.SUPPORT, 
+            AbilityList.Type.SUPPORT, 
             enumName, 
             em, 
             modifiers
@@ -36,7 +34,7 @@ public class SupportAbility extends Ability
         String desc, 
         int cooldown, 
         Effect template, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em,
         EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers) 
     {
@@ -46,7 +44,7 @@ public class SupportAbility extends Ability
             desc,
             cooldown, 
             0, 
-            AbilityList.AbilityType.SUPPORT, 
+            AbilityList.Type.SUPPORT, 
             enumName, 
             em, 
             modifiers

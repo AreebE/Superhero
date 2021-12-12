@@ -19,12 +19,12 @@ public class Game{
     Superhero testin = c.AskNMakeSuperhero();
     System.out.println("End of custom");
     AbilityList.giveAbility(testin,   
-        AbilityList.AbilityNames.HEAL_PULSE,
-        AbilityList.AbilityNames.POISON,
-        AbilityList.AbilityNames.SACRIFICE,
-        AbilityList.AbilityNames.DEFENSIVE_STANCE,
-        AbilityList.AbilityNames.PRAY);
-    testin.addEffect(EffectList.getEffect(EffectList.EffectNames.PERMAGEN));
+        AbilityList.Name.HEAL_PULSE,
+        AbilityList.Name.POISON,
+        AbilityList.Name.SACRIFICE,
+        AbilityList.Name.DEFENSIVE_STANCE,
+        AbilityList.Name.PRAY);
+    testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
 
 
     Superhero robot = new Superhero("BeepBoop", 1, 7, 8);
@@ -33,11 +33,11 @@ public class Game{
         // AbilityList.COUNTERSTRIKE, 
         // AbilityList.FLARE_UP);
     AbilityList.giveAbility(robot,
-        AbilityList.AbilityNames.LIGHTNING_STRIKE,
-        AbilityList.AbilityNames.COUNTERSTRIKE,
-        AbilityList.AbilityNames.FLARE_UP,
-        AbilityList.AbilityNames.CONSTRUCT);
-    robot.addEffect(EffectList.getEffect(EffectList.EffectNames.CURSE));
+        AbilityList.Name.LIGHTNING_STRIKE,
+        AbilityList.Name.COUNTERSTRIKE,
+        AbilityList.Name.FLARE_UP,
+        AbilityList.Name.CONSTRUCT);
+    robot.addEffect(EffectList.getEffect(EffectList.Name.CURSE));
     
     Superhero human = new Superhero("Joe", 10, 7, 8);
     // AbilityList.giveAbility(human,
@@ -45,9 +45,9 @@ public class Game{
         // AbilityList.PROTECT, 
         // AbilityList.DEFENSE_UP);
     AbilityList.giveAbility(human,
-        AbilityList.AbilityNames.SNOWBALL,
-        AbilityList.AbilityNames.PROTECT,
-        AbilityList.AbilityNames.DEFENSE_UP);
+        AbilityList.Name.SNOWBALL,
+        AbilityList.Name.PROTECT,
+        AbilityList.Name.DEFENSE_UP);
 
     Superhero bland = new Superhero("EEEEEE", 20, 7, 8);
     // AbilityList.giveAbility(bland,
@@ -55,9 +55,9 @@ public class Game{
         // AbilityList.PROTECT, 
         // AbilityList.ATTACK_UP);
     AbilityList.giveAbility(bland, 
-        AbilityList.AbilityNames.FIREBALL,
-        AbilityList.AbilityNames.PROTECT,
-        AbilityList.AbilityNames.ATTACK_UP);
+        AbilityList.Name.FIREBALL,
+        AbilityList.Name.PROTECT,
+        AbilityList.Name.ATTACK_UP);
 
     ArrayList<Superhero> superheros = new ArrayList<>();
     superheros.add(robot);
@@ -119,7 +119,7 @@ public class Game{
 
   private Ability useAbility(Scanner inputReader, Superhero currentPlayer, Superhero target){
     System.out.println("Which ability to use?");
-    AbilityList.AbilityNames nameOfAbility = AbilityList.getName(inputReader.next());
+    AbilityList.Name nameOfAbility = AbilityList.getName(inputReader.next());
     Ability abilityUsed = currentPlayer.getAbility( nameOfAbility);
     while (abilityUsed == null){
       System.out.println("Choose a different ability.");

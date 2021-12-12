@@ -7,7 +7,7 @@ public class HealAbility extends DefenseAbility
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -29,7 +29,7 @@ public class HealAbility extends DefenseAbility
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers) 
     {

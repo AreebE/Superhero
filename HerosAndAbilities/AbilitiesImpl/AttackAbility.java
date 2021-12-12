@@ -11,7 +11,7 @@ public class AttackAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
@@ -23,7 +23,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            AbilityList.AbilityType.ATTACK, 
+            AbilityList.Type.ATTACK, 
             enumName, 
             em, 
             modifiers
@@ -38,7 +38,7 @@ public class AttackAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityNames enumName,
+        AbilityList.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
@@ -51,7 +51,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            AbilityList.AbilityType.ATTACK, 
+            AbilityList.Type.ATTACK, 
             enumName, 
             em, 
             modifiers
@@ -68,7 +68,7 @@ public class AttackAbility extends Ability
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());
-        if (getEnumName().equals(AbilityList.AbilityNames.PASS_TURN)) 
+        if (getEnumName().equals(AbilityList.Name.PASS_TURN)) 
         {
             return;
         }

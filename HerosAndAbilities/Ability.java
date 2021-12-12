@@ -7,8 +7,8 @@ public abstract class Ability
     private int cooldown;
     private int strength;
     private int turnsSinceUse;
-    private AbilityList.AbilityType type;
-    private AbilityList.AbilityNames enumName;
+    private AbilityList.Type type;
+    private AbilityList.Name enumName;
     private Element em;
     private boolean isRandomized;
     private int chance;
@@ -20,8 +20,8 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityType type,
-        AbilityList.AbilityNames enumName, 
+        AbilityList.Type type,
+        AbilityList.Name enumName, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -48,8 +48,8 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.AbilityType type,
-        AbilityList.AbilityNames enumName, 
+        AbilityList.Type type,
+        AbilityList.Name enumName, 
         Element em,
         EnumMap<AbilityList.AbilityModifierNames, 
         AbilityModifier> modifiers) 
@@ -60,7 +60,7 @@ public abstract class Ability
 
 
     // alt const. for customMaker
-    // Note: AbilityType is only in the ability list
+    // Note: Type is only in the ability list
     public Ability(
         String name, 
         String desc) 
@@ -69,7 +69,7 @@ public abstract class Ability
         this.description = desc;
         this.cooldown = 2;
         this.strength = 0;
-        this.type = AbilityList.AbilityType.ATTACK;
+        this.type = AbilityList.Type.ATTACK;
         this.turnsSinceUse = cooldown;
         this.enumName = enumName;
         this.em = em;
@@ -107,7 +107,7 @@ public abstract class Ability
     }
 
 
-    public AbilityList.AbilityNames getEnumName() 
+    public AbilityList.Name getEnumName() 
     {
         return enumName;
     }

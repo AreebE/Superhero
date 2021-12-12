@@ -10,7 +10,7 @@ public class ElementList{
 
   }
 
-  public static enum ElementNames{
+  public static enum Name{
     FIRE,
     ELECTRICITY,
     ICE,
@@ -18,16 +18,16 @@ public class ElementList{
     ALL
   }
 
-   private final static EnumMap<ElementNames, Element> LIST_OF_ELEMENTS = new EnumMap<>(ElementNames.class){{
+   private final static EnumMap<Name, Element> LIST_OF_ELEMENTS = new EnumMap<>(Name.class){{
 
-     put(ElementNames.FIRE, new Element("fire", "---", ElementNames.FIRE));
-     put(ElementNames.ELECTRICITY, new Element("electricity", "---", ElementNames.ELECTRICITY));
-     put(ElementNames.ICE, new Element("Ice", "---", ElementNames.ICE));
-     put(ElementNames.NULL, new Element("Null", "normal/nothing", ElementNames.NULL));
-     put(ElementNames.ALL, new Element("All", "Will trigger for anything", ElementNames.ALL));
+     put(Name.FIRE, new Element("fire", "---", Name.FIRE));
+     put(Name.ELECTRICITY, new Element("electricity", "---", Name.ELECTRICITY));
+     put(Name.ICE, new Element("Ice", "---", Name.ICE));
+     put(Name.NULL, new Element("Null", "normal/nothing", Name.NULL));
+     put(Name.ALL, new Element("All", "Will trigger for anything", Name.ALL));
    }};
 
-  public static Element getElement(ElementNames name){
+  public static Element getElement(Name name){
     return LIST_OF_ELEMENTS.get(name);
   }
 

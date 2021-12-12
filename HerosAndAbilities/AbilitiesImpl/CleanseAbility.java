@@ -6,7 +6,7 @@ public class CleanseAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        AbilityList.AbilityNames enumName, 
+        AbilityList.Name enumName, 
         Element em,
         AbilityModifier... modifiers) 
     {
@@ -27,7 +27,7 @@ public class CleanseAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        AbilityList.AbilityNames 
+        AbilityList.Name 
         enumName, 
         Element em,
         EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers) 

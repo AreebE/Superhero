@@ -15,7 +15,7 @@ public class GroupEffect extends Effect
         super
         (
             0, 
-            EffectList.EffectType.GROUP, 
+            EffectList.Type.GROUP, 
             0, 
             true, 
             name, 
@@ -46,7 +46,7 @@ public class GroupEffect extends Effect
         super
         (
             0, 
-            EffectList.EffectType.GROUP, 
+            EffectList.Type.GROUP, 
             0, 
             true, 
             name, 
@@ -93,14 +93,14 @@ public class GroupEffect extends Effect
 
     @Override
     public void applyEffect(
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         Superhero target) 
     {
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
         {
             Effect e = listOfEffects.get(i);
             System.out.println(e);
-            e.applyEffect(e.getEffectType(), target);
+            e.applyEffect(e.getType(), target);
         }
     }
 

@@ -2,9 +2,9 @@ public class Element {
   //private int type;
   private String name;
   private String description;
-  private ElementList.ElementNames elementID;
+  private ElementList.Name elementID;
 
-  public Element(String name, String description, ElementList.ElementNames elementID){
+  public Element(String name, String description, ElementList.Name elementID){
     //this.type = type;
     this.name = name;
     this.description = description;
@@ -16,7 +16,7 @@ public class Element {
 
   }
 
-  public ElementList.ElementNames getID(){
+  public ElementList.Name getID(){
     return elementID;
   }
   

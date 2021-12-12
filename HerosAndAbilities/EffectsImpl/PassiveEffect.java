@@ -1,10 +1,8 @@
 public class PassiveEffect extends Effect 
 {
-
-
     public PassiveEffect(
         int strength, 
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         String name, 
         String desc, 
         Element element,
@@ -37,7 +35,7 @@ public class PassiveEffect extends Effect
         return new PassiveEffect
                 (
                     getStrength(), 
-                    getEffectType(), 
+                    getType(), 
                     getName(), 
                     getDesc(), 
                     getElement(), 

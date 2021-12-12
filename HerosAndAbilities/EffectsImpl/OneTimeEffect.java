@@ -5,7 +5,7 @@ public class OneTimeEffect extends Effect
 
     public OneTimeEffect(
         int strength, 
-        EffectList.EffectType type, 
+        EffectList.Type type, 
         int duration, 
         String name, 
         String desc,
@@ -31,7 +31,7 @@ public class OneTimeEffect extends Effect
     {
         if (!used) 
         {
-            applyEffect(getEffectType(), target);
+            applyEffect(getType(), target);
             used = true;
         }
         reduceDuration(target);
@@ -44,7 +44,7 @@ public class OneTimeEffect extends Effect
     {
         if (!isPermanent()) 
         {
-            switch (getEffectType()) 
+            switch (getType()) 
             {
                 case ATTACK:
                     target.addAttack(-getStrength());
@@ -64,7 +64,7 @@ public class OneTimeEffect extends Effect
         return new OneTimeEffect
                     (
                         getStrength(), 
-                        getEffectType(), 
+                        getType(), 
                         getDuration(), 
                         getName(), 
                         getDesc(), 
