@@ -9,7 +9,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   private String name;
   private int freeWill;
   private ArrayList<Ability> abilities;
-  private ArrayList<Effect> Effects;
+  private ArrayList<Effect> effects;
   private int health;
   private int maxHealth;
   private int sheildHealth;
@@ -23,7 +23,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
     this.maxHealth = health;
     this.sheildHealth = sheildHealth;
     this.abilities = new ArrayList<>();
-    this.Effects = new ArrayList<>();
+    this.effects = new ArrayList<>();
     this.baseAttack = 0;
     this.baseDefense = 0;
     AbilityList.giveAbility(this, AbilityList.AbilityNames.PASS_TURN);
@@ -69,13 +69,13 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
 // moved it down
 
     superheroString.append("\u001B[31m");
-    if (Effects.size() == 0){
+    if (effects.size() == 0){
       superheroString.append("No Effects/ deEffects applied.\n");
     } else {
       superheroString.append("The Effects/deEffects are:\n");
-      for (int i = 0; i < Effects.size(); i++){
+      for (int i = 0; i < effects.size(); i++){
         superheroString.append("* ")
-            .append(Effects.get(i))
+            .append(effects.get(i))
             .append("\n");
       }
     }
@@ -157,6 +157,10 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
     return this.sheildHealth;
   }
 
+  public boolean hasSheild(){
+    return this.sheildHealth == 0;
+  }
+
   public void healHealth(int healed){
     System.out.println("called the heal health");
     health += healed;
@@ -214,11 +218,20 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
   /* Methods for adding/removing Effects
   */
   public void addEffect(Effect newEffect){
-    Effects.add(newEffect);
+    effects.add(newEffect);
   }
    
   public void removeEffect(Effect removed){
-    Effects.remove(removed);
+    effects.remove(removed);
+  }
+
+  public void removeEffects(ElementList.ElementNames elementID){
+    for (int i = effects.size() - 1; i >= 0; i--){
+      Effect e = effects.get(i);
+      if (e.isRemovable() && (elementID.equals(ElementList.ElementNames.ALL) || elementID.equals(e.getElement().getID()))){
+        removeEffect(e);
+      }
+    }
   }
   //
   
@@ -254,8 +267,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver{
 
 
   public void useEffects(){
-    for (int i = Effects.size() - 1; i >= 0; i--){
-      Effect b = Effects.get(i);
+    for (int i = effects.size() - 1; i >= 0; i--){
+      Effect b = effects.get(i);
       b.applyEffect(this);
     }
   }

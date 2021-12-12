@@ -20,8 +20,11 @@ public class Game{
     System.out.println("End of custom");
     AbilityList.giveAbility(testin,   
         AbilityList.AbilityNames.HEAL_PULSE,
-        AbilityList.AbilityNames.POISON);
-    
+        AbilityList.AbilityNames.POISON,
+        AbilityList.AbilityNames.SACRIFICE,
+        AbilityList.AbilityNames.DEFENSIVE_STANCE,
+        AbilityList.AbilityNames.PRAY);
+    testin.addEffect(EffectList.getEffect(EffectList.EffectNames.PERMAGEN));
 
 
     Superhero robot = new Superhero("BeepBoop", 1, 7, 8);
@@ -32,7 +35,9 @@ public class Game{
     AbilityList.giveAbility(robot,
         AbilityList.AbilityNames.LIGHTNING_STRIKE,
         AbilityList.AbilityNames.COUNTERSTRIKE,
-        AbilityList.AbilityNames.FLARE_UP);
+        AbilityList.AbilityNames.FLARE_UP,
+        AbilityList.AbilityNames.CONSTRUCT);
+    robot.addEffect(EffectList.getEffect(EffectList.EffectNames.CURSE));
     
     Superhero human = new Superhero("Joe", 10, 7, 8);
     // AbilityList.giveAbility(human,
@@ -56,8 +61,8 @@ public class Game{
 
     ArrayList<Superhero> superheros = new ArrayList<>();
     superheros.add(robot);
-    superheros.add(bland);
-    superheros.add(human);
+    // superheros.add(bland);
+    // superheros.add(human);
     superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
