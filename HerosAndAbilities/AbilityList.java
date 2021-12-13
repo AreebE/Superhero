@@ -10,10 +10,11 @@ public class AbilityList
 
     private AbilityList(){}
 
-    public static enum AbilityModifierNames
+    public static enum ModifierName
     {
         RANDOM,
         RECOIL,
+        MULTICAST,
         GROUP
     }
 
@@ -31,6 +32,7 @@ public class AbilityList
         SNOWBALL, 
         LIGHTNING_STRIKE, 
         PASS_TURN,
+        POISON_SLASH,
 
         // Defense 
         HEAL_PULSE,
@@ -45,10 +47,14 @@ public class AbilityList
         SACRIFICE,
         DEFENSIVE_STANCE,
         CONSTRUCT,
-        PRAY
+        PRAY,
+        CUSTOM
     }
-    public static int MAX_CHANCE = 256;
-  
+    public static final int MAX_CHANCE = 256;
+    
+    private static int abilityID = 0;
+
+    private static HashMap<String, Ability> customAbilities = new HashMap<>();
 
     private final static EnumMap<Name, Ability> ABILITIES = new EnumMap<>(Name.class)
     {{
@@ -81,7 +87,8 @@ public class AbilityList
                 Name.SNOWBALL, 
                 ElementList.getElement(ElementList.Name.ICE), 
                 false, 
-                true
+                true,
+                new MultiCastModifier(4)
             )
         );
 
@@ -103,6 +110,23 @@ public class AbilityList
 
         put
         (
+            Name.POISON_SLASH, 
+            new AttackStatusAbility
+            (
+                "Poison Slash",
+                "Poisons the enemy upon hit",
+                4, 
+                2,
+                Name.POISON_SLASH,
+                ElementList.getElement(ElementList.Name.NULL),
+                false,
+                false,
+                EffectList.getEffect(EffectList.Name.POISON)
+            )
+        );
+
+        put
+        (
             Name.PASS_TURN, 
             new AttackAbility
             (
@@ -118,16 +142,18 @@ public class AbilityList
         );
 
 
-        // Defense abilities
+        // Defense Abilities
+
+        // Support abilities
         put
         (
             Name.HEAL_PULSE, 
-            new HealAbility
+            new SupportAbility
             (
                 "Heal pulse", 
-                "heals oneself", 
+                "boosts defense for x amount of time",
                 1, 
-                10, 
+                EffectList.getEffect(EffectList.Name.INSTANT_HEAL), 
                 Name.HEAL_PULSE, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
@@ -136,33 +162,31 @@ public class AbilityList
         put
         (
             Name.PROTECT, 
-            new DefenseAbility
+            new SupportAbility
             (
                 "Protect", 
-                "protects the user from any hit.", 
+                "protects the user from any hit",
                 3, 
-                5, 
+                EffectList.getEffect(EffectList.Name.INSTANT_SHEILD), 
                 Name.PROTECT, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
-        
+
         put
         (
             Name.COUNTERSTRIKE, 
-            new DefenseAbility
+            new SupportAbility
             (
                 "Counterstrike", 
-                "Will counter any attack that comes forth", 
-                5, 
-                50, 
+                "Adds a lot of sheild",
+                3, 
+                EffectList.getEffect(EffectList.Name.INSTANT_SHEILD_X), 
                 Name.COUNTERSTRIKE, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
 
-        // Support abilities
-        // System.out.println(listOfEffects);
         put
         (
             Name.ATTACK_UP, 
@@ -333,7 +357,7 @@ public class AbilityList
     */
     // public static void giveAbility(Superhero target, int ... ids){
     //   for (int i: ids){
-    //     target.addAbility(abilities_2.get(i).copyAbility());
+    //     target.addAbility(abilities_2.get(i).copy());
     //   }
     // }
 
@@ -342,7 +366,22 @@ public class AbilityList
         Name ... names)
     {
         for (Name name: names){
-            target.addAbility(ABILITIES.get(name).copyAbility());
+            target.addAbility(ABILITIES.get(name).copy());
+        }
+    }
+
+
+    public static void addAbility(Ability a, String... identifiers)
+    {
+        for (int i = 0; i < identifiers.length; i++)
+        {
+            String identifier = identifiers[i];
+            if (namesToAbility.containsKey(identifier))
+            {
+                continue;
+            }
+            namesToAbility.put(identifier, Name.CUSTOM);
+            customAbilities.put(identifier, a);
         }
     }
 

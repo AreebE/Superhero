@@ -59,7 +59,7 @@ public class OneTimeEffect extends Effect
 
 
     @Override
-    public Effect copyEffect() 
+    public Effect copy() 
     {
         return new OneTimeEffect
                     (

@@ -30,7 +30,7 @@ public class PassiveEffect extends Effect
 
 
     @Override
-    public Effect copyEffect() 
+    public Effect copy() 
     {
         return new PassiveEffect
                 (

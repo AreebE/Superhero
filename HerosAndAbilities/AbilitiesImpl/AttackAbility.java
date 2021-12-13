@@ -42,7 +42,7 @@ public class AttackAbility extends Ability
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        EnumMap<AbilityList.AbilityModifierNames, 
+        EnumMap<AbilityList.ModifierName, 
         AbilityModifier> modifiers) 
     {
         super
@@ -89,7 +89,7 @@ public class AttackAbility extends Ability
 
 
     @Override
-    public Ability copyAbility() 
+    public Ability copy() 
     {
         return new AttackAbility
                 (

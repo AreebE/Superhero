@@ -26,7 +26,7 @@ public class GroupEffect extends Effect
         groupDuration = 0;
         for (int i = 0; i < effects.length; i++) 
         {
-            Effect e = effects[i].copyEffect();
+            Effect e = effects[i].copy();
             listOfEffects.add(i, e);
             int currentDuration = e.getDuration();
             if (currentDuration > groupDuration) 
@@ -58,7 +58,7 @@ public class GroupEffect extends Effect
         groupDuration = 0;
         for (int i = 0; i < effects.size(); i++) 
         {
-            Effect e = effects.get(i).copyEffect();
+            Effect e = effects.get(i).copy();
             listOfEffects.add(i, e);
             int currentDuration = e.getDuration();
             if (currentDuration > groupDuration) 
@@ -106,7 +106,7 @@ public class GroupEffect extends Effect
 
 
     @Override
-    public Effect copyEffect() 
+    public Effect copy() 
     {
         return new GroupEffect
                     (

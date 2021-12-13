@@ -16,7 +16,7 @@ public class RecoilModifier implements AbilityModifier<Void>{
   };
 
   @Override
-  public AbilityList.AbilityModifierNames getModifier(){
-    return AbilityList.AbilityModifierNames.RECOIL;
+  public AbilityList.ModifierName getModifier(){
+    return AbilityList.ModifierName.RECOIL;
   }
 }

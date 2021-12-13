@@ -30,7 +30,7 @@ public class CleanseAbility extends SupportAbility
         AbilityList.Name 
         enumName, 
         Element em,
-        EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers) 
+        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
@@ -55,7 +55,7 @@ public class CleanseAbility extends SupportAbility
 
 
     @Override
-    public Ability copyAbility() 
+    public Ability copy() 
     {
         return new CleanseAbility
                 (

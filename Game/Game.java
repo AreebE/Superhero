@@ -23,7 +23,8 @@ public class Game{
         AbilityList.Name.POISON,
         AbilityList.Name.SACRIFICE,
         AbilityList.Name.DEFENSIVE_STANCE,
-        AbilityList.Name.PRAY);
+        AbilityList.Name.PRAY,
+        AbilityList.Name.PROTECT);
     testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
 
 
@@ -60,9 +61,9 @@ public class Game{
         AbilityList.Name.ATTACK_UP);
 
     ArrayList<Superhero> superheros = new ArrayList<>();
-    superheros.add(robot);
+    // superheros.add(robot);
     // superheros.add(bland);
-    // superheros.add(human);
+    superheros.add(human);
     superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);

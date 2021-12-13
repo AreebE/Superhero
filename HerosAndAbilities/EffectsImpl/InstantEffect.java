@@ -32,7 +32,7 @@ public class InstantEffect extends Effect
 
 
     @Override
-    public Effect copyEffect() {
+    public Effect copy() {
         return new InstantEffect
                     (
                         getStrength(), 

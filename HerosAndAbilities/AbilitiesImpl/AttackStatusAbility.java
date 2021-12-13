@@ -42,9 +42,8 @@ public class AttackStatusAbility extends AttackAbility
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        EnumMap<AbilityList.AbilityModifierNames, 
-        AbilityModifier> modifiers, 
-        Effect sideEffect) 
+        Effect sideEffect,
+        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
@@ -71,13 +70,13 @@ public class AttackStatusAbility extends AttackAbility
         if (isPiercing() 
             || !caster.hasSheild()) 
         {
-            target.addEffect(sideEffect.copyEffect());
+            target.addEffect(sideEffect.copy());
         }
     }
 
 
     @Override
-    public Ability copyAbility() 
+    public Ability copy() 
     {
         return new AttackStatusAbility
                     (   getName(), 
@@ -88,8 +87,8 @@ public class AttackStatusAbility extends AttackAbility
                         getElement(), 
                         doesIgnoreBaseDefense(), 
                         isPiercing(), 
-                        getModifiers(), 
-                        sideEffect
+                        sideEffect.copy(),
+                        getModifiers()
                     );
     }
 }

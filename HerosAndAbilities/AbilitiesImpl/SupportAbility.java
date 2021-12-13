@@ -36,7 +36,7 @@ public class SupportAbility extends Ability
         Effect template, 
         AbilityList.Name enumName,
         Element em,
-        EnumMap<AbilityList.AbilityModifierNames, AbilityModifier> modifiers) 
+        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
@@ -58,12 +58,12 @@ public class SupportAbility extends Ability
         Superhero target, 
         Superhero caster) 
     {
-        target.addEffect(template.copyEffect());
+        target.addEffect(template.copy());
     }
 
 
     @Override
-    public Ability copyAbility() 
+    public Ability copy() 
     {
         return new SupportAbility
                 (

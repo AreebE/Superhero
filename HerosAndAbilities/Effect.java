@@ -88,6 +88,9 @@ public class Effect
             case HEALTH:
                 target.healHealth(strength);
                 break;
+            case SHEILD:
+                target.addSheildHealth(strength);
+                break;
             case DAMAGE:
                 target.dealDamage
                 (
@@ -132,7 +135,7 @@ public class Effect
     /*
      * Creates a copy of the Effect so that two people wouldn't share the same one
      */
-    public Effect copyEffect() 
+    public Effect copy() 
     {
         return new Effect
                 (

@@ -2,11 +2,13 @@ import java.util.EnumMap;
 
 public class DefenseAbility extends Ability 
 {
+    private Sheild sheild;
+
     public DefenseAbility(
         String name, 
         String desc, 
         int cooldown, 
-        int strength, 
+        Sheild sheild, 
         AbilityList.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
@@ -16,7 +18,7 @@ public class DefenseAbility extends Ability
             name, 
             desc,
             cooldown, 
-            strength, 
+            0, 
             AbilityList.Type.DEFENSE, 
             enumName, 
             em,
@@ -29,23 +31,23 @@ public class DefenseAbility extends Ability
         String name, 
         String desc, 
         int cooldown,
-        int strength, 
+        Sheild sheild, 
         AbilityList.Name enumName,
         Element em, 
-        EnumMap<AbilityList.AbilityModifierNames, 
-        AbilityModifier> modifiers) 
+        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
             name, 
             desc, 
             cooldown, 
-            strength, 
+            0, 
             AbilityList.Type.DEFENSE, 
             enumName, 
             em, 
             modifiers
         );
+        this.sheild = sheild;
     }
 
 
@@ -54,18 +56,18 @@ public class DefenseAbility extends Ability
         Superhero target, 
         Superhero caster) 
     {
-        target.addSheildHealth(getStrength());
+        // target.addSheild(sheild);
     }
 
     @Override
-    public Ability copyAbility() 
+    public Ability copy() 
     {
         return new DefenseAbility
                 (   
                     getName(), 
                     getDescription(), 
-                    getCooldown(), 
-                    getStrength(), 
+                    getCooldown(),  
+                    null,
                     getEnumName(),
                     getElement(), 
                     getModifiers()

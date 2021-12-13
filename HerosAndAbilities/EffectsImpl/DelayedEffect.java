@@ -42,7 +42,7 @@ public class DelayedEffect extends Effect
 
 
     @Override
-    public Effect copyEffect() 
+    public Effect copy() 
     {
         return new DelayedEffect
                     (

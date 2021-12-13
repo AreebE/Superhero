@@ -9,7 +9,8 @@ public class EffectList
     {
         ATTACK, 
         DEFENSE, 
-        HEALTH, 
+        HEALTH,
+        SHEILD, 
         DAMAGE, 
         GROUP
     } 
@@ -29,8 +30,12 @@ public class EffectList
         BUILD_UP,
         GUARD,
     
+        // Sheild
+        INSTANT_SHEILD,
+        INSTANT_SHEILD_X,
 
         // health Effects
+        INSTANT_HEAL,
         REGEN, 
         PERMAGEN,
 
@@ -62,6 +67,45 @@ public class EffectList
                 Type.ATTACK, 
                 "attack up", 
                 "Boosts the base attack of all abilities by 2, except Pass", 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.INSTANT_HEAL, 
+            new InstantEffect
+            (
+                10, 
+                Type.HEALTH, 
+                "Instant heal", 
+                "Heals 10 health immediately", 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.INSTANT_SHEILD, 
+            new InstantEffect
+            (
+                10, 
+                Type.SHEILD, 
+                "Instant Sheild", 
+                "Adds 10 sheild immediately", 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.INSTANT_SHEILD_X, 
+            new InstantEffect
+            (
+                50, 
+                Type.SHEILD, 
+                "Mega Instant Sheild", 
+                "Adds 50 sheild immediately", 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
