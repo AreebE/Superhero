@@ -24,5 +24,9 @@ public class Element {
   public String toString(){
     return name + ", " + description;
   }
+
+  public String getsName(){
+    return name;
+  }
 }
 

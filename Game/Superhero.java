@@ -230,7 +230,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
 
     public boolean isPlayerHealthZero() 
     {
-        return this.health == 0;
+        return this.health <= 0;
     }
 
 

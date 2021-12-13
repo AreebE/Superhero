@@ -90,11 +90,12 @@ public class Game{
       i = (i + 1) % superheros.size();
       currentPlayer.endOfTurn();
       anyHealthZero = target.isPlayerHealthZero();
+      anyHealthZero = currentPlayer.isPlayerHealthZero();
       // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
       System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
     inputReader.close();
-    System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
+    System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth());
     
     
   }
@@ -129,4 +130,6 @@ public class Game{
     }
     return abilityUsed;
   }
+
+ 
 }
