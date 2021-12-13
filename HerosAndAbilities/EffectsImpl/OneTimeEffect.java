@@ -9,6 +9,28 @@ public class OneTimeEffect extends Effect
         int duration, 
         String name, 
         String desc,
+        Element element,
+        boolean[] pierces) 
+    {
+        super
+        (
+            strength, 
+            type, 
+            duration,
+            false, 
+            name, 
+            desc, 
+            element, 
+            pierces
+        );
+    }
+
+    public OneTimeEffect(
+        int strength, 
+        EffectList.Type type, 
+        int duration, 
+        String name, 
+        String desc,
         Element element) 
     {
         super
@@ -23,7 +45,6 @@ public class OneTimeEffect extends Effect
             null
         );
     }
-
 
     @Override
     public void applyEffect(

@@ -39,7 +39,7 @@ public abstract class Ability
             // System.out.println(m + ", " + m.getModifier());
             this.modifiers.put(m.getModifier(), m);
         }
-        System.out.println(this.modifiers);
+        // System.out.println(this.modifiers);
     }
 
 

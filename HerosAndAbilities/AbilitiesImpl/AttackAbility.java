@@ -79,7 +79,7 @@ public class AttackAbility extends Ability
             attackStrength = 0;
         }
 
-        target.dealDamage
+        boolean keepGoing = target.dealDamage
         (
             attackStrength, 
             isPiercing, 
@@ -87,7 +87,7 @@ public class AttackAbility extends Ability
             caster,
             getElement()
         );
-        return true;
+        return keepGoing;
     }
 
 

@@ -6,7 +6,7 @@ public class PassiveEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean... pierces) 
+        boolean[] pierces) 
     {
         super
         (
@@ -18,6 +18,26 @@ public class PassiveEffect extends Effect
             desc, 
             element, 
             pierces
+        );
+    }
+
+    public PassiveEffect(
+        int strength, 
+        EffectList.Type type, 
+        String name, 
+        String desc, 
+        Element element) 
+    {
+        super
+        (
+            strength, 
+            type, 
+            0, 
+            true, 
+            name,
+            desc, 
+            element, 
+            null
         );
     }
 

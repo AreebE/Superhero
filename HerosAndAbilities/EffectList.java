@@ -81,7 +81,8 @@ public class EffectList
                 Type.DAMAGE,
                 "Retaliate",
                 "Does some damage in retaliation",
-                ElementList.getElement(ElementList.Name.NULL)
+                ElementList.getElement(ElementList.Name.NULL),
+                new boolean[]{true, true}
             )
         );
 
@@ -177,8 +178,7 @@ public class EffectList
                 "Poison", 
                 "Will decrease the health of the player by one.", 
                 ElementList.getElement(ElementList.Name.NULL), 
-                true, 
-                true
+                new boolean[]{true, true}
             )
         );
 
@@ -207,8 +207,7 @@ public class EffectList
                 "Curse", 
                 "Deals a hefty amount of damage after some time has passed", 
                 ElementList.getElement(ElementList.Name.NULL),  
-                false, 
-                false
+                new boolean[]{false, false}
             )
         );
 
@@ -222,8 +221,7 @@ public class EffectList
                 "Permanent regeneration", 
                 "Just as the name says.", 
                 ElementList.getElement(ElementList.Name.NULL), 
-                true, 
-                true
+                new boolean[]{true, true}
             )
         );
 

@@ -8,6 +8,27 @@ public class InstantEffect extends Effect
         EffectList.Type type, 
         String name, 
         String desc, 
+        Element element,
+        boolean[] pierces) 
+    {
+        super
+        (
+            strength, 
+            type, 
+            0, 
+            true, 
+            name, 
+            desc, 
+            element,
+            pierces
+        );
+    }
+
+     public InstantEffect(
+        int strength, 
+        EffectList.Type type, 
+        String name, 
+        String desc, 
         Element element) 
     {
         super
@@ -18,7 +39,8 @@ public class InstantEffect extends Effect
             true, 
             name, 
             desc, 
-            element
+            element,
+            null
         );
     }
 
@@ -39,7 +61,8 @@ public class InstantEffect extends Effect
                         getType(),
                         getName(), 
                         getDesc(), 
-                        getElement()
+                        getElement(),
+                        getPierces()
                     );
     }
 }

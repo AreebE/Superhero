@@ -270,6 +270,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         Superhero caster,
         Element e) 
     {   
+        boolean endAttack = false;
         SheildList.Trigger type = null;
         if (caster != null)
         {
@@ -287,31 +288,71 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         } 
         else if (isPiercing) 
         {
-            health -= damageDealt;
             if (type != null)
             {
-                searchForSheild(type, e, caster);
+                endAttack = searchForSheild(type, e, caster);
             }
+            if (endAttack){
+                return false;
+            }
+            health -= damageDealt;
         } 
         else if (sheildHealth >= damageDealt) 
         {
             sheildHealth -= damageDealt;
-            if (type != null)
-            {
-                searchForSheild(type, e, caster);
-            }
             return true;
         } 
         else
         {
             damageDealt -= sheildHealth;
-            searchForSheild(SheildList.Trigger.SHEILD_BREAK, e, caster);
             sheildHealth = 0;
-            health -= damageDealt;
+            endAttack = searchForSheild(SheildList.Trigger.SHEILD_BREAK, e, caster);
             if (type != null)
             {
-                searchForSheild(type, e, caster);
+                endAttack = endAttack || searchForSheild(type, e, caster);
             }
+            health -= damageDealt;
+            if (endAttack){
+                return false;
+            }
+        }
+        
+        if (health < 0) 
+        {
+            health = 0;
+        }
+        return true;
+    }
+
+    public boolean dealEffectDamage(
+        int damageDealt,
+        boolean isPiercing,
+        boolean ignoresDefense)
+    {
+         if (!ignoresDefense) 
+        {
+            damageDealt -= baseDefense;
+        }
+
+        if (0 >= damageDealt) 
+        {
+            return true;
+        } 
+        else if (isPiercing) 
+        {
+            health -= damageDealt;
+        } 
+        else if (sheildHealth >= damageDealt) 
+        {
+            sheildHealth -= damageDealt;
+            return true;
+        } 
+        else
+        {
+            damageDealt -= sheildHealth;
+            sheildHealth = 0;            
+            health -= damageDealt;
+            return false;
         }
         
         if (health < 0) 
@@ -452,6 +493,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
+            System.out.println(this);
             Effect b = effects.get(i);
             b.applyEffect(this);
         }

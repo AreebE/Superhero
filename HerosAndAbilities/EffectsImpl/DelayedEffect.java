@@ -8,7 +8,7 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean... pierces) 
+        boolean[] pierces) 
     {
         super
         (
@@ -20,6 +20,27 @@ public class DelayedEffect extends Effect
             desc, 
             element, 
             pierces
+        );
+    }
+
+    public DelayedEffect(
+        int strength, 
+        EffectList.Type type, 
+        int timer, 
+        String name, 
+        String desc, 
+        Element element) 
+    {
+        super
+        (
+            strength, 
+            type, 
+            timer, 
+            true, 
+            name, 
+            desc, 
+            element, 
+            null
         );
     }
 

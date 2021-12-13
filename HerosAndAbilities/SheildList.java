@@ -29,7 +29,7 @@ public class SheildList
                 "Deal some damage when struck",
                 3,
                 EffectList.getEffect(EffectList.Name.RETALIATE),
-                false,
+                true,
                 1,
                 new Trigger[] {Trigger.ATTACK},
                 new ElementList.Name[] {ElementList.Name.ALL}

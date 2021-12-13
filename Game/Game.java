@@ -40,7 +40,7 @@ public class Game{
         AbilityList.Name.CONSTRUCT);
     robot.addEffect(EffectList.getEffect(EffectList.Name.CURSE));
     
-    Superhero human = new Superhero("Joe", 10, 7, 8);
+    Superhero human = new Superhero("Joe", 10, 7, 0);
     // AbilityList.giveAbility(human,
         // AbilityList.SNOWBALL,
         // AbilityList.PROTECT, 
@@ -68,7 +68,7 @@ public class Game{
     // superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
-    System.out.println(superheros);
+    // System.out.println(superheros);
     playGame(superheros);
   }
 
@@ -95,8 +95,9 @@ public class Game{
       System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
     inputReader.close();
-    System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
-    
+    // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
+        System.out.println(superheros);
+
     
   }
 

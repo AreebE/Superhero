@@ -38,7 +38,6 @@ public class Effect
         );
     }
 
-
     public Effect(
         int strength, 
         EffectList.Type type, 
@@ -47,7 +46,7 @@ public class Effect
         String name, 
         String desc,
         Element element, 
-        boolean... pierces) 
+        boolean[] pierces) 
     {
         this.strength = strength;
         this.typeOfEffect = type;
@@ -92,13 +91,11 @@ public class Effect
                 target.addSheildHealth(strength);
                 break;
             case DAMAGE:
-                target.dealDamage
+                target.dealEffectDamage
                 (
                     strength, 
                     pierces[PIERCES_DEFENSE_INDEX], 
-                    pierces[PIERCES_SHEILD_INDEX],
-                    null,
-                    getElement()
+                    pierces[PIERCES_SHEILD_INDEX]
                 );
         }
     }
