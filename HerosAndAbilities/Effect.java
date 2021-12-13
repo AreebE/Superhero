@@ -96,7 +96,9 @@ public class Effect
                 (
                     strength, 
                     pierces[PIERCES_DEFENSE_INDEX], 
-                    pierces[PIERCES_SHEILD_INDEX]
+                    pierces[PIERCES_SHEILD_INDEX],
+                    null,
+                    getElement()
                 );
         }
     }

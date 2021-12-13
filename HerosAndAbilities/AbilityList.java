@@ -35,11 +35,12 @@ public class AbilityList
         POISON_SLASH,
 
         // Defense 
+        COUNTER,
+
+        // Support 
         HEAL_PULSE,
         PROTECT,
         COUNTERSTRIKE,
-
-        // Support
         ATTACK_UP,
         DEFENSE_UP,
         FLARE_UP,
@@ -143,6 +144,20 @@ public class AbilityList
 
 
         // Defense Abilities
+        put
+        (
+            Name.COUNTER,
+            new DefenseAbility
+            (
+                "Counter", 
+                "counter the next attack that comes", 
+                3, 
+                SheildList.getSheild(SheildList.Name.COUNTER), 
+                Name.COUNTER, 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
 
         // Support abilities
         put
@@ -340,6 +355,8 @@ public class AbilityList
         put("construct", Name.CONSTRUCT);
         
         put("pray", Name.PRAY);
+
+        put("counter", Name.COUNTER);
     }};
 
 

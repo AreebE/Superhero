@@ -4,7 +4,6 @@ public class AttackStatusAbility extends AttackAbility
 {
     private Effect sideEffect;
 
-
     public AttackStatusAbility(
         String name, 
         String desc, 
@@ -62,7 +61,7 @@ public class AttackStatusAbility extends AttackAbility
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
@@ -72,6 +71,7 @@ public class AttackStatusAbility extends AttackAbility
         {
             target.addEffect(sideEffect.copy());
         }
+        return true;
     }
 
 

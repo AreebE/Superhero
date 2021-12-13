@@ -54,11 +54,12 @@ public class SupportAbility extends Ability
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
         target.addEffect(template.copy());
+        return true;
     }
 
 

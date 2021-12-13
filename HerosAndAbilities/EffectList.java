@@ -41,7 +41,8 @@ public class EffectList
 
         // Damage
         POISON,
-        CURSE
+        CURSE,
+        RETALIATE
     };
 
 
@@ -67,6 +68,19 @@ public class EffectList
                 Type.ATTACK, 
                 "attack up", 
                 "Boosts the base attack of all abilities by 2, except Pass", 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put 
+        (
+            Name.RETALIATE,
+            new InstantEffect
+            (
+                4,
+                Type.DAMAGE,
+                "Retaliate",
+                "Does some damage in retaliation",
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );

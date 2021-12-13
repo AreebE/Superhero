@@ -62,7 +62,7 @@ public class AttackAbility extends Ability
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
@@ -70,7 +70,7 @@ public class AttackAbility extends Ability
         // " + target.getName());
         if (getEnumName().equals(AbilityList.Name.PASS_TURN)) 
         {
-            return;
+            return true;
         }
 
         int attackStrength = getStrength() + caster.getBaseAttack();
@@ -83,8 +83,11 @@ public class AttackAbility extends Ability
         (
             attackStrength, 
             isPiercing, 
-            ignoresBaseDefense
+            ignoresBaseDefense,
+            caster,
+            getElement()
         );
+        return true;
     }
 
 

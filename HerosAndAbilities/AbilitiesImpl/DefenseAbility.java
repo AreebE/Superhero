@@ -24,6 +24,7 @@ public class DefenseAbility extends Ability
             em,
             modifiers
         );
+        this.sheild = sheild;
     }
 
 
@@ -52,11 +53,12 @@ public class DefenseAbility extends Ability
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
-        // target.addSheild(sheild);
+        target.addSheild(sheild.copy());
+        return true;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class DefenseAbility extends Ability
                     getName(), 
                     getDescription(), 
                     getCooldown(),  
-                    null,
+                    sheild.copy(),
                     getEnumName(),
                     getElement(), 
                     getModifiers()

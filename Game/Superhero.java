@@ -11,6 +11,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     private int freeWill;
     private ArrayList<Ability> abilities;
     private ArrayList<Effect> effects;
+    private ArrayList<Sheild> sheilds;
     private int health;
     private int maxHealth;
     private int sheildHealth;
@@ -30,6 +31,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         this.sheildHealth = sheildHealth;
         this.abilities = new ArrayList<>();
         this.effects = new ArrayList<>();
+        this.sheilds = new ArrayList<>();
         this.baseAttack = 0;
         this.baseDefense = 0;
         AbilityList.giveAbility(this, AbilityList.Name.PASS_TURN);
@@ -98,6 +100,21 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
             {
                 superheroString.append("* ")
                                 .append(effects.get(i))
+                                .append("\n");
+            }
+        }
+
+        superheroString.append("\u001B[35m");
+        if (sheilds.size() == 0) 
+        {
+            superheroString.append("No sheilds applied.\n");
+        } else 
+        {
+            superheroString.append("The Sheilds are:\n");
+            for (int i = 0; i < sheilds.size(); i++) 
+            {
+                superheroString.append("* ")
+                                .append(sheilds.get(i))
                                 .append("\n");
             }
         }
@@ -244,40 +261,64 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
      *
      * @param ignoresDefense whether the attack ignores the base defense
      *
+     * @return     if the player can keep attacking
      */
-    public void dealDamage(
+    public boolean dealDamage(
         int damageDealt, 
         boolean isPiercing, 
-        boolean ignoresDefense) 
-    {
+        boolean ignoresDefense,
+        Superhero caster,
+        Element e) 
+    {   
+        SheildList.Trigger type = null;
+        if (caster != null)
+        {
+            type = SheildList.Trigger.ATTACK;
+        } 
+
         if (!ignoresDefense) 
         {
             damageDealt -= baseDefense;
         }
-
+        
         if (0 >= damageDealt) 
         {
-            return;
+            return true;
         } 
         else if (isPiercing) 
         {
             health -= damageDealt;
+            if (type != null)
+            {
+                searchForSheild(type, e, caster);
+            }
         } 
         else if (sheildHealth >= damageDealt) 
         {
             sheildHealth -= damageDealt;
-            return;
+            if (type != null)
+            {
+                searchForSheild(type, e, caster);
+            }
+            return true;
         } 
         else
         {
             damageDealt -= sheildHealth;
+            searchForSheild(SheildList.Trigger.SHEILD_BREAK, e, caster);
             sheildHealth = 0;
             health -= damageDealt;
+            if (type != null)
+            {
+                searchForSheild(type, e, caster);
+            }
         }
+        
         if (health < 0) 
         {
             health = 0;
         }
+        return true;
     }
     //
 
@@ -318,7 +359,53 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     }
     //
 
+    /*
+    * Methods for adding/removing sheilds
+    */
 
+    public void addSheild(
+        Sheild s)
+    {
+        sheilds.add(s);
+    }
+
+
+    public void removeSheild(
+        Sheild s)
+    {
+        sheilds.remove(s);
+    }
+
+
+    public void reduceSheildDurations()
+    {
+        for (int i = sheilds.size() - 1; i >= 0; i--)
+        {
+            sheilds.get(i).passTurn(this);
+        }
+    }
+
+
+    public boolean searchForSheild(
+        SheildList.Trigger trigger, 
+        Element element, 
+        Superhero caster)
+    {
+        boolean nullifyEffect = false;
+        for (int i = sheilds.size() - 1; i >= 0; i--)
+        {
+            Sheild s = sheilds.get(i);
+            if (s.wouldTrigger(trigger, element))
+            {
+                boolean nullify = s.triggerSheild(this, caster);
+                if (nullify)
+                {
+                    nullifyEffect = true;
+                }
+            }
+        }
+        return nullifyEffect;
+    }
     /*
      * Methods for adding/getting attack or defense
      */
@@ -357,6 +444,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     {
         useEffects();
         reduceCooldowns();
+        reduceSheildDurations();
     }
 
 

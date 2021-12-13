@@ -46,11 +46,12 @@ public class CleanseAbility extends SupportAbility
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
         target.removeEffects(getElement().getID());
+        return true;
     }
 
 

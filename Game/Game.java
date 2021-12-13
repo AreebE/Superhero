@@ -48,7 +48,8 @@ public class Game{
     AbilityList.giveAbility(human,
         AbilityList.Name.SNOWBALL,
         AbilityList.Name.PROTECT,
-        AbilityList.Name.DEFENSE_UP);
+        AbilityList.Name.DEFENSE_UP,
+        AbilityList.Name.COUNTER);
 
     Superhero bland = new Superhero("EEEEEE", 20, 7, 8);
     // AbilityList.giveAbility(bland,
@@ -61,10 +62,10 @@ public class Game{
         AbilityList.Name.ATTACK_UP);
 
     ArrayList<Superhero> superheros = new ArrayList<>();
-    // superheros.add(robot);
+    superheros.add(robot);
     // superheros.add(bland);
     superheros.add(human);
-    superheros.add(testin);
+    // superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
     System.out.println(superheros);

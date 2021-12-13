@@ -142,7 +142,10 @@ public abstract class Ability
             }
             for (int i = 0; i < times; i++)
             {
-                castAbility(target, caster);
+                boolean keepGoing = castAbility(target, caster);
+                if (!keepGoing){
+                    return false;
+                }
             }
             return true;
         }
@@ -150,7 +153,7 @@ public abstract class Ability
     }
 
 
-    protected abstract void castAbility
+    protected abstract boolean castAbility
     (
         Superhero target, 
         Superhero caster
