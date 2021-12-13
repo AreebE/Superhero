@@ -79,6 +79,7 @@ public class Game{
     boolean anyHealthZero = false;
     while (!anyHealthZero){
       Superhero currentPlayer = superheros.get(i);
+      anyHealthZero = currentPlayer.isPlayerHealthZero();
       // System.out.println(currentPlayer.getName() + "\'s turn. Has the health of " + currentPlayer.getHealth() + ", the sheild of " + currentPlayer.getSheildHealth() + " and abilities:\n" + currentPlayer.getAbilities());
       System.out.println(currentPlayer);
 
@@ -90,7 +91,7 @@ public class Game{
       i = (i + 1) % superheros.size();
       currentPlayer.endOfTurn();
       anyHealthZero = target.isPlayerHealthZero();
-      anyHealthZero = currentPlayer.isPlayerHealthZero();
+      
       // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
       System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
