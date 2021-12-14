@@ -8,6 +8,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     // free will between 1 and 20;
 
     private String name;
+    private String desc = "default desc";
     private int freeWill;
     private ArrayList<Ability> abilities;
     private ArrayList<Effect> effects;
@@ -128,12 +129,24 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
      * shield at the beggingn of each round // for now, that could work. but for
      * more customizability, we may remove that set health later on
      */
-    public String ToSaveable() 
-    {
-        String out = "";
-        out = (out + name + freeWill);
-        return out;
+    public ArrayList<String> ToSaveable(){
+    int[] ints = {
+      freeWill,
+      health,
+      maxHealth,
+      baseAttack,
+      baseDefense,
+    };
+    ArrayList<String> out =new ArrayList<String>();
+    out.add(name);
+    out.add(desc);
+    for(int i=0;i<ints.length;i++){
+      out.add(Integer.toString(ints[i]));
     }
+
+    
+    return out;
+  }
 
 
     public String getName() 

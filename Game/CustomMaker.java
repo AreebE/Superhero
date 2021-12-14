@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.*;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class CustomMaker {
   Scanner s;
@@ -12,13 +14,7 @@ public class CustomMaker {
       f = new FileIoThing("save.txt");
 
     } catch (Exception e) {
-      System.out.println("error creating scanner or FIT in customaker init");
-    }
-    try {
-      String[] a = { "asdf", "asdfgds", "dasfas" };
-      f.writeStringArrToTxt(a);
-    } catch (IOException e) {
-      System.out.println("error testing stuff "+e );
+      System.out.println("error creating scanner or FIT in customaker init: " + e);
     }
 
   }
@@ -29,9 +25,25 @@ public class CustomMaker {
     String name = s.next();
     // i eventually need to implement a way to get Custom Fw, H , Sh ect.
 
-    System.out.println("what abilities do you want your hero to have?");
+    // System.out.println("what abilities do you want your hero to have?");
     // if()
     return new Superhero(name, 10, 100, 0);
+  }
+
+  public void saveThisHero(Superhero s) {
+    Object[] a = s.ToSaveable().toArray();
+    String[] b = Arrays.copyOf(a, a.length, String[].class);
+    f.writeStringArrToTxt(b);
+  }
+
+  public void saveThisHeroArr(ArrayList<Superhero> s) {
+    String[] allToWrite = new String[s.toArray().length]; 
+    for (int i = 0; i < s.toArray().length; i++) {
+      ArrayList<String> temps = s.get(i).ToSaveable();
+      String[] tempStringArray = Arrays.copyOf(temps.toArray(), temps.toArray().length, String[].class);
+      allToWrite[i] = f.makeStringArrIntoString(tempStringArray);
+    }
+    f.writeStringArrToTxt(allToWrite);
   }
 
   public void AskNMakeAbility() {

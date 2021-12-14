@@ -5,19 +5,16 @@ import java.util.Scanner;
 public class Game{
   
   public Game(){
-    //how do we want to go about saving/loading Heros n stuff?
-    // not entirely sure, maybe health and what abilities they have?
-    //yea i know what data to save im just wondering how to go about it like 
-    //do we make a Hero[] and add some new ones to it on creation or do a more dynamic system
-    // wdym by dynamic? as in make it so that you can change your hero at the beginning of the game
-    // that could work for starting a new game, yeah. sounds good
-    // btw, we'll be using a github called Superhero, do you have a github name?
-    // yes i think its paulo-grab-nsd
-    // just invited you, make sure to use that github and not this project anymore
      System.out.println("Hello world!... Also trying to make custom");
     CustomMaker c = new CustomMaker();
     Superhero testin = c.AskNMakeSuperhero();
+    c.saveThisHero(testin);
+
+    
     System.out.println("End of custom");
+
+
+
     AbilityList.giveAbility(testin,   
         AbilityList.Name.HEAL_PULSE,
         AbilityList.Name.POISON,
@@ -68,6 +65,12 @@ public class Game{
     Collections.sort(superheros);
     Collections.reverse(superheros);
     System.out.println(superheros);
+    System.out.println("TRYING TO SAVE ALL SUPERHEROS: ");
+    
+
+
+
+
     playGame(superheros);
   }
 

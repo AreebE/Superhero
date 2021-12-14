@@ -63,19 +63,19 @@ class FileIoThing {
     return c;
   }
 
-  public void writeStringArrToTxt(String[] toWrite) throws IOException {
-    boolean fL= false;
-    for (int i = 0; i < toWrite.length; i++) {
+  public void writeStringArrToTxt(String[] toWrite) {
+    try {
+      for (int i = 0; i < toWrite.length; i++) {
+        if (toWrite[i] != null) {
+          bw.newLine();
+          bw.write(toWrite[i]);
+          bw.flush();
+        }
 
-      if (append && !fL) {
-        bw.newLine();
       }
-      bw.write(toWrite[i]);
-      bw.flush();
-      fL=false;
-
+    } catch (IOException e) {
+      System.out.println("ERROR IN FileWrite: " + e);
     }
-    bw.close();
   }
 
   public void printStringArrToCons(String[] in) {
