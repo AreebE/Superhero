@@ -1,8 +1,5 @@
 
-Panda
-default desc
-10
-100
-100
-0
-0
+EEEEEE;default desc;20;7;7;0;0
+STVEVE;default desc;10;100;100;0;0
+Joe;default desc;10;7;7;0;0
+BeepBoop;default desc;1;7;7;0;0

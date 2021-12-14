@@ -12,6 +12,7 @@ public class CustomMaker {
     try {
       s = new Scanner(System.in);
       f = new FileIoThing("save.txt");
+      f.setAppend(false);
 
     } catch (Exception e) {
       System.out.println("error creating scanner or FIT in customaker init: " + e);

@@ -8,7 +8,7 @@ public class Game{
      System.out.println("Hello world!... Also trying to make custom");
     CustomMaker c = new CustomMaker();
     Superhero testin = c.AskNMakeSuperhero();
-    c.saveThisHero(testin);
+    //c.saveThisHero(testin);
 
     
     System.out.println("End of custom");
@@ -58,15 +58,15 @@ public class Game{
         AbilityList.Name.ATTACK_UP);
 
     ArrayList<Superhero> superheros = new ArrayList<>();
-    // superheros.add(robot);
-    // superheros.add(bland);
+    superheros.add(robot);
+    superheros.add(bland);
     superheros.add(human);
     superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
     System.out.println(superheros);
     System.out.println("TRYING TO SAVE ALL SUPERHEROS: ");
-    
+    c.saveThisHeroArr(superheros);
 
 
 
