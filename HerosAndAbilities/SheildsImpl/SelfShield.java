@@ -1,18 +1,18 @@
 import java.util.HashSet;
 
-public class SelfSheild extends Sheild
+public class SelfShield extends Shield
 {
     private Effect selfApply;
 
 
-    public SelfSheild(
+    public SelfShield(
         String name,
         String desc,
         int duration, 
         Effect selfApply, 
         boolean nullifies,
         int uses,
-        SheildList.Trigger[] eventTriggers,
+        ShieldList.Trigger[] eventTriggers,
         ElementList.Name[] elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
@@ -20,14 +20,14 @@ public class SelfSheild extends Sheild
     }
     
 
-    public SelfSheild(
+    public SelfShield(
         String name,
         String desc,
         int duration, 
         Effect selfApply, 
         boolean nullifies,
         int uses,
-        HashSet<SheildList.Trigger> eventTriggers,
+        HashSet<ShieldList.Trigger> eventTriggers,
         HashSet<ElementList.Name> elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
@@ -36,15 +36,15 @@ public class SelfSheild extends Sheild
 
 
     @Override
-    protected void applySheild(Superhero target, Superhero caster)
+    protected void applyShield(Superhero target, Superhero caster)
     {
         target.addEffect(selfApply.copy());
     }
 
     @Override
-    public Sheild copy()
+    public Shield copy()
     {
-        return new SelfSheild(getName(), getDesc(), getDuration(), selfApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new SelfShield(getName(), getDesc(), getDuration(), selfApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
 }

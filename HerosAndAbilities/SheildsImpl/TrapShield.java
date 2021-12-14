@@ -1,18 +1,18 @@
 import java.util.HashSet;
 
-public class TrapSheild extends Sheild
+public class TrapShield extends Shield
 {
     private Effect counter;
 
 
-    public TrapSheild(
+    public TrapShield(
         String name,
         String desc,
         int duration, 
         Effect counter, 
         boolean nullifies,
         int uses,
-        SheildList.Trigger[] eventTriggers,
+        ShieldList.Trigger[] eventTriggers,
         ElementList.Name[] elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
@@ -20,14 +20,14 @@ public class TrapSheild extends Sheild
     }
     
 
-    public TrapSheild(
+    public TrapShield(
         String name,
         String desc,
         int duration, 
         Effect counter, 
         boolean nullifies,
         int uses,
-        HashSet<SheildList.Trigger> eventTriggers,
+        HashSet<ShieldList.Trigger> eventTriggers,
         HashSet<ElementList.Name> elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
@@ -36,16 +36,16 @@ public class TrapSheild extends Sheild
 
 
     @Override
-    protected void applySheild(Superhero target, Superhero caster)
+    protected void applyShield(Superhero target, Superhero caster)
     {
-                System.out.println("Apply " + isNullifies());
+                // System.out.println("Apply " + isNullifies());
         caster.addEffect(counter);
     }
 
     @Override
-    public Sheild copy()
+    public Shield copy()
     {
-        return new TrapSheild(getName(), getDesc(), getDuration(), counter.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new TrapShield(getName(), getDesc(), getDuration(), counter.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
 }

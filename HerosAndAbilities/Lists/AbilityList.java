@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.EnumMap;
@@ -36,6 +37,9 @@ public class AbilityList
 
         // Defense 
         COUNTER,
+        WITCH_SPELL,
+        WARNING,
+        FIRST_AID,
 
         // Support 
         HEAL_PULSE,
@@ -49,6 +53,8 @@ public class AbilityList
         DEFENSIVE_STANCE,
         CONSTRUCT,
         PRAY,
+
+        // Etc.
         CUSTOM
     }
     public static final int MAX_CHANCE = 256;
@@ -152,8 +158,50 @@ public class AbilityList
                 "Counter", 
                 "counter the next attack that comes", 
                 3, 
-                SheildList.getSheild(SheildList.Name.COUNTER), 
+                ShieldList.getShield(ShieldList.Name.COUNTER), 
                 Name.COUNTER, 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.WARNING,
+            new DefenseAbility
+            (
+                "Warning", 
+                "The user will be warned not to break your shield", 
+                3, 
+                ShieldList.getShield(ShieldList.Name.SELF_DESTRUCT), 
+                Name.WARNING, 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.WITCH_SPELL,
+            new DefenseAbility
+            (
+                "Witch's spell", 
+                "When attacked, cast a curse on whoever attacked you", 
+                3, 
+                ShieldList.getShield(ShieldList.Name.WITCH_CURSE), 
+                Name.WITCH_SPELL, 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.FIRST_AID,
+            new DefenseAbility
+            (
+                "First id", 
+                "Heal oneself upon hit", 
+                3, 
+                ShieldList.getShield(ShieldList.Name.SELF_CARE), 
+                Name.FIRST_AID, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
@@ -182,7 +230,7 @@ public class AbilityList
                 "Protect", 
                 "protects the user from any hit",
                 3, 
-                EffectList.getEffect(EffectList.Name.INSTANT_SHEILD), 
+                EffectList.getEffect(EffectList.Name.INSTANT_SHIELD), 
                 Name.PROTECT, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
@@ -194,9 +242,9 @@ public class AbilityList
             new SupportAbility
             (
                 "Counterstrike", 
-                "Adds a lot of sheild",
+                "Adds a lot of shield",
                 3, 
-                EffectList.getEffect(EffectList.Name.INSTANT_SHEILD_X), 
+                EffectList.getEffect(EffectList.Name.INSTANT_SHIELD_X), 
                 Name.COUNTERSTRIKE, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
@@ -357,6 +405,12 @@ public class AbilityList
         put("pray", Name.PRAY);
 
         put("counter", Name.COUNTER);
+
+        put("witch_spell", Name.WITCH_SPELL);
+
+        put("warning", Name.WARNING);
+
+        put("first_aid", Name.FIRST_AID);
     }};
 
 

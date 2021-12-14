@@ -119,7 +119,7 @@ public class AttackAbility extends Ability
         }
         if (isPiercing) 
         {
-            sBuilder.append(" (It pierces the sheild) ");
+            sBuilder.append(" (It pierces the shield) ");
         }
         return sBuilder.toString();
     }

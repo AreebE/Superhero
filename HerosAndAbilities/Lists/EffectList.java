@@ -10,7 +10,7 @@ public class EffectList
         ATTACK, 
         DEFENSE, 
         HEALTH,
-        SHEILD, 
+        SHIELD, 
         DAMAGE, 
         GROUP
     } 
@@ -30,9 +30,9 @@ public class EffectList
         BUILD_UP,
         GUARD,
     
-        // Sheild
-        INSTANT_SHEILD,
-        INSTANT_SHEILD_X,
+        // Shield
+        INSTANT_SHIELD,
+        INSTANT_SHIELD_X,
 
         // health Effects
         INSTANT_HEAL,
@@ -42,7 +42,8 @@ public class EffectList
         // Damage
         POISON,
         CURSE,
-        RETALIATE
+        RETALIATE,
+        EXPLODE
     };
 
 
@@ -53,7 +54,7 @@ public class EffectList
     //   put(ATTACK_BOOST, new InstantEffect(2, Type.ATTACK, "attack up", "Boosts the base attack of all abilities by 2, except Pass"));
     //   put(DEFENSE_BOOST,  new InstantEffect(2, Type.DEFENSE, "defense up", "Reduces all future damage the character takes by 2"));
     //   put(CHARGE, new Effect(1, Type.ATTACK, 5, true, "Charge", "Will increase the base attack of the user by one each turn"));
-    //   // put(1, 3, POISON, new Effect("poison", "The user takes one damage per turn, piercing sheild, over 3 turns"));
+    //   // put(1, 3, POISON, new Effect("poison", "The user takes one damage per turn, piercing shield, over 3 turns"));
         
     // }};
 
@@ -86,6 +87,20 @@ public class EffectList
             )
         );
 
+         put 
+        (
+            Name.EXPLODE,
+            new InstantEffect
+            (
+                10,
+                Type.DAMAGE,
+                "Explode",
+                "Deals damage with an explosion",
+                ElementList.getElement(ElementList.Name.NULL),
+                new boolean[]{true, true}
+            )
+        );
+
         put
         (
             Name.INSTANT_HEAL, 
@@ -101,26 +116,26 @@ public class EffectList
 
         put
         (
-            Name.INSTANT_SHEILD, 
+            Name.INSTANT_SHIELD, 
             new InstantEffect
             (
-                10, 
-                Type.SHEILD, 
-                "Instant Sheild", 
-                "Adds 10 sheild immediately", 
+                1, 
+                Type.SHIELD, 
+                "Instant Shield", 
+                "Adds 10 shield immediately", 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
 
         put
         (
-            Name.INSTANT_SHEILD_X, 
+            Name.INSTANT_SHIELD_X, 
             new InstantEffect
             (
                 50, 
-                Type.SHEILD, 
-                "Mega Instant Sheild", 
-                "Adds 50 sheild immediately", 
+                Type.SHIELD, 
+                "Mega Instant Shield", 
+                "Adds 50 shield immediately", 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );

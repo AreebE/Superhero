@@ -11,10 +11,10 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     private int freeWill;
     private ArrayList<Ability> abilities;
     private ArrayList<Effect> effects;
-    private ArrayList<Sheild> sheilds;
+    private ArrayList<Shield> shields;
     private int health;
     private int maxHealth;
-    private int sheildHealth;
+    private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
 
@@ -22,16 +22,16 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         String name, 
         int freeWill, 
         int health, 
-        int sheildHealth) 
+        int shieldHealth) 
     {
         this.name = name;
         this.freeWill = freeWill;
         this.health = health;
         this.maxHealth = health;
-        this.sheildHealth = sheildHealth;
+        this.shieldHealth = shieldHealth;
         this.abilities = new ArrayList<>();
         this.effects = new ArrayList<>();
-        this.sheilds = new ArrayList<>();
+        this.shields = new ArrayList<>();
         this.baseAttack = 0;
         this.baseDefense = 0;
         AbilityList.giveAbility(this, AbilityList.Name.PASS_TURN);
@@ -105,16 +105,16 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         }
 
         superheroString.append("\u001B[35m");
-        if (sheilds.size() == 0) 
+        if (shields.size() == 0) 
         {
-            superheroString.append("No sheilds applied.\n");
+            superheroString.append("No shields applied.\n");
         } else 
         {
-            superheroString.append("The Sheilds are:\n");
-            for (int i = 0; i < sheilds.size(); i++) 
+            superheroString.append("The Shields are:\n");
+            for (int i = 0; i < shields.size(); i++) 
             {
                 superheroString.append("* ")
-                                .append(sheilds.get(i))
+                                .append(shields.get(i))
                                 .append("\n");
             }
         }
@@ -123,8 +123,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
                         .append("* health - ")
                         .append(health)
                         .append("\n")
-                        .append("* sheild - ")
-                        .append(sheildHealth)
+                        .append("* shield - ")
+                        .append(shieldHealth)
                         .append("\n")
                         .append("* base attack - ")
                         .append(baseAttack)
@@ -140,8 +140,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
 
     /*
      * Writes this superhero to a Single Line so that its usable by Fileiothing also
-     * should health/sheildHealth be persistent? // not entirely sure, maybe for
-     * only the base health/ base sheild? as in all heros get 100 health and x
+     * should health/shieldHealth be persistent? // not entirely sure, maybe for
+     * only the base health/ base shield? as in all heros get 100 health and x
      * shield at the beggingn of each round // for now, that could work. but for
      * more customizability, we may remove that set health later on
      */
@@ -209,21 +209,21 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     /*
      * Methods involving a player's health
      */
-    public void addSheildHealth(int sheild) 
+    public void addShieldHealth(int shield) 
     {
-        this.sheildHealth += sheild;
+        this.shieldHealth += shield;
     }
 
 
-    public int getSheildHealth() 
+    public int getShieldHealth() 
     {
-        return this.sheildHealth;
+        return this.shieldHealth;
     }
 
 
-    public boolean hasSheild() 
+    public boolean hasShield() 
     {
-        return this.sheildHealth == 0;
+        return this.shieldHealth == 0;
     }
 
 
@@ -247,7 +247,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
 
     public boolean isPlayerHealthZero() 
     {
-        return this.health == 0;
+        return this.health <= 0;
     }
 
 
@@ -257,7 +257,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
      *
      * @param damageDealt    the total damage of the attack
      *
-     * @param isPiercing     whether the attack ignores sheild health
+     * @param isPiercing     whether the attack ignores shield health
      *
      * @param ignoresDefense whether the attack ignores the base defense
      *
@@ -271,10 +271,10 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         Element e) 
     {   
         boolean endAttack = false;
-        SheildList.Trigger type = null;
+        ShieldList.Trigger type = null;
         if (caster != null)
         {
-            type = SheildList.Trigger.ATTACK;
+            type = ShieldList.Trigger.ATTACK;
         } 
 
         if (!ignoresDefense) 
@@ -290,26 +290,26 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         {
             if (type != null)
             {
-                endAttack = searchForSheild(type, e, caster);
+                endAttack = searchForShield(type, e, caster);
             }
             if (endAttack){
                 return false;
             }
             health -= damageDealt;
         } 
-        else if (sheildHealth >= damageDealt) 
+        else if (shieldHealth >= damageDealt) 
         {
-            sheildHealth -= damageDealt;
+            shieldHealth -= damageDealt;
             return true;
         } 
         else
         {
-            damageDealt -= sheildHealth;
-            sheildHealth = 0;
-            endAttack = searchForSheild(SheildList.Trigger.SHEILD_BREAK, e, caster);
+            damageDealt -= shieldHealth;
+            shieldHealth = 0;
+            endAttack = searchForShield(ShieldList.Trigger.SHIELD_BREAK, e, caster);
             if (type != null)
             {
-                endAttack = endAttack || searchForSheild(type, e, caster);
+                endAttack = endAttack || searchForShield(type, e, caster);
             }
             if (endAttack){
                 return false;
@@ -342,15 +342,15 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         {
             health -= damageDealt;
         } 
-        else if (sheildHealth >= damageDealt) 
+        else if (shieldHealth >= damageDealt) 
         {
-            sheildHealth -= damageDealt;
+            shieldHealth -= damageDealt;
             return true;
         } 
         else
         {
-            damageDealt -= sheildHealth;
-            sheildHealth = 0;            
+            damageDealt -= shieldHealth;
+            shieldHealth = 0;            
             health -= damageDealt;
             return false;
         }
@@ -401,44 +401,44 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     //
 
     /*
-    * Methods for adding/removing sheilds
+    * Methods for adding/removing shields
     */
 
-    public void addSheild(
-        Sheild s)
+    public void addShield(
+        Shield s)
     {
-        sheilds.add(s);
+        shields.add(s);
     }
 
 
-    public void removeSheild(
-        Sheild s)
+    public void removeShield(
+        Shield s)
     {
-        sheilds.remove(s);
+        shields.remove(s);
     }
 
 
-    public void reduceSheildDurations()
+    public void reduceShieldDurations()
     {
-        for (int i = sheilds.size() - 1; i >= 0; i--)
+        for (int i = shields.size() - 1; i >= 0; i--)
         {
-            sheilds.get(i).passTurn(this);
+            shields.get(i).passTurn(this);
         }
     }
 
 
-    public boolean searchForSheild(
-        SheildList.Trigger trigger, 
+    public boolean searchForShield(
+        ShieldList.Trigger trigger, 
         Element element, 
         Superhero caster)
     {
         boolean nullifyEffect = false;
-        for (int i = sheilds.size() - 1; i >= 0; i--)
+        for (int i = shields.size() - 1; i >= 0; i--)
         {
-            Sheild s = sheilds.get(i);
+            Shield s = shields.get(i);
             if (s.wouldTrigger(trigger, element))
             {
-                boolean nullify = s.triggerSheild(this, caster);
+                boolean nullify = s.triggerShield(this, caster);
                 if (nullify)
                 {
                     nullifyEffect = true;
@@ -485,7 +485,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     {
         useEffects();
         reduceCooldowns();
-        reduceSheildDurations();
+        reduceShieldDurations();
     }
 
 
@@ -493,7 +493,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
-            System.out.println(this);
+            // System.out.println(this);
             Effect b = effects.get(i);
             b.applyEffect(this);
         }

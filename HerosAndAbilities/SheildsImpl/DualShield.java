@@ -1,11 +1,11 @@
 import java.util.HashSet;
 
-public class DualSheild extends Sheild
+public class DualShield extends Shield
 {
     private Effect selfApply;
     private Effect casterApply;
 
-    public DualSheild(
+    public DualShield(
         String name,
         String desc,
         int duration, 
@@ -13,7 +13,7 @@ public class DualSheild extends Sheild
         Effect caster, 
         boolean nullifies,
         int uses,
-        SheildList.Trigger[] eventTriggers,
+        ShieldList.Trigger[] eventTriggers,
         ElementList.Name[] elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
@@ -22,7 +22,7 @@ public class DualSheild extends Sheild
     }
     
 
-    public DualSheild(
+    public DualShield(
         String name,
         String desc,
         int duration, 
@@ -30,7 +30,7 @@ public class DualSheild extends Sheild
         Effect caster, 
         boolean nullifies,
         int uses,
-        HashSet<SheildList.Trigger> eventTriggers,
+        HashSet<ShieldList.Trigger> eventTriggers,
         HashSet<ElementList.Name> elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
@@ -40,16 +40,16 @@ public class DualSheild extends Sheild
 
 
     @Override
-    protected void applySheild(Superhero target, Superhero caster)
+    protected void applyShield(Superhero target, Superhero caster)
     {
         target.addEffect(selfApply.copy());
         caster.addEffect(casterApply.copy());
     }
 
     @Override
-    public Sheild copy()
+    public Shield copy()
     {
-        return new DualSheild(getName(), getDesc(), getDuration(), selfApply.copy(), casterApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new DualShield(getName(), getDesc(), getDuration(), selfApply.copy(), casterApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
 }

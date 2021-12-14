@@ -67,7 +67,7 @@ public class AttackStatusAbility extends AttackAbility
     {
         super.castAbility(target, caster);
         if (isPiercing() 
-            || !caster.hasSheild()) 
+            || !caster.hasShield()) 
         {
             target.addEffect(sideEffect.copy());
         }

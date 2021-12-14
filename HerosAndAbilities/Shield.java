@@ -1,23 +1,23 @@
 import java.util.HashSet;
 
-public abstract class Sheild
+public abstract class Shield
 {
     private String name;
     private String desc;
-    private HashSet<SheildList.Trigger> eventTriggers;
+    private HashSet<ShieldList.Trigger> eventTriggers;
     private HashSet<ElementList.Name> elementTriggers;
     private int duration;
     private int uses;
     boolean nullifies;
 
 
-    public Sheild(
+    public Shield(
         String name,
         String desc,
         int duration, 
         boolean nullifies,
         int uses,
-        SheildList.Trigger[] eventTriggers,
+        ShieldList.Trigger[] eventTriggers,
         ElementList.Name[] elementTriggers)
     {
         this.name = name;
@@ -38,13 +38,13 @@ public abstract class Sheild
     }
     
 
-    public Sheild(
+    public Shield(
         String name,
         String desc,
         int duration, 
         boolean nullifies,
         int uses,
-        HashSet<SheildList.Trigger> eventTriggers,
+        HashSet<ShieldList.Trigger> eventTriggers,
         HashSet<ElementList.Name> elementTriggers)
     {
         this.name = name;
@@ -57,11 +57,11 @@ public abstract class Sheild
     }
 
     public boolean wouldTrigger(
-        SheildList.Trigger eventTrigger, 
+        ShieldList.Trigger eventTrigger, 
         Element element)
     {
         return  (
-                    eventTriggers.contains(SheildList.Trigger.ALL)
+                    eventTriggers.contains(ShieldList.Trigger.ALL)
                     || eventTriggers.contains(eventTrigger)
                 ) 
                 && 
@@ -72,23 +72,23 @@ public abstract class Sheild
     }
 
 
-    public boolean triggerSheild(Superhero target, Superhero caster)
+    public boolean triggerShield(Superhero target, Superhero caster)
     {
-        applySheild(target, caster);
-        System.out.println("Trigger " + nullifies);
+        applyShield(target, caster);
+        // System.out.println("Trigger " + nullifies);
         if (uses != -1) 
         {
             uses--;
         }
         if (uses == 0)
         {
-            target.removeSheild(this);
+            target.removeShield(this);
         }
         System.out.println(nullifies);
         return nullifies;
     }
 
-    protected abstract void applySheild(Superhero target, Superhero caster);
+    protected abstract void applyShield(Superhero target, Superhero caster);
 
     public void passTurn(Superhero target)
     {
@@ -98,11 +98,11 @@ public abstract class Sheild
         }
 
         if (duration == 0){
-            target.removeSheild(this);
+            target.removeShield(this);
         }
     }
 
-    public abstract Sheild copy();
+    public abstract Shield copy();
 
     public String toString()
     {
@@ -119,12 +119,12 @@ public abstract class Sheild
         return this.desc;
     }
 
-    public HashSet<SheildList.Trigger> getEventTriggers()
+    protected HashSet<ShieldList.Trigger> getEventTriggers()
     {
         return this.eventTriggers;
     }
 
-    public HashSet<ElementList.Name> getElementTriggers()
+    protected HashSet<ElementList.Name> getElementTriggers()
     {
         return this.elementTriggers;
     }
