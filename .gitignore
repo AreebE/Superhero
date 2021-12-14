@@ -1,0 +1,7 @@
+# Compiled class file
+*.class
+.replit
+.vscode/*
+res/profiles/*
+res/svdat
+nongit/*
