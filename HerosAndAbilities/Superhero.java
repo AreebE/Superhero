@@ -311,10 +311,10 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
             {
                 endAttack = endAttack || searchForSheild(type, e, caster);
             }
-            health -= damageDealt;
             if (endAttack){
                 return false;
             }
+            health -= damageDealt;
         }
         
         if (health < 0) 

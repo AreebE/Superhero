@@ -1,6 +1,6 @@
 import java.util.HashSet;
 
-public class Sheild
+public abstract class Sheild
 {
     private String name;
     private String desc;
@@ -8,7 +8,6 @@ public class Sheild
     private HashSet<ElementList.Name> elementTriggers;
     private int duration;
     private int uses;
-    private Effect counter;
     boolean nullifies;
 
 
@@ -16,7 +15,6 @@ public class Sheild
         String name,
         String desc,
         int duration, 
-        Effect counter, 
         boolean nullifies,
         int uses,
         SheildList.Trigger[] eventTriggers,
@@ -25,7 +23,6 @@ public class Sheild
         this.name = name;
         this.desc = desc;
         this.duration = duration;
-        this.counter = counter;
         this.nullifies = nullifies;
         this.uses = uses;
         this.eventTriggers = new HashSet<>();
@@ -45,7 +42,6 @@ public class Sheild
         String name,
         String desc,
         int duration, 
-        Effect counter, 
         boolean nullifies,
         int uses,
         HashSet<SheildList.Trigger> eventTriggers,
@@ -54,7 +50,6 @@ public class Sheild
         this.name = name;
         this.desc = desc;
         this.duration = duration;
-        this.counter = counter;
         this.nullifies = nullifies;
         this.uses = uses;
         this.eventTriggers = eventTriggers;
@@ -79,7 +74,8 @@ public class Sheild
 
     public boolean triggerSheild(Superhero target, Superhero caster)
     {
-        caster.addEffect(counter); 
+        applySheild(target, caster);
+        System.out.println("Trigger " + nullifies);
         if (uses != -1) 
         {
             uses--;
@@ -88,9 +84,11 @@ public class Sheild
         {
             target.removeSheild(this);
         }
+        System.out.println(nullifies);
         return nullifies;
     }
 
+    protected abstract void applySheild(Superhero target, Superhero caster);
 
     public void passTurn(Superhero target)
     {
@@ -104,13 +102,42 @@ public class Sheild
         }
     }
 
-    public Sheild copy()
-    {
-        return new Sheild(name, desc, duration, counter.copy(), nullifies, uses, eventTriggers, elementTriggers);
-    }
+    public abstract Sheild copy();
 
     public String toString()
     {
         return name + " " + desc + ", " + duration;
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getDesc()
+    {
+        return this.desc;
+    }
+
+    public HashSet<SheildList.Trigger> getEventTriggers()
+    {
+        return this.eventTriggers;
+    }
+
+    public HashSet<ElementList.Name> getElementTriggers()
+    {
+        return this.elementTriggers;
+    }
+
+    public int getDuration(){
+        return this.duration;
+    }
+
+    public int getUses(){
+        return this.uses;
+    }
+
+    public boolean isNullifies(){
+        return this.nullifies;
     }
 }

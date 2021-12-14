@@ -23,7 +23,7 @@ public class SheildList
         put
         (
             Name.COUNTER, 
-            new Sheild
+            new TrapSheild
             (
                 "Counter",
                 "Deal some damage when struck",
@@ -38,7 +38,7 @@ public class SheildList
     }};
 
     public static Sheild getSheild(Name name){
-        return SHEILDS.get(name);
+        return SHEILDS.get(name).copy();
     }
 
 }
