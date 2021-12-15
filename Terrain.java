@@ -7,7 +7,6 @@ public class Terrain{
     
   }
 
-
   public boolean getsTerrainBuff(Element abilityEm){
     if(terrianElement == abilityEm){
       return true;
