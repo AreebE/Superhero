@@ -83,7 +83,7 @@ public class AttackAbility extends Ability
         }
 
         Terrain t = caster.getsTerrain();
-        if(t.getsTerrainBuff(this.em)){
+        if(t.getsTerrainBuff(em)){
           attackStrength += attackStrength;
         }
 
