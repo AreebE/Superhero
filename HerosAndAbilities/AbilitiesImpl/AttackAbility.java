@@ -30,7 +30,7 @@ public class AttackAbility extends Ability
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
-        this.em = em;
+        this.em = getElement();
     }
 
 
@@ -59,6 +59,7 @@ public class AttackAbility extends Ability
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
+        this.em = getElement();
     }
 
 
@@ -82,8 +83,8 @@ public class AttackAbility extends Ability
         }
 
         Terrain t = caster.getsTerrain();
-        if(t.getsTerrainBuff(em) == true){
-          attackStrength = attackStrength * 2;
+        if(t.getsTerrainBuff(this.em)){
+          attackStrength += attackStrength;
         }
 
         target.dealDamage
