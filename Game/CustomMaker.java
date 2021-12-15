@@ -1,3 +1,5 @@
+
+
 import java.util.Scanner;
 import java.io.*;
 import java.util.Arrays;
@@ -11,12 +13,13 @@ public class CustomMaker {
 
     try {
       s = new Scanner(System.in);
-      f = new FileIoThing("save.txt");
+      f = new FileIoThing("save.json");
       f.setAppend(false);
 
     } catch (Exception e) {
       System.out.println("error creating scanner or FIT in customaker init: " + e);
     }
+    
 
   }
 

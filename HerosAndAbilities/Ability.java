@@ -41,6 +41,7 @@ public abstract class Ability
         }
         System.out.println(this.modifiers);
     }
+    
 
 
     public Ability(

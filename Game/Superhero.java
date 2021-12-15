@@ -1,4 +1,3 @@
-
 import java.util.Random;
 import java.lang.Comparable;
 import java.util.ArrayList;
@@ -143,6 +142,10 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     for(int i=0;i<ints.length;i++){
       out.add(Integer.toString(ints[i]));
     }
+    for(int i=0;i<abilities.toArray().length;i++){
+      out.add(abilities.get(i).getName());
+    }
+    
 
     
     return out;

@@ -7,7 +7,7 @@ public class Game{
   public Game(){
      System.out.println("Hello world!... Also trying to make custom");
     CustomMaker c = new CustomMaker();
-    Superhero testin = c.AskNMakeSuperhero();
+    //Superhero testin = c.AskNMakeSuperhero();
     //c.saveThisHero(testin);
 
     
@@ -15,7 +15,7 @@ public class Game{
 
 
 
-    AbilityList.giveAbility(testin,   
+    /*AbilityList.giveAbility(testin,   
         AbilityList.Name.HEAL_PULSE,
         AbilityList.Name.POISON,
         AbilityList.Name.SACRIFICE,
@@ -23,7 +23,7 @@ public class Game{
         AbilityList.Name.PRAY,
         AbilityList.Name.PROTECT);
     testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
-
+    */
 
     Superhero robot = new Superhero("BeepBoop", 1, 7, 8);
     // AbilityList.giveAbility(robot,
@@ -61,15 +61,13 @@ public class Game{
     superheros.add(robot);
     superheros.add(bland);
     superheros.add(human);
-    superheros.add(testin);
+    //superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
-    System.out.println(superheros);
+    //System.out.println(superheros);
+
     System.out.println("TRYING TO SAVE ALL SUPERHEROS: ");
     c.saveThisHeroArr(superheros);
-
-
-
 
     playGame(superheros);
   }
