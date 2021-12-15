@@ -16,6 +16,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     private int sheildHealth;
     private int baseAttack;
     private int baseDefense;
+    private int terrainBuff;
+    private Terrain t;
 
     public Superhero(
         String name, 
@@ -233,6 +235,14 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         return this.health <= 0;
     }
 
+    public void setsTerrain(Terrain t){
+      this.t = t;
+    }
+
+    public Terrain getsTerrain(){
+      return t;
+    }
+
 
     /**
      * deals damage to the target based on the attacks stregth, the casters base
@@ -335,6 +345,9 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         baseAttack += attack;
     }
 
+    public void setTerrianBuff(int terrainBuff){
+      terrainBuff = terrainBuff;
+    }
 
     public int getBaseAttack() 
     {
@@ -345,6 +358,11 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     public int getBaseDefense() 
     {
         return baseDefense;
+    }
+
+
+    public int getTerrainBuff(){
+      return terrainBuff;
     }
     //
 

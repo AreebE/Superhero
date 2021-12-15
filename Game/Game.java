@@ -28,7 +28,7 @@ public class Game{
     testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
 
 
-    Superhero robot = new Superhero("BeepBoop", 1, 7, 8);
+    /*Superhero robot = new Superhero("BeepBoop", 1, 7, 8);
     // AbilityList.giveAbility(robot,
         // AbilityList.LIGHTNING_STRIKE,
         // AbilityList.COUNTERSTRIKE, 
@@ -40,6 +40,8 @@ public class Game{
         AbilityList.Name.CONSTRUCT);
     robot.addEffect(EffectList.getEffect(EffectList.Name.CURSE));
     
+    */
+    
     Superhero human = new Superhero("Joe", 10, 7, 8);
     // AbilityList.giveAbility(human,
         // AbilityList.SNOWBALL,
@@ -50,15 +52,7 @@ public class Game{
         AbilityList.Name.PROTECT,
         AbilityList.Name.DEFENSE_UP);
 
-    Superhero bland = new Superhero("EEEEEE", 20, 7, 8);
-    // AbilityList.giveAbility(bland,
-        // AbilityList.FIREBALL,
-        // AbilityList.PROTECT, 
-        // AbilityList.ATTACK_UP);
-    AbilityList.giveAbility(bland, 
-        AbilityList.Name.FIREBALL,
-        AbilityList.Name.PROTECT,
-        AbilityList.Name.ATTACK_UP);
+
 
     ArrayList<Superhero> superheros = new ArrayList<>();
     // superheros.add(robot);
@@ -73,10 +67,13 @@ public class Game{
 
   public void playGame(ArrayList<Superhero> superheros){
     // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
-
+    Terrain t = new Terrain();
     Scanner inputReader = new Scanner(System.in);
     int i = 0;
+    t.setsTerrianElement(ElementList.getElement(ElementList.Name.ICE));
     boolean anyHealthZero = false;
+    superheros.get(0).setsTerrain(t);
+    superheros.get(1).setsTerrain(t);
     while (!anyHealthZero){
       Superhero currentPlayer = superheros.get(i);
       anyHealthZero = currentPlayer.isPlayerHealthZero();

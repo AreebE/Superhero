@@ -4,7 +4,7 @@ public class AttackAbility extends Ability
 {
     private boolean isPiercing;
     private boolean ignoresBaseDefense;
-
+    private Element em;
 
     public AttackAbility(
         String name, 
@@ -30,6 +30,7 @@ public class AttackAbility extends Ability
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
+        this.em = em;
     }
 
 
@@ -74,9 +75,15 @@ public class AttackAbility extends Ability
         }
 
         int attackStrength = getStrength() + caster.getBaseAttack();
+        
         if (attackStrength < 0) 
         {
             attackStrength = 0;
+        }
+
+        Terrain t = caster.getsTerrain();
+        if(t.getsTerrainBuff(em) == true){
+          attackStrength = attackStrength * 2;
         }
 
         target.dealDamage
