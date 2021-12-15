@@ -17,6 +17,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
+    private Terrain t;
 
     public Superhero(
         String name, 
@@ -248,6 +249,14 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     public boolean isPlayerHealthZero() 
     {
         return this.health <= 0;
+    }
+
+    public void setTerrain(Terrain t){
+      this.t = t;
+    }
+
+    public Terrain getTerrain(){
+      return t;
     }
 
 

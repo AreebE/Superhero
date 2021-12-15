@@ -65,9 +65,9 @@ public class Game{
         AbilityList.Name.ATTACK_UP);
 
     ArrayList<Superhero> superheros = new ArrayList<>();
-    superheros.add(robot);
+   // superheros.add(robot);
     // superheros.add(bland);
-    // superheros.add(human);
+    superheros.add(human);
     superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
@@ -81,6 +81,11 @@ public class Game{
     Scanner inputReader = new Scanner(System.in);
     int i = 0;
     boolean anyHealthZero = false;
+    Terrain t = new Terrain();
+    t.setsTerrianElement(ElementList.getElement(ElementList.Name.ICE));
+    superheros.get(0).setTerrain(t);
+    superheros.get(1).setTerrain(t);
+
     while (!anyHealthZero){
       Superhero currentPlayer = superheros.get(i);
       // System.out.println(currentPlayer.getName() + "\'s turn. Has the health of " + currentPlayer.getHealth() + ", the sheild of " + currentPlayer.getSheildHealth() + " and abilities:\n" + currentPlayer.getAbilities());
