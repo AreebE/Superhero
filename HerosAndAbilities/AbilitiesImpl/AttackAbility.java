@@ -62,7 +62,7 @@ public class AttackAbility extends Ability
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
@@ -70,7 +70,7 @@ public class AttackAbility extends Ability
         // " + target.getName());
         if (getEnumName().equals(AbilityList.Name.PASS_TURN)) 
         {
-            return;
+            return true;
         }
 
         int attackStrength = getStrength() + caster.getBaseAttack();
@@ -79,12 +79,15 @@ public class AttackAbility extends Ability
             attackStrength = 0;
         }
 
-        target.dealDamage
+        boolean keepGoing = target.dealDamage
         (
             attackStrength, 
             isPiercing, 
-            ignoresBaseDefense
+            ignoresBaseDefense,
+            caster,
+            getElement()
         );
+        return keepGoing;
     }
 
 
@@ -116,7 +119,7 @@ public class AttackAbility extends Ability
         }
         if (isPiercing) 
         {
-            sBuilder.append(" (It pierces the sheild) ");
+            sBuilder.append(" (It pierces the shield) ");
         }
         return sBuilder.toString();
     }

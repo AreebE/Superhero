@@ -3,8 +3,8 @@
   The freewill determines which hero goes first for now. Later it might do more but not for now.
 
   There are 4 types of abilites; support, attack, defense, and passive. 
-  * Support abilites will provide buffs and debuff. They can also change the state of an arena. Their main purpose is to change the overall state of the battle.
-  * Defense ablilites will sheild for certian lengths of time or heal the user. They are meant to buy time for the superhero
+  * Support abilites will provide buffs and debuffs. They can also change the state of an arena. Their main purpose is to change the overall state of the battle.
+  * Defense ablilites are meant to delay the battle through sheilds that trigger based on certain effects. This would limit the options of the other players
   * Attack abilites will harm the other superhero and will depend on the current support and defense abilites in play. They may have some side effects, but they always have some base damage.
   * Passives are abilities that exist thoughout the whole fight, though not all of them are positive. Some heros may have a debuff to ensure that they remain balanced (ex. high damage, but attacks every other turn)
 ---

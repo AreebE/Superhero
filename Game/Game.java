@@ -21,26 +21,29 @@ public class Game{
     AbilityList.giveAbility(testin,   
         AbilityList.Name.HEAL_PULSE,
         AbilityList.Name.POISON,
-        AbilityList.Name.SACRIFICE,
-        AbilityList.Name.DEFENSIVE_STANCE,
+        AbilityList.Name.PROTECT,
+        AbilityList.Name.WARNING,
+        AbilityList.Name.COUNTER,
         AbilityList.Name.PRAY,
         AbilityList.Name.PROTECT);
     testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
 
 
-    Superhero robot = new Superhero("BeepBoop", 1, 7, 8);
+    Superhero robot = new Superhero("BeepBoop", 1, 20, 8);
     // AbilityList.giveAbility(robot,
         // AbilityList.LIGHTNING_STRIKE,
         // AbilityList.COUNTERSTRIKE, 
         // AbilityList.FLARE_UP);
     AbilityList.giveAbility(robot,
-        AbilityList.Name.LIGHTNING_STRIKE,
+        AbilityList.Name.FIREBALL,
         AbilityList.Name.COUNTERSTRIKE,
         AbilityList.Name.FLARE_UP,
-        AbilityList.Name.CONSTRUCT);
+        AbilityList.Name.CONSTRUCT,
+        AbilityList.Name.WITCH_SPELL,
+        AbilityList.Name.FIRST_AID);
     robot.addEffect(EffectList.getEffect(EffectList.Name.CURSE));
     
-    Superhero human = new Superhero("Joe", 10, 7, 8);
+    Superhero human = new Superhero("Joe", 10, 7, 0);
     // AbilityList.giveAbility(human,
         // AbilityList.SNOWBALL,
         // AbilityList.PROTECT, 
@@ -48,7 +51,8 @@ public class Game{
     AbilityList.giveAbility(human,
         AbilityList.Name.SNOWBALL,
         AbilityList.Name.PROTECT,
-        AbilityList.Name.DEFENSE_UP);
+        AbilityList.Name.DEFENSE_UP,
+        AbilityList.Name.COUNTER);
 
     Superhero bland = new Superhero("EEEEEE", 20, 7, 8);
     // AbilityList.giveAbility(bland,
@@ -61,13 +65,13 @@ public class Game{
         AbilityList.Name.ATTACK_UP);
 
     ArrayList<Superhero> superheros = new ArrayList<>();
-    // superheros.add(robot);
+    superheros.add(robot);
     // superheros.add(bland);
-    superheros.add(human);
+    // superheros.add(human);
     superheros.add(testin);
     Collections.sort(superheros);
     Collections.reverse(superheros);
-    System.out.println(superheros);
+    // System.out.println(superheros);
     playGame(superheros);
   }
 
@@ -94,8 +98,9 @@ public class Game{
       System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
     inputReader.close();
-    System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
-    
+    // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
+        System.out.println(superheros);
+
     
   }
 

@@ -2,13 +2,13 @@ import java.util.EnumMap;
 
 public class DefenseAbility extends Ability 
 {
-    private Sheild sheild;
+    private Shield shield;
 
     public DefenseAbility(
         String name, 
         String desc, 
         int cooldown, 
-        Sheild sheild, 
+        Shield shield, 
         AbilityList.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
@@ -24,6 +24,7 @@ public class DefenseAbility extends Ability
             em,
             modifiers
         );
+        this.shield = shield;
     }
 
 
@@ -31,7 +32,7 @@ public class DefenseAbility extends Ability
         String name, 
         String desc, 
         int cooldown,
-        Sheild sheild, 
+        Shield shield, 
         AbilityList.Name enumName,
         Element em, 
         EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
@@ -47,16 +48,17 @@ public class DefenseAbility extends Ability
             em, 
             modifiers
         );
-        this.sheild = sheild;
+        this.shield = shield;
     }
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
-        // target.addSheild(sheild);
+        target.addShield(shield.copy());
+        return true;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class DefenseAbility extends Ability
                     getName(), 
                     getDescription(), 
                     getCooldown(),  
-                    null,
+                    shield.copy(),
                     getEnumName(),
                     getElement(), 
                     getModifiers()
@@ -75,4 +77,4 @@ public class DefenseAbility extends Ability
     }
 }
 
-// regeneration, heal, and sheilds/ resistance effects
+// regeneration, heal, and shields/ resistance effects

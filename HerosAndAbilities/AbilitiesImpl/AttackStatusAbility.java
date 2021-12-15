@@ -4,7 +4,6 @@ public class AttackStatusAbility extends AttackAbility
 {
     private Effect sideEffect;
 
-
     public AttackStatusAbility(
         String name, 
         String desc, 
@@ -62,16 +61,17 @@ public class AttackStatusAbility extends AttackAbility
 
 
     @Override
-    protected void castAbility(
+    protected boolean castAbility(
         Superhero target, 
         Superhero caster) 
     {
         super.castAbility(target, caster);
         if (isPiercing() 
-            || !caster.hasSheild()) 
+            || !caster.hasShield()) 
         {
             target.addEffect(sideEffect.copy());
         }
+        return true;
     }
 
 

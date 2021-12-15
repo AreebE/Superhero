@@ -5,7 +5,7 @@ public class Effect
 {
 
     private final static int PIERCES_DEFENSE_INDEX = 0;
-    private final static int PIERCES_SHEILD_INDEX = 1;
+    private final static int PIERCES_SHIELD_INDEX = 1;
     private int strength;
     private EffectList.Type typeOfEffect;
     private int duration;
@@ -38,7 +38,6 @@ public class Effect
         );
     }
 
-
     public Effect(
         int strength, 
         EffectList.Type type, 
@@ -47,7 +46,7 @@ public class Effect
         String name, 
         String desc,
         Element element, 
-        boolean... pierces) 
+        boolean[] pierces) 
     {
         this.strength = strength;
         this.typeOfEffect = type;
@@ -88,15 +87,15 @@ public class Effect
             case HEALTH:
                 target.healHealth(strength);
                 break;
-            case SHEILD:
-                target.addSheildHealth(strength);
+            case SHIELD:
+                target.addShieldHealth(strength);
                 break;
             case DAMAGE:
-                target.dealDamage
+                target.dealEffectDamage
                 (
                     strength, 
                     pierces[PIERCES_DEFENSE_INDEX], 
-                    pierces[PIERCES_SHEILD_INDEX]
+                    pierces[PIERCES_SHIELD_INDEX]
                 );
         }
     }
