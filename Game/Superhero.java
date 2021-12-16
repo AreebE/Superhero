@@ -128,7 +128,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
      * shield at the beggingn of each round // for now, that could work. but for
      * more customizability, we may remove that set health later on
      */
-    public ArrayList<String> ToSaveable(){
+    public ArrayList<String> toSaveable(){
     int[] ints = {
       freeWill,
       health,

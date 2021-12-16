@@ -2,16 +2,15 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
+
+
 public class Game{
   
   public Game(){
-     System.out.println("Hello world!... Also trying to make custom");
-    CustomMaker c = new CustomMaker();
-    //Superhero testin = c.AskNMakeSuperhero();
-    //c.saveThisHero(testin);
-
+    JsonIoThing j = new JsonIoThing("save.json");
     
-    System.out.println("End of custom");
 
 
 
@@ -65,9 +64,7 @@ public class Game{
     Collections.sort(superheros);
     Collections.reverse(superheros);
     //System.out.println(superheros);
-
-    System.out.println("TRYING TO SAVE ALL SUPERHEROS: ");
-    c.saveThisHeroArr(superheros);
+    j.saveSuperheroArr(superheros);
 
     playGame(superheros);
   }

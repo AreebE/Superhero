@@ -34,22 +34,6 @@ public class CustomMaker {
     return new Superhero(name, 10, 100, 0);
   }
 
-  public void saveThisHero(Superhero s) {
-    Object[] a = s.ToSaveable().toArray();
-    String[] b = Arrays.copyOf(a, a.length, String[].class);
-    f.writeStringArrToTxt(b);
-  }
-
-  public void saveThisHeroArr(ArrayList<Superhero> s) {
-    String[] allToWrite = new String[s.toArray().length]; 
-    for (int i = 0; i < s.toArray().length; i++) {
-      ArrayList<String> temps = s.get(i).ToSaveable();
-      String[] tempStringArray = Arrays.copyOf(temps.toArray(), temps.toArray().length, String[].class);
-      allToWrite[i] = f.makeStringArrIntoString(tempStringArray);
-    }
-    f.writeStringArrToTxt(allToWrite);
-  }
-
   public void AskNMakeAbility() {
     // WIP
   }
