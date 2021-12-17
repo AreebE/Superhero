@@ -25,7 +25,8 @@ public class Game{
         AbilityList.Name.WARNING,
         AbilityList.Name.COUNTER,
         AbilityList.Name.PRAY,
-        AbilityList.Name.PROTECT);
+        AbilityList.Name.PROTECT,
+        AbilityList.Name.BURN_UP);
     testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
 
 

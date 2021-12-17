@@ -29,6 +29,7 @@ public class EffectList
         CHARGE,
         BUILD_UP,
         GUARD,
+        BURNOUT,
     
         // Shield
         INSTANT_SHIELD,
@@ -124,6 +125,35 @@ public class EffectList
                 "Instant Shield", 
                 "Adds 10 shield immediately", 
                 ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+
+/*
+public DecayEffect(
+        int basePower,
+        int decayRate, 
+        int turnDecayStarts,
+        EffectList.Type type, 
+        int duration,  
+        String name, 
+        String desc,
+        Element element)
+    {
+        */
+        put
+        (
+            Name.BURNOUT,
+            new DecayEffect
+            (
+                10,
+                1,
+                1,
+                Type.ATTACK,
+                14,
+                "Burnout",
+                "Gives the user immediate attack, then it slowly burns out",
+                ElementList.getElement(ElementList.Name.FIRE)
             )
         );
 

@@ -75,25 +75,33 @@ public class Effect
         EffectList.Type type, 
         Superhero target) 
     {
+        this.applyEffect(type, target, strength);
+    }
+
+    protected void applyEffect(
+        EffectList.Type type, 
+        Superhero target, 
+        int power) 
+    {
         switch (typeOfEffect) 
         {
             case ATTACK:
                 // System.out.println("updating attack");
-                target.addAttack(strength);
+                target.addAttack(power);
                 break;
             case DEFENSE:
-                target.addDefense(strength);
+                target.addDefense(power);
                 break;
             case HEALTH:
-                target.healHealth(strength);
+                target.healHealth(power);
                 break;
             case SHIELD:
-                target.addShieldHealth(strength);
+                target.addShieldHealth(power);
                 break;
             case DAMAGE:
                 target.dealEffectDamage
                 (
-                    strength, 
+                    power, 
                     pierces[PIERCES_DEFENSE_INDEX], 
                     pierces[PIERCES_SHIELD_INDEX]
                 );

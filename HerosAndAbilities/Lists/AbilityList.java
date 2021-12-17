@@ -48,6 +48,7 @@ public class AbilityList
         ATTACK_UP,
         DEFENSE_UP,
         FLARE_UP,
+        BURN_UP,
         POISON,
         SACRIFICE,
         DEFENSIVE_STANCE,
@@ -238,6 +239,20 @@ public class AbilityList
 
         put
         (
+            Name.BURN_UP, 
+            new SupportAbility
+            (
+                "burn up", 
+                "The target will burn up for a short amount of time",
+                3, 
+                EffectList.getEffect(EffectList.Name.BURNOUT), 
+                Name.BURN_UP, 
+                ElementList.getElement(ElementList.Name.FIRE)
+            )
+        );
+
+        put
+        (
             Name.COUNTERSTRIKE, 
             new SupportAbility
             (
@@ -411,6 +426,8 @@ public class AbilityList
         put("warning", Name.WARNING);
 
         put("first_aid", Name.FIRST_AID);
+
+        put("burn_up", Name.BURN_UP);
     }};
 
 
