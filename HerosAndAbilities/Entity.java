@@ -1,14 +1,13 @@
-
 import java.util.Random;
 import java.lang.Comparable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Superhero implements Comparable<Superhero>, TurnEndReceiver 
+public class Entity implements Comparable<Entity>, TurnEndReceiver 
 {
     // free will between 1 and 20;
-
     private String name;
-    private int freeWill;
+    private int speed;
     private ArrayList<Ability> abilities;
     private ArrayList<Effect> effects;
     private ArrayList<Shield> shields;
@@ -17,16 +16,16 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
-    private Terrain t;
+    private static Terrain t;
 
-    public Superhero(
+    public Entity(
         String name, 
-        int freeWill, 
+        int speed, 
         int health, 
         int shieldHealth) 
     {
         this.name = name;
-        this.freeWill = freeWill;
+        this.speed = speed;
         this.health = health;
         this.maxHealth = health;
         this.shieldHealth = shieldHealth;
@@ -42,85 +41,85 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     /**
      * Methods involving free will
      */
-    public int getFreeWill() 
+    public int getspeed() 
     {
-        return this.freeWill;
+        return this.speed;
     }
 
 
     @Override
     public int compareTo(
-        Superhero other) 
+        Entity other) 
     {
-        return this.freeWill - other.getFreeWill();
+        return this.speed - other.getspeed();
     }
     //
 
 
     /**
-     * Provides information on what the superhero does
+     * Provides information on what the Entity does
      */
     @Override
     public String toString() 
     {
-        StringBuilder superheroString = new StringBuilder(name).append(" - will of ")
-                                                                .append(freeWill)
+        StringBuilder EntityString = new StringBuilder(name).append(" - will of ")
+                                                                .append(speed)
                                                                 .append(". \n")
                                                                 .append("\u001B[35m");
         if (abilities.size() == 0) 
         {
-            superheroString.append("There are no abilities.\n");
+            EntityString.append("There are no abilities.\n");
         } 
         else 
         {
-            superheroString.append("The abilities are: \n");
+            EntityString.append("The abilities are: \n");
             for (int i = 0; i < abilities.size(); i++) 
             {
                 Ability a = abilities.get(i);
-                superheroString.append("* ")
+                EntityString.append("* ")
                                 .append(a.toString());
                 if (!a.ableToUseAbility()) 
                 {
-                    superheroString.append(" (on cooldown. needs ")
+                    EntityString.append(" (on cooldown. needs ")
                                     .append(a.getTurnsNeeded())
                                     .append(" more turns)");
                 }
-                superheroString.append("\n");
+                EntityString.append("\n");
             }
         }
         // moved it down
 
-        superheroString.append("\u001B[31m");
+        EntityString.append("\u001B[31m");
         if (effects.size() == 0) 
         {
-            superheroString.append("No Effects/ deEffects applied.\n");
+            EntityString.append("No Effects/ deEffects applied.\n");
         } else 
         {
-            superheroString.append("The Effects/deEffects are:\n");
+            EntityString.append("The Effects/deEffects are:\n");
             for (int i = 0; i < effects.size(); i++) 
             {
-                superheroString.append("* ")
+                EntityString.append("* ")
                                 .append(effects.get(i))
                                 .append("\n");
             }
         }
 
-        superheroString.append("\u001B[35m");
+        EntityString.append("\u001B[35m");
         if (shields.size() == 0) 
         {
-            superheroString.append("No shields applied.\n");
+            EntityString.append("No shields applied.\n");
         } else 
         {
-            superheroString.append("The Shields are:\n");
+            EntityString.append("The Shields are:\n");
             for (int i = 0; i < shields.size(); i++) 
             {
-                superheroString.append("* ")
+                EntityString.append("* ")
                                 .append(shields.get(i))
                                 .append("\n");
             }
         }
 
-        superheroString.append("\u001B[34m")
+        EntityString.append("\u001B[34m")
                         .append("* health - ")
                         .append(health)
                         .append("\n")
@@ -135,12 +134,12 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
                         .append("\n")
                         .append("\u001B[0m")
                         .append("\n");
-        return superheroString.toString();
+        return EntityString.toString();
     }
 
 
     /*
-     * Writes this superhero to a Single Line so that its usable by Fileiothing also
+     * Writes this Entity to a Single Line so that its usable by Fileiothing also
      * should health/shieldHealth be persistent? // not entirely sure, maybe for
      * only the base health/ base shield? as in all heros get 100 health and x
      * shield at the beggingn of each round // for now, that could work. but for
@@ -149,7 +148,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     public String ToSaveable() 
     {
         String out = "";
-        out = (out + name + freeWill);
+        out = (out + name + speed);
         return out;
     }
 
@@ -251,15 +250,6 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         return this.health <= 0;
     }
 
-    public void setTerrain(Terrain t){
-      this.t = t;
-    }
-
-    public Terrain getTerrain(){
-      return t;
-    }
-
-
     /**
      * deals damage to the target based on the attacks stregth, the casters base
      * attack and the targets base defense.
@@ -276,7 +266,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         int damageDealt, 
         boolean isPiercing, 
         boolean ignoresDefense,
-        Superhero caster,
+        Entity caster,
         Element e) 
     {   
         boolean endAttack = false;
@@ -439,7 +429,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     public boolean searchForShield(
         ShieldList.Trigger trigger, 
         Element element, 
-        Superhero caster)
+        Entity caster)
     {
         boolean nullifyEffect = false;
         for (int i = shields.size() - 1; i >= 0; i--)
@@ -456,6 +446,22 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         }
         return nullifyEffect;
     }
+
+    /*
+    * Methods for speed
+    */
+    public void addSpeed(
+        int speed)
+    {
+        this.speed += speed;
+    }
+
+    public int getSpeed()
+    {
+        return this.speed;
+    }
+
+
     /*
      * Methods for adding/getting attack or defense
      */
@@ -485,6 +491,88 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     }
     //
 
+    /*
+     * terrain 
+    */
+
+    public void setTerrain(Terrain t){
+      this.t = t;
+    }
+
+    public Terrain getTerrain(){
+      return t;
+    }
+
+    /*
+    * Getting an action 
+    */
+
+    public class Action {
+        private Entity target;
+        private Entity caster;
+        private List<Entity> otherTargets;
+        private List<Entity> allHeros;
+        private AbilityList.Name name;
+
+        public Action(
+            Entity target, 
+            Entity caster, 
+            String abilityName,
+            List<Entity> otherTargets,
+            List<Entity> allHeros)
+        {
+            this.target = target;
+            this.caster = caster;
+            this.otherTargets = otherTargets;
+            this.allHeros = allHeros;
+            this.name = AbilityList.getName(abilityName);
+        }
+
+        public boolean isLegalAction()
+        {
+            return  name != null 
+                    && caster.getAbility(name) != null
+                    &&  (
+                            !(target instanceof AIEntity) 
+                            || ((AIEntity) target).isTargettable() 
+                        );
+        }
+
+        public void performAction()
+        {
+            caster.getAbility(name).useAbility(target, caster, otherTargets, allHeros);
+        }
+
+        public Entity getTarget()
+        {
+            return target;
+        }
+
+        public List<Entity> getOtherTargets()
+        {
+            return otherTargets;
+        }
+
+        public List<Entity> getAllHeros()
+        {
+            return allHeros;
+        }
+    }
+
+
+    public Action getAction(
+        Entity target, 
+        String name,
+        List<Entity> otherTargets,
+        List<Entity> allHeros)
+    {
+        Action a = new Action(target, this, name, otherTargets, allHeros);
+        if (a.isLegalAction())
+        {
+            return a;
+        }
+        return null;
+    }
 
     /*
      * Actions done at the end of the turn
@@ -507,7 +595,6 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
             b.applyEffect(this);
         }
     }
-
 
     public void reduceCooldowns() 
     {

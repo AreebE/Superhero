@@ -1,4 +1,5 @@
 import java.util.EnumMap;
+import java.util.List;
 
 public class CleanseAbility extends SupportAbility 
 {
@@ -47,8 +48,10 @@ public class CleanseAbility extends SupportAbility
 
     @Override
     protected boolean castAbility(
-        Superhero target, 
-        Superhero caster) 
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers) 
     {
         target.removeEffects(getElement().getID());
         return true;

@@ -15,6 +15,7 @@ public class ElementList{
     ELECTRICITY,
     ICE,
     NULL,
+    EARTH,
     ALL
   }
 
@@ -24,6 +25,8 @@ public class ElementList{
      put(Name.ELECTRICITY, new Element("electricity", "---", Name.ELECTRICITY));
      put(Name.ICE, new Element("Ice", "---", Name.ICE));
      put(Name.NULL, new Element("Null", "normal/nothing", Name.NULL));
+          put(Name.EARTH, new Element("Earth", "mother earth", Name.EARTH));
+
      put(Name.ALL, new Element("All", "Will trigger for anything", Name.ALL));
    }};
 

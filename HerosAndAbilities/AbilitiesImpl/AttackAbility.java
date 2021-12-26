@@ -1,4 +1,6 @@
 import java.util.EnumMap;
+import java.util.List;
+
 
 public class AttackAbility extends Ability 
 {
@@ -65,8 +67,10 @@ public class AttackAbility extends Ability
 
     @Override
     protected boolean castAbility(
-        Superhero target, 
-        Superhero caster) 
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers) 
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());

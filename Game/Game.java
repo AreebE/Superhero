@@ -11,12 +11,12 @@ public class Game{
     //do we make a Hero[] and add some new ones to it on creation or do a more dynamic system
     // wdym by dynamic? as in make it so that you can change your hero at the beginning of the game
     // that could work for starting a new game, yeah. sounds good
-    // btw, we'll be using a github called Superhero, do you have a github name?
+    // btw, we'll be using a github called Entity, do you have a github name?
     // yes i think its paulo-grab-nsd
     // just invited you, make sure to use that github and not this project anymore
      System.out.println("Hello world!... Also trying to make custom");
     CustomMaker c = new CustomMaker();
-    Superhero testin = c.AskNMakeSuperhero();
+    Entity testin = c.AskNMakeSuperhero();
     System.out.println("End of custom");
     AbilityList.giveAbility(testin,   
         AbilityList.Name.HEAL_PULSE,
@@ -30,7 +30,7 @@ public class Game{
     testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
 
 
-    Superhero robot = new Superhero("BeepBoop", 1, 20, 8);
+    Entity robot = new Entity("BeepBoop", 1, 20, 8);
     // AbilityList.giveAbility(robot,
         // AbilityList.LIGHTNING_STRIKE,
         // AbilityList.COUNTERSTRIKE, 
@@ -44,7 +44,7 @@ public class Game{
         AbilityList.Name.FIRST_AID);
     robot.addEffect(EffectList.getEffect(EffectList.Name.CURSE));
     
-    Superhero human = new Superhero("Joe", 10, 7, 0);
+    Entity human = new Entity("Joe", 10, 7, 0);
     // AbilityList.giveAbility(human,
         // AbilityList.SNOWBALL,
         // AbilityList.PROTECT, 
@@ -55,7 +55,7 @@ public class Game{
         AbilityList.Name.DEFENSE_UP,
         AbilityList.Name.COUNTER);
 
-    Superhero bland = new Superhero("EEEEEE", 20, 7, 8);
+    Entity bland = new Entity("EEEEEE", 20, 7, 8);
     // AbilityList.giveAbility(bland,
         // AbilityList.FIREBALL,
         // AbilityList.PROTECT, 
@@ -65,71 +65,71 @@ public class Game{
         AbilityList.Name.PROTECT,
         AbilityList.Name.ATTACK_UP);
 
-    ArrayList<Superhero> superheros = new ArrayList<>();
-   // superheros.add(robot);
-    // superheros.add(bland);
-    superheros.add(human);
-    superheros.add(testin);
-    Collections.sort(superheros);
-    Collections.reverse(superheros);
-    // System.out.println(superheros);
-    playGame(superheros);
+    ArrayList<Entity> Entitys = new ArrayList<>();
+   // Entitys.add(robot);
+    // Entitys.add(bland);
+    Entitys.add(human);
+    Entitys.add(testin);
+    Collections.sort(Entitys);
+    Collections.reverse(Entitys);
+    // System.out.println(Entitys);
+    playGame(Entitys);
   }
 
-  public void playGame(ArrayList<Superhero> superheros){
-    // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
+  public void playGame(ArrayList<Entity> Entitys){
+    // System.out.println(Entitys.get(0).getHealth() + ", " + Entitys.get(1).getHealth() + ", " + Entitys.get(2).getHealth());
 
     Scanner inputReader = new Scanner(System.in);
     int i = 0;
     boolean anyHealthZero = false;
     Terrain t = new Terrain();
     t.setsTerrianElement(ElementList.getElement(ElementList.Name.ICE));
-    superheros.get(0).setTerrain(t);
-    superheros.get(1).setTerrain(t);
+    Entitys.get(0).setTerrain(t);
+    Entitys.get(1).setTerrain(t);
 
     while (!anyHealthZero){
-      Superhero currentPlayer = superheros.get(i);
+      Entity currentPlayer = Entitys.get(i);
       // System.out.println(currentPlayer.getName() + "\'s turn. Has the health of " + currentPlayer.getHealth() + ", the sheild of " + currentPlayer.getSheildHealth() + " and abilities:\n" + currentPlayer.getAbilities());
       System.out.println(currentPlayer);
 
-      Superhero target = getTarget(superheros, inputReader);
+      Entity target = getTarget(Entitys, inputReader);
       System.out.println("Target - " + target);
       Ability abilityToUse = useAbility(inputReader, currentPlayer, target); 
-      abilityToUse.useAbility(target, currentPlayer);
+      abilityToUse.useAbility(target, currentPlayer, Entitys, Entitys);
 
-      i = (i + 1) % superheros.size();
+      i = (i + 1) % Entitys.size();
       currentPlayer.endOfTurn();
       anyHealthZero = target.isPlayerHealthZero();
-      // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
+      // System.out.println(Entitys.get(0).getHealth() + ", " + Entitys.get(1).getHealth() + ", " + Entitys.get(2).getHealth());
       System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
     inputReader.close();
-    // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
-        System.out.println(superheros);
+    // System.out.println(Entitys.get(0).getHealth() + ", " + Entitys.get(1).getHealth() + ", " + Entitys.get(2).getHealth());
+        System.out.println(Entitys);
 
     
   }
 
-  private Superhero getSuperhero(String name, ArrayList<Superhero> superheros){
-    for (int i = 0; i < superheros.size(); i++){
-      if (superheros.get(i).getName().equals(name)){
-        return superheros.get(i);
+  private Entity getEntity(String name, ArrayList<Entity> Entitys){
+    for (int i = 0; i < Entitys.size(); i++){
+      if (Entitys.get(i).getName().equals(name)){
+        return Entitys.get(i);
       }
     }
     return null;
   }
 
-  private Superhero getTarget(ArrayList<Superhero> superheros, Scanner inputReader){
+  private Entity getTarget(ArrayList<Entity> Entitys, Scanner inputReader){
     System.out.println("Who to target?");
-    Superhero target = getSuperhero(inputReader.next(), superheros);
+    Entity target = getEntity(inputReader.next(), Entitys);
     while (target == null){
       System.out.println("No target specified.");
-      target = getSuperhero(inputReader.next(), superheros);
+      target = getEntity(inputReader.next(), Entitys);
     }
     return target;
   }
 
-  private Ability useAbility(Scanner inputReader, Superhero currentPlayer, Superhero target){
+  private Ability useAbility(Scanner inputReader, Entity currentPlayer, Entity target){
     System.out.println("Which ability to use?");
     AbilityList.Name nameOfAbility = AbilityList.getName(inputReader.next());
     Ability abilityUsed = currentPlayer.getAbility( nameOfAbility);

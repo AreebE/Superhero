@@ -71,7 +71,7 @@ public class GroupEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
         groupDuration--;
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
@@ -94,7 +94,7 @@ public class GroupEffect extends Effect
     @Override
     public void applyEffect(
         EffectList.Type type, 
-        Superhero target) 
+        Entity target) 
     {
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
         {

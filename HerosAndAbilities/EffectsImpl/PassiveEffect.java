@@ -44,7 +44,7 @@ public class PassiveEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
     }
 

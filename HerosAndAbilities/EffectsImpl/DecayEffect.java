@@ -18,11 +18,28 @@ public class DecayEffect extends Effect{
         this.count = 0;
         this.turnDecayStarts = turnDecayStarts;
     }
+
+    public DecayEffect(
+        int basePower,
+        int decayRate, 
+        int turnDecayStarts,
+        EffectList.Type type, 
+        int duration,  
+        String name, 
+        String desc,
+        Element element,
+        boolean[] pierces)
+    {
+        super(basePower, type, duration, true, name, desc, element, pierces);
+        this.decayRate = decayRate;
+        this.count = 0;
+        this.turnDecayStarts = turnDecayStarts;
+    }
     
     @Override
     public void applyEffect(
         EffectList.Type type, 
-        Superhero target)
+        Entity target)
     {
         if (count < turnDecayStarts)
         {
@@ -36,7 +53,7 @@ public class DecayEffect extends Effect{
 
     @Override 
     public void reduceDuration(
-        Superhero target)
+        Entity target)
     {
         super.reduceDuration(target);
         count++;

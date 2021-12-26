@@ -47,7 +47,7 @@ public class InstantEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
         target.removeEffect(this);
     }

@@ -60,10 +60,10 @@ public class Effect
 
 
     /**
-     * Will apply its effect to the given superhero
+     * Will apply its effect to the given Entity
      */
     public void applyEffect(
-        Superhero target) 
+        Entity target) 
     {
         // System.out.println("called super");
         applyEffect(typeOfEffect, target);
@@ -73,14 +73,14 @@ public class Effect
 
     protected void applyEffect(
         EffectList.Type type, 
-        Superhero target) 
+        Entity target) 
     {
         this.applyEffect(type, target, strength);
     }
 
     protected void applyEffect(
         EffectList.Type type, 
-        Superhero target, 
+        Entity target, 
         int power) 
     {
         switch (typeOfEffect) 
@@ -110,7 +110,7 @@ public class Effect
 
 
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
         duration--;
         if (duration == 0) 
@@ -121,7 +121,7 @@ public class Effect
 
 
     protected void removeEffect(
-        Superhero target) 
+        Entity target) 
     {
         if (!permanent) 
         {

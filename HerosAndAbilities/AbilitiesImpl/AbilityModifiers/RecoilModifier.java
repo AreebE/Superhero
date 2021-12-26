@@ -10,7 +10,7 @@ public class RecoilModifier implements AbilityModifier<Void>{
   }
 
   @Override
-  public Void triggerModifier(Superhero target, Superhero caster) {
+  public Void triggerModifier(Entity target, Entity caster) {
     caster.dealDamage(recoilDmg, piercesSheild, piercesDefense, target, null);
     return null;
   };

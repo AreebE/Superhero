@@ -1,4 +1,5 @@
 import java.util.EnumMap;
+import java.util.List;
 
 public class DefenseAbility extends Ability 
 {
@@ -54,8 +55,10 @@ public class DefenseAbility extends Ability
 
     @Override
     protected boolean castAbility(
-        Superhero target, 
-        Superhero caster) 
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers) 
     {
         target.addShield(shield.copy());
         return true;

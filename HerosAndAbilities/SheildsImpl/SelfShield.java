@@ -36,7 +36,7 @@ public class SelfShield extends Shield
 
 
     @Override
-    protected void applyShield(Superhero target, Superhero caster)
+    protected void applyShield(Entity target, Entity caster)
     {
         target.addEffect(selfApply.copy());
     }

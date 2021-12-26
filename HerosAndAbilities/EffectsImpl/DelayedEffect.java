@@ -47,7 +47,7 @@ public class DelayedEffect extends Effect
 
     @Override
     public void applyEffect(
-        Superhero target) 
+        Entity target) 
     {
         reduceDuration(target);
     }
@@ -55,7 +55,7 @@ public class DelayedEffect extends Effect
 
     @Override
     protected void removeEffect(
-        Superhero target) 
+        Entity target) 
     {
         applyEffect(super.getType(), target);
         target.removeEffect(this);

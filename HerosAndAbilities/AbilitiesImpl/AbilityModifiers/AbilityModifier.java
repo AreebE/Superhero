@@ -1,4 +1,4 @@
 public interface AbilityModifier<T> {
-  public T triggerModifier(Superhero target, Superhero caster);
+  public T triggerModifier(Entity target, Entity caster);
   public AbilityList.ModifierName getModifier();
 }

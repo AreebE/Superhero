@@ -72,7 +72,7 @@ public abstract class Shield
     }
 
 
-    public boolean triggerShield(Superhero target, Superhero caster)
+    public boolean triggerShield(Entity target, Entity caster)
     {
         applyShield(target, caster);
         // System.out.println("Trigger " + nullifies);
@@ -88,9 +88,9 @@ public abstract class Shield
         return nullifies;
     }
 
-    protected abstract void applyShield(Superhero target, Superhero caster);
+    protected abstract void applyShield(Entity target, Entity caster);
 
-    public void passTurn(Superhero target)
+    public void passTurn(Entity target)
     {
         if (duration != -1)
         {

@@ -2,6 +2,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.EnumMap;
+import java.util.List;
+import java.util.HashSet;
 
 public class AbilityList 
 {
@@ -34,12 +36,17 @@ public class AbilityList
         LIGHTNING_STRIKE, 
         PASS_TURN,
         POISON_SLASH,
+        LASER,
+        SCRATCH,
+        GROUND_SUCTION,
 
         // Defense 
         COUNTER,
         WITCH_SPELL,
         WARNING,
         FIRST_AID,
+        SUMMON_SQUIRREL,
+        SUMMON_GOLEM,
 
         // Support 
         HEAL_PULSE,
@@ -54,6 +61,7 @@ public class AbilityList
         DEFENSIVE_STANCE,
         CONSTRUCT,
         PRAY,
+        SPORE,
 
         // Etc.
         CUSTOM
@@ -82,6 +90,39 @@ public class AbilityList
                 false
             )
         );
+
+        put
+        (
+            Name.LASER,
+            new AttackAbility
+            (
+                "Laser",
+                "Repeatedly attack the opponent",
+                1,
+                1,
+                Name.LASER,
+                ElementList.getElement(ElementList.Name.FIRE),
+                false,
+                true,
+                new MultiCastModifier(10)
+            )
+        );
+
+        put
+        (
+            Name.SCRATCH,
+            new AttackAbility
+            (
+                "Scratch",
+                "Do very minor damage",
+                1,
+                1,
+                Name.SCRATCH,
+                ElementList.getElement(ElementList.Name.NULL),
+                true,
+                true
+            )
+        );
         
         put
         (
@@ -107,12 +148,12 @@ public class AbilityList
             (
                 "Lightning Strike", 
                 "Has a chance to shock the enemy.", 
-                1, 
-                3, 
+                9, 
+                50, 
                 Name.LIGHTNING_STRIKE, 
                 ElementList.getElement(ElementList.Name.ELECTRICITY), 
                 true, 
-                false
+                true
             )
         );
 
@@ -146,6 +187,23 @@ public class AbilityList
                 ElementList.getElement(ElementList.Name.NULL), 
                 false, 
                 false
+            )
+        );
+
+        put 
+        (
+            Name.GROUND_SUCTION,
+            new AttackStatusAbility 
+            (
+                "Ground Suction",
+                "Pulls the user into the ground, cutting them on the rocks and they bleed out over time",
+                5,
+                10,
+                Name.GROUND_SUCTION,
+                ElementList.getElement(ElementList.Name.EARTH),
+                true, 
+                true,
+                EffectList.getEffect(EffectList.Name.BLEED)
             )
         );
 
@@ -207,6 +265,33 @@ public class AbilityList
             )
         );
 
+        put
+        (
+            Name.SUMMON_SQUIRREL,
+            new SpawnableAbility
+            (
+                "Summon Squirrel",
+                "Summon a small squirrel to help you",
+                5,
+                SpawnableList.getEntityInfo(SpawnableList.Name.SQUIRREL),
+                Name.SUMMON_SQUIRREL,
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.SUMMON_GOLEM,
+            new SpawnableAbility
+            (
+                "Summon Golem",
+                "Summon a crystal to help you",
+                5,
+                SpawnableList.getEntityInfo(SpawnableList.Name.CRYSTAL),
+                Name.SUMMON_GOLEM,
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
 
         // Support abilities
         put
@@ -219,6 +304,20 @@ public class AbilityList
                 1, 
                 EffectList.getEffect(EffectList.Name.INSTANT_HEAL), 
                 Name.HEAL_PULSE, 
+                ElementList.getElement(ElementList.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.SPORE, 
+            new SupportAbility
+            (
+                "Spore", 
+                "Gives the opponent an infection",
+                9, 
+                EffectList.getEffect(EffectList.Name.FUNGAL_INFECTION), 
+                Name.SPORE, 
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
@@ -428,6 +527,10 @@ public class AbilityList
         put("first_aid", Name.FIRST_AID);
 
         put("burn_up", Name.BURN_UP);
+
+        put("squirrel_summon", Name.SUMMON_SQUIRREL);
+
+        put("golem_summon", Name.SUMMON_GOLEM);
     }};
 
 
@@ -437,26 +540,45 @@ public class AbilityList
     {
         // System.out.println(name)
         // System.out.println(name + NamesToAbility);
+        if (name == null)
+        {
+            return null;
+        }
         Name enumName = namesToAbility.get(name.toLowerCase());
         return enumName;
     }
 
     /**
     */
-    // public static void giveAbility(Superhero target, int ... ids){
+    // public static void giveAbility(Entity target, int ... ids){
     //   for (int i: ids){
     //     target.addAbility(abilities_2.get(i).copy());
     //   }
     // }
 
     public static void giveAbility(
-        Superhero target, 
+        Entity target, 
         Name ... names)
     {
         for (Name name: names){
             target.addAbility(ABILITIES.get(name).copy());
         }
     }
+
+    public static void giveAbilities(
+        AIEntity target, 
+        List<Name> names)
+    {
+        HashSet<Name> abilitiesAdded = new HashSet<>();
+        for (Name name: names){
+            if (!abilitiesAdded.contains(name))
+            {
+                target.addAbility(ABILITIES.get(name).copy());
+                abilitiesAdded.add(name);
+            }
+        }
+    }
+
 
 
     public static void addAbility(Ability a, String... identifiers)

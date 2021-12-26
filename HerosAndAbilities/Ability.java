@@ -1,4 +1,5 @@
 import java.util.EnumMap;
+import java.util.List;
 
 public abstract class Ability 
 {
@@ -120,8 +121,10 @@ public abstract class Ability
 
 
     public boolean useAbility(
-        Superhero target, 
-        Superhero caster) 
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers) 
     {
         turnsSinceUse = 0;
         RecoilModifier recoil = (RecoilModifier) modifiers.get(AbilityList.ModifierName.RECOIL);
@@ -142,7 +145,7 @@ public abstract class Ability
             }
             for (int i = 0; i < times; i++)
             {
-                boolean keepGoing = castAbility(target, caster);
+                boolean keepGoing = castAbility(target, caster, otherTargets, allPlayers);
                 if (!keepGoing){
                     return false;
                 }
@@ -155,8 +158,10 @@ public abstract class Ability
 
     protected abstract boolean castAbility
     (
-        Superhero target, 
-        Superhero caster
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers
     );
 
 

@@ -6,7 +6,7 @@ public class MultiCastModifier implements AbilityModifier<Integer>{
   } 
 
   @Override 
-  public Integer triggerModifier(Superhero target, Superhero caster){
+  public Integer triggerModifier(Entity target, Entity caster){
     return times;
   }
 

@@ -48,7 +48,7 @@ public class OneTimeEffect extends Effect
 
     @Override
     public void applyEffect(
-        Superhero target) 
+        Entity target) 
     {
         if (!used) 
         {
@@ -61,7 +61,7 @@ public class OneTimeEffect extends Effect
 
     @Override
     public void removeEffect(
-        Superhero target) 
+        Entity target) 
     {
         if (!isPermanent()) 
         {

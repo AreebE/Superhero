@@ -44,7 +44,9 @@ public class EffectList
         POISON,
         CURSE,
         RETALIATE,
-        EXPLODE
+        BLEED,
+        EXPLODE,
+        FUNGAL_INFECTION
     };
 
 
@@ -115,6 +117,8 @@ public class EffectList
             )
         );
 
+        
+
         put
         (
             Name.INSTANT_SHIELD, 
@@ -159,6 +163,23 @@ public DecayEffect(
 
         put
         (
+            Name.FUNGAL_INFECTION ,
+            new DecayEffect
+            (
+                1,
+                0,
+                -1,
+                Type.DAMAGE,
+                10,
+                "Fungal infection",
+                "A type of infection that deals more damage over time",
+                ElementList.getElement(ElementList.Name.NULL),
+                new boolean[] {true, true}
+            )
+        );
+
+        put
+        (
             Name.INSTANT_SHIELD_X, 
             new InstantEffect
             (
@@ -196,6 +217,24 @@ public DecayEffect(
                 ElementList.getElement(ElementList.Name.NULL)
             )
         );
+
+        put
+        (
+            Name.BLEED, 
+            new Effect
+            (   
+                3,
+                Type.ATTACK,
+                5, 
+                false,
+                "Bleed", 
+                "The opponent starts to suffer from blood loss", 
+                ElementList.getElement(ElementList.Name.NULL),
+                new boolean[]{true, true}
+            )
+        );
+
+        
         
         put(
             Name.REGEN, 

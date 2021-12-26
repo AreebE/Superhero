@@ -1,4 +1,5 @@
 import java.util.EnumMap;
+import java.util.List;
 
 public class AttackStatusAbility extends AttackAbility 
 {
@@ -62,10 +63,12 @@ public class AttackStatusAbility extends AttackAbility
 
     @Override
     protected boolean castAbility(
-        Superhero target, 
-        Superhero caster) 
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers) 
     {
-        super.castAbility(target, caster);
+        super.castAbility(target, caster, otherTargets, allPlayers);
         if (isPiercing() 
             || !caster.hasShield()) 
         {
