@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class AttackStatusAbility extends AttackAbility
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
@@ -38,12 +40,12 @@ public class AttackStatusAbility extends AttackAbility
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
         Effect sideEffect,
-        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (

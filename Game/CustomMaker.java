@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
+import battlesystem.*;
 
 public class CustomMaker {
   Scanner s;

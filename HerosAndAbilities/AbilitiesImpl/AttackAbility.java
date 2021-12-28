@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class AttackAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
@@ -25,7 +27,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            AbilityList.Type.ATTACK, 
+            Abilities.Type.ATTACK, 
             enumName, 
             em, 
             modifiers
@@ -41,11 +43,11 @@ public class AttackAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        EnumMap<AbilityList.ModifierName, 
+        EnumMap<Abilities.ModifierName, 
         AbilityModifier> modifiers) 
     {
         super
@@ -54,7 +56,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            AbilityList.Type.ATTACK, 
+            Abilities.Type.ATTACK, 
             enumName, 
             em, 
             modifiers
@@ -74,7 +76,7 @@ public class AttackAbility extends Ability
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());
-        if (getEnumName().equals(AbilityList.Name.PASS_TURN)) 
+        if (getEnumName().equals(Abilities.Name.PASS_TURN)) 
         {
             return true;
         }

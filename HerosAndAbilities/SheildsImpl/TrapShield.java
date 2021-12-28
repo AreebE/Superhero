@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.HashSet;
 
 public class TrapShield extends Shield
@@ -12,8 +14,8 @@ public class TrapShield extends Shield
         Effect counter, 
         boolean nullifies,
         int uses,
-        ShieldList.Trigger[] eventTriggers,
-        ElementList.Name[] elementTriggers)
+        Shields.Trigger[] eventTriggers,
+        Elements.Name[] elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
         this.counter = counter;
@@ -27,8 +29,8 @@ public class TrapShield extends Shield
         Effect counter, 
         boolean nullifies,
         int uses,
-        HashSet<ShieldList.Trigger> eventTriggers,
-        HashSet<ElementList.Name> elementTriggers)
+        HashSet<Shields.Trigger> eventTriggers,
+        HashSet<Elements.Name> elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
         this.counter = counter;

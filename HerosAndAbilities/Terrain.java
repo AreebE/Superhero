@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class Terrain{
 
   private boolean buff; 

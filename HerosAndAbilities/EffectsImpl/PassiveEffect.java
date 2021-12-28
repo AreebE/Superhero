@@ -1,8 +1,10 @@
+package battlesystem;
+
 public class PassiveEffect extends Effect 
 {
     public PassiveEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element,
@@ -23,7 +25,7 @@ public class PassiveEffect extends Effect
 
     public PassiveEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element) 

@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class DefenseAbility extends Ability
         String desc, 
         int cooldown, 
         Shield shield, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -20,7 +22,7 @@ public class DefenseAbility extends Ability
             desc,
             cooldown, 
             0, 
-            AbilityList.Type.DEFENSE, 
+            Abilities.Type.DEFENSE, 
             enumName, 
             em,
             modifiers
@@ -34,9 +36,9 @@ public class DefenseAbility extends Ability
         String desc, 
         int cooldown,
         Shield shield, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
-        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
@@ -44,7 +46,7 @@ public class DefenseAbility extends Ability
             desc, 
             cooldown, 
             0, 
-            AbilityList.Type.DEFENSE, 
+            Abilities.Type.DEFENSE, 
             enumName, 
             em, 
             modifiers

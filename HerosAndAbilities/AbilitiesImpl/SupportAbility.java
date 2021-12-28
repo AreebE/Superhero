@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class SupportAbility extends Ability
         String desc, 
         int cooldown, 
         Effect template, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -21,7 +23,7 @@ public class SupportAbility extends Ability
             desc, 
             cooldown, 
             0, 
-            AbilityList.Type.SUPPORT, 
+            Abilities.Type.SUPPORT, 
             enumName, 
             em, 
             modifiers
@@ -35,9 +37,9 @@ public class SupportAbility extends Ability
         String desc, 
         int cooldown, 
         Effect template, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em,
-        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
@@ -45,7 +47,7 @@ public class SupportAbility extends Ability
             desc,
             cooldown, 
             0, 
-            AbilityList.Type.SUPPORT, 
+            Abilities.Type.SUPPORT, 
             enumName, 
             em, 
             modifiers

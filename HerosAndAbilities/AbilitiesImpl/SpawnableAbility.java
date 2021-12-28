@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.List;
 import java.util.EnumMap;
 
@@ -10,7 +12,7 @@ public class SpawnableAbility extends DefenseAbility
         String desc, 
         int cooldown, 
         AIInfoItem info, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -33,9 +35,9 @@ public class SpawnableAbility extends DefenseAbility
         String desc, 
         int cooldown,
         AIInfoItem info, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
-        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (
@@ -58,9 +60,8 @@ public class SpawnableAbility extends DefenseAbility
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
-        AIEntity entity = info.createEntity(caster);
-        AbilityList.giveAbilities(entity, entity.getAttackPattern());
-        allPlayers.add(entity);
+        Entity ai = info.create(caster);
+        allPlayers.add(ai);
         return true;
     }
 

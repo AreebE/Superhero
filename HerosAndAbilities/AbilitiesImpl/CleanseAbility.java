@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class CleanseAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        AbilityList.Name enumName, 
+        Abilities.Name enumName, 
         Element em,
         AbilityModifier... modifiers) 
     {
@@ -28,10 +30,10 @@ public class CleanseAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        AbilityList.Name 
+        Abilities.Name 
         enumName, 
         Element em,
-        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
     {
         super
         (

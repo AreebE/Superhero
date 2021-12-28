@@ -1,9 +1,11 @@
+package battlesystem;
+
 import java.util.Random;
 import java.lang.Comparable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entity implements Comparable<Entity>, TurnEndReceiver 
+public class Entity implements Comparable<Entity>
 {
     // free will between 1 and 20;
     private String name;
@@ -34,7 +36,7 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
         this.shields = new ArrayList<>();
         this.baseAttack = 0;
         this.baseDefense = 0;
-        AbilityList.giveAbility(this, AbilityList.Name.PASS_TURN);
+        Abilities.giveAbility(this, Abilities.Name.PASS_TURN);
     }
 
 
@@ -176,7 +178,7 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
 
 
     public Ability getAbility(
-        AbilityList.Name enumName) 
+        Abilities.Name enumName) 
     {
         // System.out.println(this);
         for (Ability a : abilities) 
@@ -270,10 +272,10 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
         Element e) 
     {   
         boolean endAttack = false;
-        ShieldList.Trigger type = null;
+        Shields.Trigger type = null;
         if (caster != null)
         {
-            type = ShieldList.Trigger.ATTACK;
+            type = Shields.Trigger.ATTACK;
         } 
 
         if (!ignoresDefense) 
@@ -305,7 +307,7 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
         {
             damageDealt -= shieldHealth;
             shieldHealth = 0;
-            endAttack = searchForShield(ShieldList.Trigger.SHIELD_BREAK, e, caster);
+            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, caster);
             if (type != null)
             {
                 endAttack = endAttack || searchForShield(type, e, caster);
@@ -381,14 +383,14 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
 
 
     public void removeEffects(
-        ElementList.Name elementID)
+        Elements.Name elementID)
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
             Effect e = effects.get(i);
             if (e.isRemovable()
                     &&  ( 
-                            elementID.equals(ElementList.Name.ALL) 
+                            elementID.equals(Elements.Name.ALL) 
                             || elementID.equals(e.getElement().getID())
                         )
                 ) 
@@ -427,7 +429,7 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
 
 
     public boolean searchForShield(
-        ShieldList.Trigger trigger, 
+        Shields.Trigger trigger, 
         Element element, 
         Entity caster)
     {
@@ -512,7 +514,7 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
         private Entity caster;
         private List<Entity> otherTargets;
         private List<Entity> allHeros;
-        private AbilityList.Name name;
+        private Abilities.Name name;
 
         public Action(
             Entity target, 
@@ -525,7 +527,7 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
             this.caster = caster;
             this.otherTargets = otherTargets;
             this.allHeros = allHeros;
-            this.name = AbilityList.getName(abilityName);
+            this.name = Abilities.getName(abilityName);
         }
 
         public boolean isLegalAction()
@@ -577,7 +579,6 @@ public class Entity implements Comparable<Entity>, TurnEndReceiver
     /*
      * Actions done at the end of the turn
      */
-    @Override
     public void endOfTurn() 
     {
         useEffects();

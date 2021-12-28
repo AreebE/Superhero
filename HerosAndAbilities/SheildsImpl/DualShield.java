@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.HashSet;
 
 public class DualShield extends Shield
@@ -13,8 +15,8 @@ public class DualShield extends Shield
         Effect caster, 
         boolean nullifies,
         int uses,
-        ShieldList.Trigger[] eventTriggers,
-        ElementList.Name[] elementTriggers)
+        Shields.Trigger[] eventTriggers,
+        Elements.Name[] elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
         this.selfApply = self;
@@ -30,8 +32,8 @@ public class DualShield extends Shield
         Effect caster, 
         boolean nullifies,
         int uses,
-        HashSet<ShieldList.Trigger> eventTriggers,
-        HashSet<ElementList.Name> elementTriggers)
+        HashSet<Shields.Trigger> eventTriggers,
+        HashSet<Elements.Name> elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
         this.selfApply = self;

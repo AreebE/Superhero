@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class RecoilModifier implements AbilityModifier<Void>{
   private int recoilDmg;
   private boolean piercesSheild;
@@ -16,7 +18,7 @@ public class RecoilModifier implements AbilityModifier<Void>{
   };
 
   @Override
-  public AbilityList.ModifierName getModifier(){
-    return AbilityList.ModifierName.RECOIL;
+  public Abilities.ModifierName getModifier(){
+    return Abilities.ModifierName.RECOIL;
   }
 }

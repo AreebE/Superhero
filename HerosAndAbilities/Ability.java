@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.EnumMap;
 import java.util.List;
 
@@ -8,12 +10,12 @@ public abstract class Ability
     private int cooldown;
     private int strength;
     private int turnsSinceUse;
-    private AbilityList.Type type;
-    private AbilityList.Name enumName;
+    private Abilities.Type type;
+    private Abilities.Name enumName;
     private Element em;
     private boolean isRandomized;
     private int chance;
-    private EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers;
+    private EnumMap<Abilities.ModifierName, AbilityModifier> modifiers;
 
 
     public Ability(
@@ -21,8 +23,8 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Type type,
-        AbilityList.Name enumName, 
+        Abilities.Type type,
+        Abilities.Name enumName, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -34,7 +36,7 @@ public abstract class Ability
         this.turnsSinceUse = cooldown;
         this.enumName = enumName;
         this.em = em;
-        this.modifiers = new EnumMap<>(AbilityList.ModifierName.class);
+        this.modifiers = new EnumMap<>(Abilities.ModifierName.class);
         for (AbilityModifier m : modifiers) 
         {
             // System.out.println(m + ", " + m.getModifier());
@@ -49,10 +51,10 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Type type,
-        AbilityList.Name enumName, 
+        Abilities.Type type,
+        Abilities.Name enumName, 
         Element em,
-        EnumMap<AbilityList.ModifierName, 
+        EnumMap<Abilities.ModifierName, 
         AbilityModifier> modifiers) 
     {
         this(name, desc, cooldown, strength, type, enumName, em);
@@ -70,11 +72,11 @@ public abstract class Ability
         this.description = desc;
         this.cooldown = 2;
         this.strength = 0;
-        this.type = AbilityList.Type.ATTACK;
+        this.type = Abilities.Type.ATTACK;
         this.turnsSinceUse = cooldown;
         this.enumName = enumName;
         this.em = em;
-        this.modifiers = new EnumMap<>(AbilityList.ModifierName.class);
+        this.modifiers = new EnumMap<>(Abilities.ModifierName.class);
     }
 
 
@@ -108,13 +110,13 @@ public abstract class Ability
     }
 
 
-    public AbilityList.Name getEnumName() 
+    public Abilities.Name getEnumName() 
     {
         return enumName;
     }
 
 
-    protected EnumMap<AbilityList.ModifierName, AbilityModifier> getModifiers() 
+    protected EnumMap<Abilities.ModifierName, AbilityModifier> getModifiers() 
     {
         return modifiers;
     }
@@ -127,9 +129,9 @@ public abstract class Ability
         List<Entity> allPlayers) 
     {
         turnsSinceUse = 0;
-        RecoilModifier recoil = (RecoilModifier) modifiers.get(AbilityList.ModifierName.RECOIL);
-        RandomModifier random = (RandomModifier) modifiers.get(AbilityList.ModifierName.RANDOM);
-        MultiCastModifier multi = (MultiCastModifier) modifiers.get(AbilityList.ModifierName.MULTICAST);
+        RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.ModifierName.RECOIL);
+        RandomModifier random = (RandomModifier) modifiers.get(Abilities.ModifierName.RANDOM);
+        MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.ModifierName.MULTICAST);
         // System.out.println(random + ", " + recoil);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 

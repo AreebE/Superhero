@@ -1,9 +1,11 @@
+package battlesystem;
+
 public class DelayedEffect extends Effect 
 {
 
     public DelayedEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int timer, 
         String name, 
         String desc, 
@@ -25,7 +27,7 @@ public class DelayedEffect extends Effect
 
     public DelayedEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int timer, 
         String name, 
         String desc, 

@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.ArrayList;
 
 public class GroupEffect extends Effect 
@@ -15,7 +17,7 @@ public class GroupEffect extends Effect
         super
         (
             0, 
-            EffectList.Type.GROUP, 
+            Effects.Type.GROUP, 
             0, 
             true, 
             name, 
@@ -46,7 +48,7 @@ public class GroupEffect extends Effect
         super
         (
             0, 
-            EffectList.Type.GROUP, 
+            Effects.Type.GROUP, 
             0, 
             true, 
             name, 
@@ -93,7 +95,7 @@ public class GroupEffect extends Effect
 
     @Override
     public void applyEffect(
-        EffectList.Type type, 
+        Effects.Type type, 
         Entity target) 
     {
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 

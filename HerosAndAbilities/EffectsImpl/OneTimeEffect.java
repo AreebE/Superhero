@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class OneTimeEffect extends Effect 
 {
     private boolean used;
@@ -5,7 +7,7 @@ public class OneTimeEffect extends Effect
 
     public OneTimeEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         String name, 
         String desc,
@@ -27,7 +29,7 @@ public class OneTimeEffect extends Effect
 
     public OneTimeEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         String name, 
         String desc,

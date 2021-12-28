@@ -1,3 +1,5 @@
+package battlesystem;
+
 // package Game.ablilites.Effects;
 // i dont think multiplayer replit and github branches work
 // that's probably true
@@ -7,7 +9,7 @@ public class Effect
     private final static int PIERCES_DEFENSE_INDEX = 0;
     private final static int PIERCES_SHIELD_INDEX = 1;
     private int strength;
-    private EffectList.Type typeOfEffect;
+    private Effects.Type typeOfEffect;
     private int duration;
     private boolean permanent;
     private String name;
@@ -18,7 +20,7 @@ public class Effect
 
     public Effect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         boolean permanent, 
         String name, 
@@ -40,7 +42,7 @@ public class Effect
 
     public Effect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         boolean permanent, 
         String name, 
@@ -72,14 +74,14 @@ public class Effect
 
 
     protected void applyEffect(
-        EffectList.Type type, 
+        Effects.Type type, 
         Entity target) 
     {
         this.applyEffect(type, target, strength);
     }
 
     protected void applyEffect(
-        EffectList.Type type, 
+        Effects.Type type, 
         Entity target, 
         int power) 
     {
@@ -164,7 +166,7 @@ public class Effect
     }
 
 
-    protected EffectList.Type getType() 
+    protected Effects.Type getType() 
     {
         return this.typeOfEffect;
     }

@@ -1,3 +1,5 @@
+package battlesystem;
+
 // package Game.ablilites.Effects;
 
 public class InstantEffect extends Effect 
@@ -5,7 +7,7 @@ public class InstantEffect extends Effect
 
     public InstantEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element,
@@ -26,7 +28,7 @@ public class InstantEffect extends Effect
 
      public InstantEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element) 

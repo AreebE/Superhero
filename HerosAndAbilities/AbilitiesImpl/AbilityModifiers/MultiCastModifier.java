@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class MultiCastModifier implements AbilityModifier<Integer>{
   private int times;
   
@@ -11,7 +13,7 @@ public class MultiCastModifier implements AbilityModifier<Integer>{
   }
 
   @Override
-  public AbilityList.ModifierName getModifier(){
-    return AbilityList.ModifierName.MULTICAST;
+  public Abilities.ModifierName getModifier(){
+    return Abilities.ModifierName.MULTICAST;
   }
 }

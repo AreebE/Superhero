@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class DecayEffect extends Effect{
     private int count;
     private int decayRate;
@@ -7,7 +9,7 @@ public class DecayEffect extends Effect{
         int basePower,
         int decayRate, 
         int turnDecayStarts,
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration,  
         String name, 
         String desc,
@@ -23,7 +25,7 @@ public class DecayEffect extends Effect{
         int basePower,
         int decayRate, 
         int turnDecayStarts,
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration,  
         String name, 
         String desc,
@@ -38,7 +40,7 @@ public class DecayEffect extends Effect{
     
     @Override
     public void applyEffect(
-        EffectList.Type type, 
+        Effects.Type type, 
         Entity target)
     {
         if (count < turnDecayStarts)

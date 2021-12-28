@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Scanner;
+import battlesystem.*;
 
 public class AreebGame{
   
@@ -10,73 +11,74 @@ public class AreebGame{
     CustomMaker c = new CustomMaker();
     Entity testin = c.AskNMakeSuperhero();
     System.out.println("End of custom");
-    AbilityList.giveAbility(testin,   
-        AbilityList.Name.HEAL_PULSE,
-        AbilityList.Name.POISON,
-        AbilityList.Name.PROTECT,
-        AbilityList.Name.WARNING,
-        AbilityList.Name.COUNTER,
-        AbilityList.Name.PRAY,
-        AbilityList.Name.PROTECT,
-        AbilityList.Name.BURN_UP);
-    testin.addEffect(EffectList.getEffect(EffectList.Name.PERMAGEN));
+    Abilities.giveAbility(testin,   
+        Abilities.Name.HEAL_PULSE,
+        Abilities.Name.POISON,
+        Abilities.Name.PROTECT,
+        Abilities.Name.WARNING,
+        Abilities.Name.COUNTER,
+        Abilities.Name.PRAY,
+        Abilities.Name.PROTECT,
+        Abilities.Name.BURN_UP);
+    testin.addEffect(Effects.getEffect(Effects.Name.PERMAGEN));
 
 
     Entity robot = new Entity("BeepBoop", 1, 20, 8);
-    // AbilityList.giveAbility(robot,
-        // AbilityList.LIGHTNING_STRIKE,
-        // AbilityList.COUNTERSTRIKE, 
-        // AbilityList.FLARE_UP);
-    AbilityList.giveAbility(robot,
-        AbilityList.Name.FIREBALL,
-        AbilityList.Name.COUNTERSTRIKE,
-        AbilityList.Name.FLARE_UP,
-        AbilityList.Name.CONSTRUCT,
-        AbilityList.Name.WITCH_SPELL,
-        AbilityList.Name.FIRST_AID);
-    robot.addEffect(EffectList.getEffect(EffectList.Name.CURSE));
+    // Abilities.giveAbility(robot,
+        // Abilities.LIGHTNING_STRIKE,
+        // Abilities.COUNTERSTRIKE, 
+        // Abilities.FLARE_UP);
+    Abilities.giveAbility(robot,
+        Abilities.Name.FIREBALL,
+        Abilities.Name.COUNTERSTRIKE,
+        Abilities.Name.FLARE_UP,
+        Abilities.Name.CONSTRUCT,
+        Abilities.Name.WITCH_SPELL,
+        Abilities.Name.FIRST_AID);
+    robot.addEffect(Effects.getEffect(Effects.Name.CURSE));
 
 
     Entity human = new Entity("Joe", 10, 7, 0);
-    // AbilityList.giveAbility(human,
-        // AbilityList.SNOWBALL,
-        // AbilityList.PROTECT, 
-        // AbilityList.DEFENSE_UP);
-    AbilityList.giveAbility(human,
-        AbilityList.Name.SNOWBALL,
-        AbilityList.Name.PROTECT,
-        AbilityList.Name.DEFENSE_UP,
-        AbilityList.Name.COUNTER);
+    // Abilities.giveAbility(human,
+        // Abilities.SNOWBALL,
+        // Abilities.PROTECT, 
+        // Abilities.DEFENSE_UP);
+    Abilities.giveAbility(human,
+        Abilities.Name.SNOWBALL,
+        Abilities.Name.PROTECT,
+        Abilities.Name.DEFENSE_UP,
+        Abilities.Name.COUNTER);
 
     Entity bland = new Entity("EEEEEE", 20, 7, 8);
-    // AbilityList.giveAbility(bland,
-        // AbilityList.FIREBALL,
-        // AbilityList.PROTECT, 
-        // AbilityList.ATTACK_UP);
-    AbilityList.giveAbility(bland, 
-        AbilityList.Name.FIREBALL,
-        AbilityList.Name.PROTECT,
-        AbilityList.Name.ATTACK_UP);
+    // Abilities.giveAbility(bland,
+        // Abilities.FIREBALL,
+        // Abilities.PROTECT, 
+        // Abilities.ATTACK_UP);
+    Abilities.giveAbility(bland, 
+        Abilities.Name.FIREBALL,
+        Abilities.Name.PROTECT,
+        Abilities.Name.ATTACK_UP);
 
     Entity A = new Entity("A", 10, 100, 50);
-    AbilityList.giveAbility(A,
-        AbilityList.Name.FIREBALL,
-        AbilityList.Name.SUMMON_SQUIRREL
+    Abilities.giveAbility(A,
+        Abilities.Name.FIREBALL,
+        Abilities.Name.SUMMON_SQUIRREL
         );
 
     Entity B = new Entity("B", 30, 100, 50);
-    AbilityList.giveAbility(B,
-        AbilityList.Name.SNOWBALL,
-        AbilityList.Name.SUMMON_GOLEM
+    Abilities.giveAbility(B,
+        Abilities.Name.SNOWBALL,
+        Abilities.Name.SUMMON_GOLEM
         );
 
     ArrayList<Entity> superheros = new ArrayList<>();
-   // superheros.add(robot);
-    // superheros.add(bland);
-    // superheros.add(human);
+    superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
+    superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
+    superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
+
     // superheros.add(testin);
-    superheros.add(A);
-    superheros.add(B);
+    // superheros.add(A);
+    // superheros.add(B);
     Collections.sort(superheros);
     Collections.reverse(superheros);
     // System.out.println(superheros);
@@ -90,7 +92,7 @@ public class AreebGame{
     // int i = 0;
     boolean anyHealthZero = false;
     Terrain t = new Terrain();
-    t.setsTerrianElement(ElementList.getElement(ElementList.Name.ICE));
+    t.setsTerrianElement(Elements.getElement(Elements.Name.ICE));
     ArrayList<Entity.Action> actions = new ArrayList<>();
     superheros.get(0).setTerrain(t);
     superheros.get(1).setTerrain(t);
@@ -169,11 +171,11 @@ public class AreebGame{
 
   private Ability useAbility(Scanner inputReader, Entity currentPlayer, Entity target){
     System.out.println("Which ability to use?");
-    AbilityList.Name nameOfAbility = AbilityList.getName(inputReader.next());
+    Abilities.Name nameOfAbility = Abilities.getName(inputReader.next());
     Ability abilityUsed = currentPlayer.getAbility( nameOfAbility);
     while (abilityUsed == null){
       System.out.println("Choose a different ability.");
-      nameOfAbility = AbilityList.getName(inputReader.next());
+      nameOfAbility = Abilities.getName(inputReader.next());
       abilityUsed = currentPlayer.getAbility(nameOfAbility);
     }
     return abilityUsed;

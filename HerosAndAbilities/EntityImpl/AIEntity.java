@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +8,7 @@ public class AIEntity extends Entity
     int currentAbility;
     Entity creator;
     boolean isTargettable;
-    ArrayList<AbilityList.Name> attackPattern;
+    ArrayList<Abilities.Name> attackPattern;
 
     public AIEntity(
         String name, 
@@ -14,7 +16,7 @@ public class AIEntity extends Entity
         int health, 
         int shieldHealth,
         Entity creator,
-        ArrayList<AbilityList.Name> attackPattern,
+        ArrayList<Abilities.Name> attackPattern,
         boolean isTargettable)
     {
         super(name, speed, health, shieldHealth);
@@ -113,7 +115,7 @@ public class AIEntity extends Entity
         return isTargettable;
     }
 
-    public ArrayList<AbilityList.Name> getAttackPattern()
+    public ArrayList<Abilities.Name> getAttackPattern()
     {
         return this.attackPattern;
     }
