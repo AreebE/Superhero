@@ -4,6 +4,7 @@ import java.util.Random;
 import java.lang.Comparable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Entity implements Comparable<Entity>
 {
@@ -19,6 +20,16 @@ public class Entity implements Comparable<Entity>
     private int baseAttack;
     private int baseDefense;
     private static Terrain t;
+
+
+    public static enum Statistic
+    {
+        SPEED,
+        MAX_HEALTH,
+        HEALTH,
+        BASE_ATTACK,
+        BASE_DEFENSE
+    }
 
     public Entity(
         String name, 
@@ -525,19 +536,38 @@ public class Entity implements Comparable<Entity>
         {
             this.target = target;
             this.caster = caster;
-            this.otherTargets = otherTargets;
             this.allHeros = allHeros;
             this.name = Abilities.getName(abilityName);
         }
 
         public boolean isLegalAction()
         {
-            return  name != null 
-                    && caster.getAbility(name) != null
-                    &&  (
-                            !(target instanceof AIEntity) 
-                            || ((AIEntity) target).isTargettable() 
-                        );
+            if (name == null || caster.getAbility(name) == null)
+            {
+                return false;
+            }
+            if (otherTargets != null)
+            {
+                for (int i = 0; i < otherTargets.size(); i++)
+                {  
+                    Entity singleTarget = otherTargets.get(i);
+                    if ((singleTarget instanceof AIEntity) 
+                        && !((AIEntity) singleTarget).isTargettable() )
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            return  (
+                        ! (target instanceof AIEntity) 
+                        || ((AIEntity) target).isTargettable() 
+                    );
+        }
+
+        public void setOtherTargets(Scanner inputReader)
+        {
+            
         }
 
         public void performAction()
@@ -565,15 +595,37 @@ public class Entity implements Comparable<Entity>
     public Action getAction(
         Entity target, 
         String name,
-        List<Entity> otherTargets,
-        List<Entity> allHeros)
+        List<Entity> allHeros,
+        Scanner inputReader)
     {
+        List<Entity> otherTargets = null;
         Action a = new Action(target, this, name, otherTargets, allHeros);
         if (a.isLegalAction())
         {
             return a;
         }
         return null;
+    }
+
+    /*
+    *
+    */
+    public int getStatistic(Statistic stat)
+    {
+        switch (stat)
+        {
+            case SPEED:
+                return speed;
+            case HEALTH:
+                return health;
+            case MAX_HEALTH:
+                return maxHealth;
+            case BASE_ATTACK:
+                return baseAttack;
+            case BASE_DEFENSE:
+                return baseDefense; 
+        }
+        return 0;
     }
 
     /*

@@ -2,6 +2,7 @@ package battlesystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AIEntity extends Entity
 {
@@ -68,10 +69,10 @@ public class AIEntity extends Entity
     public Entity.Action getAction(
         Entity target, 
         String name,
-        List<Entity> otherTargets,
-        List<Entity> allHeros)
+        List<Entity> allHeros,
+        Scanner inputReader)
     {
-        Entity.Action a = new AIAction(target, this, otherTargets, allHeros);
+        Entity.Action a = new AIAction(target, this, null, allHeros);
         if (a.isLegalAction())
         {
             return a;

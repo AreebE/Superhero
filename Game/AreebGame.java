@@ -117,7 +117,7 @@ public class AreebGame{
                     System.out.println("Choose an ability.");
                     abilityName = inputReader.next();
                 }
-                a = e.getAction(target, abilityName, superheros, superheros);
+                a = e.getAction(target, abilityName, null, superheros);
             }
             actions.add(a);
             e.endOfTurn();
@@ -125,7 +125,7 @@ public class AreebGame{
 
         for (int i = 0; i < actions.size(); i++)
         {
-            System.out.println(actions.get(i).getClass());
+            // System.out.println(actions.get(i).getClass());
             actions.get(i).performAction();
         }
         actions.clear();

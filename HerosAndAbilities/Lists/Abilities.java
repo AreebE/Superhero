@@ -19,6 +19,7 @@ public final class Abilities
         RANDOM,
         RECOIL,
         MULTICAST,
+        PERCENTAGE,
         GROUP
     }
 

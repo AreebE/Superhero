@@ -3,7 +3,7 @@ package battlesystem;
 import java.util.EnumMap;
 import java.util.List;
 
-public class Shields 
+public final class Shields 
 {
     
     private Shields()

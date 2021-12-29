@@ -3,7 +3,7 @@ package battlesystem;
 import java.util.EnumMap;
 import java.util.ArrayList;
 
-public class Heroes {
+public final class Heroes {
     private Heroes(){}
 
     public static enum Name{
