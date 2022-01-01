@@ -76,7 +76,7 @@ public final class Heroes {
             new EntityInfoItem
             (
                 "EEEEEE",
-                700,
+                100,
                 new ArrayList<Abilities.Name>()
                 {{
                     add(Abilities.Name.SUMMON_SQUIRREL);

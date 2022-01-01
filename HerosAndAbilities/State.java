@@ -1,9 +1,9 @@
 package battlesystem;
 
-public abstract class Status 
+public abstract class State 
 {
 
-    public Status(
+    public State(
         int strength, 
         String name, 
         String description)

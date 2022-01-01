@@ -56,7 +56,7 @@ public class PassiveEffect extends Effect
     {
         return new PassiveEffect
                 (
-                    getStrength(), 
+                    getStrength(),
                     getType(), 
                     getName(), 
                     getDesc(), 
@@ -65,6 +65,18 @@ public class PassiveEffect extends Effect
                 );
     }
 
+    @Override
+    public Effect copy(int additionalStrength) {
+        return new PassiveEffect
+                    (
+                        getStrength() + additionalStrength, 
+                        getType(),
+                        getName(), 
+                        getDesc(), 
+                        getElement(),
+                        getPierces()
+                    );
+        }
 
     @Override
     public boolean isRemovable() 

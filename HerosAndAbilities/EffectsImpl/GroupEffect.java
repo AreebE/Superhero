@@ -70,6 +70,38 @@ public class GroupEffect extends Effect
         }
     }
 
+    private GroupEffect(
+        String name, 
+        String desc, 
+        Element element, 
+        ArrayList<Effect> effects,
+        int additionalStrength) 
+    {
+        super
+        (
+            0, 
+            Effects.Type.GROUP, 
+            0, 
+            true, 
+            name, 
+            desc, 
+            element
+        );
+
+        listOfEffects = new ArrayList<>();
+        groupDuration = 0;
+        for (int i = 0; i < effects.size(); i++) 
+        {
+            Effect e = effects.get(i).copy(additionalStrength);
+            listOfEffects.add(i, e);
+            int currentDuration = e.getDuration();
+            if (currentDuration > groupDuration) 
+            {
+                groupDuration = currentDuration;
+            }
+        }
+    }
+
 
     @Override
     public void reduceDuration(
@@ -117,6 +149,19 @@ public class GroupEffect extends Effect
                         getElement(), 
                         listOfEffects
                     );
+    }
+
+    @Override
+    public Effect copy(int additionalStrength) 
+    {
+        return new GroupEffect
+                (
+                    getName(), 
+                    getDesc(), 
+                    getElement(),
+                    listOfEffects,
+                    additionalStrength
+                );
     }
 
     @Override

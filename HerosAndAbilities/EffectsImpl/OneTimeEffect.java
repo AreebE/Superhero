@@ -91,7 +91,22 @@ public class OneTimeEffect extends Effect
                         getDuration(), 
                         getName(), 
                         getDesc(), 
-                        getElement()
+                        getElement(),
+                        getPierces()
+                    );
+    }
+
+    @Override
+    public Effect copy(int additionalStrength) {
+        return new OneTimeEffect
+                    (
+                        getStrength() + additionalStrength, 
+                        getType(),
+                        getDuration(),
+                        getName(), 
+                        getDesc(), 
+                        getElement(),
+                        getPierces()
                     );
     }
 }

@@ -78,4 +78,19 @@ public class DelayedEffect extends Effect
                         getPierces()
                     );
     }
+
+    @Override
+    public Effect copy(int additionalStrength) 
+    {
+        return new DelayedEffect
+                (
+                    getStrength() + additionalStrength, 
+                    this.getType(), 
+                    this.getDuration(), 
+                    getName(), 
+                    getDesc(), 
+                    getElement(),
+                    getPierces()
+                );
+    }
 }

@@ -139,7 +139,8 @@ public final class Abilities
                 Elements.getElement(Elements.Name.ICE), 
                 false, 
                 true,
-                new MultiCastModifier(4)
+                // new MultiCastModifier(4),
+                new PercentageModifier(10, Entity.Statistic.SPEED, true)
             )
         );
 

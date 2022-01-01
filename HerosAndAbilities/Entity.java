@@ -572,6 +572,7 @@ public class Entity implements Comparable<Entity>
 
         public void performAction()
         {
+            System.out.println("perform action");
             caster.getAbility(name).useAbility(target, caster, otherTargets, allHeros);
         }
 

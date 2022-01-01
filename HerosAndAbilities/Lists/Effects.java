@@ -336,7 +336,7 @@ public DecayEffect(
     public static Effect getEffect(
         Name name)
     {
-        return EFFECTS.get(name);
+        return EFFECTS.get(name).copy();
     }
 
     public static void giveEffects(

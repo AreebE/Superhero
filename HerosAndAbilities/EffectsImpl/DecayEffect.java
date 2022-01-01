@@ -73,7 +73,25 @@ public class DecayEffect extends Effect{
                     getDuration(), 
                     getName(), 
                     getDesc(), 
-                    getElement()
+                    getElement(),
+                    getPierces()
+                );
+    }
+
+    @Override
+    public Effect copy(int additionalStrength) 
+    {
+        return new DecayEffect
+                (
+                    getStrength() + additionalStrength, 
+                    this.decayRate, 
+                    this.turnDecayStarts, 
+                    this.getType(), 
+                    this.getDuration(), 
+                    getName(), 
+                    getDesc(), 
+                    getElement(),
+                    getPierces()
                 );
     }
 }

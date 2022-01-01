@@ -1,6 +1,6 @@
-public final class Statuses
+public final class States
 {
-    private Statuses(){}
+    private States(){}
 
     public static enum Name
     {

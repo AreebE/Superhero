@@ -132,7 +132,8 @@ public abstract class Ability
         RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.ModifierName.RECOIL);
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.ModifierName.RANDOM);
         MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.ModifierName.MULTICAST);
-        // System.out.println(random + ", " + recoil);
+        PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.ModifierName.PERCENTAGE);
+        System.out.println(random + ", " + recoil);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
         {
@@ -147,7 +148,16 @@ public abstract class Ability
             }
             for (int i = 0; i < times; i++)
             {
+                int additionalStrength = 0;
+                System.out.println(percent.toString());
+                if (percent != null)
+                {
+                    System.out.println("called percent");
+                    additionalStrength = percent.triggerModifier(target, caster);
+                }
+                strength += additionalStrength;
                 boolean keepGoing = castAbility(target, caster, otherTargets, allPlayers);
+                strength -= additionalStrength;
                 if (!keepGoing){
                     return false;
                 }

@@ -159,6 +159,21 @@ public class Effect
                 );
     }
 
+    public Effect copy(int additionalStrength) 
+    {
+        return new Effect
+                (
+                    strength + additionalStrength, 
+                    typeOfEffect, 
+                    duration, 
+                    permanent, 
+                    name, 
+                    desc, 
+                    element, 
+                    pierces
+                );
+    }
+
 
     public boolean isRemovable() 
     {

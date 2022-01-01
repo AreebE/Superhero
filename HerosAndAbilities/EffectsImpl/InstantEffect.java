@@ -67,4 +67,17 @@ public class InstantEffect extends Effect
                         getPierces()
                     );
     }
+
+    @Override
+    public Effect copy(int additionalStrength) {
+        return new InstantEffect
+                    (
+                        getStrength() + additionalStrength, 
+                        getType(),
+                        getName(), 
+                        getDesc(), 
+                        getElement(),
+                        getPierces()
+                    );
+    }
 }

@@ -74,7 +74,7 @@ public class AttackStatusAbility extends AttackAbility
         if (isPiercing() 
             || !caster.hasShield()) 
         {
-            target.addEffect(sideEffect.copy());
+            target.addEffect(sideEffect.copy(caster.getBaseAttack()));
         }
         return true;
     }
