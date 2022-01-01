@@ -243,7 +243,7 @@ public class Entity implements Comparable<Entity>
     public void healHealth(
         int healed) 
     {
-        System.out.println("called the heal health");
+        // System.out.println("called the heal health");
         health += healed;
         if (health > maxHealth) 
         {
@@ -572,7 +572,7 @@ public class Entity implements Comparable<Entity>
 
         public void performAction()
         {
-            System.out.println("perform action");
+            // System.out.println("perform action");
             caster.getAbility(name).useAbility(target, caster, otherTargets, allHeros);
         }
 

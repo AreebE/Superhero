@@ -32,7 +32,8 @@ public final class Abilities
 
     public static enum Name 
     {
-        // Attack
+        // Attack 
+        RAM_ATTACK,
         FIREBALL, 
         SNOWBALL, 
         LIGHTNING_STRIKE, 
@@ -77,6 +78,24 @@ public final class Abilities
     private final static EnumMap<Name, Ability> ABILITIES = new EnumMap<>(Name.class)
     {{
     // Attack ability
+
+        put 
+        (
+            Name.RAM_ATTACK,
+            new AttackAbility
+            (
+                "Ram",
+                "Ram yourself into your opponent",
+                1,
+                5,
+                Name.RAM_ATTACK,
+                Elements.getElement(Elements.Name.NULL),
+                false,
+                false,
+                new PercentageModifier(10, Entity.Statistic.SPEED, true)
+            )
+        );
+
         put
         (
             Name.FIREBALL, 
@@ -122,7 +141,8 @@ public final class Abilities
                 Name.SCRATCH,
                 Elements.getElement(Elements.Name.NULL),
                 true,
-                true
+                true,
+                new PercentageModifier(10, Entity.Statistic.SPEED, true)
             )
         );
         
@@ -139,8 +159,7 @@ public final class Abilities
                 Elements.getElement(Elements.Name.ICE), 
                 false, 
                 true,
-                // new MultiCastModifier(4),
-                new PercentageModifier(10, Entity.Statistic.SPEED, true)
+                new MultiCastModifier(4)
             )
         );
 
@@ -534,6 +553,8 @@ public final class Abilities
         put("squirrel_summon", Name.SUMMON_SQUIRREL);
 
         put("golem_summon", Name.SUMMON_GOLEM);
+
+        put("ram", Name.RAM_ATTACK);
     }};
 
 

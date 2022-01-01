@@ -1,26 +1,27 @@
+package battlesystem;
+
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Scanner;
-import battlesystem.*;
 
 public class AreebGame{
   
   public AreebGame(){
    
-     System.out.println("Hello world!... Also trying to make custom");
-    CustomMaker c = new CustomMaker();
-    Entity testin = c.AskNMakeSuperhero();
-    System.out.println("End of custom");
-    Abilities.giveAbility(testin,   
-        Abilities.Name.HEAL_PULSE,
-        Abilities.Name.POISON,
-        Abilities.Name.PROTECT,
-        Abilities.Name.WARNING,
-        Abilities.Name.COUNTER,
-        Abilities.Name.PRAY,
-        Abilities.Name.PROTECT,
-        Abilities.Name.BURN_UP);
-    testin.addEffect(Effects.getEffect(Effects.Name.PERMAGEN));
+    //  System.out.println("Hello world!... Also trying to make custom");
+    // CustomMaker c = new CustomMaker();
+    // Entity testin = c.AskNMakeSuperhero();
+    // System.out.println("End of custom");
+    // Abilities.giveAbility(testin,   
+    //     Abilities.Name.HEAL_PULSE,
+    //     Abilities.Name.POISON,
+    //     Abilities.Name.PROTECT,
+    //     Abilities.Name.WARNING,
+    //     Abilities.Name.COUNTER,
+    //     Abilities.Name.PRAY,
+    //     Abilities.Name.PROTECT,
+    //     Abilities.Name.BURN_UP);
+    // testin.addEffect(Effects.getEffect(Effects.Name.PERMAGEN));
 
 
     Entity robot = new Entity("BeepBoop", 1, 20, 8);
@@ -62,23 +63,25 @@ public class AreebGame{
     Entity A = new Entity("A", 10, 100, 50);
     Abilities.giveAbility(A,
         Abilities.Name.FIREBALL,
-        Abilities.Name.SUMMON_SQUIRREL
+        Abilities.Name.SUMMON_SQUIRREL,
+        Abilities.Name.RAM_ATTACK
         );
 
     Entity B = new Entity("B", 30, 100, 50);
     Abilities.giveAbility(B,
         Abilities.Name.SNOWBALL,
-        Abilities.Name.SUMMON_GOLEM
+        Abilities.Name.SUMMON_GOLEM,
+        Abilities.Name.GROUND_SUCTION
         );
 
     ArrayList<Entity> superheros = new ArrayList<>();
-    superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
-    superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
-    superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
+    // superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
+    // superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
+    // superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
 
     // superheros.add(testin);
-    // superheros.add(A);
-    // superheros.add(B);
+    superheros.add(A);
+    superheros.add(B);
     Collections.sort(superheros);
     Collections.reverse(superheros);
     // System.out.println(superheros);
@@ -117,7 +120,7 @@ public class AreebGame{
                     System.out.println("Choose an ability.");
                     abilityName = inputReader.next();
                 }
-                a = e.getAction(target, abilityName, null, superheros);
+                a = e.getAction(target, abilityName, superheros, inputReader);
             }
             actions.add(a);
             e.endOfTurn();

@@ -133,7 +133,7 @@ public abstract class Ability
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.ModifierName.RANDOM);
         MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.ModifierName.MULTICAST);
         PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.ModifierName.PERCENTAGE);
-        System.out.println(random + ", " + recoil);
+        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
         {
@@ -149,7 +149,6 @@ public abstract class Ability
             for (int i = 0; i < times; i++)
             {
                 int additionalStrength = 0;
-                System.out.println(percent.toString());
                 if (percent != null)
                 {
                     System.out.println("called percent");
