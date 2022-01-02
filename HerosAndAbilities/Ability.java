@@ -133,7 +133,7 @@ public abstract class Ability
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.ModifierName.RANDOM);
         MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.ModifierName.MULTICAST);
         PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.ModifierName.PERCENTAGE);
-        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
+        // System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
         {

@@ -1,5 +1,9 @@
+package battlesystem;
+
+import java.util.List;
+
 public interface InputSystem {
+    public String getAbilityName();
     public Entity getSingleTarget();
-    public Entity getSecondaryTargets();
-    
+    public List<Entity> getSecondaryTargets();   
 }

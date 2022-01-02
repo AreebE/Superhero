@@ -35,13 +35,13 @@ public class AIEntity extends Entity
         public AIAction(
             Entity target, 
             AIEntity caster, 
-            List<Entity> otherTargets,
             List<Entity> allHeros)
         {
-            super(target, caster, null, otherTargets, allHeros);
+            super(target, caster, null, allHeros);
             this.caster = caster;
         }
 
+        @Override
         public boolean isLegalAction()
         {
             return  (
@@ -67,12 +67,11 @@ public class AIEntity extends Entity
 
     @Override
     public Entity.Action getAction(
-        Entity target, 
-        String name,
         List<Entity> allHeros,
-        Scanner inputReader)
+        InputSystem inputReader)
     {
-        Entity.Action a = new AIAction(target, this, null, allHeros);
+        Entity target = inputReader.getSingleTarget();
+        Entity.Action a = new AIAction(target, this, allHeros);
         if (a.isLegalAction())
         {
             return a;

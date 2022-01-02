@@ -531,12 +531,12 @@ public class Entity implements Comparable<Entity>
             Entity target, 
             Entity caster, 
             String abilityName,
-            List<Entity> otherTargets,
             List<Entity> allHeros)
         {
             this.target = target;
             this.caster = caster;
             this.allHeros = allHeros;
+            this.otherTargets = null;
             this.name = Abilities.getName(abilityName);
         }
 
@@ -594,13 +594,12 @@ public class Entity implements Comparable<Entity>
 
 
     public Action getAction(
-        Entity target, 
-        String name,
         List<Entity> allHeros,
-        Scanner inputReader)
+        InputSystem inputReader)
     {
-        List<Entity> otherTargets = null;
-        Action a = new Action(target, this, name, otherTargets, allHeros);
+        Entity target = inputReader.getSingleTarget();
+        String name = inputReader.getAbilityName();
+        Action a = new Action(target, this, name, allHeros);
         if (a.isLegalAction())
         {
             return a;

@@ -1,11 +1,17 @@
 package battlesystem;
 
+import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class AreebGame{
-  
+
+    ArrayList<Entity> superheros;
+    Entity currentPlayer;
+    ScannerInput system;
+
   public AreebGame(){
    
     //  System.out.println("Hello world!... Also trying to make custom");
@@ -37,7 +43,6 @@ public class AreebGame{
         Abilities.Name.WITCH_SPELL,
         Abilities.Name.FIRST_AID);
     robot.addEffect(Effects.getEffect(Effects.Name.CURSE));
-
 
     Entity human = new Entity("Joe", 10, 7, 0);
     // Abilities.giveAbility(human,
@@ -74,7 +79,7 @@ public class AreebGame{
         Abilities.Name.GROUND_SUCTION
         );
 
-    ArrayList<Entity> superheros = new ArrayList<>();
+    superheros = new ArrayList<>();
     // superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
     // superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
     // superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
@@ -85,6 +90,7 @@ public class AreebGame{
     Collections.sort(superheros);
     Collections.reverse(superheros);
     // System.out.println(superheros);
+    currentPlayer = null;
     playGame(superheros);
     }
 
@@ -92,6 +98,7 @@ public class AreebGame{
     // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
 
     Scanner inputReader = new Scanner(System.in);
+    system = new ScannerInput(inputReader);
     // int i = 0;
     boolean anyHealthZero = false;
     Terrain t = new Terrain();
@@ -107,23 +114,16 @@ public class AreebGame{
     //   System.out.println(currentPlayer);
         for (int i = 0; i < superheros.size(); i++)
         {
-            Entity e = superheros.get(i);
+            currentPlayer = superheros.get(i);
             Entity.Action a = null;
             while (a == null)
             {
-                System.out.println(e);
-                Entity target = getTarget(superheros, inputReader);
-                System.out.println(target);
-                String abilityName = null;
-                if (!(e instanceof AIEntity))
-                {
-                    System.out.println("Choose an ability.");
-                    abilityName = inputReader.next();
-                }
-                a = e.getAction(target, abilityName, superheros, inputReader);
+                System.out.println(currentPlayer);
+// =                System.out.println(target);
+                a = currentPlayer.getAction(superheros, system);
             }
             actions.add(a);
-            e.endOfTurn();
+            currentPlayer.endOfTurn();
         }
 
         for (int i = 0; i < actions.size(); i++)
@@ -145,6 +145,49 @@ public class AreebGame{
     
   }
 
+    private class ScannerInput implements InputSystem 
+    {
+        private Scanner inputReader;
+
+        public ScannerInput(Scanner inputReader)
+        {
+            this.inputReader = inputReader;
+        }
+
+        @Override
+        public String getAbilityName()
+        {
+            System.out.println("Which ability to use?");
+            return inputReader.next();
+        }        
+        
+        @Override
+        public Entity getSingleTarget()
+        {
+            System.out.println("Who to target?");
+            String name = inputReader.next();
+            if (name.toLowerCase().equals("pass")){
+                return null;
+            }
+            Entity target = getEntity(name, superheros);
+            while (target == null){
+                System.out.println("No target specified.");
+                name = inputReader.next();
+                if (name.toLowerCase().equals("pass")){
+                    return null;
+                }
+                target = getEntity(name, superheros);
+            }
+            return target;
+        }
+
+        @Override
+        public List<Entity> getSecondaryTargets()
+        {
+            return null;
+        }
+    }
+
   private Entity getEntity(String name, ArrayList<Entity> superheros){
     for (int i = 0; i < superheros.size(); i++){
       if (superheros.get(i).getName().equals(name)){
@@ -152,35 +195,5 @@ public class AreebGame{
       }
     }
     return null;
-  }
-
-  private Entity getTarget(ArrayList<Entity> superheros, Scanner inputReader){
-    System.out.println("Who to target?");
-    String name = inputReader.next();
-      if (name.toLowerCase().equals("pass")){
-          return null;
-      }
-    Entity target = getEntity(name, superheros);
-    while (target == null){
-      System.out.println("No target specified.");
-      name = inputReader.next();
-      if (name.toLowerCase().equals("pass")){
-          return null;
-      }
-      target = getEntity(name, superheros);
-    }
-    return target;
-  }
-
-  private Ability useAbility(Scanner inputReader, Entity currentPlayer, Entity target){
-    System.out.println("Which ability to use?");
-    Abilities.Name nameOfAbility = Abilities.getName(inputReader.next());
-    Ability abilityUsed = currentPlayer.getAbility( nameOfAbility);
-    while (abilityUsed == null){
-      System.out.println("Choose a different ability.");
-      nameOfAbility = Abilities.getName(inputReader.next());
-      abilityUsed = currentPlayer.getAbility(nameOfAbility);
-    }
-    return abilityUsed;
   }
 }
