@@ -17,11 +17,14 @@ public final class Shields
         SELF_DESTRUCT,
         SELF_CARE,
         WITCH_CURSE,
+        DEATH_DEFIANCE,
+        GIFT
     }
 
     public static enum Trigger {
         ATTACK,
         SHIELD_BREAK,
+        DEATH,
         ALL
     }
 
@@ -92,6 +95,33 @@ public final class Shields
             )
         );
 
+        put
+        (
+            Name.GIFT,
+            new DeathShield 
+            (
+                "Gift",
+                "Give the creator some extra stats",
+                -1,
+                Effects.getEffect(Effects.Name.SACRIFICIAL_GIFT),
+                false,
+                1
+            )
+        );
+
+        put
+        (
+            Name.DEATH_DEFIANCE,
+            new SelfDeathShield 
+            (
+                "Deathly Defiance",
+                "Defy death",
+                -1,
+                Effects.getEffect(Effects.Name.RESURRECT),
+                false,
+                2
+            )
+        );
     }};
 
     public static Shield getShield(Name name){

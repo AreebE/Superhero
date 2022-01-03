@@ -42,9 +42,9 @@ public class DualShield extends Shield
 
 
     @Override
-    protected void applyShield(Entity target, Entity caster)
+    protected void applyShield(Entity victim, Entity caster)
     {
-        target.addEffect(selfApply.copy());
+        victim.addEffect(selfApply.copy());
         caster.addEffect(casterApply.copy());
     }
 

@@ -55,7 +55,7 @@ public final class Spawnables
                 null,
                 new ArrayList<Shields.Name>()
                 {{
-                    add(Shields.Name.SELF_DESTRUCT);
+                    add(Shields.Name.GIFT);
                 }},
                 1,
                 0,

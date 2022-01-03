@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Entity implements Comparable<Entity>
 {
     // free will between 1 and 20;
+    private Entity creator;
     private String name;
     private int speed;
     private ArrayList<Ability> abilities;
@@ -35,7 +36,8 @@ public class Entity implements Comparable<Entity>
         String name, 
         int speed, 
         int health, 
-        int shieldHealth) 
+        int shieldHealth,
+        Entity creator) 
     {
         this.name = name;
         this.speed = speed;
@@ -47,27 +49,15 @@ public class Entity implements Comparable<Entity>
         this.shields = new ArrayList<>();
         this.baseAttack = 0;
         this.baseDefense = 0;
+        this.creator = creator;
         Abilities.giveAbility(this, Abilities.Name.PASS_TURN);
     }
 
 
-    /**
-     * Methods involving free will
-     */
-    public int getspeed() 
+    protected Entity getCreator()
     {
-        return this.speed;
+        return this.creator;
     }
-
-
-    @Override
-    public int compareTo(
-        Entity other) 
-    {
-        return this.speed - other.getspeed();
-    }
-    //
-
 
     /**
      * Provides information on what the Entity does
@@ -135,6 +125,8 @@ public class Entity implements Comparable<Entity>
         EntityString.append("\u001B[34m")
                         .append("* health - ")
                         .append(health)
+                        .append("/")
+                        .append(maxHealth)
                         .append("\n")
                         .append("* shield - ")
                         .append(shieldHealth)
@@ -219,7 +211,7 @@ public class Entity implements Comparable<Entity>
         return abilities.contains(ability);
     }
     
-    private boolean hasGroupAbility(
+    public boolean hasGroupAbility(
         Abilities.Name name)
     {
         return getAbility(name).hasModifier(Abilities.Modifier.GROUP);
@@ -262,9 +254,18 @@ public class Entity implements Comparable<Entity>
         return this.health;
     }
 
+    public void addMaxHealth(int addHealth)
+    {   
+        maxHealth += addHealth;
+        health += addHealth;
+    }
 
-    public boolean isPlayerHealthZero() 
+    public boolean isHealthZero() 
     {
+        if (this.health <= 0)
+        {
+            searchForShield(Shields.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this);
+        }
         return this.health <= 0;
     }
 
@@ -307,7 +308,7 @@ public class Entity implements Comparable<Entity>
         {
             if (type != null)
             {
-                endAttack = searchForShield(type, e, caster);
+                endAttack = searchForShield(type, e, this, caster);
             }
             if (endAttack){
                 return false;
@@ -323,10 +324,10 @@ public class Entity implements Comparable<Entity>
         {
             damageDealt -= shieldHealth;
             shieldHealth = 0;
-            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, caster);
+            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, this, caster);
             if (type != null)
             {
-                endAttack = endAttack || searchForShield(type, e, caster);
+                endAttack = endAttack || searchForShield(type, e, this, caster);
             }
             if (endAttack){
                 return false;
@@ -390,6 +391,12 @@ public class Entity implements Comparable<Entity>
         effects.add(newEffect);
     }
 
+    public void applyEffect(
+        Effect e
+    )
+    {
+        e.applyEffect(this);
+    }
 
     public void removeEffect(
         Effect removed) 
@@ -446,7 +453,8 @@ public class Entity implements Comparable<Entity>
 
     public boolean searchForShield(
         Shields.Trigger trigger, 
-        Element element, 
+        Element element,
+        Entity target, 
         Entity caster)
     {
         boolean nullifyEffect = false;
@@ -455,7 +463,7 @@ public class Entity implements Comparable<Entity>
             Shield s = shields.get(i);
             if (s.wouldTrigger(trigger, element))
             {
-                boolean nullify = s.triggerShield(this, caster);
+                boolean nullify = s.triggerShield(target, caster);
                 if (nullify)
                 {
                     nullifyEffect = true;
@@ -477,6 +485,13 @@ public class Entity implements Comparable<Entity>
     public int getSpeed()
     {
         return this.speed;
+    }
+
+     @Override
+    public int compareTo(
+        Entity other) 
+    {
+        return this.speed - other.getSpeed();
     }
 
 
@@ -524,82 +539,6 @@ public class Entity implements Comparable<Entity>
     /*
     * Getting an action 
     */
-
-    public static class Action {
-        private Entity target;
-        private Entity caster;
-        private List<Entity> otherTargets;
-        private List<Entity> allHeros;
-        private Abilities.Name name;
-
-        public Action(
-            Entity target, 
-            Entity caster, 
-            String abilityName,
-            List<Entity> allHeros,
-            InputSystem input)
-        {
-            this.target = target;
-            this.caster = caster;
-            this.allHeros = allHeros;
-            this.name = Abilities.getName(abilityName);
-            this.otherTargets = null;
-            if (caster.hasGroupAbility(name))
-            {
-                int limit = ((GroupModifier) caster.getAbility(name).getModifier(Abilities.Modifier.GROUP)).getLimit();
-                this.otherTargets = input.getSecondaryTargets(limit);
-                System.out.println(otherTargets);
-            }
-        }
-
-        public boolean isLegalAction()
-        {
-            if (name == null || caster.getAbility(name) == null)
-            {
-                return false;
-            }
-            if (otherTargets != null)
-            {
-                for (int i = 0; i < otherTargets.size(); i++)
-                {  
-                    Entity singleTarget = otherTargets.get(i);
-                    if ((singleTarget instanceof AIEntity) 
-                        && !((AIEntity) singleTarget).isTargettable() )
-                    {
-                        return false;
-                    }
-                }
-            }
-            
-            return  (
-                        ! (target instanceof AIEntity) 
-                        || ((AIEntity) target).isTargettable() 
-                    );
-        }
-
-        public void performAction()
-        {
-            // System.out.println("perform action");
-            caster.getAbility(name).useAbility(target, caster, otherTargets, allHeros);
-        }
-
-        public Entity getTarget()
-        {
-            return target;
-        }
-
-        public List<Entity> getOtherTargets()
-        {
-            return otherTargets;
-        }
-
-        public List<Entity> getAllHeros()
-        {
-            return allHeros;
-        }
-    }
-
-
     public Action getAction(
         List<Entity> allHeros,
         InputSystem inputReader)

@@ -38,7 +38,7 @@ public class TrapShield extends Shield
 
 
     @Override
-    protected void applyShield(Entity target, Entity caster)
+    protected void applyShield(Entity victim, Entity caster)
     {
                 // System.out.println("Apply " + isNullifies());
         caster.addEffect(counter);

@@ -86,7 +86,7 @@ public abstract class Shield
         {
             target.removeShield(this);
         }
-        System.out.println(nullifies);
+        // System.out.println(nullifies);
         return nullifies;
     }
 

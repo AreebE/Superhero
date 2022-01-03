@@ -14,8 +14,10 @@ public final class Effects
         ATTACK, 
         DEFENSE, 
         HEALTH,
+        MAX_HEALTH,
         SHIELD, 
         DAMAGE, 
+        SPEED,
         GROUP
     } 
 
@@ -24,11 +26,16 @@ public final class Effects
     {
         // Base stat Effects
         ATTACK_BOOST,
+        ATTACK_BOOST_X,
         DEFENSE_BOOST,
+        DEFENSE_BOOST_X,
+        SPEED_BOOST_X,
+        MAX_HEALTH_BOOST_X,
         CHARGE,
         BUILD_UP,
         GUARD,
         BURNOUT,
+        SACRIFICIAL_GIFT,
     
         // Shield
         INSTANT_SHIELD,
@@ -36,6 +43,7 @@ public final class Effects
 
         // health Effects
         INSTANT_HEAL,
+        RESURRECT,
         REGEN, 
         PERMAGEN,
 
@@ -77,6 +85,58 @@ public final class Effects
 
         put 
         (
+            Name.ATTACK_BOOST_X,
+            new InstantEffect
+            (
+                7,
+                Type.ATTACK,
+                "Attack boost X",
+                "Buffs the attack by a lot",
+                Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.DEFENSE_BOOST_X,
+            new InstantEffect 
+            (
+                7, 
+                Type.DEFENSE,
+                "Defense Boost X",
+                "Buffs the defense",
+                Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put 
+        (
+            Name.SPEED_BOOST_X,
+            new InstantEffect 
+            (  
+                20,
+                Type.SPEED,
+                "Speed Boost X",
+                "Buffs speed",
+                Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put 
+        (
+            Name.MAX_HEALTH_BOOST_X,
+            new InstantEffect 
+            (  
+                20,
+                Type.MAX_HEALTH,
+                "Max Health X",
+                "Buffs health",
+                Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put 
+        (
             Name.RETALIATE,
             new InstantEffect
             (
@@ -100,6 +160,19 @@ public final class Effects
                 "Deals damage with an explosion",
                 Elements.getElement(Elements.Name.NULL),
                 new boolean[]{true, true}
+            )
+        );
+
+        put 
+        (
+            Name.RESURRECT,
+            new InstantEffect
+            (
+                100,
+                Type.HEALTH,
+                "Resurrect",
+                "Resurrect the person from beyond the grave",
+                Elements.getElement(Elements.Name.NULL)
             )
         );
 
@@ -321,6 +394,22 @@ public DecayEffect(
                 this.get(Name.REGEN)
             )
         );
+
+        put 
+        (
+            Name.SACRIFICIAL_GIFT,
+            new GroupEffect
+            (
+                "Sacrificial Gift",
+                "The target gets some extreme buffs",
+                Elements.getElement(Elements.Name.NULL),
+                this.get(Name.ATTACK_BOOST_X),
+                this.get(Name.DEFENSE_BOOST_X),
+                this.get(Name.MAX_HEALTH_BOOST_X),
+                this.get(Name.SPEED_BOOST_X)
+            )
+        );
+
         // template
         // put(Name., new __Effect(1, Type., 1, "", "", Elements.getElement(Elements.Name.), true, true));
     }};

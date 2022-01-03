@@ -30,49 +30,49 @@ public class AreebGame{
     // testin.addEffect(Effects.getEffect(Effects.Name.PERMAGEN));
 
 
-    Entity robot = new Entity("BeepBoop", 1, 20, 8);
+    // Entity robot = new Entity("BeepBoop", 1, 20, 8);
     // Abilities.giveAbility(robot,
         // Abilities.LIGHTNING_STRIKE,
         // Abilities.COUNTERSTRIKE, 
         // Abilities.FLARE_UP);
-    Abilities.giveAbility(robot,
-        Abilities.Name.FIREBALL,
-        Abilities.Name.COUNTERSTRIKE,
-        Abilities.Name.FLARE_UP,
-        Abilities.Name.CONSTRUCT,
-        Abilities.Name.WITCH_SPELL,
-        Abilities.Name.FIRST_AID);
-    robot.addEffect(Effects.getEffect(Effects.Name.CURSE));
+    // Abilities.giveAbility(robot,
+    //     Abilities.Name.FIREBALL,
+    //     Abilities.Name.COUNTERSTRIKE,
+    //     Abilities.Name.FLARE_UP,
+    //     Abilities.Name.CONSTRUCT,
+    //     Abilities.Name.WITCH_SPELL,
+    //     Abilities.Name.FIRST_AID);
+    // robot.addEffect(Effects.getEffect(Effects.Name.CURSE));
 
-    Entity human = new Entity("Joe", 10, 7, 0);
+    // Entity human = new Entity("Joe", 10, 7, 0, null);
     // Abilities.giveAbility(human,
         // Abilities.SNOWBALL,
         // Abilities.PROTECT, 
         // Abilities.DEFENSE_UP);
-    Abilities.giveAbility(human,
-        Abilities.Name.SNOWBALL,
-        Abilities.Name.PROTECT,
-        Abilities.Name.DEFENSE_UP,
-        Abilities.Name.COUNTER);
+    // Abilities.giveAbility(human,
+    //     Abilities.Name.SNOWBALL,
+    //     Abilities.Name.PROTECT,
+    //     Abilities.Name.DEFENSE_UP,
+    //     Abilities.Name.COUNTER);
 
-    Entity bland = new Entity("EEEEEE", 20, 7, 8);
-    // Abilities.giveAbility(bland,
-        // Abilities.FIREBALL,
-        // Abilities.PROTECT, 
-        // Abilities.ATTACK_UP);
-    Abilities.giveAbility(bland, 
-        Abilities.Name.FIREBALL,
-        Abilities.Name.PROTECT,
-        Abilities.Name.ATTACK_UP);
+    // // Entity bland = new Entity("EEEEEE", 20, 7, 8, null);
+    // // Abilities.giveAbility(bland,
+    //     // Abilities.FIREBALL,
+    //     // Abilities.PROTECT, 
+    //     // Abilities.ATTACK_UP);
+    // Abilities.giveAbility(bland, 
+    //     Abilities.Name.FIREBALL,
+    //     Abilities.Name.PROTECT,
+    //     Abilities.Name.ATTACK_UP);
 
-    Entity A = new Entity("A", 10, 100, 50);
+    Entity A = new Entity("A", 10, 100, 50, null);
     Abilities.giveAbility(A,
         Abilities.Name.FIREBALL,
         Abilities.Name.SUMMON_SQUIRREL,
         Abilities.Name.RAM_ATTACK
         );
 
-    Entity B = new Entity("B", 30, 100, 50);
+    Entity B = new Entity("B", 30, 100, 50, null);
     Abilities.giveAbility(B,
         Abilities.Name.SNOWBALL,
         Abilities.Name.SUMMON_GOLEM,
@@ -103,19 +103,19 @@ public class AreebGame{
     boolean anyHealthZero = false;
     Terrain t = new Terrain();
     t.setsTerrianElement(Elements.getElement(Elements.Name.ICE));
-    ArrayList<Entity.Action> actions = new ArrayList<>();
+    ArrayList<Action> actions = new ArrayList<>();
     superheros.get(0).setTerrain(t);
     superheros.get(1).setTerrain(t);
-
+    int removeCount = 0;
     // ArrayList<Action> actions = new
-    while (!anyHealthZero){
+    while (removeCount < 2){
     //   Entity currentPlayer = superheros.get(i);
       // System.out.println(currentPlayer.getName() + "\'s turn. Has the health of " + currentPlayer.getHealth() + ", the sheild of " + currentPlayer.getSheildHealth() + " and abilities:\n" + currentPlayer.getAbilities());
     //   System.out.println(currentPlayer);
         for (int i = 0; i < superheros.size(); i++)
         {
             currentPlayer = superheros.get(i);
-            Entity.Action a = null;
+            Action a = null;
             while (a == null)
             {
                 System.out.println(currentPlayer);
@@ -123,13 +123,24 @@ public class AreebGame{
                 a = currentPlayer.getAction(superheros, system);
             }
             actions.add(a);
-            currentPlayer.endOfTurn();
         }
-
+        
+        
         for (int i = 0; i < actions.size(); i++)
         {
             // System.out.println(actions.get(i).getClass());
             actions.get(i).performAction();
+        }
+        for (int i = superheros.size() - 1; i >= 0; i--)
+        {
+            superheros.get(i).endOfTurn();
+            if (superheros.get(i).isHealthZero())
+            {
+                Entity target = superheros.remove(i);
+                System.out.println(target.getName() + " was eliminated. " + target.toString());
+                removeCount++;
+            }
+            // superheros.get(i);
         }
         actions.clear();
         Collections.sort(superheros);

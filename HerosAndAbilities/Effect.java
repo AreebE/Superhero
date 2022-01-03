@@ -94,6 +94,12 @@ public class Effect
             case DEFENSE:
                 target.addDefense(power);
                 break;
+            case SPEED:
+                target.addSpeed(power);
+                break;
+            case MAX_HEALTH:
+                target.addMaxHealth(power);
+                break;
             case HEALTH:
                 target.healHealth(power);
                 break;
@@ -107,6 +113,7 @@ public class Effect
                     pierces[PIERCES_DEFENSE_INDEX], 
                     pierces[PIERCES_SHIELD_INDEX]
                 );
+                break;
         }
     }
 

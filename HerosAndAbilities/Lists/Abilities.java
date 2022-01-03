@@ -573,6 +573,8 @@ public final class Abilities
 
         put("golem_summon", Name.SUMMON_GOLEM);
 
+        put ("ground_suction", Name.GROUND_SUCTION);
+
         put("ram", Name.RAM_ATTACK);
     }};
 

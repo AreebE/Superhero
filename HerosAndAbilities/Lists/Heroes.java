@@ -64,7 +64,7 @@ public final class Heroes {
                 }},
                 new ArrayList<Shields.Name>()
                 {{
-                    // add(Shields.Name.);
+                    add(Shields.Name.DEATH_DEFIANCE);
                 }},
                 100,
                 40
