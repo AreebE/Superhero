@@ -14,7 +14,7 @@ public final class Abilities
 
     private Abilities(){}
 
-    public static enum ModifierName
+    public static enum Modifier
     {
         RANDOM,
         RECOIL,
@@ -33,6 +33,7 @@ public final class Abilities
     public static enum Name 
     {
         // Attack 
+        WIDE_SLASH,
         RAM_ATTACK,
         FIREBALL, 
         SNOWBALL, 
@@ -181,6 +182,23 @@ public final class Abilities
 
         put
         (
+            Name.WIDE_SLASH,
+            new AttackAbility
+            (
+                "Wide Slash",
+                "Performs a sweeping attack, targetting two other characters",
+                4,
+                10,
+                Name.WIDE_SLASH,
+                Elements.getElement(Elements.Name.NULL),
+                false,
+                false,
+                new GroupModifier(50, 2)
+            )
+        );
+
+        put
+        (
             Name.POISON_SLASH, 
             new AttackStatusAbility
             (
@@ -228,7 +246,6 @@ public final class Abilities
                 Effects.getEffect(Effects.Name.BLEED)
             )
         );
-
 
         // Defense Abilities
         put
@@ -510,6 +527,8 @@ public final class Abilities
     // Getting an ability's id, based on a name given
     private final static HashMap<String, Name> namesToAbility = new HashMap<>()
     {{
+        put("wide_slash", Name.WIDE_SLASH);
+
         put("fireball", Name.FIREBALL);
 
         put("snowball", Name.SNOWBALL);

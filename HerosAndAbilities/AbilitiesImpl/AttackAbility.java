@@ -47,7 +47,7 @@ public class AttackAbility extends Ability
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        EnumMap<Abilities.ModifierName, 
+        EnumMap<Abilities.Modifier, 
         AbilityModifier> modifiers) 
     {
         super

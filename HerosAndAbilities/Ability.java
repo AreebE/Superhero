@@ -15,7 +15,7 @@ public abstract class Ability
     private Element em;
     private boolean isRandomized;
     private int chance;
-    private EnumMap<Abilities.ModifierName, AbilityModifier> modifiers;
+    private EnumMap<Abilities.Modifier, AbilityModifier> modifiers;
 
 
     public Ability(
@@ -36,7 +36,7 @@ public abstract class Ability
         this.turnsSinceUse = cooldown;
         this.enumName = enumName;
         this.em = em;
-        this.modifiers = new EnumMap<>(Abilities.ModifierName.class);
+        this.modifiers = new EnumMap<>(Abilities.Modifier.class);
         for (AbilityModifier m : modifiers) 
         {
             // System.out.println(m + ", " + m.getModifier());
@@ -54,7 +54,7 @@ public abstract class Ability
         Abilities.Type type,
         Abilities.Name enumName, 
         Element em,
-        EnumMap<Abilities.ModifierName, 
+        EnumMap<Abilities.Modifier, 
         AbilityModifier> modifiers) 
     {
         this(name, desc, cooldown, strength, type, enumName, em);
@@ -76,7 +76,7 @@ public abstract class Ability
         this.turnsSinceUse = cooldown;
         this.enumName = enumName;
         this.em = em;
-        this.modifiers = new EnumMap<>(Abilities.ModifierName.class);
+        this.modifiers = new EnumMap<>(Abilities.Modifier.class);
     }
 
 
@@ -116,7 +116,7 @@ public abstract class Ability
     }
 
 
-    protected EnumMap<Abilities.ModifierName, AbilityModifier> getModifiers() 
+    protected EnumMap<Abilities.Modifier, AbilityModifier> getModifiers() 
     {
         return modifiers;
     }
@@ -129,10 +129,11 @@ public abstract class Ability
         List<Entity> allPlayers) 
     {
         turnsSinceUse = 0;
-        RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.ModifierName.RECOIL);
-        RandomModifier random = (RandomModifier) modifiers.get(Abilities.ModifierName.RANDOM);
-        MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.ModifierName.MULTICAST);
-        PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.ModifierName.PERCENTAGE);
+        RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.Modifier.RECOIL);
+        RandomModifier random = (RandomModifier) modifiers.get(Abilities.Modifier.RANDOM);
+        MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.Modifier.MULTICAST);
+        PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.Modifier.PERCENTAGE);
+        GroupModifier group = (GroupModifier) modifiers.get(Abilities.Modifier.GROUP);
         // System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
@@ -148,15 +149,26 @@ public abstract class Ability
             }
             for (int i = 0; i < times; i++)
             {
+                int baseStrength = strength;
                 int additionalStrength = 0;
                 if (percent != null)
                 {
-                    System.out.println("called percent");
+                    // System.out.println("called percent");
                     additionalStrength = percent.triggerModifier(target, caster);
                 }
                 strength += additionalStrength;
+                // System.out.println(strength);
                 boolean keepGoing = castAbility(target, caster, otherTargets, allPlayers);
-                strength -= additionalStrength;
+                if (group != null)
+                {
+                    strength *= group.triggerModifier(target, caster);
+                    // System.out.println(strength);
+                    for (int j = 0; j < group.getLimit(); j++)
+                    {
+                        castAbility(otherTargets.get(j), caster, otherTargets, allPlayers);
+                    }
+                }
+                strength = baseStrength;
                 if (!keepGoing){
                     return false;
                 }
@@ -229,4 +241,14 @@ public abstract class Ability
 
 
     public abstract Ability copy();
+
+    public boolean hasModifier(Abilities.Modifier modifierName)
+    {
+        return modifiers.containsKey(modifierName);
+    }
+
+    public AbilityModifier getModifier(Abilities.Modifier modifierName)
+    {
+        return modifiers.get(modifierName);
+    }
 }

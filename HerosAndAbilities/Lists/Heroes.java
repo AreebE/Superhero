@@ -56,6 +56,7 @@ public final class Heroes {
                     add(Abilities.Name.PROTECT);
                     add(Abilities.Name.DEFENSE_UP);
                     add(Abilities.Name.COUNTER);
+                    add(Abilities.Name.WIDE_SLASH);
                 }},
                 new ArrayList<Effects.Name>()
                 {{

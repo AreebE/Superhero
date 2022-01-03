@@ -80,9 +80,9 @@ public class AreebGame{
         );
 
     superheros = new ArrayList<>();
-    // superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
-    // superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
-    // superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
+    superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
+    superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
+    superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
 
     // superheros.add(testin);
     superheros.add(A);
@@ -182,9 +182,26 @@ public class AreebGame{
         }
 
         @Override
-        public List<Entity> getSecondaryTargets()
+        public List<Entity> getSecondaryTargets(Integer limit)
         {
-            return null;
+            ArrayList<Entity> otherTargets = new ArrayList<>();
+            for (int i = 0; i < limit && otherTargets.size() < superheros.size() - 1; i++ )
+            {
+                System.out.println("Who else to target?");
+                String name = inputReader.next();
+                Entity target = getEntity(name, superheros);
+                while (target == null && otherTargets.contains(target))
+                {
+                    System.out.println("No target specified.");
+                    name = inputReader.next();
+                    if (name.toLowerCase().equals("pass")){
+                        return null;
+                    }
+                    target = getEntity(name, superheros);
+                }
+                otherTargets.add(target);
+            }
+            return otherTargets;
         }
     }
 

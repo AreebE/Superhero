@@ -213,12 +213,17 @@ public class Entity implements Comparable<Entity>
     }
 
 
-    public boolean hasAbility(Ability ability) 
+    public boolean hasAbility(
+        Ability ability) 
     {
         return abilities.contains(ability);
     }
-    //
-
+    
+    private boolean hasGroupAbility(
+        Abilities.Name name)
+    {
+        return getAbility(name).hasModifier(Abilities.Modifier.GROUP);
+    }
     /*
      * Methods involving a player's health
      */
@@ -520,7 +525,7 @@ public class Entity implements Comparable<Entity>
     * Getting an action 
     */
 
-    public class Action {
+    public static class Action {
         private Entity target;
         private Entity caster;
         private List<Entity> otherTargets;
@@ -531,13 +536,20 @@ public class Entity implements Comparable<Entity>
             Entity target, 
             Entity caster, 
             String abilityName,
-            List<Entity> allHeros)
+            List<Entity> allHeros,
+            InputSystem input)
         {
             this.target = target;
             this.caster = caster;
             this.allHeros = allHeros;
-            this.otherTargets = null;
             this.name = Abilities.getName(abilityName);
+            this.otherTargets = null;
+            if (caster.hasGroupAbility(name))
+            {
+                int limit = ((GroupModifier) caster.getAbility(name).getModifier(Abilities.Modifier.GROUP)).getLimit();
+                this.otherTargets = input.getSecondaryTargets(limit);
+                System.out.println(otherTargets);
+            }
         }
 
         public boolean isLegalAction()
@@ -563,11 +575,6 @@ public class Entity implements Comparable<Entity>
                         ! (target instanceof AIEntity) 
                         || ((AIEntity) target).isTargettable() 
                     );
-        }
-
-        public void setOtherTargets(Scanner inputReader)
-        {
-            
         }
 
         public void performAction()
@@ -599,7 +606,7 @@ public class Entity implements Comparable<Entity>
     {
         Entity target = inputReader.getSingleTarget();
         String name = inputReader.getAbilityName();
-        Action a = new Action(target, this, name, allHeros);
+        Action a = new Action(target, this, name, allHeros, inputReader);
         if (a.isLegalAction())
         {
             return a;

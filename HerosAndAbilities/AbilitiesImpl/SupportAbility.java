@@ -39,7 +39,7 @@ public class SupportAbility extends Ability
         Effect template, 
         Abilities.Name enumName,
         Element em,
-        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
     {
         super
         (

@@ -28,16 +28,17 @@ public class AIEntity extends Entity
         currentAbility = 0;
     }
 
-    public class AIAction extends Entity.Action
+    public static class AIAction extends Entity.Action
     {
         private AIEntity caster;
 
         public AIAction(
             Entity target, 
             AIEntity caster, 
-            List<Entity> allHeros)
+            List<Entity> allHeros,
+            InputSystem inputReader)
         {
-            super(target, caster, null, allHeros);
+            super(target, caster, null, allHeros, inputReader);
             this.caster = caster;
         }
 
@@ -71,7 +72,7 @@ public class AIEntity extends Entity
         InputSystem inputReader)
     {
         Entity target = inputReader.getSingleTarget();
-        Entity.Action a = new AIAction(target, this, allHeros);
+        Entity.Action a = new AIAction(target, this, allHeros, inputReader);
         if (a.isLegalAction())
         {
             return a;

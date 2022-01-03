@@ -21,7 +21,7 @@ public class RandomModifier implements AbilityModifier<Boolean>{
   }
 
   @Override
-  public Abilities.ModifierName getModifier(){
-    return Abilities.ModifierName.RANDOM;
+  public Abilities.Modifier getModifier(){
+    return Abilities.Modifier.RANDOM;
   }
 }

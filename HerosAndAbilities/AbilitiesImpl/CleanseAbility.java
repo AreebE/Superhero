@@ -33,7 +33,7 @@ public class CleanseAbility extends SupportAbility
         Abilities.Name 
         enumName, 
         Element em,
-        EnumMap<Abilities.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
     {
         super
         (
