@@ -112,10 +112,10 @@ public abstract class Shield
         builder.append(name)
                 .append(" - ")
                 .append(desc)
-                .append(": ")
+                .append(": ");
         if (duration == -1)
         {
-            builder.append("Lasts for an infinite time. ")
+            builder.append("Lasts for an infinite time. ");
         }
         else 
         {
