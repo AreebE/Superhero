@@ -60,7 +60,7 @@ public class SpawnableAbility extends DefenseAbility
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
-        Entity ai = info.create(caster);
+        Entity ai = info.create(target);
         allPlayers.add(ai);
         return true;
     }
