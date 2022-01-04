@@ -108,7 +108,33 @@ public abstract class Shield
 
     public String toString()
     {
-        return name + " " + desc + ", " + duration;
+        StringBuilder builder = new StringBuilder();
+        builder.append(name)
+                .append(" - ")
+                .append(desc)
+                .append(": ")
+        if (duration == -1)
+        {
+            builder.append("Lasts for an infinite time. ")
+        }
+        else 
+        {
+            builder.append("Lasts for ")
+                    .append(duration)
+                    .append(" more turns. ");
+        }
+
+        if (uses == -1)
+        {
+            builder.append("Can be triggered forever. ");
+        }
+        else 
+        {
+            builder.append("Can be triggered up to ")
+                    .append(uses)
+                    .append(" more times.");
+        }
+        return builder.toString();
     }
 
     public String getName()
