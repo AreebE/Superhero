@@ -1,9 +1,11 @@
+package battlesystem;
+
 public class DelayedEffect extends Effect 
 {
 
     public DelayedEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int timer, 
         String name, 
         String desc, 
@@ -25,7 +27,7 @@ public class DelayedEffect extends Effect
 
     public DelayedEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int timer, 
         String name, 
         String desc, 
@@ -47,7 +49,7 @@ public class DelayedEffect extends Effect
 
     @Override
     public void applyEffect(
-        Superhero target) 
+        Entity target) 
     {
         reduceDuration(target);
     }
@@ -55,7 +57,7 @@ public class DelayedEffect extends Effect
 
     @Override
     protected void removeEffect(
-        Superhero target) 
+        Entity target) 
     {
         applyEffect(super.getType(), target);
         target.removeEffect(this);
@@ -75,5 +77,20 @@ public class DelayedEffect extends Effect
                         getElement(), 
                         getPierces()
                     );
+    }
+
+    @Override
+    public Effect copy(int additionalStrength) 
+    {
+        return new DelayedEffect
+                (
+                    getStrength() + additionalStrength, 
+                    this.getType(), 
+                    this.getDuration(), 
+                    getName(), 
+                    getDesc(), 
+                    getElement(),
+                    getPierces()
+                );
     }
 }

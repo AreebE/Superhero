@@ -1,10 +1,12 @@
+package battlesystem;
+
 public class Element {
   //private int type;
   private String name;
   private String description;
-  private ElementList.Name elementID;
+  private Elements.Name elementID;
 
-  public Element(String name, String description, ElementList.Name elementID){
+  public Element(String name, String description, Elements.Name elementID){
     //this.type = type;
     this.name = name;
     this.description = description;
@@ -16,7 +18,7 @@ public class Element {
 
   }
 
-  public ElementList.Name getID(){
+  public Elements.Name getID(){
     return elementID;
   }
   

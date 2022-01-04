@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class RecoilModifier implements AbilityModifier<Void>{
   private int recoilDmg;
   private boolean piercesSheild;
@@ -10,13 +12,13 @@ public class RecoilModifier implements AbilityModifier<Void>{
   }
 
   @Override
-  public Void triggerModifier(Superhero target, Superhero caster) {
+  public Void triggerModifier(Entity target, Entity caster) {
     caster.dealDamage(recoilDmg, piercesSheild, piercesDefense, target, null);
     return null;
   };
 
   @Override
-  public AbilityList.ModifierName getModifier(){
-    return AbilityList.ModifierName.RECOIL;
+  public Abilities.Modifier getModifier(){
+    return Abilities.Modifier.RECOIL;
   }
 }

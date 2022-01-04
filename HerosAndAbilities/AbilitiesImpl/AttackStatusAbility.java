@@ -1,4 +1,7 @@
+package battlesystem;
+
 import java.util.EnumMap;
+import java.util.List;
 
 public class AttackStatusAbility extends AttackAbility 
 {
@@ -9,7 +12,7 @@ public class AttackStatusAbility extends AttackAbility
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
@@ -37,12 +40,12 @@ public class AttackStatusAbility extends AttackAbility
         String desc, 
         int cooldown, 
         int strength, 
-        AbilityList.Name enumName,
+        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
         Effect sideEffect,
-        EnumMap<AbilityList.ModifierName, AbilityModifier> modifiers) 
+        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
     {
         super
         (
@@ -62,14 +65,16 @@ public class AttackStatusAbility extends AttackAbility
 
     @Override
     protected boolean castAbility(
-        Superhero target, 
-        Superhero caster) 
+        Entity target, 
+        Entity caster,
+        List<Entity> otherTargets,
+        List<Entity> allPlayers) 
     {
-        super.castAbility(target, caster);
+        super.castAbility(target, caster, otherTargets, allPlayers);
         if (isPiercing() 
             || !caster.hasShield()) 
         {
-            target.addEffect(sideEffect.copy());
+            target.addEffect(sideEffect.copy(caster.getBaseAttack()));
         }
         return true;
     }

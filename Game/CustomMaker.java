@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.*;
+import battlesystem.*;
 
 public class CustomMaker {
   Scanner s;
@@ -23,7 +24,7 @@ public class CustomMaker {
 
   }
 
-  public Superhero AskNMakeSuperhero() {
+  public Entity AskNMakeSuperhero() {
     System.out.println("You have decided to create a custom superhero... \n \n");
     System.out.println("Enter your new superheros name:  ");
     String name = s.next();
@@ -31,7 +32,7 @@ public class CustomMaker {
 
     System.out.println("what abilities do you want your hero to have?");
     // if()
-    return new Superhero(name, 10, 100, 0);
+    return new Entity(name, 10, 100, 0);
   }
 
   public void AskNMakeAbility() {

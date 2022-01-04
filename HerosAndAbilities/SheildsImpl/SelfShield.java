@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.HashSet;
 
 public class SelfShield extends Shield
@@ -12,8 +14,8 @@ public class SelfShield extends Shield
         Effect selfApply, 
         boolean nullifies,
         int uses,
-        ShieldList.Trigger[] eventTriggers,
-        ElementList.Name[] elementTriggers)
+        Shields.Trigger[] eventTriggers,
+        Elements.Name[] elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
         this.selfApply = selfApply;
@@ -27,8 +29,8 @@ public class SelfShield extends Shield
         Effect selfApply, 
         boolean nullifies,
         int uses,
-        HashSet<ShieldList.Trigger> eventTriggers,
-        HashSet<ElementList.Name> elementTriggers)
+        HashSet<Shields.Trigger> eventTriggers,
+        HashSet<Elements.Name> elementTriggers)
     {
         super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
         this.selfApply = selfApply;
@@ -36,9 +38,9 @@ public class SelfShield extends Shield
 
 
     @Override
-    protected void applyShield(Superhero target, Superhero caster)
+    protected void applyShield(Entity victim, Entity caster)
     {
-        target.addEffect(selfApply.copy());
+        victim.addEffect(selfApply.copy());
     }
 
     @Override

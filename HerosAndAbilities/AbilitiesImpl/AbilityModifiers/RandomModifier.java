@@ -1,3 +1,5 @@
+package battlesystem;
+
 import java.util.Random;
 
 public class RandomModifier implements AbilityModifier<Boolean>{
@@ -9,9 +11,9 @@ public class RandomModifier implements AbilityModifier<Boolean>{
   } 
 
   @Override 
-  public Boolean triggerModifier(Superhero target, Superhero caster){
+  public Boolean triggerModifier(Entity target, Entity caster){
     System.out.println("triggered random");
-    if (randomizer.nextInt(AbilityList.MAX_CHANCE) < chance){
+    if (randomizer.nextInt(Abilities.MAX_CHANCE) < chance){
       return true;
     } else {
       return false;
@@ -19,7 +21,7 @@ public class RandomModifier implements AbilityModifier<Boolean>{
   }
 
   @Override
-  public AbilityList.ModifierName getModifier(){
-    return AbilityList.ModifierName.RANDOM;
+  public Abilities.Modifier getModifier(){
+    return Abilities.Modifier.RANDOM;
   }
 }

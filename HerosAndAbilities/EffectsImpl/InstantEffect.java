@@ -1,3 +1,5 @@
+package battlesystem;
+
 // package Game.ablilites.Effects;
 
 public class InstantEffect extends Effect 
@@ -5,7 +7,7 @@ public class InstantEffect extends Effect
 
     public InstantEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element,
@@ -26,7 +28,7 @@ public class InstantEffect extends Effect
 
      public InstantEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element) 
@@ -47,7 +49,7 @@ public class InstantEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
         target.removeEffect(this);
     }
@@ -58,6 +60,19 @@ public class InstantEffect extends Effect
         return new InstantEffect
                     (
                         getStrength(), 
+                        getType(),
+                        getName(), 
+                        getDesc(), 
+                        getElement(),
+                        getPierces()
+                    );
+    }
+
+    @Override
+    public Effect copy(int additionalStrength) {
+        return new InstantEffect
+                    (
+                        getStrength() + additionalStrength, 
                         getType(),
                         getName(), 
                         getDesc(), 

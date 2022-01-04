@@ -1,3 +1,5 @@
+package battlesystem;
+
 // package Game.ablilites.Effects;
 // i dont think multiplayer replit and github branches work
 // that's probably true
@@ -7,7 +9,7 @@ public class Effect
     private final static int PIERCES_DEFENSE_INDEX = 0;
     private final static int PIERCES_SHIELD_INDEX = 1;
     private int strength;
-    private EffectList.Type typeOfEffect;
+    private Effects.Type typeOfEffect;
     private int duration;
     private boolean permanent;
     private String name;
@@ -18,7 +20,7 @@ public class Effect
 
     public Effect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         boolean permanent, 
         String name, 
@@ -40,7 +42,7 @@ public class Effect
 
     public Effect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         boolean permanent, 
         String name, 
@@ -60,10 +62,10 @@ public class Effect
 
 
     /**
-     * Will apply its effect to the given superhero
+     * Will apply its effect to the given Entity
      */
     public void applyEffect(
-        Superhero target) 
+        Entity target) 
     {
         // System.out.println("called super");
         applyEffect(typeOfEffect, target);
@@ -72,37 +74,52 @@ public class Effect
 
 
     protected void applyEffect(
-        EffectList.Type type, 
-        Superhero target) 
+        Effects.Type type, 
+        Entity target) 
+    {
+        this.applyEffect(type, target, strength);
+    }
+
+    protected void applyEffect(
+        Effects.Type type, 
+        Entity target, 
+        int power) 
     {
         switch (typeOfEffect) 
         {
             case ATTACK:
                 // System.out.println("updating attack");
-                target.addAttack(strength);
+                target.addAttack(power);
                 break;
             case DEFENSE:
-                target.addDefense(strength);
+                target.addDefense(power);
+                break;
+            case SPEED:
+                target.addSpeed(power);
+                break;
+            case MAX_HEALTH:
+                target.addMaxHealth(power);
                 break;
             case HEALTH:
-                target.healHealth(strength);
+                target.healHealth(power);
                 break;
             case SHIELD:
-                target.addShieldHealth(strength);
+                target.addShieldHealth(power);
                 break;
             case DAMAGE:
                 target.dealEffectDamage
                 (
-                    strength, 
+                    power, 
                     pierces[PIERCES_DEFENSE_INDEX], 
                     pierces[PIERCES_SHIELD_INDEX]
                 );
+                break;
         }
     }
 
 
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
         duration--;
         if (duration == 0) 
@@ -113,7 +130,7 @@ public class Effect
 
 
     protected void removeEffect(
-        Superhero target) 
+        Entity target) 
     {
         if (!permanent) 
         {
@@ -149,6 +166,21 @@ public class Effect
                 );
     }
 
+    public Effect copy(int additionalStrength) 
+    {
+        return new Effect
+                (
+                    strength + additionalStrength, 
+                    typeOfEffect, 
+                    duration, 
+                    permanent, 
+                    name, 
+                    desc, 
+                    element, 
+                    pierces
+                );
+    }
+
 
     public boolean isRemovable() 
     {
@@ -156,7 +188,7 @@ public class Effect
     }
 
 
-    protected EffectList.Type getType() 
+    protected Effects.Type getType() 
     {
         return this.typeOfEffect;
     }

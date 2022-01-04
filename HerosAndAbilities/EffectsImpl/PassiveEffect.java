@@ -1,8 +1,10 @@
+package battlesystem;
+
 public class PassiveEffect extends Effect 
 {
     public PassiveEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element,
@@ -23,7 +25,7 @@ public class PassiveEffect extends Effect
 
     public PassiveEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         String name, 
         String desc, 
         Element element) 
@@ -44,7 +46,7 @@ public class PassiveEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Superhero target) 
+        Entity target) 
     {
     }
 
@@ -54,7 +56,7 @@ public class PassiveEffect extends Effect
     {
         return new PassiveEffect
                 (
-                    getStrength(), 
+                    getStrength(),
                     getType(), 
                     getName(), 
                     getDesc(), 
@@ -63,6 +65,18 @@ public class PassiveEffect extends Effect
                 );
     }
 
+    @Override
+    public Effect copy(int additionalStrength) {
+        return new PassiveEffect
+                    (
+                        getStrength() + additionalStrength, 
+                        getType(),
+                        getName(), 
+                        getDesc(), 
+                        getElement(),
+                        getPierces()
+                    );
+        }
 
     @Override
     public boolean isRemovable() 

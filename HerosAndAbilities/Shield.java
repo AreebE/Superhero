@@ -1,11 +1,13 @@
+package battlesystem;
+
 import java.util.HashSet;
 
 public abstract class Shield
 {
     private String name;
     private String desc;
-    private HashSet<ShieldList.Trigger> eventTriggers;
-    private HashSet<ElementList.Name> elementTriggers;
+    private HashSet<Shields.Trigger> eventTriggers;
+    private HashSet<Elements.Name> elementTriggers;
     private int duration;
     private int uses;
     boolean nullifies;
@@ -17,8 +19,8 @@ public abstract class Shield
         int duration, 
         boolean nullifies,
         int uses,
-        ShieldList.Trigger[] eventTriggers,
-        ElementList.Name[] elementTriggers)
+        Shields.Trigger[] eventTriggers,
+        Elements.Name[] elementTriggers)
     {
         this.name = name;
         this.desc = desc;
@@ -44,8 +46,8 @@ public abstract class Shield
         int duration, 
         boolean nullifies,
         int uses,
-        HashSet<ShieldList.Trigger> eventTriggers,
-        HashSet<ElementList.Name> elementTriggers)
+        HashSet<Shields.Trigger> eventTriggers,
+        HashSet<Elements.Name> elementTriggers)
     {
         this.name = name;
         this.desc = desc;
@@ -57,22 +59,22 @@ public abstract class Shield
     }
 
     public boolean wouldTrigger(
-        ShieldList.Trigger eventTrigger, 
+        Shields.Trigger eventTrigger, 
         Element element)
     {
         return  (
-                    eventTriggers.contains(ShieldList.Trigger.ALL)
+                    eventTriggers.contains(Shields.Trigger.ALL)
                     || eventTriggers.contains(eventTrigger)
                 ) 
                 && 
                 (
-                    elementTriggers.contains(ElementList.Name.ALL) 
+                    elementTriggers.contains(Elements.Name.ALL) 
                     || elementTriggers.contains(element.getID())
                 );
     }
 
 
-    public boolean triggerShield(Superhero target, Superhero caster)
+    public boolean triggerShield(Entity target, Entity caster)
     {
         applyShield(target, caster);
         // System.out.println("Trigger " + nullifies);
@@ -84,13 +86,13 @@ public abstract class Shield
         {
             target.removeShield(this);
         }
-        System.out.println(nullifies);
+        // System.out.println(nullifies);
         return nullifies;
     }
 
-    protected abstract void applyShield(Superhero target, Superhero caster);
+    protected abstract void applyShield(Entity target, Entity caster);
 
-    public void passTurn(Superhero target)
+    public void passTurn(Entity target)
     {
         if (duration != -1)
         {
@@ -106,7 +108,33 @@ public abstract class Shield
 
     public String toString()
     {
-        return name + " " + desc + ", " + duration;
+        StringBuilder builder = new StringBuilder();
+        builder.append(name)
+                .append(" - ")
+                .append(desc)
+                .append(": ")
+        if (duration == -1)
+        {
+            builder.append("Lasts for an infinite time. ")
+        }
+        else 
+        {
+            builder.append("Lasts for ")
+                    .append(duration)
+                    .append(" more turns. ");
+        }
+
+        if (uses == -1)
+        {
+            builder.append("Can be triggered forever. ");
+        }
+        else 
+        {
+            builder.append("Can be triggered up to ")
+                    .append(uses)
+                    .append(" more times.");
+        }
+        return builder.toString();
     }
 
     public String getName()
@@ -119,12 +147,12 @@ public abstract class Shield
         return this.desc;
     }
 
-    protected HashSet<ShieldList.Trigger> getEventTriggers()
+    protected HashSet<Shields.Trigger> getEventTriggers()
     {
         return this.eventTriggers;
     }
 
-    protected HashSet<ElementList.Name> getElementTriggers()
+    protected HashSet<Elements.Name> getElementTriggers()
     {
         return this.elementTriggers;
     }

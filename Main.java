@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import battlesystem.AreebGame;
 //found it
 
 
@@ -7,7 +8,7 @@ import java.util.Collections;
 
 class Main {
   public static void main(String[] args) {
-   new Game();
+   new AreebGame();
   }
 }
 

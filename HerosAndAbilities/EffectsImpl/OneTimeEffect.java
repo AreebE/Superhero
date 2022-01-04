@@ -1,3 +1,5 @@
+package battlesystem;
+
 public class OneTimeEffect extends Effect 
 {
     private boolean used;
@@ -5,7 +7,7 @@ public class OneTimeEffect extends Effect
 
     public OneTimeEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         String name, 
         String desc,
@@ -27,7 +29,7 @@ public class OneTimeEffect extends Effect
 
     public OneTimeEffect(
         int strength, 
-        EffectList.Type type, 
+        Effects.Type type, 
         int duration, 
         String name, 
         String desc,
@@ -48,7 +50,7 @@ public class OneTimeEffect extends Effect
 
     @Override
     public void applyEffect(
-        Superhero target) 
+        Entity target) 
     {
         if (!used) 
         {
@@ -61,7 +63,7 @@ public class OneTimeEffect extends Effect
 
     @Override
     public void removeEffect(
-        Superhero target) 
+        Entity target) 
     {
         if (!isPermanent()) 
         {
@@ -89,7 +91,22 @@ public class OneTimeEffect extends Effect
                         getDuration(), 
                         getName(), 
                         getDesc(), 
-                        getElement()
+                        getElement(),
+                        getPierces()
+                    );
+    }
+
+    @Override
+    public Effect copy(int additionalStrength) {
+        return new OneTimeEffect
+                    (
+                        getStrength() + additionalStrength, 
+                        getType(),
+                        getDuration(),
+                        getName(), 
+                        getDesc(), 
+                        getElement(),
+                        getPierces()
                     );
     }
 }
