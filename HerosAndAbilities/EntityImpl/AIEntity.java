@@ -35,8 +35,14 @@ public class AIEntity extends Entity
         List<Entity> allHeros,
         InputSystem inputReader)
     {
+        Action a = getState().applyStatus(this);
+        if (a != null)
+        {
+            System.out.println("applied");
+            return a;
+        }
         Entity target = inputReader.getSingleTarget();
-        Action a = new AIAction(target, this, allHeros, inputReader);
+        a = new AIAction(target, this, allHeros, inputReader);
         if (a.isLegalAction())
         {
             return a;

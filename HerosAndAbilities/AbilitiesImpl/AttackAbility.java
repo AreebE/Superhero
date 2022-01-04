@@ -76,11 +76,6 @@ public class AttackAbility extends Ability
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());
-        if (getEnumName().equals(Abilities.Name.PASS_TURN)) 
-        {
-            return true;
-        }
-
         int attackStrength = getStrength() + caster.getBaseAttack();
         if (attackStrength < 0) 
         {

@@ -20,7 +20,7 @@ public final class Spawnables
             Name.CRYSTAL,
             new AIInfoItem
             (
-                "Crystal Golem",
+                "Crystal",
                 1,
                 new ArrayList<Abilities.Name>()
                 {{

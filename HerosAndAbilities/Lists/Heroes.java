@@ -85,6 +85,7 @@ public final class Heroes {
                     add(Abilities.Name.FIREBALL);
                     add(Abilities.Name.PROTECT);
                     add(Abilities.Name.ATTACK_UP);
+                    add(Abilities.Name.STUN_SPORE);
                 }},
                 new ArrayList<Effects.Name>()
                 {{

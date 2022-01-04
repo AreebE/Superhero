@@ -66,6 +66,7 @@ public final class Abilities
         CONSTRUCT,
         PRAY,
         SPORE,
+        STUN_SPORE,
 
         // Etc.
         CUSTOM
@@ -217,16 +218,10 @@ public final class Abilities
         put
         (
             Name.PASS_TURN, 
-            new AttackAbility
+            new PassAbility
             (
                 "Pass turn", 
-                "Allows the user to skip their turn", 
-                0, 
-                0, 
-                Name.PASS_TURN, 
-                Elements.getElement(Elements.Name.NULL), 
-                false, 
-                false
+                "Allows the user to skip their turn"
             )
         );
 
@@ -510,6 +505,20 @@ public final class Abilities
 
         put
         (
+            Name.STUN_SPORE, 
+            new StateChangeAbility
+            (
+                "Stun Spore", 
+                "Paralyze the target, preventing them from doing anything", 
+                2, 
+                States.get(States.Name.PARALYZED),
+                Name.STUN_SPORE, 
+                Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put
+        (
             Name.PRAY, 
             new CleanseAbility
             (
@@ -576,6 +585,8 @@ public final class Abilities
         put ("ground_suction", Name.GROUND_SUCTION);
 
         put("ram", Name.RAM_ATTACK);
+
+        put("stun_spore", Name.STUN_SPORE);
     }};
 
 
