@@ -1,15 +1,10 @@
-
- 
-import org.json.simple.JSONArray;
+import org.json.simple.JSONObject.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
- 
 import java.io.FileReader;
 import java.util.Iterator;
-//package org.json;
-import org.json.*;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
 import java.util.*;
 import java.io.*;
 import Game.*;
@@ -31,6 +26,7 @@ class JsonIoThing {
     } catch (Exception Ex) {
       System.out.println("HEY exce in JsonIoThing init: " + Ex);
     }
+    
 
   }
   public void saveSuperheroArr(ArrayList<Superhero> heros){
@@ -50,16 +46,22 @@ class JsonIoThing {
     
   }
   public void loadSuperheroArr(){
-    JSONParser parser = new JSONParser();
+    
     System.out.println("Trying to load superheros: ");
     try{
-      Object obj = parser.parse(new FileReader("save.json"));
-      JSONObject p = (JSONObject) obj;
-      JSONObject s =(JSONObject) p.get("superheros");
+      Object obj = new JSONParser().parse(new FileReader("save.json"));
+      JSONObject superHeros = (org.json.simple.JSONObject) obj;
+      if(superHeros.get("Joe")!=null){
+        System.out.println("ITS NULL");
+      }else{
+        System.out.println("ITS NOT NULL");
+      }
+      JSONObject j = (JSONObject) superHeros.get("Joe");
       
-      //Superhero out = new Superhero();
+
     }catch(Exception e){
-      System.out.println("ERROR IN JASON "+e);
+      e.printStackTrace();
+      System.exit(1);
     }
   }
 

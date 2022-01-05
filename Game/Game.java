@@ -65,7 +65,7 @@ public class Game{
     Collections.reverse(superheros);
     //System.out.println(superheros);
     j.saveSuperheroArr(superheros);
-
+    j.loadSuperheroArr();
     playGame(superheros);
   }
 
