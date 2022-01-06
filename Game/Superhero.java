@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.lang.Comparable;
 import java.util.ArrayList;
-import org.json.*;
+
 
 public class Superhero implements Comparable<Superhero>, TurnEndReceiver 
 {
@@ -10,8 +10,9 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
     private String name;
     private String desc = "default desc";
     private int freeWill;
-    private ArrayList<Ability> abilities;
-    private ArrayList<Effect> effects;
+    private transient ArrayList<Ability> abilities;
+    private transient ArrayList<Effect> effects;
+    private ArrayList<String> abilitiesNames;
     private int health;
     private int maxHealth;
     private int sheildHealth;
@@ -33,13 +34,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         this.effects = new ArrayList<>();
         this.baseAttack = 0;
         this.baseDefense = 0;
+        this.abilitiesNames = new ArrayList<String>();
         AbilityList.giveAbility(this, AbilityList.Name.PASS_TURN);
-    }
-    // alt constructor for Jason
-    public Superhero(String name,JSONObject j){
-      this.name =name;
-      int[] ints =(int[]) j.get("ints");
-      ArrayList<String> abNames =(ArrayList<String>) j.get("abilities");
     }
 
 
@@ -135,27 +131,7 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
      * shield at the beggingn of each round // for now, that could work. but for
      * more customizability, we may remove that set health later on
      */
-    public JSONObject toSaveable(){
-      JSONObject out = new JSONObject();
-      
-      int[] ints = {
-       freeWill,
-        health,
-        maxHealth,
-        baseAttack,
-        baseDefense,
-      };
-      
-
-      ArrayList<String> s = new ArrayList<String>();
-      for(int i=0;i<abilities.toArray().length;i++){
-        s.add(abilities.get(i).getName());
-      }
-      out.put("ints",ints);
-      out.put("Abilities",s);
-      out.put("desc",desc);
-      return out;
-    }
+    
 
 
     public String getName() 
@@ -171,6 +147,8 @@ public class Superhero implements Comparable<Superhero>, TurnEndReceiver
         Ability newAbility) 
     {
         abilities.add(newAbility);
+        abilitiesNames.add(newAbility.getName());
+        
     }
 
 

@@ -369,6 +369,9 @@ public class AbilityList
             target.addAbility(ABILITIES.get(name).copy());
         }
     }
+    public static Ability getAbility(String name){
+      return ABILITIES.get(getName(name));
+    }
 
 
     public static void addAbility(Ability a, String... identifiers)
