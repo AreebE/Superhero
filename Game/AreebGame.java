@@ -13,7 +13,8 @@ public class AreebGame{
     ScannerInput system;
 
   public AreebGame(){
-   
+        JsonIoThing j = new JsonIoThing("save.json");
+
     //  System.out.println("Hello world!... Also trying to make custom");
     // CustomMaker c = new CustomMaker();
     // Entity testin = c.AskNMakeSuperhero();
@@ -91,6 +92,8 @@ public class AreebGame{
     Collections.sort(superheros);
     Collections.reverse(superheros);
     // System.out.println(superheros);
+    j.saveSuperheroArr(superheros);
+    j.loadSuperheroArr();
     currentPlayer = null;
     playGame(superheros);
     }

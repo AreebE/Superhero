@@ -9,19 +9,19 @@ import java.util.Scanner;
 public class Entity implements Comparable<Entity>
 {
     // free will between 1 and 20;
-    private Entity creator;
+    private transient Entity creator;
     private String name;
     private int speed;
-    private ArrayList<Ability> abilities;
-    private ArrayList<Effect> effects;
-    private ArrayList<Shield> shields;
-    private State state;
+    private transient ArrayList<Ability> abilities;
+    private transient ArrayList<Effect> effects;
+    private transient ArrayList<Shield> shields;
+    private transient State state;
     private int health;
     private int maxHealth;
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
-    private static Terrain t;
+    private static transient Terrain t;
 
 
     public static enum Statistic
