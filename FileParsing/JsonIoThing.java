@@ -34,12 +34,11 @@ class JsonIoThing {
   }
 
   public void saveSuperheroArr(ArrayList<Entity> heros) {
-    System.out.println("\n\u001B[33m"+"Savin Superheros... "+"\u001B[0m\n ");
+    System.out.println("\n\u001B[33m"+"Savin Entities... "+"\u001B[0m\n ");
     Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
     String json = gson.toJson(heros);
     try{
       Files.writeString(thisFilePath,json);
-      //System.out.println("\n "+json);
     }catch(IOException e){
       e.printStackTrace();
       System.exit(1);
@@ -49,7 +48,7 @@ class JsonIoThing {
   }
 
   public Entity[] loadSuperheroArr() {
-    System.out.println("\n\u001B[33m"+"loadin Superheros... "+"\u001B[0m\n ");
+    System.out.println("\n\u001B[33m"+"loadin Entities... "+"\u001B[0m\n ");
     Entity[] out = new Entity[1];
     try{
       out= new Gson().fromJson(Files.readString(thisFilePath),Entity[].class);

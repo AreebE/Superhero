@@ -62,23 +62,6 @@ public abstract class Ability
     }
 
 
-    // alt const. for customMaker
-    // Note: Type is only in the ability list
-    public Ability(
-        String name, 
-        String desc) 
-    {
-        this.name = name;
-        this.description = desc;
-        this.cooldown = 2;
-        this.strength = 0;
-        this.type = Abilities.Type.ATTACK;
-        this.turnsSinceUse = cooldown;
-        this.enumName = enumName;
-        this.em = em;
-        this.modifiers = new EnumMap<>(Abilities.Modifier.class);
-    }
-
 
     public String getName() 
     {

@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import battlesystem.AreebGame;
-//found it
 
 
+//should we make like a "main menu" type of thing so that
+//it would be easier to do stuff like change the file or 
+//create new heros and/or abilities and choose to save and load...
+ 
 
 
 class Main {
@@ -11,16 +14,3 @@ class Main {
    new AreebGame();
   }
 }
-
-//can you guys see this?
-//Idea for ablilites:
-/*
-  - flamethrower
-  - heal pulse
-  - protect 
-  - Ice shard
-*/
-
-/*
- * Card system idea - draw a card from a deck to gain an ability or buff
-*/

@@ -13,7 +13,7 @@ public class AreebGame{
     ScannerInput system;
 
   public AreebGame(){
-        JsonIoThing j = new JsonIoThing("save.json");
+        JsonIoThing j = new JsonIoThing("FileParsing/save.json");
 
     //  System.out.println("Hello world!... Also trying to make custom");
     // CustomMaker c = new CustomMaker();
