@@ -15,6 +15,7 @@ public class Entity implements Comparable<Entity>
     private ArrayList<Ability> abilities;
     private ArrayList<Effect> effects;
     private ArrayList<Shield> shields;
+    private State state;
     private int health;
     private int maxHealth;
     private int shieldHealth;
@@ -29,7 +30,8 @@ public class Entity implements Comparable<Entity>
         MAX_HEALTH,
         HEALTH,
         BASE_ATTACK,
-        BASE_DEFENSE
+        BASE_DEFENSE,
+        SHIELD
     }
 
     public Entity(
@@ -47,6 +49,7 @@ public class Entity implements Comparable<Entity>
         this.abilities = new ArrayList<>();
         this.effects = new ArrayList<>();
         this.shields = new ArrayList<>();
+        this.state = States.get(States.Name.NORMAL);
         this.baseAttack = 0;
         this.baseDefense = 0;
         this.creator = creator;
@@ -91,8 +94,10 @@ public class Entity implements Comparable<Entity>
             }
         }
         // moved it down
-
-        EntityString.append("\u001B[31m");
+        EntityString.append("The state is: ")
+                    .append(state.toString())
+                    .append("\n")
+                    .append("\u001B[31m");
         if (effects.size() == 0) 
         {
             EntityString.append("No Effects/ deEffects applied.\n");
@@ -539,18 +544,29 @@ public class Entity implements Comparable<Entity>
     /*
     * Getting an action 
     */
-    public Action getAction(
+    public List<Action> getActions(
         List<Entity> allHeros,
         InputSystem inputReader)
     {
-        Entity target = inputReader.getSingleTarget();
-        String name = inputReader.getAbilityName();
-        Action a = new Action(target, this, name, allHeros, inputReader);
-        if (a.isLegalAction())
+        List<Action> actions = new ArrayList<>();
+        Integer numActions = state.applyStatus(this);
+        if (numActions == 0)
         {
-            return a;
+            actions.add(new PassAction(this));
+            return actions;
         }
-        return null;
+        for (int i = 0; i < numActions; i++)
+        {
+            Action a = null;
+            while (a == null || !a.isLegalAction())
+            {
+                Entity target = inputReader.getSingleTarget();
+                String name = inputReader.getAbilityName();
+                a = new Action(target, this, name, allHeros, inputReader);
+            }
+            actions.add(a);
+        }
+        return actions;
     }
 
     /*
@@ -570,8 +586,28 @@ public class Entity implements Comparable<Entity>
                 return baseAttack;
             case BASE_DEFENSE:
                 return baseDefense; 
+            case SHIELD:
+                return shieldHealth;
         }
         return 0;
+    }
+
+    /*
+    * Changing state
+    */
+    public void replaceState(State newState)
+    {
+        this.state = newState;
+    }
+
+    public State getState()
+    {
+        return this.state;
+    }
+
+    public void resetState()
+    {
+        this.state = States.get(States.Name.NORMAL);
     }
 
     /*
@@ -582,6 +618,7 @@ public class Entity implements Comparable<Entity>
         useEffects();
         reduceCooldowns();
         reduceShieldDurations();
+        reduceStateDurations();
     }
 
 
@@ -601,6 +638,11 @@ public class Entity implements Comparable<Entity>
         {
             a.reduceCooldown();
         }
+    }
+
+    public void reduceStateDurations()
+    {
+        state.reduceDuration(this);
     }
 
 }

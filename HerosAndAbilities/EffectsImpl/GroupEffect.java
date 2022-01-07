@@ -22,7 +22,8 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element
+            element,
+            new EffectModifier[0]
         );
         listOfEffects = new ArrayList<>();
         groupDuration = 0;
@@ -53,7 +54,8 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element
+            element,
+            new EffectModifier[0]
         );
 
         listOfEffects = new ArrayList<>();
@@ -85,7 +87,8 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element
+            element,
+            new EffectModifier[0]
         );
 
         listOfEffects = new ArrayList<>();

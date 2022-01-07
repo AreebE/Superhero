@@ -11,27 +11,28 @@ public class InstantEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean[] pierces) 
+        EffectModifier[] modifiers) 
     {
-        super
+        this
         (
             strength, 
             type, 
-            0, 
-            true, 
             name, 
             desc, 
             element,
-            pierces
+            null,
+            modifiers
         );
     }
 
-     public InstantEffect(
+    public InstantEffect(
         int strength, 
         Effects.Type type, 
         String name, 
         String desc, 
-        Element element) 
+        Element element,
+        boolean[] pierces,
+        EffectModifier[] modifiers) 
     {
         super
         (
@@ -42,7 +43,8 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
-            null
+            pierces,
+            modifiers
         );
     }
 
@@ -64,7 +66,8 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces()
+                        getPierces(),
+                        getModifiers()
                     );
     }
 
@@ -77,7 +80,8 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces()
+                        getPierces(),
+                        getModifiers()
                     );
     }
 }

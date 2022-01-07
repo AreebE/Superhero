@@ -9,7 +9,9 @@ public final class Heroes {
     public static enum Name{
         BEEP_BOOP,
         JOE,
-        EEEEEE
+        EEEEEE,
+        TEST_SUBJECT,
+        SOLARIS
     }
 
     private final static EnumMap<Name, EntityInfoItem> HEROS = new EnumMap<>(Name.class)
@@ -32,7 +34,7 @@ public final class Heroes {
                 }},
                 new ArrayList<Effects.Name>()
                 {{
-                    // add(Effects.Name.CHARGE);
+                    add(Effects.Name.EXPONENTIAL_SHIELD);
                 }},
                 new ArrayList<Shields.Name>()
                 {{
@@ -85,6 +87,7 @@ public final class Heroes {
                     add(Abilities.Name.FIREBALL);
                     add(Abilities.Name.PROTECT);
                     add(Abilities.Name.ATTACK_UP);
+                    add(Abilities.Name.STUN_SPORE);
                 }},
                 new ArrayList<Effects.Name>()
                 {{
@@ -93,6 +96,35 @@ public final class Heroes {
                 new ArrayList<Shields.Name>()
                 {{
                     // add(Shields.Name.);
+                }},
+                100,
+                40
+            )  
+        );
+
+        put
+        (
+            Name.TEST_SUBJECT,
+            new EntityInfoItem
+            (
+                "TestSubject",
+                200,
+                new ArrayList<Abilities.Name>()
+                {{
+                    add(Abilities.Name.EARTHQUAKE);
+                    add(Abilities.Name.ILLUSION_SPELL);
+                    add(Abilities.Name.TELEKINESIS);
+                    // add(Abilities.Name.PROTECT);
+                    // add(Abilities.Name.ATTACK_UP);
+                    // add(Abilities.Name.STUN_SPORE);
+                }},
+                new ArrayList<Effects.Name>()
+                {{
+                    // add(Effects.Name.);
+                }},
+                new ArrayList<Shields.Name>()
+                {{
+                    add(Shields.Name.ILLUSION);
                 }},
                 100,
                 40

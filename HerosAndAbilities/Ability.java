@@ -128,7 +128,7 @@ public abstract class Ability
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
-        turnsSinceUse = 0;
+        turnsSinceUse -= cooldown;
         RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.Modifier.RECOIL);
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.Modifier.RANDOM);
         MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.Modifier.MULTICAST);
@@ -163,7 +163,7 @@ public abstract class Ability
                 {
                     strength *= group.triggerModifier(target, caster);
                     // System.out.println(strength);
-                    for (int j = 0; j < group.getLimit(); j++)
+                    for (int j = 0; j < otherTargets.size(); j++)
                     {
                         castAbility(otherTargets.get(j), caster, otherTargets, allPlayers);
                     }

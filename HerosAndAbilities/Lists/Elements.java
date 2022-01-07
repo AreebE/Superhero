@@ -18,18 +18,20 @@ public final class Elements{
     ICE,
     NULL,
     EARTH,
+    LIGHT,
     ALL
   }
 
    private final static EnumMap<Name, Element> LIST_OF_ELEMENTS = new EnumMap<>(Name.class){{
 
-     put(Name.FIRE, new Element("fire", "---", Name.FIRE));
-     put(Name.ELECTRICITY, new Element("electricity", "---", Name.ELECTRICITY));
-     put(Name.ICE, new Element("Ice", "---", Name.ICE));
-     put(Name.NULL, new Element("Null", "normal/nothing", Name.NULL));
-          put(Name.EARTH, new Element("Earth", "mother earth", Name.EARTH));
+    put(Name.FIRE, new Element("fire", "---", Name.FIRE));
+    put(Name.ELECTRICITY, new Element("electricity", "---", Name.ELECTRICITY));
+    put(Name.ICE, new Element("Ice", "---", Name.ICE));
+    put(Name.NULL, new Element("Null", "normal/nothing", Name.NULL));
+    put(Name.EARTH, new Element("Earth", "mother earth", Name.EARTH));
+    put(Name.LIGHT, new Element("Light", "shiny", Name.EARTH));
 
-     put(Name.ALL, new Element("All", "Will trigger for anything", Name.ALL));
+    put(Name.ALL, new Element("All", "Will trigger for anything", Name.ALL));
    }};
 
   public static Element getElement(Name name){

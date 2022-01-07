@@ -10,18 +10,18 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean[] pierces) 
+        EffectModifier[] modifiers) 
     {
-        super
+        this
         (
             strength, 
             type, 
             timer, 
-            true, 
             name, 
             desc, 
             element, 
-            pierces
+            null, 
+            modifiers
         );
     }
 
@@ -31,7 +31,9 @@ public class DelayedEffect extends Effect
         int timer, 
         String name, 
         String desc, 
-        Element element) 
+        Element element,
+        boolean[] pierces,
+        EffectModifier[] modifiers) 
     {
         super
         (
@@ -42,10 +44,10 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element, 
-            null
+            pierces,
+            modifiers
         );
     }
-
 
     @Override
     public void applyEffect(
@@ -75,7 +77,8 @@ public class DelayedEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(), 
-                        getPierces()
+                        getPierces(),
+                        getModifiers()
                     );
     }
 
@@ -90,7 +93,8 @@ public class DelayedEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces()
+                    getPierces(),
+                    getModifiers()
                 );
     }
 }

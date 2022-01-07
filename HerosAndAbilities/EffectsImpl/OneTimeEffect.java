@@ -3,8 +3,7 @@ package battlesystem;
 public class OneTimeEffect extends Effect 
 {
     private boolean used;
-
-
+    
     public OneTimeEffect(
         int strength, 
         Effects.Type type, 
@@ -12,7 +11,8 @@ public class OneTimeEffect extends Effect
         String name, 
         String desc,
         Element element,
-        boolean[] pierces) 
+        boolean[] pierces,
+        EffectModifier[] modifiers) 
     {
         super
         (
@@ -23,7 +23,8 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
-            pierces
+            pierces,
+            modifiers
         );
     }
 
@@ -33,18 +34,19 @@ public class OneTimeEffect extends Effect
         int duration, 
         String name, 
         String desc,
-        Element element) 
+        Element element,
+        EffectModifier[] modifiers) 
     {
-        super
+        this
         (
             strength, 
             type, 
             duration,
-            false, 
             name, 
             desc, 
             element, 
-            null
+            null,
+            modifiers
         );
     }
 
@@ -75,6 +77,8 @@ public class OneTimeEffect extends Effect
                 case DEFENSE:
                     target.addDefense(-getStrength());
                     break;
+                case SPEED:
+                    target.addSpeed(-getStrength());
             }
         }
         target.removeEffect(this);
@@ -92,7 +96,8 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces()
+                        getPierces(),
+                        getModifiers()
                     );
     }
 
@@ -106,7 +111,8 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces()
+                        getPierces(),
+                        getModifiers()
                     );
     }
 }
