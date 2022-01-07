@@ -543,23 +543,29 @@ public class Entity implements Comparable<Entity>
     /*
     * Getting an action 
     */
-    public Action getAction(
+    public List<Action> getActions(
         List<Entity> allHeros,
         InputSystem inputReader)
     {
-        Action a = state.applyStatus(this);
-        if (a != null)
+        List<Action> actions = new ArrayList<>();
+        Integer numActions = state.applyStatus(this);
+        if (numActions == 0)
         {
-            return a;
+            actions.add(new PassAction(this));
+            return actions;
         }
-        Entity target = inputReader.getSingleTarget();
-        String name = inputReader.getAbilityName();
-        a = new Action(target, this, name, allHeros, inputReader);
-        if (a.isLegalAction())
+        for (int i = 0; i < numActions; i++)
         {
-            return a;
+            Action a = null;
+            while (a == null || !a.isLegalAction())
+            {
+                Entity target = inputReader.getSingleTarget();
+                String name = inputReader.getAbilityName();
+                a = new Action(target, this, name, allHeros, inputReader);
+            }
+            actions.add(a);
         }
-        return null;
+        return actions;
     }
 
     /*

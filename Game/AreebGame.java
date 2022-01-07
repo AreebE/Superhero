@@ -83,6 +83,7 @@ public class AreebGame{
     superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
     superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
     superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
+        superheros.add(Heroes.getHero(Heroes.Name.TEST_SUBJECT, null));
 
     // superheros.add(testin);
     superheros.add(A);
@@ -115,14 +116,13 @@ public class AreebGame{
         for (int i = 0; i < superheros.size(); i++)
         {
             currentPlayer = superheros.get(i);
-            Action a = null;
-            while (a == null)
+            System.out.println(currentPlayer);
+            List<Action> playerActions = currentPlayer.getActions(superheros, system);
+            
+            for (Action a: playerActions)
             {
-                System.out.println(currentPlayer);
-// =                System.out.println(target);
-                a = currentPlayer.getAction(superheros, system);
+                actions.add(a);
             }
-            actions.add(a);
         }
         
         
@@ -133,7 +133,6 @@ public class AreebGame{
         }
         for (int i = superheros.size() - 1; i >= 0; i--)
         {
-            superheros.get(i).endOfTurn();
             if (superheros.get(i).isHealthZero())
             {
                 Entity target = superheros.remove(i);
@@ -159,6 +158,7 @@ public class AreebGame{
     private class ScannerInput implements InputSystem 
     {
         private Scanner inputReader;
+        private Entity target;
 
         public ScannerInput(Scanner inputReader)
         {
@@ -177,18 +177,13 @@ public class AreebGame{
         {
             System.out.println("Who to target?");
             String name = inputReader.next();
-            if (name.toLowerCase().equals("pass")){
-                return null;
-            }
             Entity target = getEntity(name, superheros);
             while (target == null){
                 System.out.println("No target specified.");
                 name = inputReader.next();
-                if (name.toLowerCase().equals("pass")){
-                    return null;
-                }
                 target = getEntity(name, superheros);
             }
+            this.target = target;
             return target;
         }
 
@@ -196,6 +191,16 @@ public class AreebGame{
         public List<Entity> getSecondaryTargets(Integer limit)
         {
             ArrayList<Entity> otherTargets = new ArrayList<>();
+            if (limit == -1)
+            {
+                for (int i = 0; i < superheros.size(); i++)
+                {
+                    if (!superheros.get(i).equals(currentPlayer) && !superheros.get(i).equals(target))
+                    {
+                        otherTargets.add(superheros.get(i));
+                    }
+                }
+            }
             for (int i = 0; i < limit && otherTargets.size() < superheros.size() - 1; i++ )
             {
                 System.out.println("Who else to target?");

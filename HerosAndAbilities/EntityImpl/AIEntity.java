@@ -31,25 +31,27 @@ public class AIEntity extends Entity
   
 
     @Override
-    public Action getAction(
+    public List<Action> getActions(
         List<Entity> allHeros,
         InputSystem inputReader)
     {
-        Action a = getState().applyStatus(this);
-        if (a != null)
+        List<Action> actions = new ArrayList<>();
+        Integer limit = getState().applyStatus(this);
+        if (limit == 0)
         {
-            System.out.println("applied");
-            return a;
+            actions.add(new PassAction(this));
         }
-        Entity target = inputReader.getSingleTarget();
-        a = new AIAction(target, this, allHeros, inputReader);
-        if (a.isLegalAction())
+        for (int i = 0; i < limit; i++)
         {
-            return a;
+            Action a = null;
+            while (a == null && !a.isLegalAction())
+            {
+                Entity target = inputReader.getSingleTarget();
+                a = new AIAction(target, this, allHeros, inputReader);
+            }
+            actions.add(a);
         }
-        else {
-            return null;
-        }
+        return actions;
     }
 
     public Ability getCurrentAbility()

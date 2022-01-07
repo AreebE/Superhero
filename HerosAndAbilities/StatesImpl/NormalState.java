@@ -8,9 +8,9 @@ public class NormalState extends State
     }
 
     @Override
-    public Action triggerStatus(Entity victim)
+    public Integer triggerStatus(Entity victim)
     {
-        return null;
+        return 1;
     }
 
     @Override

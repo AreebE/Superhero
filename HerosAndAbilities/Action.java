@@ -8,7 +8,7 @@ public class Action {
     private Entity caster;
     private List<Entity> otherTargets;
     private List<Entity> allHeros;
-    private Abilities.Name name;
+    private Ability ability;
 
     public Action(
         Entity target, 
@@ -30,11 +30,12 @@ public class Action {
         this.target = target;
         this.caster = caster;
         this.allHeros = allHeros;
-        this.name = abilityName;
         this.otherTargets = null;
-        if (caster.getAbility(name) != null && caster.hasGroupAbility(name))
+        this.ability = caster.getAbility(abilityName);
+        if (ability != null && caster.hasGroupAbility(abilityName))
         {
-            int limit = ((GroupModifier) caster.getAbility(name).getModifier(Abilities.Modifier.GROUP)).getLimit();
+            
+            int limit = ((GroupModifier) ability.getModifier(Abilities.Modifier.GROUP)).getLimit();
             this.otherTargets = input.getSecondaryTargets(limit);
             // System.out.println(otherTargets);
         }
@@ -42,7 +43,7 @@ public class Action {
 
     public boolean isLegalAction()
     {
-        if (name == null || caster.getAbility(name) == null)
+        if (ability == null)
         {
             return false;
         }
@@ -68,7 +69,8 @@ public class Action {
     public void performAction()
     {
         // System.out.println("perform action");
-        caster.getAbility(name).useAbility(target, caster, otherTargets, allHeros);
+        ability.useAbility(target, caster, otherTargets, allHeros);
+        caster.endOfTurn();
     }
 
     public Entity getTarget()

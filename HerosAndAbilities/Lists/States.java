@@ -9,7 +9,8 @@ public final class States
     public static enum Name
     {
         NORMAL,
-        PARALYZED
+        PARALYZED,
+        ENERGIZED
     }
 
     private static final EnumMap<Name, State> STATES = new EnumMap(Name.class)
@@ -33,6 +34,18 @@ public final class States
                 "Paralyzed",
                 "The person is in shock and unable to move",
                 3
+            )
+        );
+
+        put
+        (
+            Name.ENERGIZED,
+            new VigorState 
+            (
+                "Energized",
+                "The person becomes more energized and can perform more actions per turn",
+                3,
+                2
             )
         );
     }};

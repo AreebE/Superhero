@@ -17,12 +17,12 @@ public abstract class State
         this.desc = desc;
     }
     
-    public Action applyStatus(Entity victim)
+    public Integer applyStatus(Entity victim)
     {
         return triggerStatus(victim);
     }
 
-    protected abstract Action triggerStatus(Entity victim);
+    protected abstract Integer triggerStatus(Entity victim);
 
     protected void reduceDuration(Entity victim)
     {

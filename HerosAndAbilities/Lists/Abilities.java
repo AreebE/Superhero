@@ -35,6 +35,7 @@ public final class Abilities
         // Attack 
         WIDE_SLASH,
         RAM_ATTACK,
+        EARTHQUAKE,
         FIREBALL, 
         SNOWBALL, 
         LIGHTNING_STRIKE, 
@@ -43,12 +44,14 @@ public final class Abilities
         LASER,
         SCRATCH,
         GROUND_SUCTION,
+        TELEKINESIS,
 
         // Defense 
         COUNTER,
         WITCH_SPELL,
         WARNING,
         FIRST_AID,
+        ILLUSION_SPELL,
         SUMMON_SQUIRREL,
         SUMMON_GOLEM,
 
@@ -67,6 +70,7 @@ public final class Abilities
         PRAY,
         SPORE,
         STUN_SPORE,
+        INVIGORATE,
 
         // Etc.
         CUSTOM
@@ -100,6 +104,22 @@ public final class Abilities
 
         put
         (
+            Name.TELEKINESIS,
+            new AttackAbility
+            (
+                "Telekinesis",
+                "You slam a rock into your opponent",
+                1, 
+                10, 
+                Name.TELEKINESIS,
+                Elements.getElement(Elements.Name.NULL),
+                false,
+                true
+            )
+        );
+
+        put
+        (
             Name.FIREBALL, 
             new AttackAbility
             (
@@ -114,6 +134,23 @@ public final class Abilities
             )
         );
 
+        put 
+        (
+            Name.EARTHQUAKE,
+            new AttackAbility 
+            (
+                "Earthquake",
+                "Hits everyone",
+                5,
+                50,
+                Name.EARTHQUAKE,
+                Elements.getElement(Elements.Name.EARTH),
+                true, 
+                true,
+                new GroupModifier(100, -1)
+            )
+        );
+        
         put
         (
             Name.LASER,
@@ -282,6 +319,20 @@ public final class Abilities
                 Shields.getShield(Shields.Name.WITCH_CURSE), 
                 Name.WITCH_SPELL, 
                 Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put
+        (
+            Name.ILLUSION_SPELL,
+            new DefenseAbility
+            (
+                "Illusion spell", 
+                "Create an illusion that retaliates when attacked", 
+                3, 
+                Shields.getShield(Shields.Name.ILLUSION), 
+                Name.WITCH_SPELL, 
+                Elements.getElement(Elements.Name.LIGHT)
             )
         );
 
@@ -519,6 +570,20 @@ public final class Abilities
 
         put
         (
+            Name.INVIGORATE, 
+            new StateChangeAbility
+            (
+                "Invigorate", 
+                "Energize the target, allowing them to make more moves per turn", 
+                2, 
+                States.get(States.Name.ENERGIZED),
+                Name.INVIGORATE, 
+                Elements.getElement(Elements.Name.NULL)
+            )
+        );
+
+        put
+        (
             Name.PRAY, 
             new CleanseAbility
             (
@@ -587,6 +652,12 @@ public final class Abilities
         put("ram", Name.RAM_ATTACK);
 
         put("stun_spore", Name.STUN_SPORE);
+
+        put("illusion", Name.ILLUSION_SPELL); 
+
+        put("earthquake", Name.EARTHQUAKE);
+
+        put("telekinesis", Name.TELEKINESIS);
     }};
 
 

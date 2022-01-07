@@ -51,6 +51,7 @@ public final class Effects
         POISON,
         CURSE,
         RETALIATE,
+        ILLUSIONARY_BLAST,
         BLEED,
         EXPLODE,
         FUNGAL_INFECTION
@@ -148,6 +149,21 @@ public final class Effects
                 new boolean[]{true, true}
             )
         );
+
+        put 
+        (
+            Name.ILLUSIONARY_BLAST,
+            new InstantEffect
+            (
+                30,
+                Type.DAMAGE,
+                "Illusionary blast",
+                "An illusion attacks the person",
+                Elements.getElement(Elements.Name.LIGHT),
+                new boolean[]{true, true}
+            )
+        );
+
 
          put 
         (

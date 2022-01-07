@@ -8,9 +8,9 @@ public class StunState extends State
     }
 
     @Override
-    public Action triggerStatus(Entity victim)
+    public Integer triggerStatus(Entity victim)
     {
-        return new PassAction(victim);
+        return 0;
     }
 
     @Override

@@ -18,6 +18,7 @@ public final class Shields
         SELF_CARE,
         WITCH_CURSE,
         DEATH_DEFIANCE,
+        ILLUSION,
         GIFT
     }
 
@@ -38,6 +39,22 @@ public final class Shields
                 "Deal some damage when struck",
                 3,
                 Effects.getEffect(Effects.Name.RETALIATE),
+                true,
+                1,
+                new Trigger[] {Trigger.ATTACK},
+                new Elements.Name[] {Elements.Name.ALL}
+            ) 
+        );
+
+        put
+        (
+            Name.ILLUSION, 
+            new TrapShield
+            (
+                "Illusion",
+                "Redirects the person's attack",
+                2,
+                Effects.getEffect(Effects.Name.ILLUSIONARY_BLAST),
                 true,
                 1,
                 new Trigger[] {Trigger.ATTACK},
