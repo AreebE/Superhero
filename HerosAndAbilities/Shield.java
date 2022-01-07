@@ -84,7 +84,7 @@ public abstract class Shield
         }
         if (uses == 0)
         {
-            target.removeShield(this);
+            removeShield(target, caster);
         }
         // System.out.println(nullifies);
         return nullifies;
@@ -100,11 +100,26 @@ public abstract class Shield
         }
 
         if (duration == 0){
-            target.removeShield(this);
+            removeShield(target, null);
         }
     }
 
     public abstract Shield copy();
+
+    public void removeShield(
+        Entity target,
+        Entity caster
+    )
+    {
+        if (target != null)
+        {
+            target.removeShield(this);
+        }
+        else 
+        {
+            caster.removeShield(this);
+        }
+    }
 
     public String toString()
     {
