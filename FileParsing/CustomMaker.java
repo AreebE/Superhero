@@ -31,7 +31,7 @@ public class CustomMaker {
 
     // System.out.println("what abilities do you want your hero to have?");
     // if()
-    return new Entity(name, 10, 100, 0);
+    return new Entity(name, 10, 100, 0, null);
   }
 
   public void AskNMakeAbility() {
