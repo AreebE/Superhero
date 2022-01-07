@@ -1,5 +1,8 @@
 package battlesystem;
 
+import java.util.EnumMap;
+import java.util.Collection;
+import java.util.Arrays;
 // package Game.ablilites.Effects;
 // i dont think multiplayer replit and github branches work
 // that's probably true
@@ -16,7 +19,7 @@ public class Effect
     private String desc;
     private Element element;
     private boolean[] pierces;
-
+    private EnumMap<Effects.Modifier, EffectModifier> modifiers;
 
     public Effect(
         int strength, 
@@ -25,7 +28,8 @@ public class Effect
         boolean permanent, 
         String name, 
         String desc,
-        Element element) 
+        Element element,
+        EffectModifier[] modifiers) 
     {
         this
         (
@@ -36,7 +40,8 @@ public class Effect
             name, 
             desc, 
             element, 
-            null
+            null,
+            modifiers
         );
     }
 
@@ -48,7 +53,8 @@ public class Effect
         String name, 
         String desc,
         Element element, 
-        boolean[] pierces) 
+        boolean[] pierces,
+        EffectModifier[] modifiers) 
     {
         this.strength = strength;
         this.typeOfEffect = type;
@@ -58,6 +64,12 @@ public class Effect
         this.desc = desc;
         this.element = element;
         this.pierces = pierces;
+        this.modifiers = new EnumMap<>(Effects.Modifier.class);
+        for (int i = 0; i < modifiers.length; i++)
+        {
+            EffectModifier modifier = modifiers[0];
+            this.modifiers.put(modifier.getName(), modifier);
+        }
     }
 
 
@@ -77,7 +89,10 @@ public class Effect
         Effects.Type type, 
         Entity target) 
     {
-        this.applyEffect(type, target, strength);
+        PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effects.Modifier.PERCENT);
+        int power = this.strength + ((percent == null) ? 0: percent.applyEffect(target));
+        // System.out.println("Applied " + name + ", " + type power + " " + percent);
+        this.applyEffect(type, target, power);
     }
 
     protected void applyEffect(
@@ -85,6 +100,7 @@ public class Effect
         Entity target, 
         int power) 
     {
+
         switch (typeOfEffect) 
         {
             case ATTACK:
@@ -162,7 +178,8 @@ public class Effect
                     name, 
                     desc, 
                     element, 
-                    pierces
+                    pierces,
+                    getModifiers()
                 );
     }
 
@@ -177,7 +194,8 @@ public class Effect
                     name, 
                     desc, 
                     element, 
-                    pierces
+                    pierces,
+                    getModifiers()
                 );
     }
 
@@ -193,12 +211,31 @@ public class Effect
         return this.typeOfEffect;
     }
 
+    protected EffectModifier[] getModifiers()
+    {
+        // System.out.println(modifiers);
+        Collection<EffectModifier> modifierCollection = modifiers.values();
+        EffectModifier[] mods = new EffectModifier[]{};
+        if (modifierCollection != null)
+        {
+            // System.out.println(Arrays.toString(modifierCollection.toArray(mods)));
+            mods = modifierCollection.toArray(mods);
+                        // System.out.println(Arrays.toString(mods));
+
+        }
+        return mods;
+    }
 
     protected int getStrength() 
     {
         return this.strength;
     }
 
+    protected int getStrength(Entity target) 
+    {
+        PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effects.Modifier.PERCENT);
+        return this.strength + ((percent == null)? 0: percent.applyEffect(target));
+    }
 
     protected int getDuration() 
     {

@@ -30,7 +30,8 @@ public class Entity implements Comparable<Entity>
         MAX_HEALTH,
         HEALTH,
         BASE_ATTACK,
-        BASE_DEFENSE
+        BASE_DEFENSE,
+        SHIELD
     }
 
     public Entity(
@@ -585,6 +586,8 @@ public class Entity implements Comparable<Entity>
                 return baseAttack;
             case BASE_DEFENSE:
                 return baseDefense; 
+            case SHIELD:
+                return shieldHealth;
         }
         return 0;
     }

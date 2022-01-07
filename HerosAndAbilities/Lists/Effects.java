@@ -21,6 +21,11 @@ public final class Effects
         GROUP
     } 
 
+    public static enum Modifier 
+    {
+        PERCENT
+    }
+
 
     public static enum Name
     {
@@ -40,6 +45,7 @@ public final class Effects
         // Shield
         INSTANT_SHIELD,
         INSTANT_SHIELD_X,
+        EXPONENTIAL_SHIELD,
 
         // health Effects
         INSTANT_HEAL,
@@ -80,7 +86,11 @@ public final class Effects
                 Type.ATTACK, 
                 "attack up", 
                 "Boosts the base attack of all abilities by 2, except Pass", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+
+                }
             )
         );
 
@@ -93,7 +103,11 @@ public final class Effects
                 Type.ATTACK,
                 "Attack boost X",
                 "Buffs the attack by a lot",
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -106,7 +120,11 @@ public final class Effects
                 Type.DEFENSE,
                 "Defense Boost X",
                 "Buffs the defense",
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -119,7 +137,11 @@ public final class Effects
                 Type.SPEED,
                 "Speed Boost X",
                 "Buffs speed",
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -132,7 +154,11 @@ public final class Effects
                 Type.MAX_HEALTH,
                 "Max Health X",
                 "Buffs health",
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -146,7 +172,11 @@ public final class Effects
                 "Retaliate",
                 "Does some damage in retaliation",
                 Elements.getElement(Elements.Name.NULL),
-                new boolean[]{true, true}
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -160,7 +190,11 @@ public final class Effects
                 "Illusionary blast",
                 "An illusion attacks the person",
                 Elements.getElement(Elements.Name.LIGHT),
-                new boolean[]{true, true}
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -175,7 +209,11 @@ public final class Effects
                 "Explode",
                 "Deals damage with an explosion",
                 Elements.getElement(Elements.Name.NULL),
-                new boolean[]{true, true}
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -188,7 +226,11 @@ public final class Effects
                 Type.HEALTH,
                 "Resurrect",
                 "Resurrect the person from beyond the grave",
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -201,7 +243,11 @@ public final class Effects
                 Type.HEALTH, 
                 "Instant heal", 
                 "Heals 10 health immediately", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -216,7 +262,11 @@ public final class Effects
                 Type.SHIELD, 
                 "Instant Shield", 
                 "Adds 10 shield immediately", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -245,7 +295,11 @@ public DecayEffect(
                 14,
                 "Burnout",
                 "Gives the user immediate attack, then it slowly burns out",
-                Elements.getElement(Elements.Name.FIRE)
+                Elements.getElement(Elements.Name.FIRE),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -262,7 +316,11 @@ public DecayEffect(
                 "Fungal infection",
                 "A type of infection that deals more damage over time",
                 Elements.getElement(Elements.Name.NULL),
-                new boolean[] {true, true}
+                new boolean[] {true, true},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -275,7 +333,11 @@ public DecayEffect(
                 Type.SHIELD, 
                 "Mega Instant Shield", 
                 "Adds 50 shield immediately", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -288,7 +350,11 @@ public DecayEffect(
                 Type.DEFENSE, 
                 "defense up", 
                 "Reduces all future damage the character takes by 2", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
         
@@ -302,7 +368,11 @@ public DecayEffect(
                 true, 
                 "Charge", 
                 "Will increase the base attack of the user by one each turn", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -318,7 +388,11 @@ public DecayEffect(
                 "Bleed", 
                 "The opponent starts to suffer from blood loss", 
                 Elements.getElement(Elements.Name.NULL),
-                new boolean[]{true, true}
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -334,7 +408,11 @@ public DecayEffect(
                 true, 
                 "Regen", 
                 "The player will recover health for ten turns, 1 health per turn. ", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
         
@@ -350,7 +428,11 @@ public DecayEffect(
                 "Poison", 
                 "Will decrease the health of the player by one.", 
                 Elements.getElement(Elements.Name.NULL), 
-                new boolean[]{true, true}
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -364,7 +446,11 @@ public DecayEffect(
                 5, 
                 "Guard", 
                 "Will let the user adopt a defensive stance", 
-                Elements.getElement(Elements.Name.NULL)
+                Elements.getElement(Elements.Name.NULL),
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -379,7 +465,11 @@ public DecayEffect(
                 "Curse", 
                 "Deals a hefty amount of damage after some time has passed", 
                 Elements.getElement(Elements.Name.NULL),  
-                new boolean[]{false, false}
+                new boolean[]{false, false},
+                new EffectModifier[]
+                {
+                    
+                }
             )
         );
 
@@ -393,7 +483,29 @@ public DecayEffect(
                 "Permanent regeneration", 
                 "Just as the name says.", 
                 Elements.getElement(Elements.Name.NULL), 
-                new boolean[]{true, true}
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    
+                }
+            )
+        );
+
+        put
+        (
+            Name.EXPONENTIAL_SHIELD, 
+            new PassiveEffect
+            (
+                0, 
+                Type.SHIELD, 
+                "Exponential Shield", 
+                "Generates more shield over time", 
+                Elements.getElement(Elements.Name.NULL), 
+                new boolean[]{true, true},
+                new EffectModifier[]
+                {
+                    new PercentageEffectModifier(Entity.Statistic.SHIELD, 25)
+                }
             )
         );
 

@@ -34,7 +34,7 @@ public final class Heroes {
                 }},
                 new ArrayList<Effects.Name>()
                 {{
-                    // add(Effects.Name.CHARGE);
+                    add(Effects.Name.EXPONENTIAL_SHIELD);
                 }},
                 new ArrayList<Shields.Name>()
                 {{

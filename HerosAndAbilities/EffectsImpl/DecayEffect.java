@@ -13,14 +13,12 @@ public class DecayEffect extends Effect{
         int duration,  
         String name, 
         String desc,
-        Element element)
+        Element element,
+        EffectModifier[] modifiers)
     {
-        super(basePower, type, duration, true, name, desc, element);
-        this.decayRate = decayRate;
-        this.count = 0;
-        this.turnDecayStarts = turnDecayStarts;
+        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null, modifiers);
     }
-
+    
     public DecayEffect(
         int basePower,
         int decayRate, 
@@ -30,14 +28,15 @@ public class DecayEffect extends Effect{
         String name, 
         String desc,
         Element element,
-        boolean[] pierces)
+        boolean[] pierces,
+        EffectModifier[] modifiers)
     {
-        super(basePower, type, duration, true, name, desc, element, pierces);
+        super(basePower, type, duration, true, name, desc, element, pierces, modifiers);
         this.decayRate = decayRate;
         this.count = 0;
         this.turnDecayStarts = turnDecayStarts;
     }
-    
+
     @Override
     public void applyEffect(
         Effects.Type type, 
@@ -45,7 +44,7 @@ public class DecayEffect extends Effect{
     {
         if (count < turnDecayStarts)
         {
-            super.applyEffect(type, target, super.getStrength());
+            super.applyEffect(type, target, super.getStrength(target));
         }
         else 
         {
@@ -74,7 +73,8 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces()
+                    getPierces(),
+                    getModifiers()
                 );
     }
 
@@ -91,7 +91,8 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces()
+                    getPierces(),
+                    getModifiers()
                 );
     }
 }
