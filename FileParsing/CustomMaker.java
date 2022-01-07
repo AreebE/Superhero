@@ -1,9 +1,7 @@
 package battlesystem;
 
-import java.util.Scanner;
 import java.io.*;
-import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.*;
 //this thing is kinda nuts and needs some work also it no longer 
 // deals with files so i dont think it needs to be in FileParsing
 public class CustomMaker {
@@ -16,23 +14,33 @@ public class CustomMaker {
     return new Entity(name, 10, 100, 0, null);
   }
 
-  public void AskNMakeAbility() {
+  public static Ability askNMakeAbility() {
     // very WIP
+    Scanner s = new Scanner(System.in);
     System.out.println("You have decided to create a custom Ability... \n \n");
     System.out.println("Enter your new Abilities name:  ");
-    String name =  new Scanner(System.in).next();
+    String name =  s.next();
     System.out.println("Enter your new Abilities description:  ");
-    String desc =  new Scanner(System.in).next();
+    String desc = s.next();
     System.out.println("Enter your new Abilities cooldown:  ");
-    int cldn =  new Scanner(System.in).nextInt();
+    int cldn =  s.nextInt();
     System.out.println("Enter your new Abilities strength:  ");
-    int str =  new Scanner(System.in).nextInt();
-    System.out.println("Enter your new Abilities type: (NOT IMPLEMENTED YET...) ");
-    
-
-    //WIP
-
-
+    int str =  s.nextInt();
+    System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED YET...) ");
+    String t = s.next();
+    Abilities.Type a = null;
+    switch(t){
+      case "ATTACK":
+        a= Abilities.Type.ATTACK;
+        break;
+      case "DEFENSE":
+        a= Abilities.Type.DEFENSE;
+        break;
+      case "SUPPORT":
+        a=Abilities.Type.SUPPORT;
+        break;
+    }
+    System.out.println("NEW AB IS \n"+name+desc+cldn+str);
     /*
     ATTACK, 
     DEFENSE, 
@@ -42,10 +50,11 @@ public class CustomMaker {
     String desc, 
     int cooldown, 
     int strength, 
-    Abilities.Type type,
+    Abilities.Type Type,
     Abilities.Name enumName, 
     Element em, 
     AbilityModifier... modifiers)
     */
+    return null;
   }
 }
