@@ -1,0 +1,51 @@
+[
+  {
+    "name": "EEEEEE",
+    "desc": "default desc",
+    "freeWill": 20,
+    "abilitiesNames": [
+      "Pass turn",
+      "Fireball",
+      "Protect",
+      "attack up"
+    ],
+    "health": 7,
+    "maxHealth": 7,
+    "sheildHealth": 8,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "Joe",
+    "desc": "default desc",
+    "freeWill": 10,
+    "abilitiesNames": [
+      "Pass turn",
+      "Snowball",
+      "Protect",
+      "defense up"
+    ],
+    "health": 7,
+    "maxHealth": 7,
+    "sheildHealth": 8,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "BeepBoop",
+    "desc": "default desc",
+    "freeWill": 1,
+    "abilitiesNames": [
+      "Pass turn",
+      "Lightning Strike",
+      "Counterstrike",
+      "flare up",
+      "Construct"
+    ],
+    "health": 7,
+    "maxHealth": 7,
+    "sheildHealth": 8,
+    "baseAttack": 0,
+    "baseDefense": 0
+  }
+]
