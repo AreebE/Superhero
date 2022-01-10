@@ -49,14 +49,20 @@ public class CleanseAbility extends SupportAbility
 
 
     @Override
-    protected boolean castAbility(
+    protected String castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
-        target.removeEffects(getElement().getID());
-        return true;
+        StringBuilder actions = new StringBuilder();
+        target.removeEffects(getElement().getID(), actions);
+        String action = actions.toString();
+        if (action.equals(""))
+        {
+            return "No effects were cleansed.";
+        }
+        return action;
     }
 
 

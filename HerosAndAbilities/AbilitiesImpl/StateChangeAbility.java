@@ -35,14 +35,20 @@ public class StateChangeAbility extends SupportAbility
     }
     
     @Override
-    protected boolean castAbility(
+    protected String castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
+        String oldStateName = target.getState().getName();
         target.replaceState(template.copy());
-        return true;
+        return new StringBuilder(target.getName())
+                .append("\'s state changed from ")
+                .append(oldStateName)
+                .append(" to ")
+                .append(template.getName())
+                .toString();
     }
 
 

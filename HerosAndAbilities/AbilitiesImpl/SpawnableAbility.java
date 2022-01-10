@@ -54,7 +54,7 @@ public class SpawnableAbility extends DefenseAbility
     
 
     @Override
-    protected boolean castAbility(
+    protected String castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
@@ -62,7 +62,10 @@ public class SpawnableAbility extends DefenseAbility
     {
         Entity ai = info.create(target);
         allPlayers.add(ai);
-        return true;
+        return new StringBuilder(ai.getName())
+                .append(" was created. Their leader is ")
+                .append(target.getName())
+                .toString();
     }
 
     @Override

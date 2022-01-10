@@ -50,18 +50,21 @@ public class DelayedEffect extends Effect
     }
 
     @Override
-    public void applyEffect(
-        Entity target) 
+    public void useEffect(
+        Entity target,
+        StringBuilder actions) 
     {
-        reduceDuration(target);
+        reduceDuration(target, actions);
     }
 
 
     @Override
     protected void removeEffect(
-        Entity target) 
+        Entity target,
+        StringBuilder actions) 
     {
-        applyEffect(super.getType(), target);
+        applyEffect(target, actions);
+        actions.append(" The delayed effect has also been removed.");
         target.removeEffect(this);
     }
 

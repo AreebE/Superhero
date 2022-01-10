@@ -83,11 +83,13 @@ public class AreebGame{
     superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
     superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
     superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
-        superheros.add(Heroes.getHero(Heroes.Name.TEST_SUBJECT, null));
+    superheros.add(Heroes.getHero(Heroes.Name.TEST_SUBJECT, null));
+    superheros.add(Heroes.getHero(Heroes.Name.SECOND_TEST, null));
+
 
     // superheros.add(testin);
-    superheros.add(A);
-    superheros.add(B);
+    // superheros.add(A);
+    // superheros.add(B);
     Collections.sort(superheros);
     Collections.reverse(superheros);
     // System.out.println(superheros);
@@ -121,15 +123,18 @@ public class AreebGame{
             
             for (Action a: playerActions)
             {
-                actions.add(a);
+                actions.add(0, a);
             }
         }
         
-        
-        for (int i = 0; i < actions.size(); i++)
+        // String[] battleLog = new String[actions.size()];
+        for (int i = actions.size() - 1; i >= 0; i--)
         {
             // System.out.println(actions.get(i).getClass());
-            actions.get(i).performAction();
+            Action a = actions.get(i);
+            System.out.println(a.getCaster().getName() + ": ");
+            System.out.println(a.performAction());
+            System.out.println();
         }
         for (int i = superheros.size() - 1; i >= 0; i--)
         {

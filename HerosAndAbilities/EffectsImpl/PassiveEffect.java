@@ -48,7 +48,8 @@ public class PassiveEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Entity target) 
+        Entity target,
+        StringBuilder actions) 
     {
     }
 

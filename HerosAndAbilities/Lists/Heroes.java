@@ -11,7 +11,8 @@ public final class Heroes {
         JOE,
         EEEEEE,
         TEST_SUBJECT,
-        SOLARIS
+        SOLARIS,
+        SECOND_TEST
     }
 
     private final static EnumMap<Name, EntityInfoItem> HEROS = new EnumMap<>(Name.class)
@@ -116,6 +117,35 @@ public final class Heroes {
                     add(Abilities.Name.TELEKINESIS);
                     // add(Abilities.Name.PROTECT);
                     // add(Abilities.Name.ATTACK_UP);
+                    // add(Abilities.Name.STUN_SPORE);
+                }},
+                new ArrayList<Effects.Name>()
+                {{
+                    // add(Effects.Name.);
+                }},
+                new ArrayList<Shields.Name>()
+                {{
+                    add(Shields.Name.ILLUSION);
+                }},
+                100,
+                40
+            )  
+        );
+
+         put
+        (
+            Name.SECOND_TEST,
+            new EntityInfoItem
+            (
+                "SecondestSubject",
+                300,
+                new ArrayList<Abilities.Name>()
+                {{
+                    add(Abilities.Name.POISON_SLASH);
+                    add(Abilities.Name.ILLUSION_SPELL);
+                    add(Abilities.Name.TELEKINESIS);
+                    add(Abilities.Name.DEFENSIVE_STANCE);
+                    add(Abilities.Name.PRAY);
                     // add(Abilities.Name.STUN_SPORE);
                 }},
                 new ArrayList<Effects.Name>()

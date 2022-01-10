@@ -68,7 +68,7 @@ public class AttackAbility extends Ability
 
 
     @Override
-    protected boolean castAbility(
+    protected String castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
@@ -88,17 +88,57 @@ public class AttackAbility extends Ability
           attackStrength += attackStrength;
         }
 
-        boolean keepGoing = target.dealDamage
+        StringBuilder action = new StringBuilder();
+        int[] values = target.dealDamage
         (
             attackStrength, 
             isPiercing, 
             ignoresBaseDefense,
             caster,
-            getElement()
+            getElement(),
+            action
         );
-        return keepGoing;
+        if (values[Entity.KEEP_GOING_INDEX] == Ability.MISS)
+        {
+            super.stopAttack();
+        }
+        return action.append(formActionString(values, target)).toString();
     }
 
+    private String formActionString(int[] values, Entity target)
+    {
+        StringBuilder action = new StringBuilder(target.getName());
+        // action.append(values[Entity.KEEP_GOING_INDEX]);
+        int healthLost = values[Entity.HEALTH_LOST_INDEX];
+        int shieldLost = values[Entity.SHIELD_LOST_INDEX];
+        if (healthLost == 0
+            && shieldLost == 0)
+        {
+            action.append(" received no damage.");
+            return action.toString();
+        }
+        action.append(" lost ");
+        if (shieldLost != 0)
+        {
+            action.append(shieldLost)
+                .append(" shield (Has ")
+                .append(target.getStatistic(Entity.Statistic.SHIELD))
+                .append(" shield left) ");
+
+            if (healthLost != 0)
+            {
+                action.append("and ");
+            }
+        }
+        if (healthLost != 0)
+        {
+            action.append(healthLost)
+                .append(" health (Has ")
+                .append(target.getStatistic(Entity.Statistic.HEALTH))
+                .append(" health left)");
+        }
+        return action.toString();
+    }
 
     @Override
     public Ability copy() 

@@ -64,19 +64,27 @@ public class AttackStatusAbility extends AttackAbility
 
 
     @Override
-    protected boolean castAbility(
+    protected String castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
-        super.castAbility(target, caster, otherTargets, allPlayers);
+        StringBuilder action = new StringBuilder(super.castAbility(target, caster, otherTargets, allPlayers)).append("\n");
         if (isPiercing() 
             || !caster.hasShield()) 
         {
-            target.addEffect(sideEffect.copy(caster.getBaseAttack()));
+            target.addEffect(sideEffect.copy());
+            action.append(target.getName())
+                .append(" also received the \'")
+                .append(sideEffect.getName())
+                .append("\' effect.");
         }
-        return true;
+        else 
+        {
+            action.append("No effect was applied.");
+        }
+        return action.toString();
     }
 
 

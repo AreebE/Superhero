@@ -35,7 +35,7 @@ public class Effect
         (
             strength, 
             type, 
-            duration, 
+            duration,
             permanent, 
             name, 
             desc, 
@@ -76,30 +76,48 @@ public class Effect
     /**
      * Will apply its effect to the given Entity
      */
-    public void applyEffect(
-        Entity target) 
+    public void useEffect(
+        Entity target,
+        StringBuilder actions) 
     {
         // System.out.println("called super");
-        applyEffect(typeOfEffect, target);
-        reduceDuration(target);
+        applyEffect(target, actions);
+        reduceDuration(target, actions);
     }
 
 
     protected void applyEffect(
-        Effects.Type type, 
-        Entity target) 
+        Entity target,
+        StringBuilder actions) 
     {
         PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effects.Modifier.PERCENT);
         int power = this.strength + ((percent == null) ? 0: percent.applyEffect(target));
+        
+        
         // System.out.println("Applied " + name + ", " + type power + " " + percent);
-        this.applyEffect(type, target, power);
+        this.applyEffect(target, power, actions);
     }
 
     protected void applyEffect(
-        Effects.Type type, 
         Entity target, 
-        int power) 
+        int power,
+        StringBuilder actions) 
     {
+        // System.out.println(actions.toString())
+        if (power >= 0 && typeOfEffect != Effects.Type.DAMAGE)
+        {
+            actions.append("Increased ");
+        }
+        else 
+        {
+            actions.append("Decreased ");
+        }
+        actions.append(target.getName())
+                .append("\'s ")
+                .append(typeOfEffect.name)
+                .append(" by ")
+                .append(Math.abs(power))
+                .append("");
 
         switch (typeOfEffect) 
         {
@@ -135,21 +153,27 @@ public class Effect
 
 
     public void reduceDuration(
-        Entity target) 
+        Entity target,
+        StringBuilder actions) 
     {
         duration--;
         if (duration == 0) 
         {
-            removeEffect(target);
+            removeEffect(target, actions);
         }
     }
 
 
     protected void removeEffect(
-        Entity target) 
+        Entity target,
+        StringBuilder actions) 
     {
+        actions.append(", but they lost the effect.");
         if (!permanent) 
         {
+            actions.append(" (also lost their ")
+                    .append(typeOfEffect.name)
+                    .append(" buff)");
             switch (typeOfEffect) 
             {
                 case ATTACK:
@@ -158,6 +182,8 @@ public class Effect
                 case DEFENSE:
                     target.addDefense(-strength * duration);
                     break;
+                case SPEED:
+                    target.addDefense(-strength * duration);
             }
         }
         target.removeEffect(this);

@@ -57,14 +57,18 @@ public class SupportAbility extends Ability
 
 
     @Override
-    protected boolean castAbility(
+    protected String castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
         List<Entity> allPlayers) 
     {
         target.addEffect(template.copy());
-        return true;
+        return new StringBuilder(target.getName())
+                .append(" recieved the \'")
+                .append(template.getName())
+                .append("\' effect")
+                .toString();
     }
 
 

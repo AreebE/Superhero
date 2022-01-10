@@ -108,13 +108,14 @@ public class GroupEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Entity target)
+        Entity target,
+        StringBuilder actions)
     {
         groupDuration--;
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
         {
             Effect e = listOfEffects.get(i);
-            e.reduceDuration(target);
+            e.reduceDuration(target, actions);
             // System.out.println(e.getDuration());
             if (e.getDuration() <= 0) 
             {
@@ -130,18 +131,26 @@ public class GroupEffect extends Effect
 
     @Override
     public void applyEffect(
-        Effects.Type type, 
-        Entity target) 
+        Entity target,
+        StringBuilder actions) 
     {
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
         {
+            if (i == 0)
+            {
+                actions.append(", and ");
+            }
+            else if (i < listOfEffects.size() - 1)
+            {
+                actions.append(", ");
+            }
             Effect e = listOfEffects.get(i);
             // System.out.println(e);
-            e.applyEffect(e.getType(), target);
+            e.applyEffect(target, actions);
         }
     }
 
-
+    
     @Override
     public Effect copy() 
     {

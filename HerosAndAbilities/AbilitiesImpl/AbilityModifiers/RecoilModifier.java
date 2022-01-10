@@ -1,6 +1,6 @@
 package battlesystem;
 
-public class RecoilModifier implements AbilityModifier<Void>{
+public class RecoilModifier implements AbilityModifier<String>{
   private int recoilDmg;
   private boolean piercesSheild;
   private boolean piercesDefense;
@@ -12,9 +12,9 @@ public class RecoilModifier implements AbilityModifier<Void>{
   }
 
   @Override
-  public Void triggerModifier(Entity target, Entity caster) {
-    caster.dealDamage(recoilDmg, piercesSheild, piercesDefense, target, null);
-    return null;
+  public String triggerModifier(Entity target, Entity caster) {
+    caster.dealEffectDamage(recoilDmg, piercesSheild, piercesDefense);
+    return "Recieved " + recoilDmg + " recoil damage.";
   };
 
   @Override

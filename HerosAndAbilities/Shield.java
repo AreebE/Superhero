@@ -74,9 +74,9 @@ public abstract class Shield
     }
 
 
-    public boolean triggerShield(Entity target, Entity caster)
+    public boolean triggerShield(Entity target, Entity caster, StringBuilder actions)
     {
-        applyShield(target, caster);
+        applyShield(target, caster, actions);
         // System.out.println("Trigger " + nullifies);
         if (uses != -1) 
         {
@@ -84,15 +84,17 @@ public abstract class Shield
         }
         if (uses == 0)
         {
-            removeShield(target, caster);
+            removeShield(target, caster, actions);
         }
         // System.out.println(nullifies);
         return nullifies;
     }
 
-    protected abstract void applyShield(Entity target, Entity caster);
+    protected abstract void applyShield(Entity target, Entity caster, StringBuilder actions);
 
-    public void passTurn(Entity target)
+    public void passTurn(
+        Entity target, 
+        StringBuilder actions)
     {
         if (duration != -1)
         {
@@ -100,7 +102,7 @@ public abstract class Shield
         }
 
         if (duration == 0){
-            removeShield(target, null);
+            removeShield(target, null, actions);
         }
     }
 
@@ -108,9 +110,11 @@ public abstract class Shield
 
     public void removeShield(
         Entity target,
-        Entity caster
+        Entity caster,
+        StringBuilder actions
     )
     {
+        actions.append("The shield expired.");
         if (target != null)
         {
             target.removeShield(this);

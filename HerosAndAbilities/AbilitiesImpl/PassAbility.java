@@ -14,7 +14,7 @@ public class PassAbility extends Ability
     }
 
     @Override
-    protected boolean castAbility
+    protected String castAbility
     (
         Entity target, 
         Entity caster,
@@ -22,11 +22,11 @@ public class PassAbility extends Ability
         List<Entity> allPlayers
     )
     {
-        return true;
+        return "  ";
     }
 
     @Override
-    public boolean useAbility
+    public String useAbility
     (
         Entity target, 
         Entity caster,
@@ -34,7 +34,9 @@ public class PassAbility extends Ability
         List<Entity> allPlayers
     )
     {
-        return true;
+        return new StringBuilder(caster.getName())
+                .append(" passed their turn.")
+                .toString();
     }  
     
     @Override

@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class Entity implements Comparable<Entity>
 {
+
+    public static final int HEALTH_LOST_INDEX = 0;
+    public static final int SHIELD_LOST_INDEX = 1;
+    public static final int KEEP_GOING_INDEX = 2;
+
     // free will between 1 and 20;
     private Entity creator;
     private String name;
@@ -265,12 +270,17 @@ public class Entity implements Comparable<Entity>
         health += addHealth;
     }
 
-    public boolean isHealthZero() 
+    public boolean isHealthZero(StringBuilder actions) 
     {
         if (this.health <= 0)
         {
-            searchForShield(Shields.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this);
+            searchForShield(Shields.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, actions);
         }
+        return this.health <= 0;
+    }
+
+    public boolean isHealthZero() 
+    {
         return this.health <= 0;
     }
 
@@ -286,13 +296,16 @@ public class Entity implements Comparable<Entity>
      *
      * @return     if the player can keep attacking
      */
-    public boolean dealDamage(
+    public int[] dealDamage(
         int damageDealt, 
         boolean isPiercing, 
         boolean ignoresDefense,
         Entity caster,
-        Element e) 
+        Element e,
+        StringBuilder actions) 
     {   
+        int[] returnValues = new int[]{0, 0, 0};
+        
         boolean endAttack = false;
         Shields.Trigger type = null;
         if (caster != null)
@@ -307,36 +320,42 @@ public class Entity implements Comparable<Entity>
         
         if (0 >= damageDealt) 
         {
-            return true;
+            return returnValues;
         } 
         else if (isPiercing) 
         {
             if (type != null)
             {
-                endAttack = searchForShield(type, e, this, caster);
+                endAttack = searchForShield(type, e, this, caster, actions);
             }
             if (endAttack){
-                return false;
+                returnValues[KEEP_GOING_INDEX] = Ability.MISS;
+                return returnValues;
             }
             health -= damageDealt;
+            returnValues[HEALTH_LOST_INDEX] = damageDealt;
         } 
         else if (shieldHealth >= damageDealt) 
         {
             shieldHealth -= damageDealt;
-            return true;
+            returnValues[SHIELD_LOST_INDEX] = damageDealt;
+            return returnValues;
         } 
         else
         {
+            returnValues[SHIELD_LOST_INDEX] = shieldHealth;
             damageDealt -= shieldHealth;
             shieldHealth = 0;
-            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, this, caster);
+            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, this, caster, actions);
             if (type != null)
             {
-                endAttack = endAttack || searchForShield(type, e, this, caster);
+                endAttack = endAttack || searchForShield(type, e, this, caster, actions);
             }
             if (endAttack){
-                return false;
+                returnValues[KEEP_GOING_INDEX] = Ability.MISS;
+                return returnValues;
             }
+            returnValues[HEALTH_LOST_INDEX] = damageDealt;
             health -= damageDealt;
         }
         
@@ -344,7 +363,7 @@ public class Entity implements Comparable<Entity>
         {
             health = 0;
         }
-        return true;
+        return returnValues;
     }
 
     public boolean dealEffectDamage(
@@ -397,10 +416,11 @@ public class Entity implements Comparable<Entity>
     }
 
     public void applyEffect(
-        Effect e
+        Effect e,
+        StringBuilder actions
     )
     {
-        e.applyEffect(this);
+        e.useEffect(this, actions);
     }
 
     public void removeEffect(
@@ -409,10 +429,20 @@ public class Entity implements Comparable<Entity>
         effects.remove(removed);
     }
 
+    public void removeEffect(
+        Effect removed,
+        StringBuilder actions) 
+    {
+        effects.remove(removed);
+        actions.append(removed.getName());
+    }
+
 
     public void removeEffects(
-        Elements.Name elementID)
+        Elements.Name elementID,
+        StringBuilder actions)
     {
+        int times = 0;
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
             Effect e = effects.get(i);
@@ -423,7 +453,16 @@ public class Entity implements Comparable<Entity>
                         )
                 ) 
             {
-                removeEffect(e);
+                if (times == 0)
+                {
+                    actions.append("Removed effect(s) ");
+                }
+                else 
+                {
+                    actions.append(", ");
+                }
+                times++;
+                removeEffect(e, actions);
             }
         }
     }
@@ -447,11 +486,13 @@ public class Entity implements Comparable<Entity>
     }
 
 
-    public void reduceShieldDurations()
+    public void reduceShieldDurations(
+        StringBuilder actions
+    )
     {
         for (int i = shields.size() - 1; i >= 0; i--)
         {
-            shields.get(i).passTurn(this);
+            shields.get(i).passTurn(this, actions);
         }
     }
 
@@ -460,7 +501,8 @@ public class Entity implements Comparable<Entity>
         Shields.Trigger trigger, 
         Element element,
         Entity target, 
-        Entity caster)
+        Entity caster,
+        StringBuilder actions)
     {
         boolean nullifyEffect = false;
         for (int i = shields.size() - 1; i >= 0; i--)
@@ -468,7 +510,7 @@ public class Entity implements Comparable<Entity>
             Shield s = shields.get(i);
             if (s.wouldTrigger(trigger, element))
             {
-                boolean nullify = s.triggerShield(target, caster);
+                boolean nullify = s.triggerShield(target, caster, actions);
                 if (nullify)
                 {
                     nullifyEffect = true;
@@ -613,30 +655,52 @@ public class Entity implements Comparable<Entity>
     /*
      * Actions done at the end of the turn
      */
-    public void endOfTurn() 
+    public String endOfTurn() 
     {
-        useEffects();
-        reduceCooldowns();
-        reduceShieldDurations();
+        StringBuilder actions = new StringBuilder("\n");
+        // use effects
+        useEffects(actions);
+        actions.append("\n");
+        // Reset cooldowns
+        reduceCooldowns(actions);
+        actions.append("\n");
+
+        // Reduce sheilds
+        reduceShieldDurations(actions);
+        actions.append("\n");
+        // Reduce state duration
         reduceStateDurations();
+        
+        actions.append("The user is in a ")
+                .append(state.getName())
+                .append(" state.");
+
+        return actions.toString();
     }
 
 
-    public void useEffects() 
+    public void useEffects(StringBuilder actions) 
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
             // System.out.println(this);
             Effect b = effects.get(i);
-            b.applyEffect(this);
+            b.useEffect(this, actions);
+            actions.append("\n");
         }
     }
 
-    public void reduceCooldowns() 
+    public void reduceCooldowns(StringBuilder actions) 
     {
         for (Ability a : abilities) 
         {
             a.reduceCooldown();
+            if (a.ableToUseAbility())
+            {
+                actions.append(a.getName())
+                    .append(" is able to be used.")
+                    .append("\n");
+            }
         }
     }
 
@@ -645,4 +709,5 @@ public class Entity implements Comparable<Entity>
         state.reduceDuration(this);
     }
 
+    
 }

@@ -35,10 +35,11 @@ public class DeathShield extends Shield
     @Override
     protected void applyShield(
         Entity victim, 
-        Entity caster)
+        Entity caster,
+        StringBuilder actions)
     {
         // System.out.println("appltied death shield to " + victim.getName());
-        victim.applyEffect(effect.copy());
+        caster.applyEffect(effect.copy(), actions);
     }
 
     protected Effect getEffect()

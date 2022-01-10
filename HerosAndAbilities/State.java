@@ -24,7 +24,8 @@ public abstract class State
 
     protected abstract Integer triggerStatus(Entity victim);
 
-    protected void reduceDuration(Entity victim)
+    protected void reduceDuration(
+        Entity victim)
     {
         if (duration > 0)
         {

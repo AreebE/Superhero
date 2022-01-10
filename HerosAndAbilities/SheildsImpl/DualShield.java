@@ -42,8 +42,20 @@ public class DualShield extends Shield
 
 
     @Override
-    protected void applyShield(Entity victim, Entity caster)
+    protected void applyShield(
+        Entity victim, 
+        Entity caster,
+        StringBuilder actions)
     {
+        actions.append(victim.getName())
+            .append(" recieved the effect of ")
+            .append(selfApply.getName())
+            .append("\n")
+            .append(" while ")
+            .append(caster.getName())
+            .append(" gets the effect of ")
+            .append(casterApply.getName());
+
         victim.addEffect(selfApply.copy());
         caster.addEffect(casterApply.copy());
     }

@@ -66,16 +66,23 @@ public class Action {
                 );
     }
 
-    public void performAction()
+    public String performAction()
     {
         // System.out.println("perform action");
-        ability.useAbility(target, caster, otherTargets, allHeros);
-        caster.endOfTurn();
+        StringBuilder action = new StringBuilder(ability.useAbility(target, caster, otherTargets, allHeros))
+                .append(caster.endOfTurn());
+        // caster.endOfTurn();
+        return action.toString();
     }
 
     public Entity getTarget()
     {
         return target;
+    }
+
+    public Entity getCaster()
+    {
+        return caster;
     }
 
     public List<Entity> getOtherTargets()

@@ -38,8 +38,15 @@ public class SelfShield extends Shield
 
 
     @Override
-    protected void applyShield(Entity victim, Entity caster)
+    protected void applyShield(
+        Entity victim, 
+        Entity caster, 
+        StringBuilder actions)
     {
+        actions.append(victim.getName())
+            .append(" recieved the effect of ")
+            .append(selfApply.getName())
+            .append("\n");
         victim.addEffect(selfApply.copy());
     }
 
