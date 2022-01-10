@@ -1,0 +1,56 @@
+[
+  {
+    "name": "TestSubject",
+    "speed": 200,
+    "health": 100,
+    "maxHealth": 100,
+    "shieldHealth": 40,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "EEEEEE",
+    "speed": 100,
+    "health": 100,
+    "maxHealth": 100,
+    "shieldHealth": 40,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "Joe",
+    "speed": 60,
+    "health": 100,
+    "maxHealth": 100,
+    "shieldHealth": 40,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "B",
+    "speed": 30,
+    "health": 100,
+    "maxHealth": 100,
+    "shieldHealth": 50,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "BeepBoop",
+    "speed": 30,
+    "health": 100,
+    "maxHealth": 100,
+    "shieldHealth": 40,
+    "baseAttack": 0,
+    "baseDefense": 0
+  },
+  {
+    "name": "A",
+    "speed": 10,
+    "health": 100,
+    "maxHealth": 100,
+    "shieldHealth": 50,
+    "baseAttack": 0,
+    "baseDefense": 0
+  }
+]

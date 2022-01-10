@@ -26,7 +26,7 @@ public class CustomMaker {
     int cldn =  s.nextInt();
     System.out.println("Enter your new Abilities strength:  ");
     int str =  s.nextInt();
-    System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED YET...) ");
+    System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
     String t = s.next();
     Abilities.Type a = null;
     switch(t){
@@ -40,6 +40,8 @@ public class CustomMaker {
         a=Abilities.Type.SUPPORT;
         break;
     }
+    System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
+
     System.out.println("NEW AB IS \n"+name+desc+cldn+str);
     /*
     ATTACK, 

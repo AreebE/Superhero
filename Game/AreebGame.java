@@ -15,7 +15,7 @@ public class AreebGame{
   public AreebGame(){
         GUI g = new GUI();
         JsonIoThing j = new JsonIoThing("FileParsing/save.json");
-        Ability a = CustomMaker.askNMakeAbility();
+        //Ability a = CustomMaker.askNMakeAbility();
 
     //  System.out.println("Hello world!... Also trying to make custom");
     // CustomMaker c = new CustomMaker();
