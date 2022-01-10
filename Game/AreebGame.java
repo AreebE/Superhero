@@ -13,6 +13,7 @@ public class AreebGame{
     ScannerInput system;
 
   public AreebGame(){
+        GUI g = new GUI();
         JsonIoThing j = new JsonIoThing("FileParsing/save.json");
         Ability a = CustomMaker.askNMakeAbility();
 
@@ -101,6 +102,7 @@ public class AreebGame{
 
   public void playGame(ArrayList<Entity> superheros){
     // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
+    
 
     Scanner inputReader = new Scanner(System.in);
     system = new ScannerInput(inputReader);

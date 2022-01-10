@@ -15,6 +15,7 @@ public class Game{
     // btw, we'll be using a github called Entity, do you have a github name?
     // yes i think its paulo-grab-nsd
     // just invited you, make sure to use that github and not this project anymore
+    GUI g = new GUI();
      System.out.println("Hello world!... Also trying to make custom");
     CustomMaker c = new CustomMaker();
     Entity testin = c.AskNMakeSuperhero();
@@ -74,6 +75,7 @@ public class Game{
     Collections.sort(Entitys);
     Collections.reverse(Entitys);
     // System.out.println(Entitys);
+    
     playGame(Entitys);
   }
 
