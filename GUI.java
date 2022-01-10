@@ -5,6 +5,8 @@ public class GUI{
 
   public GUI(){
 
+    //5 abilites per superhero + pass turn
+
     JFrame frame = new JFrame();
     frame.setSize(500, 500);
     JPanel panel = new JPanel();
