@@ -688,7 +688,11 @@ public final class Abilities
         Name... names)
     {
         for (Name name: names){
+          try{
             target.addAbility(ABILITIES.get(name).copy());
+          }catch(Exception e){
+            e.printStackTrace();
+          }
         }
     }
 

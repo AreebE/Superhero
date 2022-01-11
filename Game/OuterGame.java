@@ -18,31 +18,17 @@ public class OuterGame {
   ScannerInput system;
 
   public OuterGame() {
+    superheros = new ArrayList<Entity>();
     GUI g = new GUI();
     JsonIoThing j = new JsonIoThing("FileParsing/save.json");
-    Entity A = new Entity("A", 10, 100, 50, null);
-    Abilities.giveAbility(A, Abilities.Name.FIREBALL, Abilities.Name.SUMMON_SQUIRREL, Abilities.Name.RAM_ATTACK);
-
-    Entity B = new Entity("B", 30, 100, 50, null);
-    Abilities.giveAbility(B, Abilities.Name.SNOWBALL, Abilities.Name.SUMMON_GOLEM, Abilities.Name.GROUND_SUCTION);
-
-    superheros = new ArrayList<>();
-    /*
-    superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
-    superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
-    superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
-    superheros.add(Heroes.getHero(Heroes.Name.TEST_SUBJECT, null));
-    */
-    superheros.add(A);
-    superheros.add(B);
-    
+    makeFixedEntities();
     j.saveSuperheroArr(superheros);
 
     //load still needs to parse its abilities
     ArrayList<Entity> e = j.loadSuperheroArr();
-    InnerGame iG = new InnerGame(superheros, g);
+    InnerGame iG = new InnerGame(e, g);
     iG.playGame();
-    System.out.println("note turns arent implemented yet \n Nor is loading an entitys abilities from file");
+    System.out.println("note turns arent implemented yet but loading entitys now is working");
   }
 
   private Entity getEntity(String name, ArrayList<Entity> superheros) {
@@ -52,5 +38,16 @@ public class OuterGame {
       }
     }
     return null;
+  }
+  private void makeFixedEntities(){
+    
+    Entity A = new Entity("A", 10, 100, 50, null);
+    Abilities.giveAbility(A, Abilities.Name.FIREBALL, Abilities.Name.SUMMON_SQUIRREL);
+
+    Entity B = new Entity("B", 30, 100, 50, null);
+    Abilities.giveAbility(B, Abilities.Name.SNOWBALL, Abilities.Name.SUMMON_GOLEM, Abilities.Name.GROUND_SUCTION);
+
+    superheros.add(A);
+    superheros.add(B);
   }
 }

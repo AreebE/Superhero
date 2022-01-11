@@ -63,6 +63,9 @@ class JsonIoThing {
       System.exit(1);
     }
     ArrayList<Entity> out = new ArrayList<Entity>(Arrays.asList(o));
+    for(Entity t:out){
+      t.updateAbilities();
+    }
     //System.out.println("ps in load is "+out.toArray().length);
     
     return out;
