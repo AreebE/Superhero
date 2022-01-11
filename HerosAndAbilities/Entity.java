@@ -16,6 +16,7 @@ public class Entity implements Comparable<Entity>
     private transient ArrayList<Effect> effects;
     private transient ArrayList<Shield> shields;
     private transient State state;
+    private ArrayList<String> abNames = new ArrayList<String>();
     private int health;
     private int maxHealth;
     private int shieldHealth;
@@ -46,7 +47,7 @@ public class Entity implements Comparable<Entity>
         this.health = health;
         this.maxHealth = health;
         this.shieldHealth = shieldHealth;
-        this.abilities = new ArrayList<>();
+        this.abilities = new ArrayList<Ability>();
         this.effects = new ArrayList<>();
         this.shields = new ArrayList<>();
         this.state = States.get(States.Name.NORMAL);
@@ -176,6 +177,7 @@ public class Entity implements Comparable<Entity>
         Ability newAbility) 
     {
         abilities.add(newAbility);
+        abNames.add(newAbility.getName());
     }
 
 
@@ -639,7 +641,11 @@ public class Entity implements Comparable<Entity>
             a.reduceCooldown();
         }
     }
-
+    public void updateAbNames(){
+      for(Ability a:abilities){
+        abNames.add(a.getName());
+      }
+    }
     public void reduceStateDurations()
     {
         state.reduceDuration(this);

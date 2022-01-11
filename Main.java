@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import battlesystem.AreebGame;
+import battlesystem.*;
 
 
 //should we make like a "main menu" type of thing so that
@@ -11,6 +11,6 @@ import battlesystem.AreebGame;
 
 class Main {
   public static void main(String[] args) {
-   new AreebGame();
+   new OuterGame();
   }
 }
