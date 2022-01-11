@@ -56,7 +56,7 @@ class JsonIoThing {
     Entity[] o = null;
     try{
       o=  new Gson().fromJson(Files.readString(thisFilePath),Entity[].class);
-      System.out.println(o[0].getName());
+      //System.out.println(o[0].getName());
 
     }catch(IOException e){
       e.printStackTrace();

@@ -16,7 +16,7 @@ class InnerGame {
 
   public void playGame() {
     int remainingFighters =fighters.toArray().length;
-    System.out.println("rem players is "+remainingFighters);
+    //System.out.println("rem players is "+remainingFighters);
     while(remainingFighters > 1){
       Entity turned = fighters.get(1);
       System.out.println(turned);

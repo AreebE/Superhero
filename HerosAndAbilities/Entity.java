@@ -60,7 +60,7 @@ public class Entity implements Comparable<Entity> {
       }
       Abilities.giveAbility(this,Abilities.Name.valueOf(a[d]));
     }
-    System.out.println("Supposedly found all of "+this.name+"s abilitys");
+    //System.out.println("Supposedly found all of "+this.name+"s abilitys");
   }
 
   protected Entity getCreator() {
@@ -88,7 +88,6 @@ public class Entity implements Comparable<Entity> {
       }
     }
     // moved it down
-    System.out.println("EntityString is "+EntityString+"end of enString also \n");
     if(state == null){
       state = States.get(States.Name.NORMAL);
     }
@@ -135,7 +134,7 @@ public class Entity implements Comparable<Entity> {
    */
   public void addAbility(Ability newAbility) {
     if(abilities == null){
-      System.out.println("HEY NEWAB IS NULL");
+      //System.out.println("HEY NEWAB IS NULL");
     }
     abilities.add(newAbility);
     abNames.add(newAbility.getName());
