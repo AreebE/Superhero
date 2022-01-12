@@ -54,15 +54,18 @@ public class SpawnableAbility extends DefenseAbility
     
 
     @Override
-    protected boolean castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
         Entity ai = info.create(target);
+        Object[] contents = new Object[]{target.getName(), ai.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
         allPlayers.add(ai);
-        return true;
+        return;
     }
 
     @Override

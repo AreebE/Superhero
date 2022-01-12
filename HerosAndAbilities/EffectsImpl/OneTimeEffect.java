@@ -51,21 +51,23 @@ public class OneTimeEffect extends Effect
     }
 
     @Override
-    public void applyEffect(
-        Entity target) 
+    public void useEffect(
+        Entity target,
+        BattleLog log) 
     {
         if (!used) 
         {
-            applyEffect(getType(), target);
+            applyEffect(target, log);
             used = true;
         }
-        reduceDuration(target);
+        reduceDuration(target, log);
     }
 
 
     @Override
     public void removeEffect(
-        Entity target) 
+        Entity target,
+        BattleLog log) 
     {
         if (!isPermanent()) 
         {

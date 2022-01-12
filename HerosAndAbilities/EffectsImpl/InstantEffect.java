@@ -51,7 +51,8 @@ public class InstantEffect extends Effect
 
     @Override
     public void reduceDuration(
-        Entity target) 
+        Entity target,
+        BattleLog log) 
     {
         target.removeEffect(this);
     }

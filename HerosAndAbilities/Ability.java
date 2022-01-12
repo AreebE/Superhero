@@ -5,6 +5,9 @@ import java.util.List;
 
 public abstract class Ability 
 {
+
+    public static final int MISS = -1;
+
     private String name;
     private String description;
     private int cooldown;
@@ -13,10 +16,10 @@ public abstract class Ability
     private Abilities.Type type;
     private Abilities.Name enumName;
     private Element em;
-    private boolean isRandomized;
     private int chance;
     private EnumMap<Abilities.Modifier, AbilityModifier> modifiers;
 
+    private boolean keepGoing;
 
     public Ability(
         String name, 
@@ -105,12 +108,17 @@ public abstract class Ability
     }
 
 
-    public boolean useAbility(
+    public void useAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
+        keepGoing = true;
+        Object[] contents = new Object[]{caster.getName(), target.getName(), name, (otherTargets == null)? 0: otherTargets.size()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
+        
         turnsSinceUse -= cooldown;
         RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.Modifier.RECOIL);
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.Modifier.RANDOM);
@@ -141,33 +149,41 @@ public abstract class Ability
                 }
                 strength += additionalStrength;
                 // System.out.println(strength);
-                boolean keepGoing = castAbility(target, caster, otherTargets, allPlayers);
+                castAbility(target, caster, otherTargets, allPlayers, log);
                 if (group != null)
                 {
                     strength *= group.triggerModifier(target, caster);
                     // System.out.println(strength);
                     for (int j = 0; j < otherTargets.size(); j++)
                     {
-                        castAbility(otherTargets.get(j), caster, otherTargets, allPlayers);
+                        castAbility(otherTargets.get(j), caster, otherTargets, allPlayers, log);
                     }
                 }
+                  
                 strength = baseStrength;
                 if (!keepGoing){
-                    return false;
+                    contents = new Object[]{BattleLog.Entry.Interruption.SHIELD};
+                    log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
+                    return;                
                 }
             }
-            return true;
+            // contents = new Object[]{caster.getName(), target.getName(), name, (group == null)? 0: group.getLimit()};
+            // log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
+            return;
         }
-        return false;
+        contents = new Object[]{BattleLog.Entry.Interruption.RANDOM};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
+        return;
     }
 
 
-    protected abstract boolean castAbility
+    protected abstract void castAbility
     (
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers
+        List<Entity> allPlayers,
+        BattleLog log
     );
 
 
@@ -233,5 +249,10 @@ public abstract class Ability
     public AbilityModifier getModifier(Abilities.Modifier modifierName)
     {
         return modifiers.get(modifierName);
+    }
+
+    protected void stopAttack()
+    {
+        keepGoing = false;
     }
 }

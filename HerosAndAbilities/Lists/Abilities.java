@@ -145,8 +145,8 @@ public final class Abilities
                 50,
                 Name.EARTHQUAKE,
                 Elements.getElement(Elements.Name.EARTH),
-                true, 
-                true,
+                false, 
+                false,
                 new GroupModifier(100, -1)
             )
         );
@@ -331,7 +331,7 @@ public final class Abilities
                 "Create an illusion that retaliates when attacked", 
                 3, 
                 Shields.getShield(Shields.Name.ILLUSION), 
-                Name.WITCH_SPELL, 
+                Name.ILLUSION_SPELL, 
                 Elements.getElement(Elements.Name.LIGHT)
             )
         );
@@ -658,6 +658,8 @@ public final class Abilities
         put("earthquake", Name.EARTHQUAKE);
 
         put("telekinesis", Name.TELEKINESIS);
+
+        put("poison_slash", Name.POISON_SLASH);
     }};
 
 

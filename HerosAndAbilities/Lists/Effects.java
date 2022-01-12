@@ -11,14 +11,21 @@ public final class Effects
 
     public static enum Type
     {
-        ATTACK, 
-        DEFENSE, 
-        HEALTH,
-        MAX_HEALTH,
-        SHIELD, 
-        DAMAGE, 
-        SPEED,
-        GROUP
+        ATTACK("attack"), 
+        DEFENSE("defense"), 
+        HEALTH("health"),
+        MAX_HEALTH("Max health"),
+        SHIELD("shield"), 
+        DAMAGE("health"), 
+        SPEED("speed"),
+        GROUP("");
+
+        public final String name;
+        
+        Type(String name)
+        {
+            this.name = name;
+        }
     } 
 
     public static enum Modifier 

@@ -14,27 +14,31 @@ public class PassAbility extends Ability
     }
 
     @Override
-    protected boolean castAbility
+    protected void castAbility
     (
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers
+        List<Entity> allPlayers,
+        BattleLog battleLog
     )
     {
-        return true;
+        
     }
 
     @Override
-    public boolean useAbility
+    public void useAbility
     (
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers
+        List<Entity> allPlayers,
+        BattleLog log
     )
     {
-        return true;
+        Object[] contents = new Object[]{caster.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.PASS, contents));
+        return;
     }  
     
     @Override

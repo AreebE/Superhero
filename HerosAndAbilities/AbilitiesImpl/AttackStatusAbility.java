@@ -64,19 +64,22 @@ public class AttackStatusAbility extends AttackAbility
 
 
     @Override
-    protected boolean castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
-        super.castAbility(target, caster, otherTargets, allPlayers);
+        super.castAbility(target, caster, otherTargets, allPlayers, log);
         if (isPiercing() 
             || !caster.hasShield()) 
         {
-            target.addEffect(sideEffect.copy(caster.getBaseAttack()));
+            target.addEffect(sideEffect.copy());
+            Object[] contents = new Object[]{target.getName(), sideEffect.getName()};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
         }
-        return true;
+        return;
     }
 
 

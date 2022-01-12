@@ -35,7 +35,7 @@ public class Effect
         (
             strength, 
             type, 
-            duration, 
+            duration,
             permanent, 
             name, 
             desc, 
@@ -76,31 +76,33 @@ public class Effect
     /**
      * Will apply its effect to the given Entity
      */
-    public void applyEffect(
-        Entity target) 
+    public void useEffect(
+        Entity target,
+        BattleLog log) 
     {
         // System.out.println("called super");
-        applyEffect(typeOfEffect, target);
-        reduceDuration(target);
+        applyEffect(target, log);
+        reduceDuration(target, log);
     }
 
 
     protected void applyEffect(
-        Effects.Type type, 
-        Entity target) 
+        Entity target,
+        BattleLog log) 
     {
         PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effects.Modifier.PERCENT);
         int power = this.strength + ((percent == null) ? 0: percent.applyEffect(target));
+
+        Object[] contents = new Object[]{target.getName(), typeOfEffect, power, name};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.APPLY_EFFECT, contents));
         // System.out.println("Applied " + name + ", " + type power + " " + percent);
-        this.applyEffect(type, target, power);
+        this.applyEffect(target, power);
     }
 
     protected void applyEffect(
-        Effects.Type type, 
         Entity target, 
         int power) 
     {
-
         switch (typeOfEffect) 
         {
             case ATTACK:
@@ -135,18 +137,27 @@ public class Effect
 
 
     public void reduceDuration(
-        Entity target) 
+        Entity target,
+        BattleLog log) 
     {
         duration--;
         if (duration == 0) 
         {
-            removeEffect(target);
+            Object[] contents = new Object[]{target.getName(), new String[]{name}};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_REMOVED, contents));
+            removeEffect(target, log);
         }
+    }
+
+    public void reduceDuration()
+    {
+        duration--;
     }
 
 
     protected void removeEffect(
-        Entity target) 
+        Entity target,
+        BattleLog log) 
     {
         if (!permanent) 
         {
@@ -158,6 +169,8 @@ public class Effect
                 case DEFENSE:
                     target.addDefense(-strength * duration);
                     break;
+                case SPEED:
+                    target.addDefense(-strength * duration);
             }
         }
         target.removeEffect(this);

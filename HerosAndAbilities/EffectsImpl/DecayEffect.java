@@ -38,25 +38,27 @@ public class DecayEffect extends Effect{
     }
 
     @Override
-    public void applyEffect(
-        Effects.Type type, 
-        Entity target)
+    public void useEffect(
+        Entity target,
+        BattleLog log)
     {
         if (count < turnDecayStarts)
         {
-            super.applyEffect(type, target, super.getStrength(target));
+            super.applyEffect(target, super.getStrength(target));
         }
         else 
         {
-            super.applyEffect(type, target, -decayRate);
+            super.applyEffect(target, -decayRate);
         }
+        reduceDuration(target, log);
     }
 
     @Override 
     public void reduceDuration(
-        Entity target)
+        Entity target,
+        BattleLog log)
     {
-        super.reduceDuration(target);
+        super.reduceDuration(target, log);
         count++;
     }
 

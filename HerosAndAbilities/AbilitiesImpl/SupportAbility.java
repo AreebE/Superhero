@@ -57,14 +57,17 @@ public class SupportAbility extends Ability
 
 
     @Override
-    protected boolean castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
         target.addEffect(template.copy());
-        return true;
+        Object[] contents = new Object[]{target.getName(), template.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_APPLIED, contents));
+        return;
     }
 
 

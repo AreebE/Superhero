@@ -68,14 +68,17 @@ public class AttackAbility extends Ability
 
 
     @Override
-    protected boolean castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());
+        int currentIndex = log.getCurrentIndex(); 
+
         int attackStrength = getStrength() + caster.getBaseAttack();
         if (attackStrength < 0) 
         {
@@ -88,17 +91,22 @@ public class AttackAbility extends Ability
           attackStrength += attackStrength;
         }
 
-        boolean keepGoing = target.dealDamage
+        Object[] results = target.dealDamage
         (
             attackStrength, 
             isPiercing, 
             ignoresBaseDefense,
             caster,
-            getElement()
+            getElement(),
+            log
         );
-        return keepGoing;
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK, results), currentIndex);
+        if ((Boolean) results[5])
+        {
+            super.stopAttack();
+        }
+        return;
     }
-
 
     @Override
     public Ability copy() 

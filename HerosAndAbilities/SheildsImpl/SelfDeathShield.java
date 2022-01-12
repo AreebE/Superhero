@@ -31,9 +31,17 @@ public class SelfDeathShield extends DeathShield
     @Override
     protected void applyShield(
         Entity victim, 
-        Entity caster)
+        Entity caster,
+        BattleLog log)
     {
-        System.out.println(" apply shield to " + caster.getName());
-        caster.applyEffect(getEffect().copy());
+        Object[] contents = new Object[]{
+            victim.getName(), 
+            getUses() - 1, 
+            victim.getName(), 
+            getEffect().getName(), 
+            null,
+            getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
+        victim.applyEffect(getEffect().copy(), log);
     }
 }

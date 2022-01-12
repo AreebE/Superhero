@@ -42,8 +42,13 @@ public class DualShield extends Shield
 
 
     @Override
-    protected void applyShield(Entity victim, Entity caster)
+    protected void applyShield(
+        Entity victim, 
+        Entity caster,
+        BattleLog log)
     {
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), casterApply.getName(), selfApply.getName(), getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
         victim.addEffect(selfApply.copy());
         caster.addEffect(casterApply.copy());
     }

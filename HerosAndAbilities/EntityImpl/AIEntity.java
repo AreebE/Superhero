@@ -44,7 +44,7 @@ public class AIEntity extends Entity
         for (int i = 0; i < limit; i++)
         {
             Action a = null;
-            while (a == null && !a.isLegalAction())
+            while (a == null || !a.isLegalAction())
             {
                 Entity target = inputReader.getSingleTarget();
                 a = new AIAction(target, this, allHeros, inputReader);
@@ -61,25 +61,26 @@ public class AIEntity extends Entity
     }
 
     @Override
-    public boolean dealDamage(
+    public Object[] dealDamage(
         int damageDealt, 
         boolean isPiercing, 
         boolean ignoresDefense,
         Entity caster,
-        Element e
+        Element e,
+        BattleLog log
     )
     {
         if (isTargettable)
         {
-            super.dealDamage(damageDealt, isPiercing, ignoresDefense, caster, e);
+            return super.dealDamage(damageDealt, isPiercing, ignoresDefense, caster, e, log);
         }
-        return false;
+        return new Object[]{super.getName(), 0, 0, 0, 0, 0, 0};
     }
 
     @Override
-    public void endOfTurn()
+    public void endOfTurn(BattleLog log)
     {
-        super.endOfTurn();
+        super.endOfTurn(log);
         currentAbility = (currentAbility + 1) % attackPattern.size();
     }
 

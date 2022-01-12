@@ -49,14 +49,15 @@ public class CleanseAbility extends SupportAbility
 
 
     @Override
-    protected boolean castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
-        target.removeEffects(getElement().getID());
-        return true;
+        target.removeEffects(getElement().getID(), log);
+        return;
     }
 
 

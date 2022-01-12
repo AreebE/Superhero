@@ -38,10 +38,15 @@ public class TrapShield extends Shield
 
 
     @Override
-    protected void applyShield(Entity victim, Entity caster)
+    protected void applyShield(
+        Entity victim, 
+        Entity caster,
+        BattleLog log)
     {
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), counter.getName(), null, getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
                 // System.out.println("Apply " + isNullifies());
-        caster.addEffect(counter);
+        caster.addEffect(counter.copy());
     }
 
     @Override

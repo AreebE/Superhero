@@ -74,9 +74,9 @@ public abstract class Shield
     }
 
 
-    public boolean triggerShield(Entity target, Entity caster)
+    public boolean triggerShield(Entity target, Entity caster, BattleLog log)
     {
-        applyShield(target, caster);
+        applyShield(target, caster, log);
         // System.out.println("Trigger " + nullifies);
         if (uses != -1) 
         {
@@ -84,15 +84,17 @@ public abstract class Shield
         }
         if (uses == 0)
         {
-            target.removeShield(this);
+            removeShield(target, caster, log);
         }
         // System.out.println(nullifies);
         return nullifies;
     }
 
-    protected abstract void applyShield(Entity target, Entity caster);
+    protected abstract void applyShield(Entity target, Entity caster, BattleLog log);
 
-    public void passTurn(Entity target)
+    public void passTurn(
+        Entity target, 
+        BattleLog log)
     {
         if (duration != -1)
         {
@@ -100,11 +102,29 @@ public abstract class Shield
         }
 
         if (duration == 0){
-            target.removeShield(this);
+            removeShield(target, null, log);
         }
     }
 
     public abstract Shield copy();
+
+    public void removeShield(
+        Entity target,
+        Entity caster,
+        BattleLog log
+    )
+    {
+        Object[] contents = new Object[]{target.getName(), new String[]{name}};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_LOST, contents));
+        if (target != null)
+        {
+            target.removeShield(this);
+        }
+        else 
+        {
+            caster.removeShield(this);
+        }
+    }
 
     public String toString()
     {

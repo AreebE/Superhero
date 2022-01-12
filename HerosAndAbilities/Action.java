@@ -66,16 +66,22 @@ public class Action {
                 );
     }
 
-    public void performAction()
+    public void performAction(BattleLog log)
     {
         // System.out.println("perform action");
-        ability.useAbility(target, caster, otherTargets, allHeros);
-        caster.endOfTurn();
+        ability.useAbility(target, caster, otherTargets, allHeros, log);
+        caster.endOfTurn(log);
+        // caster.endOfTurn();
     }
 
     public Entity getTarget()
     {
         return target;
+    }
+
+    public Entity getCaster()
+    {
+        return caster;
     }
 
     public List<Entity> getOtherTargets()
