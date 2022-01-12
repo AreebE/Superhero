@@ -2,11 +2,7 @@
   {
     "name": "A",
     "speed": 10,
-    "abNames": [
-      "Pass turn",
-      "Fireball",
-      "Summon Squirrel"
-    ],
+    "abNames": [],
     "health": 100,
     "maxHealth": 100,
     "shieldHealth": 50,
@@ -16,12 +12,7 @@
   {
     "name": "B",
     "speed": 30,
-    "abNames": [
-      "Pass turn",
-      "Snowball",
-      "Summon Golem",
-      "Ground Suction"
-    ],
+    "abNames": [],
     "health": 100,
     "maxHealth": 100,
     "shieldHealth": 50,

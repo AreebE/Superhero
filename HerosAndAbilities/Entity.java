@@ -5,28 +5,25 @@ import java.lang.Comparable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Entity implements Comparable<Entity>
 {
-
-    public static final int HEALTH_LOST_INDEX = 0;
-    public static final int SHIELD_LOST_INDEX = 1;
-    public static final int KEEP_GOING_INDEX = 2;
-
     // free will between 1 and 20;
-    private Entity creator;
+    private transient Entity creator;
     private String name;
     private int speed;
-    private ArrayList<Ability> abilities;
-    private ArrayList<Effect> effects;
-    private ArrayList<Shield> shields;
-    private State state;
+    private transient ArrayList<Ability> abilities;
+    private transient ArrayList<Effect> effects;
+    private transient ArrayList<Shield> shields;
+    private transient State state;
+    private ArrayList<String> abNames = new ArrayList<String>();
     private int health;
     private int maxHealth;
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
-    private static Terrain t;
+    private static transient Terrain t;
 
 
     public static enum Statistic
@@ -61,7 +58,25 @@ public class Entity implements Comparable<Entity>
         Abilities.giveAbility(this, Abilities.Name.PASS_TURN);
     }
 
-
+    public void updateAbilities() {
+    abilities = new ArrayList<Ability>();
+    int yep = abNames.toArray().length;
+    String[] a = Arrays.toString(Abilities.Name.values()).replaceAll("^.|.$", "").split(", ");
+    for(int i=0;i<yep;i++){
+      //System.out.println("abnames toarris"+yep);
+      String q=abNames.get(i);
+      q=q.toUpperCase();
+      q=q.replaceAll(" ","_");
+      q=q.replaceAll("t","X");
+      int d=0;
+      while(!q.equals(a[d]) && d<34){
+        d++;
+      }
+      Abilities.giveAbility(this,Abilities.Name.valueOf(a[d]));
+    }
+    //System.out.println("Supposedly found all of "+this.name+"s abilitys");
+  }
+  
     protected Entity getCreator()
     {
         return this.creator;
@@ -99,39 +114,48 @@ public class Entity implements Comparable<Entity>
             }
         }
         // moved it down
-        EntityString.append("The state is: ")
+        if (state != null)
+        {
+            EntityString.append("The state is: ")
                     .append(state.toString())
                     .append("\n")
                     .append("\u001B[31m");
-        if (effects.size() == 0) 
+        }
+        
+        if (effects != null)
         {
-            EntityString.append("No Effects/ deEffects applied.\n");
-        } else 
-        {
-            EntityString.append("The Effects/deEffects are:\n");
-            for (int i = 0; i < effects.size(); i++) 
+            if (effects.size() == 0) 
             {
-                EntityString.append("* ")
-                                .append(effects.get(i))
-                                .append("\n");
+                EntityString.append("No Effects/ deEffects applied.\n");
+            } else 
+            {
+                EntityString.append("The Effects/deEffects are:\n");
+                for (int i = 0; i < effects.size(); i++) 
+                {
+                    EntityString.append("* ")
+                                    .append(effects.get(i))
+                                    .append("\n");
+                }
             }
         }
 
         EntityString.append("\u001B[35m");
-        if (shields.size() == 0) 
+        if (shields != null)
         {
-            EntityString.append("No shields applied.\n");
-        } else 
-        {
-            EntityString.append("The Shields are:\n");
-            for (int i = 0; i < shields.size(); i++) 
+            if (shields.size() == 0) 
             {
-                EntityString.append("* ")
-                                .append(shields.get(i))
-                                .append("\n");
+                EntityString.append("No shields applied.\n");
+            } else 
+            {
+                EntityString.append("The Shields are:\n");
+                for (int i = 0; i < shields.size(); i++) 
+                {
+                    EntityString.append("* ")
+                                    .append(shields.get(i))
+                                    .append("\n");
+                }
             }
         }
-
         EntityString.append("\u001B[34m")
                         .append("* health - ")
                         .append(health)
@@ -274,8 +298,7 @@ public class Entity implements Comparable<Entity>
     {
         if (this.health <= 0)
         {
-            Object[] contents = new Object[]{name};
-            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.KNOCKED_OUT, contents));
+            searchForShield(Shields.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, log);
         }
         return this.health <= 0;
     }
@@ -292,7 +315,7 @@ public class Entity implements Comparable<Entity>
      *
      * @return     if the player can keep attacking
      */
-    public Object[] dealDamage(
+ public Object[] dealDamage(
         int damageDealt, 
         boolean isPiercing, 
         boolean ignoresDefense,
@@ -421,7 +444,7 @@ public class Entity implements Comparable<Entity>
         BattleLog log
     )
     {
-        e.useEffect(this, log);
+        e.applyEffect(this, log);
     }
 
     public void removeEffect(
@@ -429,6 +452,7 @@ public class Entity implements Comparable<Entity>
     {
         effects.remove(removed);
     }
+
 
     public void removeEffects(
         Elements.Name elementID,
@@ -472,9 +496,7 @@ public class Entity implements Comparable<Entity>
     }
 
 
-    public void reduceShieldDurations(
-        BattleLog log
-    )
+    public void reduceShieldDurations(BattleLog log)
     {
         for (int i = shields.size() - 1; i >= 0; i--)
         {
@@ -641,7 +663,7 @@ public class Entity implements Comparable<Entity>
     /*
      * Actions done at the end of the turn
      */
-    public void endOfTurn(BattleLog log) 
+     public void endOfTurn(BattleLog log) 
     {
         Object[] contents = new Object[]{name};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.END_OF_TURN, contents));
@@ -668,7 +690,7 @@ public class Entity implements Comparable<Entity>
         {
             // System.out.println(this);
             Effect b = effects.get(i);
-            b.useEffect(this, log);
+            b.applyEffect(this, log);
         }
     }
 
@@ -677,10 +699,6 @@ public class Entity implements Comparable<Entity>
         for (Ability a : abilities) 
         {
             a.reduceCooldown();
-            if (a.ableToUseAbility())
-            {
-               
-            }
         }
     }
 
@@ -689,5 +707,4 @@ public class Entity implements Comparable<Entity>
         state.reduceDuration(this);
     }
 
-    
 }

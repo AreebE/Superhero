@@ -54,7 +54,7 @@ class InnerGame {
   public int isLastOne(){
     int t=fighters.toArray().length;
     for(Entity e:fighters){
-      if(e.isHealthZero()){
+      if(e.isHealthZero(new StringBattleLog())){
         t--;
       }
       System.out.println("numOfFightersAliveIs: "+t);
