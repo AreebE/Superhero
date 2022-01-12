@@ -36,10 +36,12 @@ public class DeathShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster,
-        StringBuilder actions)
+        BattleLog log)
     {
         // System.out.println("appltied death shield to " + victim.getName());
-        caster.applyEffect(effect.copy(), actions);
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), effect.getName(), null, getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
+        caster.applyEffect(effect.copy(), log);
     }
 
     protected Effect getEffect()

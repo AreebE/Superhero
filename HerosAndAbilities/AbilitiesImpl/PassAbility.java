@@ -14,29 +14,31 @@ public class PassAbility extends Ability
     }
 
     @Override
-    protected String castAbility
+    protected void castAbility
     (
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers
+        List<Entity> allPlayers,
+        BattleLog battleLog
     )
     {
-        return "  ";
+        
     }
 
     @Override
-    public String useAbility
+    public void useAbility
     (
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers
+        List<Entity> allPlayers,
+        BattleLog log
     )
     {
-        return new StringBuilder(caster.getName())
-                .append(" passed their turn.")
-                .toString();
+        Object[] contents = new Object[]{caster.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.PASS, contents));
+        return;
     }  
     
     @Override

@@ -68,14 +68,17 @@ public class AttackAbility extends Ability
 
 
     @Override
-    protected String castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());
+        int currentIndex = log.getCurrentIndex(); 
+
         int attackStrength = getStrength() + caster.getBaseAttack();
         if (attackStrength < 0) 
         {
@@ -88,56 +91,21 @@ public class AttackAbility extends Ability
           attackStrength += attackStrength;
         }
 
-        StringBuilder action = new StringBuilder();
-        int[] values = target.dealDamage
+        Object[] results = target.dealDamage
         (
             attackStrength, 
             isPiercing, 
             ignoresBaseDefense,
             caster,
             getElement(),
-            action
+            log
         );
-        if (values[Entity.KEEP_GOING_INDEX] == Ability.MISS)
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK, results), currentIndex);
+        if ((Boolean) results[5])
         {
             super.stopAttack();
         }
-        return action.append(formActionString(values, target)).toString();
-    }
-
-    private String formActionString(int[] values, Entity target)
-    {
-        StringBuilder action = new StringBuilder(target.getName());
-        // action.append(values[Entity.KEEP_GOING_INDEX]);
-        int healthLost = values[Entity.HEALTH_LOST_INDEX];
-        int shieldLost = values[Entity.SHIELD_LOST_INDEX];
-        if (healthLost == 0
-            && shieldLost == 0)
-        {
-            action.append(" received no damage.");
-            return action.toString();
-        }
-        action.append(" lost ");
-        if (shieldLost != 0)
-        {
-            action.append(shieldLost)
-                .append(" shield (Has ")
-                .append(target.getStatistic(Entity.Statistic.SHIELD))
-                .append(" shield left) ");
-
-            if (healthLost != 0)
-            {
-                action.append("and ");
-            }
-        }
-        if (healthLost != 0)
-        {
-            action.append(healthLost)
-                .append(" health (Has ")
-                .append(target.getStatistic(Entity.Statistic.HEALTH))
-                .append(" health left)");
-        }
-        return action.toString();
+        return;
     }
 
     @Override

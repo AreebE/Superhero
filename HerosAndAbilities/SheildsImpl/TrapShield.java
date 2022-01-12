@@ -41,14 +41,12 @@ public class TrapShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster,
-        StringBuilder actions)
+        BattleLog log)
     {
-        actions.append(caster.getName())
-            .append(" recieved the effect of ")
-            .append(counter.getName())
-            .append("\n");
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), counter.getName(), null, getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
                 // System.out.println("Apply " + isNullifies());
-        caster.addEffect(counter);
+        caster.addEffect(counter.copy());
     }
 
     @Override

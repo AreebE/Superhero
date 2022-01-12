@@ -49,7 +49,7 @@ public class PassiveEffect extends Effect
     @Override
     public void reduceDuration(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
     }
 

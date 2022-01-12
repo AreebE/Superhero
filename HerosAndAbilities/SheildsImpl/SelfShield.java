@@ -41,12 +41,10 @@ public class SelfShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster, 
-        StringBuilder actions)
+        BattleLog log)
     {
-        actions.append(victim.getName())
-            .append(" recieved the effect of ")
-            .append(selfApply.getName())
-            .append("\n");
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, victim.getName(), selfApply.getName(), null, getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
         victim.addEffect(selfApply.copy());
     }
 

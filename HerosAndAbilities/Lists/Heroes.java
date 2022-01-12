@@ -144,6 +144,7 @@ public final class Heroes {
                     add(Abilities.Name.POISON_SLASH);
                     add(Abilities.Name.ILLUSION_SPELL);
                     add(Abilities.Name.TELEKINESIS);
+                    add(Abilities.Name.EARTHQUAKE);
                     add(Abilities.Name.DEFENSIVE_STANCE);
                     add(Abilities.Name.PRAY);
                     // add(Abilities.Name.STUN_SPORE);

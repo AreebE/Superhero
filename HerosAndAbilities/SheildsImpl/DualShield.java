@@ -45,17 +45,10 @@ public class DualShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster,
-        StringBuilder actions)
+        BattleLog log)
     {
-        actions.append(victim.getName())
-            .append(" recieved the effect of ")
-            .append(selfApply.getName())
-            .append("\n")
-            .append(" while ")
-            .append(caster.getName())
-            .append(" gets the effect of ")
-            .append(casterApply.getName());
-
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), casterApply.getName(), selfApply.getName(), getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
         victim.addEffect(selfApply.copy());
         caster.addEffect(casterApply.copy());
     }

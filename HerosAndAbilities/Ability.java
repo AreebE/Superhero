@@ -125,45 +125,30 @@ public abstract class Ability
     }
 
 
-    public String useAbility(
+    public void useAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
         keepGoing = true;
-        StringBuilder builder = new StringBuilder();
-        builder.append("Used ")
-                .append(name)
-                .append(" on ")
-                .append(target.getName());
+        Object[] contents = new Object[]{caster.getName(), target.getName(), name, (otherTargets == null)? 0: otherTargets.size()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
+        
         turnsSinceUse -= cooldown;
         RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.Modifier.RECOIL);
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.Modifier.RANDOM);
         MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.Modifier.MULTICAST);
         PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.Modifier.PERCENTAGE);
         GroupModifier group = (GroupModifier) modifiers.get(Abilities.Modifier.GROUP);
-        if (group != null)
-        {
-            builder.append(" along with ");
-            if (group.getLimit() == -1)
-            {
-                builder.append("everyone else.");
-            }
-            else 
-            {
-                builder.append(otherTargets.size())
-                        .append(" others");
-            }
-        }
-        builder.append("\n");
         // System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
         {
             if (recoil != null) 
             {
-                builder.append(recoil.triggerModifier(target, caster));
+                recoil.triggerModifier(target, caster);
             }
             int times = 1;
             if (multi != null)
@@ -181,59 +166,41 @@ public abstract class Ability
                 }
                 strength += additionalStrength;
                 // System.out.println(strength);
-                builder.append(castAbility(target, caster, otherTargets, allPlayers))
-                        .append("\n");
+                castAbility(target, caster, otherTargets, allPlayers, log);
                 if (group != null)
                 {
                     strength *= group.triggerModifier(target, caster);
                     // System.out.println(strength);
                     for (int j = 0; j < otherTargets.size(); j++)
                     {
-                        builder.append(castAbility(otherTargets.get(j), caster, otherTargets, allPlayers))
-                                .append("\n");
+                        castAbility(otherTargets.get(j), caster, otherTargets, allPlayers, log);
                     }
-                    builder.append("\n__");
                 }
                   
                 strength = baseStrength;
                 if (!keepGoing){
-                    builder.append(name)
-                        .append(" was interrupted");
-                    if (times > 1)
-                    {
-                        builder.append("on the ")
-                            .append(i + 1)
-                            .append(" out of ")
-                            .append(times)
-                            .append(" attempt");
-                    }
-                    builder.append(".");
-                    
-                    return builder.toString();
+                    contents = new Object[]{BattleLog.Entry.Interruption.SHIELD};
+                    log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
+                    return;                
                 }
             }
-            if (times > 1)
-            {
-                builder.append(name)
-                    .append(" was used successfully ")
-                    .append(times)
-                    .append(" times. \n");   
-            }
-            
-        
-            return builder.toString();
+            // contents = new Object[]{caster.getName(), target.getName(), name, (group == null)? 0: group.getLimit()};
+            // log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
+            return;
         }
-        builder.append("... but it missed. (Caused by random chance)");
-        return builder.toString();
+        contents = new Object[]{BattleLog.Entry.Interruption.RANDOM};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
+        return;
     }
 
 
-    protected abstract String castAbility
+    protected abstract void castAbility
     (
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers
+        List<Entity> allPlayers,
+        BattleLog log
     );
 
 

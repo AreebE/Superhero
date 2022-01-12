@@ -52,19 +52,18 @@ public class DelayedEffect extends Effect
     @Override
     public void useEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
-        reduceDuration(target, actions);
+        reduceDuration(target, log);
     }
 
 
     @Override
     protected void removeEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
-        applyEffect(target, actions);
-        actions.append(" The delayed effect has also been removed.");
+        applyEffect(target, log);
         target.removeEffect(this);
     }
 

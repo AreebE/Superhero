@@ -111,7 +111,7 @@ public class AreebGame{
     superheros.get(1).setTerrain(t);
     int removeCount = 0;
     // ArrayList<Action> actions = new
-    while (removeCount < 2){
+    while (superheros.size() > 1){
     //   Entity currentPlayer = superheros.get(i);
       // System.out.println(currentPlayer.getName() + "\'s turn. Has the health of " + currentPlayer.getHealth() + ", the sheild of " + currentPlayer.getSheildHealth() + " and abilities:\n" + currentPlayer.getAbilities());
     //   System.out.println(currentPlayer);
@@ -128,17 +128,17 @@ public class AreebGame{
         }
         
         // String[] battleLog = new String[actions.size()];
+        BattleLog log = new StringBattleLog();
         for (int i = actions.size() - 1; i >= 0; i--)
         {
             // System.out.println(actions.get(i).getClass());
-            Action a = actions.get(i);
-            System.out.println(a.getCaster().getName() + ": ");
-            System.out.println(a.performAction());
+            actions.get(i).performAction(log);
             System.out.println();
         }
+        // System.out.println(log.getFullLog().toString());
         for (int i = superheros.size() - 1; i >= 0; i--)
         {
-            if (superheros.get(i).isHealthZero())
+            if (superheros.get(i).isHealthZero(log))
             {
                 Entity target = superheros.remove(i);
                 System.out.println(target.getName() + " was eliminated. " + target.toString());
@@ -146,6 +146,13 @@ public class AreebGame{
             }
             // superheros.get(i);
         }
+
+        ArrayList<String> fullLog = (ArrayList<String>) log.getFullLog();
+        for (String s: fullLog)
+        {
+            System.out.println(s);
+        }
+        
         actions.clear();
         Collections.sort(superheros);
         Collections.reverse(superheros);
@@ -155,9 +162,7 @@ public class AreebGame{
     }
     inputReader.close();
     // System.out.println(superheros.get(0).getHealth() + ", " + superheros.get(1).getHealth() + ", " + superheros.get(2).getHealth());
-        System.out.println(superheros);
-
-    
+    System.out.println(superheros.get(0).getName() + " won!");
   }
 
     private class ScannerInput implements InputSystem 

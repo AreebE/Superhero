@@ -53,25 +53,24 @@ public class OneTimeEffect extends Effect
     @Override
     public void useEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
         if (!used) 
         {
-            applyEffect(target, actions);
+            applyEffect(target, log);
             used = true;
         }
-        reduceDuration(target, actions);
+        reduceDuration(target, log);
     }
 
 
     @Override
     public void removeEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
         if (!isPermanent()) 
         {
-            actions.append("The effect was also removed.");
             switch (getType()) 
             {
                 case ATTACK:

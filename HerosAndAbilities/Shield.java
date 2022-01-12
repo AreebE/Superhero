@@ -74,9 +74,9 @@ public abstract class Shield
     }
 
 
-    public boolean triggerShield(Entity target, Entity caster, StringBuilder actions)
+    public boolean triggerShield(Entity target, Entity caster, BattleLog log)
     {
-        applyShield(target, caster, actions);
+        applyShield(target, caster, log);
         // System.out.println("Trigger " + nullifies);
         if (uses != -1) 
         {
@@ -84,17 +84,17 @@ public abstract class Shield
         }
         if (uses == 0)
         {
-            removeShield(target, caster, actions);
+            removeShield(target, caster, log);
         }
         // System.out.println(nullifies);
         return nullifies;
     }
 
-    protected abstract void applyShield(Entity target, Entity caster, StringBuilder actions);
+    protected abstract void applyShield(Entity target, Entity caster, BattleLog log);
 
     public void passTurn(
         Entity target, 
-        StringBuilder actions)
+        BattleLog log)
     {
         if (duration != -1)
         {
@@ -102,7 +102,7 @@ public abstract class Shield
         }
 
         if (duration == 0){
-            removeShield(target, null, actions);
+            removeShield(target, null, log);
         }
     }
 
@@ -111,10 +111,11 @@ public abstract class Shield
     public void removeShield(
         Entity target,
         Entity caster,
-        StringBuilder actions
+        BattleLog log
     )
     {
-        actions.append("The shield expired.");
+        Object[] contents = new Object[]{target.getName(), new String[]{name}};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_LOST, contents));
         if (target != null)
         {
             target.removeShield(this);

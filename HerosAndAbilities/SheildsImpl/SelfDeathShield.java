@@ -32,12 +32,16 @@ public class SelfDeathShield extends DeathShield
     protected void applyShield(
         Entity victim, 
         Entity caster,
-        StringBuilder actions)
+        BattleLog log)
     {
-        actions.append(victim.getName())
-            .append(" recieved the effect of ")
-            .append(getEffect().getName())
-            .append("\n");
-        victim.applyEffect(getEffect().copy(), actions);
+        Object[] contents = new Object[]{
+            victim.getName(), 
+            getUses() - 1, 
+            victim.getName(), 
+            getEffect().getName(), 
+            null,
+            getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
+        victim.applyEffect(getEffect().copy(), log);
     }
 }

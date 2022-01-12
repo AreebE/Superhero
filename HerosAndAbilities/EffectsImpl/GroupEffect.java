@@ -109,13 +109,13 @@ public class GroupEffect extends Effect
     @Override
     public void reduceDuration(
         Entity target,
-        StringBuilder actions)
+        BattleLog log)
     {
         groupDuration--;
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
         {
             Effect e = listOfEffects.get(i);
-            e.reduceDuration(target, actions);
+            e.reduceDuration();
             // System.out.println(e.getDuration());
             if (e.getDuration() <= 0) 
             {
@@ -124,6 +124,8 @@ public class GroupEffect extends Effect
         }
         if (groupDuration <= 0) 
         {
+            Object[] contents = new Object[]{target.getName(), 0, 0, 0, 0, 0, 0};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_REMOVED, contents));
             target.removeEffect(this);
         }
     }
@@ -132,21 +134,12 @@ public class GroupEffect extends Effect
     @Override
     public void applyEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
         for (int i = listOfEffects.size() - 1; i >= 0; i--) 
         {
-            if (i == 0)
-            {
-                actions.append(", and ");
-            }
-            else if (i < listOfEffects.size() - 1)
-            {
-                actions.append(", ");
-            }
             Effect e = listOfEffects.get(i);
-            // System.out.println(e);
-            e.applyEffect(target, actions);
+            e.applyEffect(target, log);
         }
     }
 

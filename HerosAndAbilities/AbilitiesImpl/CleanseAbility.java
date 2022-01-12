@@ -49,20 +49,15 @@ public class CleanseAbility extends SupportAbility
 
 
     @Override
-    protected String castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
-        StringBuilder actions = new StringBuilder();
-        target.removeEffects(getElement().getID(), actions);
-        String action = actions.toString();
-        if (action.equals(""))
-        {
-            return "No effects were cleansed.";
-        }
-        return action;
+        target.removeEffects(getElement().getID(), log);
+        return;
     }
 
 

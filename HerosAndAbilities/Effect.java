@@ -78,47 +78,31 @@ public class Effect
      */
     public void useEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
         // System.out.println("called super");
-        applyEffect(target, actions);
-        reduceDuration(target, actions);
+        applyEffect(target, log);
+        reduceDuration(target, log);
     }
 
 
     protected void applyEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
         PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effects.Modifier.PERCENT);
         int power = this.strength + ((percent == null) ? 0: percent.applyEffect(target));
-        
-        
+
+        Object[] contents = new Object[]{target.getName(), typeOfEffect, power, name};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.APPLY_EFFECT, contents));
         // System.out.println("Applied " + name + ", " + type power + " " + percent);
-        this.applyEffect(target, power, actions);
+        this.applyEffect(target, power);
     }
 
     protected void applyEffect(
         Entity target, 
-        int power,
-        StringBuilder actions) 
+        int power) 
     {
-        // System.out.println(actions.toString())
-        if (power >= 0 && typeOfEffect != Effects.Type.DAMAGE)
-        {
-            actions.append("Increased ");
-        }
-        else 
-        {
-            actions.append("Decreased ");
-        }
-        actions.append(target.getName())
-                .append("\'s ")
-                .append(typeOfEffect.name)
-                .append(" by ")
-                .append(Math.abs(power))
-                .append("");
-
         switch (typeOfEffect) 
         {
             case ATTACK:
@@ -154,26 +138,29 @@ public class Effect
 
     public void reduceDuration(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
         duration--;
         if (duration == 0) 
         {
-            removeEffect(target, actions);
+            Object[] contents = new Object[]{target.getName(), new String[]{name}};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_REMOVED, contents));
+            removeEffect(target, log);
         }
+    }
+
+    public void reduceDuration()
+    {
+        duration--;
     }
 
 
     protected void removeEffect(
         Entity target,
-        StringBuilder actions) 
+        BattleLog log) 
     {
-        actions.append(", but they lost the effect.");
         if (!permanent) 
         {
-            actions.append(" (also lost their ")
-                    .append(typeOfEffect.name)
-                    .append(" buff)");
             switch (typeOfEffect) 
             {
                 case ATTACK:

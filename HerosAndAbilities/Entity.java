@@ -270,17 +270,13 @@ public class Entity implements Comparable<Entity>
         health += addHealth;
     }
 
-    public boolean isHealthZero(StringBuilder actions) 
+    public boolean isHealthZero(BattleLog log) 
     {
         if (this.health <= 0)
         {
-            searchForShield(Shields.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, actions);
+            Object[] contents = new Object[]{name};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.KNOCKED_OUT, contents));
         }
-        return this.health <= 0;
-    }
-
-    public boolean isHealthZero() 
-    {
         return this.health <= 0;
     }
 
@@ -296,16 +292,15 @@ public class Entity implements Comparable<Entity>
      *
      * @return     if the player can keep attacking
      */
-    public int[] dealDamage(
+    public Object[] dealDamage(
         int damageDealt, 
         boolean isPiercing, 
         boolean ignoresDefense,
         Entity caster,
         Element e,
-        StringBuilder actions) 
+        BattleLog log) 
     {   
-        int[] returnValues = new int[]{0, 0, 0};
-        
+        Object[] logValues = new Object[]{this.name, 0, 0, 0, 0, false};
         boolean endAttack = false;
         Shields.Trigger type = null;
         if (caster != null)
@@ -320,50 +315,56 @@ public class Entity implements Comparable<Entity>
         
         if (0 >= damageDealt) 
         {
-            return returnValues;
+            return logValues;
         } 
         else if (isPiercing) 
         {
             if (type != null)
             {
-                endAttack = searchForShield(type, e, this, caster, actions);
+                System.out.println();
+                endAttack = searchForShield(type, e, this, caster, log);
             }
             if (endAttack){
-                returnValues[KEEP_GOING_INDEX] = Ability.MISS;
-                return returnValues;
+                logValues[5] = true;
+                return logValues;
             }
             health -= damageDealt;
-            returnValues[HEALTH_LOST_INDEX] = damageDealt;
+            logValues[1] = damageDealt;
+            logValues[2] = (health < 0)? 0: health;
         } 
         else if (shieldHealth >= damageDealt) 
         {
             shieldHealth -= damageDealt;
-            returnValues[SHIELD_LOST_INDEX] = damageDealt;
-            return returnValues;
+            logValues[3] = damageDealt;
+            logValues[4] = shieldHealth;
+            return logValues;
         } 
         else
         {
-            returnValues[SHIELD_LOST_INDEX] = shieldHealth;
+            logValues[3] = shieldHealth;
+            logValues[4] = 0;
             damageDealt -= shieldHealth;
             shieldHealth = 0;
-            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, this, caster, actions);
+            endAttack = searchForShield(Shields.Trigger.SHIELD_BREAK, e, this, caster, log);
             if (type != null)
             {
-                endAttack = endAttack || searchForShield(type, e, this, caster, actions);
+                endAttack = endAttack || searchForShield(type, e, this, caster, log);
             }
             if (endAttack){
-                returnValues[KEEP_GOING_INDEX] = Ability.MISS;
-                return returnValues;
+                logValues[5] = true;
+                return logValues;
             }
-            returnValues[HEALTH_LOST_INDEX] = damageDealt;
+            logValues[1] = damageDealt;
             health -= damageDealt;
+            logValues[2] = (health > 0)? health: 0;
         }
         
         if (health < 0) 
         {
             health = 0;
+            searchForShield(Shields.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), this, creator, log);
         }
-        return returnValues;
+        return logValues;
     }
 
     public boolean dealEffectDamage(
@@ -417,10 +418,10 @@ public class Entity implements Comparable<Entity>
 
     public void applyEffect(
         Effect e,
-        StringBuilder actions
+        BattleLog log
     )
     {
-        e.useEffect(this, actions);
+        e.useEffect(this, log);
     }
 
     public void removeEffect(
@@ -429,20 +430,11 @@ public class Entity implements Comparable<Entity>
         effects.remove(removed);
     }
 
-    public void removeEffect(
-        Effect removed,
-        StringBuilder actions) 
-    {
-        effects.remove(removed);
-        actions.append(removed.getName());
-    }
-
-
     public void removeEffects(
         Elements.Name elementID,
-        StringBuilder actions)
+        BattleLog log)
     {
-        int times = 0;
+        List<String> effectsRemoved = new ArrayList<>();
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
             Effect e = effects.get(i);
@@ -453,18 +445,12 @@ public class Entity implements Comparable<Entity>
                         )
                 ) 
             {
-                if (times == 0)
-                {
-                    actions.append("Removed effect(s) ");
-                }
-                else 
-                {
-                    actions.append(", ");
-                }
-                times++;
-                removeEffect(e, actions);
+                effectsRemoved.add(e.getName());
+                removeEffect(e);
             }
         }
+        Object[] contents = new Object[]{name, effectsRemoved.toArray(new String[0])};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.CLEANSE, contents));
     }
     //
 
@@ -487,12 +473,12 @@ public class Entity implements Comparable<Entity>
 
 
     public void reduceShieldDurations(
-        StringBuilder actions
+        BattleLog log
     )
     {
         for (int i = shields.size() - 1; i >= 0; i--)
         {
-            shields.get(i).passTurn(this, actions);
+            shields.get(i).passTurn(this, log);
         }
     }
 
@@ -502,7 +488,7 @@ public class Entity implements Comparable<Entity>
         Element element,
         Entity target, 
         Entity caster,
-        StringBuilder actions)
+        BattleLog log)
     {
         boolean nullifyEffect = false;
         for (int i = shields.size() - 1; i >= 0; i--)
@@ -510,7 +496,7 @@ public class Entity implements Comparable<Entity>
             Shield s = shields.get(i);
             if (s.wouldTrigger(trigger, element))
             {
-                boolean nullify = s.triggerShield(target, caster, actions);
+                boolean nullify = s.triggerShield(target, caster, log);
                 if (nullify)
                 {
                     nullifyEffect = true;
@@ -655,51 +641,45 @@ public class Entity implements Comparable<Entity>
     /*
      * Actions done at the end of the turn
      */
-    public String endOfTurn() 
+    public void endOfTurn(BattleLog log) 
     {
-        StringBuilder actions = new StringBuilder("\n");
-        // use effects
-        useEffects(actions);
-        actions.append("\n");
-        // Reset cooldowns
-        reduceCooldowns(actions);
-        actions.append("\n");
+        Object[] contents = new Object[]{name};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.END_OF_TURN, contents));
 
-        // Reduce sheilds
-        reduceShieldDurations(actions);
-        actions.append("\n");
-        // Reduce state duration
+        useEffects(log);
+        reduceCooldowns(log);
+        reduceShieldDurations(log);
         reduceStateDurations();
-        
-        actions.append("The user is in a ")
-                .append(state.getName())
-                .append(" state.");
+        isHealthZero(log);
 
-        return actions.toString();
+        contents = new Object[]{name, state.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.CURRENT_STATE, contents));
+
+        contents = new Object[]{health, maxHealth, shieldHealth, baseAttack, baseDefense, speed};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.STAT_DISPLAY, contents));
+        
+        return;
     }
 
 
-    public void useEffects(StringBuilder actions) 
+    public void useEffects(BattleLog log) 
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
             // System.out.println(this);
             Effect b = effects.get(i);
-            b.useEffect(this, actions);
-            actions.append("\n");
+            b.useEffect(this, log);
         }
     }
 
-    public void reduceCooldowns(StringBuilder actions) 
+    public void reduceCooldowns(BattleLog log) 
     {
         for (Ability a : abilities) 
         {
             a.reduceCooldown();
             if (a.ableToUseAbility())
             {
-                actions.append(a.getName())
-                    .append(" is able to be used.")
-                    .append("\n");
+               
             }
         }
     }

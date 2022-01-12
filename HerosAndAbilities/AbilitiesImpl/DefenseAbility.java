@@ -56,17 +56,17 @@ public class DefenseAbility extends Ability
 
 
     @Override
-    protected String castAbility(
+    protected void castAbility(
         Entity target, 
         Entity caster,
         List<Entity> otherTargets,
-        List<Entity> allPlayers) 
+        List<Entity> allPlayers,
+        BattleLog log) 
     {
         target.addShield(shield.copy());
-        return new StringBuilder(target.getName())
-                .append(" recieved a new shield called ")
-                .append(shield.getName())
-                .toString();
+        Object[] contents = new Object[]{target.getName(), shield.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.DEFENSE, contents));
+        return;
     }
 
     @Override

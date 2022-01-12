@@ -61,28 +61,27 @@ public class AIEntity extends Entity
     }
 
     @Override
-    public int[] dealDamage(
+    public Object[] dealDamage(
         int damageDealt, 
         boolean isPiercing, 
         boolean ignoresDefense,
         Entity caster,
         Element e,
-        StringBuilder actions
+        BattleLog log
     )
     {
         if (isTargettable)
         {
-            return super.dealDamage(damageDealt, isPiercing, ignoresDefense, caster, e, actions);
+            return super.dealDamage(damageDealt, isPiercing, ignoresDefense, caster, e, log);
         }
-        return new int[]{0, 0, 0};
+        return new Object[]{super.getName(), 0, 0, 0, 0, 0, 0};
     }
 
     @Override
-    public String endOfTurn()
+    public void endOfTurn(BattleLog log)
     {
-        String action = super.endOfTurn();
+        super.endOfTurn(log);
         currentAbility = (currentAbility + 1) % attackPattern.size();
-        return action;
     }
 
     public boolean isTargettable()
