@@ -728,6 +728,9 @@ public final class Abilities
             customAbilities.put(identifier, a);
         }
     }
+    public static Ability getAbility(Name n){
+      return ABILITIES.get(n);
+    }
 
     
 

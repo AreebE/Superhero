@@ -8,6 +8,7 @@ public abstract class Shield
     private String desc;
     private HashSet<Shields.Trigger> eventTriggers;
     private HashSet<Elements.Name> elementTriggers;
+    private Shields.Name enumName; //currently isnt created properly
     private int duration;
     private int uses;
     boolean nullifies;
@@ -187,5 +188,8 @@ public abstract class Shield
 
     public boolean isNullifies(){
         return this.nullifies;
+    }
+    public Shields.Name getEnumName(){
+      return this.enumName;
     }
 }

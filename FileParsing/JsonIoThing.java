@@ -22,6 +22,7 @@ class JsonIoThing {
     this.thisFilePath = Path.of(thisFileName);
     try {
       fr = new FileReader(thisFile);
+      fw = new FileWriter(thisFile);
     } catch (Exception Ex) {
       Ex.printStackTrace();
       System.exit(1);
@@ -31,42 +32,40 @@ class JsonIoThing {
 
   public void saveSuperheroArr(ArrayList<Entity> heros) {
     System.out.println("\n\u001B[33m"+"Savin Entities... "+"\u001B[0m\n ");
-    try{
-    fw = new FileWriter(thisFile);
-    } catch (Exception Ex) {
-      Ex.printStackTrace();
-      System.exit(1);
+    ArrayList<EntityInfoItem> toSave = new ArrayList<>();
+
+    for(Entity t: heros){
+      toSave.add(t.toEII());
     }
-    
-    
-    Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
-    String json = gson.toJson(heros);
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    System.out.println("the printy thing is "+gson.toJson(toSave));
     try{
-      Files.writeString(thisFilePath,json);
+      gson.toJson(toSave,fw);
+
+      fw.flush();
     }catch(IOException e){
       e.printStackTrace();
-      System.exit(1);
+      System.exit(69);
     }
-    
 
   }
 
-  public ArrayList<Entity> loadSuperheroArr() {
-    System.out.println("\n\u001B[33m"+"loadin Entities... "+"\u001B[0m\n ");
-    Entity[] o = null;
-    try{
-      o=  new Gson().fromJson(Files.readString(thisFilePath),Entity[].class);
-      //System.out.println(o[0].getName());
 
+  public ArrayList<Entity> loadSuperheroArr() {
+    
+    System.out.println("\n\u001B[33m"+"loadin Entities... "+"\u001B[0m\n ");
+    
+    EntityInfoItem[] o = null;
+    try{
+      o=new Gson().fromJson(Files.readString(thisFilePath),EntityInfoItem[].class);
     }catch(IOException e){
       e.printStackTrace();
-      System.exit(1);
+      System.exit(69);
     }
-    ArrayList<Entity> out = new ArrayList<Entity>(Arrays.asList(o));
-    for(Entity t:out){
-      t.updateAbilities();
+    ArrayList<Entity> out = new ArrayList<Entity>();
+    for(EntityInfoItem t:o){
+      out.add(new Entity(t));
     }
-    //System.out.println("ps in load is "+out.toArray().length);
     
     return out;
   }

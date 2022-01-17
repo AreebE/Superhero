@@ -16,6 +16,7 @@ public class Effect
     private int duration;
     private boolean permanent;
     private String name;
+    private Effects.Name enumName;//currently isnt created properly
     private String desc;
     private Element element;
     private boolean[] pierces;
@@ -283,6 +284,9 @@ public class Effect
     public Element getElement() 
     {
         return this.element;
+    }
+    public Effects.Name getEnumName(){
+      return this.enumName;
     }
 
     @Override

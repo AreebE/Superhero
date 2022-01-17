@@ -17,7 +17,6 @@ public class Entity implements Comparable<Entity>
     private transient ArrayList<Effect> effects;
     private transient ArrayList<Shield> shields;
     private transient State state;
-    private ArrayList<String> abNames = new ArrayList<String>();
     private int health;
     private int maxHealth;
     private int shieldHealth;
@@ -34,6 +33,26 @@ public class Entity implements Comparable<Entity>
         BASE_ATTACK,
         BASE_DEFENSE,
         SHIELD
+    }
+    //alt constructor using EII
+    public Entity(EntityInfoItem in){
+      this.name = in.name;
+      this.speed = in.speed;
+      setStuffFromEII(in);
+      this.maxHealth = health;
+      this.state = States.get(States.Name.NORMAL);
+      this.baseAttack = 0;
+      this.baseDefense = 0;
+      this.creator = creator;
+      /*
+      private String name;
+      private int speed;
+      private ArrayList<Abilities.Name> abilities;
+      private ArrayList<Effects.Name> effects;
+      private ArrayList<Shields.Name> shields;
+      private int maxHealth;
+      private int shieldHealth;
+      */
     }
 
     public Entity(
@@ -58,24 +77,62 @@ public class Entity implements Comparable<Entity>
         Abilities.giveAbility(this, Abilities.Name.PASS_TURN);
     }
 
-    public void updateAbilities() {
-    abilities = new ArrayList<Ability>();
-    int yep = abNames.toArray().length;
-    String[] a = Arrays.toString(Abilities.Name.values()).replaceAll("^.|.$", "").split(", ");
-    for(int i=0;i<yep;i++){
-      //System.out.println("abnames toarris"+yep);
-      String q=abNames.get(i);
-      q=q.toUpperCase();
-      q=q.replaceAll(" ","_");
-      q=q.replaceAll("t","X");
-      int d=0;
-      while(!q.equals(a[d]) && d<34){
-        d++;
+
+    private void setStuffFromEII(EntityInfoItem in){
+      this.abilities = new ArrayList<>();
+      this.effects = new ArrayList<>();
+      this.shields = new ArrayList<>();
+      for(Abilities.Name t: in.abilities){
+        this.abilities.add(Abilities.getAbility(t));
       }
-      Abilities.giveAbility(this,Abilities.Name.valueOf(a[d]));
+      
+      for(Effects.Name t: in.effects){
+        this.effects.add(Effects.getEffect(t));
+      }
+
+      for(Shields.Name t: in.shields){
+        this.shields.add(Shields.getShield(t));
+      }
+
     }
-    //System.out.println("Supposedly found all of "+this.name+"s abilitys");
-  }
+
+
+
+    public EntityInfoItem toEII(){
+      try{
+        return new EntityInfoItem(name,speed,getAbEnums(),getEffectsEnums(),getStartingShieldEnums(),maxHealth,shieldHealth);
+      }catch(Exception e){
+        System.out.println("ERROR CREATING EII");
+        e.printStackTrace();
+      }
+      return null;
+    }
+
+    private ArrayList<Abilities.Name> getAbEnums() throws Exception{
+      ArrayList<Abilities.Name> out = new ArrayList<>();
+      for(Ability t:abilities){
+        out.add(t.getEnumName());
+      }
+      return out;
+    }
+    private ArrayList<Effects.Name> getEffectsEnums() throws Exception{
+      ArrayList<Effects.Name> out = new ArrayList<>();
+      for(Effect t:effects){
+        out.add(t.getEnumName());
+      }
+      return out;
+      
+    }
+    private ArrayList<Shields.Name> getStartingShieldEnums() throws Exception{
+      ArrayList<Shields.Name> out = new ArrayList<>();
+      for(Shield t:shields){
+        out.add(t.getEnumName());
+      }
+      return out;
+    }
+    
+
+
   
     protected Entity getCreator()
     {

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class EntityInfoItem implements InfoItem<Entity>
 {
 
-    private String name;
-    private int speed;
-    private ArrayList<Abilities.Name> abilities;
-    private ArrayList<Effects.Name> effects;
-    private ArrayList<Shields.Name> shields;
-    private int maxHealth;
-    private int shieldHealth;
+    public String name;
+    public int speed;
+    public ArrayList<Abilities.Name> abilities;
+    public ArrayList<Effects.Name> effects;
+    public ArrayList<Shields.Name> shields;
+    public int maxHealth;
+    public int shieldHealth;
    
     public EntityInfoItem(
         String name,

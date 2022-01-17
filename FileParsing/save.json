@@ -2,21 +2,28 @@
   {
     "name": "A",
     "speed": 10,
-    "abNames": [],
-    "health": 100,
+    "abilities": [
+      "PASS_TURN",
+      "FIREBALL",
+      "SUMMON_SQUIRREL"
+    ],
+    "effects": [],
+    "shields": [],
     "maxHealth": 100,
-    "shieldHealth": 50,
-    "baseAttack": 0,
-    "baseDefense": 0
+    "shieldHealth": 50
   },
   {
     "name": "B",
     "speed": 30,
-    "abNames": [],
-    "health": 100,
+    "abilities": [
+      "PASS_TURN",
+      "SNOWBALL",
+      "SUMMON_GOLEM",
+      "GROUND_SUCTION"
+    ],
+    "effects": [],
+    "shields": [],
     "maxHealth": 100,
-    "shieldHealth": 50,
-    "baseAttack": 0,
-    "baseDefense": 0
+    "shieldHealth": 50
   }
 ]
