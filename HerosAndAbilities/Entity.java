@@ -17,6 +17,7 @@ public class Entity implements Comparable<Entity>
     private transient ArrayList<Effect> effects;
     private transient ArrayList<Shield> shields;
     private transient State state;
+    private transient State defaultState;
     private int health;
     private int maxHealth;
     private int shieldHealth;
@@ -38,12 +39,15 @@ public class Entity implements Comparable<Entity>
     public Entity(EntityInfoItem in){
       this.name = in.name;
       this.speed = in.speed;
-      setStuffFromEII(in);
-      this.maxHealth = health;
+      this.maxHealth = in.maxHealth;
+      this.health = maxHealth;
+      this.shieldHealth = in.shieldHealth;
       this.state = States.get(States.Name.NORMAL);
       this.baseAttack = 0;
       this.baseDefense = 0;
       this.creator = creator;
+    setStuffFromEII(in);
+
       /*
       private String name;
       private int speed;
@@ -60,6 +64,7 @@ public class Entity implements Comparable<Entity>
         int speed, 
         int health, 
         int shieldHealth,
+        State defaultState,
         Entity creator) 
     {
         this.name = name;
@@ -70,7 +75,8 @@ public class Entity implements Comparable<Entity>
         this.abilities = new ArrayList<>();
         this.effects = new ArrayList<>();
         this.shields = new ArrayList<>();
-        this.state = States.get(States.Name.NORMAL);
+        this.defaultState = defaultState;
+        this.state = defaultState;
         this.baseAttack = 0;
         this.baseDefense = 0;
         this.creator = creator;
@@ -85,14 +91,19 @@ public class Entity implements Comparable<Entity>
       for(Abilities.Name t: in.abilities){
         this.abilities.add(Abilities.getAbility(t));
       }
+    
+    // System.out.println(effects.toString());
+        
+            for(Effects.Name t: in.effects){
+                this.effects.add(Effects.getEffect(t));
+            }
+        
       
-      for(Effects.Name t: in.effects){
-        this.effects.add(Effects.getEffect(t));
-      }
-
-      for(Shields.Name t: in.shields){
-        this.shields.add(Shields.getShield(t));
-      }
+        
+            for(Shields.Name t: in.shields){
+                this.shields.add(Shields.getShield(t));
+            }
+        
 
     }
 
@@ -118,6 +129,7 @@ public class Entity implements Comparable<Entity>
     private ArrayList<Effects.Name> getEffectsEnums() throws Exception{
       ArrayList<Effects.Name> out = new ArrayList<>();
       for(Effect t:effects){
+          System.out.println(t.getEnumName());
         out.add(t.getEnumName());
       }
       return out;
@@ -501,7 +513,7 @@ public class Entity implements Comparable<Entity>
         BattleLog log
     )
     {
-        e.applyEffect(this, log);
+        e.useEffect(this, log);
     }
 
     public void removeEffect(
@@ -714,7 +726,7 @@ public class Entity implements Comparable<Entity>
 
     public void resetState()
     {
-        this.state = States.get(States.Name.NORMAL);
+        this.state = defaultState;
     }
 
     /*
@@ -747,7 +759,7 @@ public class Entity implements Comparable<Entity>
         {
             // System.out.println(this);
             Effect b = effects.get(i);
-            b.applyEffect(this, log);
+            b.useEffect(this, log);
         }
     }
 

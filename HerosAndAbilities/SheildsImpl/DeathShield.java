@@ -11,9 +11,10 @@ public class DeathShield extends Shield
         int duration, 
         Effect effect,
         boolean nullifies,
-        int uses)
+        int uses,
+        Shields.Name enumName)
     {
-        super(name, desc, duration, nullifies, uses, new Shields.Trigger[]{Shields.Trigger.DEATH}, new Elements.Name[]{Elements.Name.ALL});
+        super(name, desc, duration, nullifies, uses, enumName, new Shields.Trigger[]{Shields.Trigger.DEATH}, new Elements.Name[]{Elements.Name.ALL});
         this.effect = effect;
         // System.out.println(effect);
     }
@@ -28,7 +29,8 @@ public class DeathShield extends Shield
             getDuration(),
             effect.copy(),
             isNullifies(),
-            getUses()
+            getUses(),
+            getEnumName()
         );
     }
 

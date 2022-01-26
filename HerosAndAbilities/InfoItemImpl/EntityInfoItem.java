@@ -35,7 +35,7 @@ public class EntityInfoItem implements InfoItem<Entity>
     @Override
     public Entity create(Entity creator)
     {
-        Entity e = new Entity(name, speed, maxHealth, shieldHealth, creator);
+        Entity e = new Entity(name, speed, maxHealth, shieldHealth, States.get(States.Name.NORMAL), creator);
         addItems(e);
         return e;
     }

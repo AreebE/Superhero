@@ -94,6 +94,7 @@ public final class Effects
                 "attack up", 
                 "Boosts the base attack of all abilities by 2, except Pass", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.ATTACK_BOOST,
                 new EffectModifier[]
                 {
 
@@ -111,6 +112,7 @@ public final class Effects
                 "Attack boost X",
                 "Buffs the attack by a lot",
                 Elements.getElement(Elements.Name.NULL),
+                Name.ATTACK_BOOST_X,
                 new EffectModifier[]
                 {
                     
@@ -128,6 +130,7 @@ public final class Effects
                 "Defense Boost X",
                 "Buffs the defense",
                 Elements.getElement(Elements.Name.NULL),
+                Name.DEFENSE_BOOST_X,
                 new EffectModifier[]
                 {
                     
@@ -145,6 +148,7 @@ public final class Effects
                 "Speed Boost X",
                 "Buffs speed",
                 Elements.getElement(Elements.Name.NULL),
+                Name.SPEED_BOOST_X,
                 new EffectModifier[]
                 {
                     
@@ -162,6 +166,7 @@ public final class Effects
                 "Max Health X",
                 "Buffs health",
                 Elements.getElement(Elements.Name.NULL),
+                Name.MAX_HEALTH_BOOST_X,
                 new EffectModifier[]
                 {
                     
@@ -179,6 +184,7 @@ public final class Effects
                 "Retaliate",
                 "Does some damage in retaliation",
                 Elements.getElement(Elements.Name.NULL),
+                Name.RETALIATE,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -197,6 +203,7 @@ public final class Effects
                 "Illusionary blast",
                 "An illusion attacks the person",
                 Elements.getElement(Elements.Name.LIGHT),
+                Name.ILLUSIONARY_BLAST,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -216,6 +223,7 @@ public final class Effects
                 "Explode",
                 "Deals damage with an explosion",
                 Elements.getElement(Elements.Name.NULL),
+                Name.EXPLODE,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -234,6 +242,7 @@ public final class Effects
                 "Resurrect",
                 "Resurrect the person from beyond the grave",
                 Elements.getElement(Elements.Name.NULL),
+                Name.RESURRECT,
                 new EffectModifier[]
                 {
                     
@@ -251,6 +260,7 @@ public final class Effects
                 "Instant heal", 
                 "Heals 10 health immediately", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.INSTANT_HEAL,
                 new EffectModifier[]
                 {
                     
@@ -270,6 +280,7 @@ public final class Effects
                 "Instant Shield", 
                 "Adds 10 shield immediately", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.INSTANT_SHIELD,
                 new EffectModifier[]
                 {
                     
@@ -303,6 +314,7 @@ public DecayEffect(
                 "Burnout",
                 "Gives the user immediate attack, then it slowly burns out",
                 Elements.getElement(Elements.Name.FIRE),
+                Name.BURNOUT,
                 new EffectModifier[]
                 {
                     
@@ -323,6 +335,7 @@ public DecayEffect(
                 "Fungal infection",
                 "A type of infection that deals more damage over time",
                 Elements.getElement(Elements.Name.NULL),
+                Name.FUNGAL_INFECTION,
                 new boolean[] {true, true},
                 new EffectModifier[]
                 {
@@ -341,6 +354,7 @@ public DecayEffect(
                 "Mega Instant Shield", 
                 "Adds 50 shield immediately", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.INSTANT_SHIELD_X,
                 new EffectModifier[]
                 {
                     
@@ -358,6 +372,7 @@ public DecayEffect(
                 "defense up", 
                 "Reduces all future damage the character takes by 2", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.DEFENSE_BOOST,
                 new EffectModifier[]
                 {
                     
@@ -376,6 +391,7 @@ public DecayEffect(
                 "Charge", 
                 "Will increase the base attack of the user by one each turn", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.CHARGE,
                 new EffectModifier[]
                 {
                     
@@ -395,6 +411,7 @@ public DecayEffect(
                 "Bleed", 
                 "The opponent starts to suffer from blood loss", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.BLEED,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -416,6 +433,7 @@ public DecayEffect(
                 "Regen", 
                 "The player will recover health for ten turns, 1 health per turn. ", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.REGEN,
                 new EffectModifier[]
                 {
                     
@@ -435,6 +453,7 @@ public DecayEffect(
                 "Poison", 
                 "Will decrease the health of the player by one.", 
                 Elements.getElement(Elements.Name.NULL), 
+                Name.POISON,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -454,6 +473,7 @@ public DecayEffect(
                 "Guard", 
                 "Will let the user adopt a defensive stance", 
                 Elements.getElement(Elements.Name.NULL),
+                Name.GUARD,
                 new EffectModifier[]
                 {
                     
@@ -471,7 +491,8 @@ public DecayEffect(
                 4, 
                 "Curse", 
                 "Deals a hefty amount of damage after some time has passed", 
-                Elements.getElement(Elements.Name.NULL),  
+                Elements.getElement(Elements.Name.NULL), 
+                Name.CURSE, 
                 new boolean[]{false, false},
                 new EffectModifier[]
                 {
@@ -490,6 +511,7 @@ public DecayEffect(
                 "Permanent regeneration", 
                 "Just as the name says.", 
                 Elements.getElement(Elements.Name.NULL), 
+                Name.PERMAGEN,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -508,6 +530,7 @@ public DecayEffect(
                 "Exponential Shield", 
                 "Generates more shield over time", 
                 Elements.getElement(Elements.Name.NULL), 
+                Name.EXPONENTIAL_SHIELD,
                 new boolean[]{true, true},
                 new EffectModifier[]
                 {
@@ -524,6 +547,7 @@ public DecayEffect(
                 "Build up", 
                 "The target begins to increase all of their stats.", 
                 Elements.getElement(Elements.Name.NULL), 
+                Name.BUILD_UP,
                 this.get(Name.CHARGE), 
                 this.get(Name.DEFENSE_BOOST), 
                 this.get(Name.REGEN)
@@ -538,6 +562,7 @@ public DecayEffect(
                 "Sacrificial Gift",
                 "The target gets some extreme buffs",
                 Elements.getElement(Elements.Name.NULL),
+                Name.SACRIFICIAL_GIFT,
                 this.get(Name.ATTACK_BOOST_X),
                 this.get(Name.DEFENSE_BOOST_X),
                 this.get(Name.MAX_HEALTH_BOOST_X),
@@ -560,6 +585,7 @@ public DecayEffect(
     public static Effect getEffect(
         Name name)
     {
+        // System.out.println(name);
         return EFFECTS.get(name).copy();
     }
 

@@ -16,11 +16,12 @@ public class AIEntity extends Entity
         int speed, 
         int health, 
         int shieldHealth,
+        State defaultState,
         Entity creator,
         ArrayList<Abilities.Name> attackPattern,
         boolean isTargettable)
     {
-        super(name, speed, health, shieldHealth, creator);
+        super(name, speed, health, shieldHealth, defaultState, creator);
         // this.creator = creator;
         this.isTargettable = isTargettable;
         this.attackPattern = attackPattern;

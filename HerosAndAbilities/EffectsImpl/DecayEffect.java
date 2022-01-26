@@ -14,9 +14,10 @@ public class DecayEffect extends Effect{
         String name, 
         String desc,
         Element element,
+        Effects.Name enumName,
         EffectModifier[] modifiers)
     {
-        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null, modifiers);
+        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, enumName, null, modifiers);
     }
     
     public DecayEffect(
@@ -28,10 +29,11 @@ public class DecayEffect extends Effect{
         String name, 
         String desc,
         Element element,
+        Effects.Name enumName,
         boolean[] pierces,
         EffectModifier[] modifiers)
     {
-        super(basePower, type, duration, true, name, desc, element, pierces, modifiers);
+        super(basePower, type, duration, true, name, desc, element, enumName, pierces, modifiers);
         this.decayRate = decayRate;
         this.count = 0;
         this.turnDecayStarts = turnDecayStarts;
@@ -75,6 +77,7 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getEnumName(),
                     getPierces(),
                     getModifiers()
                 );
@@ -93,6 +96,7 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getEnumName(),
                     getPierces(),
                     getModifiers()
                 );

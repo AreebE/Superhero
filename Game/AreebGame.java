@@ -65,26 +65,26 @@ public class AreebGame{
     //     Abilities.Name.PROTECT,
     //     Abilities.Name.ATTACK_UP);
 
-    Entity A = new Entity("A", 10, 100, 50, null);
-    Abilities.giveAbility(A,
-        Abilities.Name.FIREBALL,
-        Abilities.Name.SUMMON_SQUIRREL,
-        Abilities.Name.RAM_ATTACK
-        );
+    // Entity A = new Entity("A", 10, 100, 50, null);
+    // Abilities.giveAbility(A,
+    //     Abilities.Name.FIREBALL,
+    //     Abilities.Name.SUMMON_SQUIRREL,
+    //     Abilities.Name.RAM_ATTACK
+    //     );
 
-    Entity B = new Entity("B", 30, 100, 50, null);
-    Abilities.giveAbility(B,
-        Abilities.Name.SNOWBALL,
-        Abilities.Name.SUMMON_GOLEM,
-        Abilities.Name.GROUND_SUCTION
-        );
+    // Entity B = new Entity("B", 30, 100, 50, null);
+    // Abilities.giveAbility(B,
+    //     Abilities.Name.SNOWBALL,
+    //     Abilities.Name.SUMMON_GOLEM,
+    //     Abilities.Name.GROUND_SUCTION
+    //     );
 
     superheros = new ArrayList<>();
-    superheros.add(Heroes.getHero(Heroes.Name.BEEP_BOOP, null));
-    superheros.add(Heroes.getHero(Heroes.Name.JOE, null));
-    superheros.add(Heroes.getHero(Heroes.Name.EEEEEE, null));
-    superheros.add(Heroes.getHero(Heroes.Name.TEST_SUBJECT, null));
-    superheros.add(Heroes.getHero(Heroes.Name.SECOND_TEST, null));
+    superheros.add(Heroes.get(Heroes.Name.BEEP_BOOP, null));
+    superheros.add(Heroes.get(Heroes.Name.JOE, null));
+    superheros.add(Heroes.get(Heroes.Name.EEEEEE, null));
+    superheros.add(Heroes.get(Heroes.Name.TEST_SUBJECT, null));
+    superheros.add(Heroes.get(Heroes.Name.SECOND_TEST, null));
 
 
     // superheros.add(testin);

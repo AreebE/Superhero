@@ -11,6 +11,7 @@ public class OneTimeEffect extends Effect
         String name, 
         String desc,
         Element element,
+        Effects.Name enumName,
         boolean[] pierces,
         EffectModifier[] modifiers) 
     {
@@ -23,6 +24,7 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
+            enumName,
             pierces,
             modifiers
         );
@@ -35,6 +37,7 @@ public class OneTimeEffect extends Effect
         String name, 
         String desc,
         Element element,
+        Effects.Name enumName,
         EffectModifier[] modifiers) 
     {
         this
@@ -45,6 +48,7 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
+            enumName,
             null,
             modifiers
         );
@@ -98,6 +102,7 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getEnumName(),
                         getPierces(),
                         getModifiers()
                     );
@@ -113,6 +118,7 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getEnumName(),
                         getPierces(),
                         getModifiers()
                     );

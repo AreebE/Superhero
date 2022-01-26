@@ -11,7 +11,8 @@ public class GroupEffect extends Effect
     public GroupEffect(
         String name, 
         String desc, 
-        Element element, 
+        Element element,
+        Effects.Name enumName, 
         Effect... effects) 
     {
         super
@@ -23,6 +24,7 @@ public class GroupEffect extends Effect
             name, 
             desc, 
             element,
+            enumName,
             new EffectModifier[0]
         );
         listOfEffects = new ArrayList<>();
@@ -30,6 +32,7 @@ public class GroupEffect extends Effect
         for (int i = 0; i < effects.length; i++) 
         {
             Effect e = effects[i].copy();
+            e.setName(name);
             listOfEffects.add(i, e);
             int currentDuration = e.getDuration();
             if (currentDuration > groupDuration) 
@@ -44,7 +47,8 @@ public class GroupEffect extends Effect
         String name, 
         String desc, 
         Element element, 
-        ArrayList<Effect> effects) 
+        ArrayList<Effect> effects,
+        Effects.Name enumName) 
     {
         super
         (
@@ -55,6 +59,7 @@ public class GroupEffect extends Effect
             name, 
             desc, 
             element,
+            enumName,
             new EffectModifier[0]
         );
 
@@ -77,6 +82,7 @@ public class GroupEffect extends Effect
         String desc, 
         Element element, 
         ArrayList<Effect> effects,
+        Effects.Name enumName,
         int additionalStrength) 
     {
         super
@@ -88,6 +94,7 @@ public class GroupEffect extends Effect
             name, 
             desc, 
             element,
+            enumName,
             new EffectModifier[0]
         );
 
@@ -152,7 +159,8 @@ public class GroupEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(), 
-                        listOfEffects
+                        listOfEffects,
+                        getEnumName()
                     );
     }
 
@@ -165,6 +173,7 @@ public class GroupEffect extends Effect
                     getDesc(), 
                     getElement(),
                     listOfEffects,
+                    getEnumName(),
                     additionalStrength
                 );
     }

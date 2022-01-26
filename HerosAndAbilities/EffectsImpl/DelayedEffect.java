@@ -10,6 +10,7 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        Effects.Name enumName,
         EffectModifier[] modifiers) 
     {
         this
@@ -20,6 +21,7 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element, 
+            enumName,
             null, 
             modifiers
         );
@@ -32,6 +34,7 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        Effects.Name enumName,
         boolean[] pierces,
         EffectModifier[] modifiers) 
     {
@@ -43,7 +46,8 @@ public class DelayedEffect extends Effect
             true, 
             name, 
             desc, 
-            element, 
+            element,
+            enumName, 
             pierces,
             modifiers
         );
@@ -79,6 +83,7 @@ public class DelayedEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(), 
+                        getEnumName(),
                         getPierces(),
                         getModifiers()
                     );
@@ -95,6 +100,7 @@ public class DelayedEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getEnumName(),
                     getPierces(),
                     getModifiers()
                 );

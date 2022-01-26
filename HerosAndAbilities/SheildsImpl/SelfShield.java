@@ -14,10 +14,11 @@ public class SelfShield extends Shield
         Effect selfApply, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         Shields.Trigger[] eventTriggers,
         Elements.Name[] elementTriggers)
     {
-        super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
+        super(name, desc, duration, nullifies, uses, enumName, eventTriggers, elementTriggers);
         this.selfApply = selfApply;
     }
     
@@ -29,10 +30,11 @@ public class SelfShield extends Shield
         Effect selfApply, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         HashSet<Shields.Trigger> eventTriggers,
         HashSet<Elements.Name> elementTriggers)
     {
-        super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
+        super(name, desc, duration, nullifies, uses, enumName, eventTriggers, elementTriggers);
         this.selfApply = selfApply;
     }
 
@@ -51,7 +53,7 @@ public class SelfShield extends Shield
     @Override
     public Shield copy()
     {
-        return new SelfShield(getName(), getDesc(), getDuration(), selfApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new SelfShield(getName(), getDesc(), getDuration(), selfApply.copy(), isNullifies(), getUses(), getEnumName(), getEventTriggers(), getElementTriggers());
     }
 
 }

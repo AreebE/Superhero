@@ -25,5 +25,44 @@
     "shields": [],
     "maxHealth": 100,
     "shieldHealth": 50
+  },
+  {
+    "name": "BeepBoop",
+    "speed": 30,
+    "abilities": [
+      "PASS_TURN",
+      "LIGHTNING_STRIKE",
+      "COUNTERSTRIKE",
+      "FLARE_UP",
+      "CONSTRUCT",
+      "WITCH_SPELL",
+      "FIRST_AID"
+    ],
+    "effects": [
+      "EXPONENTIAL_SHIELD"
+    ],
+    "shields": [],
+    "maxHealth": 100,
+    "shieldHealth": 40
+  },
+  {
+    "name": "Joe",
+    "speed": 60,
+    "abilities": [
+      "PASS_TURN",
+      "SNOWBALL",
+      "PROTECT",
+      "DEFENSE_UP",
+      "COUNTER",
+      "WIDE_SLASH"
+    ],
+    "effects": [
+      "CURSE"
+    ],
+    "shields": [
+      "DEATH_DEFIANCE"
+    ],
+    "maxHealth": 100,
+    "shieldHealth": 40
   }
 ]

@@ -11,6 +11,7 @@ public class InstantEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        Effects.Name enumName,
         EffectModifier[] modifiers) 
     {
         this
@@ -20,6 +21,7 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
+            enumName,
             null,
             modifiers
         );
@@ -31,6 +33,7 @@ public class InstantEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        Effects.Name enumName,
         boolean[] pierces,
         EffectModifier[] modifiers) 
     {
@@ -43,6 +46,7 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
+            enumName,
             pierces,
             modifiers
         );
@@ -67,6 +71,7 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getEnumName(),
                         getPierces(),
                         getModifiers()
                     );
@@ -81,6 +86,7 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getEnumName(),
                         getPierces(),
                         getModifiers()
                     );

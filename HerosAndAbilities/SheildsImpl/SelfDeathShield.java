@@ -9,9 +9,10 @@ public class SelfDeathShield extends DeathShield
         int duration, 
         Effect effect,
         boolean nullifies,
-        int uses)
+        int uses,
+        Shields.Name enumName)
     {
-        super(name, desc, duration, effect, nullifies, uses);
+        super(name, desc, duration, effect, nullifies, uses, enumName);
     }
 
     @Override
@@ -24,7 +25,8 @@ public class SelfDeathShield extends DeathShield
             getDuration(),
             getEffect().copy(),
             isNullifies(),
-            getUses()
+            getUses(),
+            getEnumName()
         );
     }
 

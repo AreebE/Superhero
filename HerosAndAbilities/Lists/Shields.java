@@ -41,6 +41,7 @@ public final class Shields
                 Effects.getEffect(Effects.Name.RETALIATE),
                 true,
                 1,
+                Name.COUNTER,
                 new Trigger[] {Trigger.ATTACK},
                 new Elements.Name[] {Elements.Name.ALL}
             ) 
@@ -57,6 +58,7 @@ public final class Shields
                 Effects.getEffect(Effects.Name.ILLUSIONARY_BLAST),
                 true,
                 1,
+                Name.ILLUSION,
                 new Trigger[] {Trigger.ATTACK},
                 new Elements.Name[] {Elements.Name.ALL}
             ) 
@@ -73,6 +75,7 @@ public final class Shields
                 Effects.getEffect(Effects.Name.INSTANT_HEAL),
                 false,
                 -1,
+                Name.SELF_CARE,
                 new Trigger[] {Trigger.ATTACK},
                 new Elements.Name[] {Elements.Name.ALL}
             ) 
@@ -90,6 +93,7 @@ public final class Shields
                 Effects.getEffect(Effects.Name.EXPLODE),
                 false,
                 1,
+                Name.SELF_DESTRUCT,
                 new Trigger[] {Trigger.SHIELD_BREAK},
                 new Elements.Name[] {Elements.Name.ALL}
             )
@@ -107,6 +111,7 @@ public final class Shields
                 Effects.getEffect(Effects.Name.CURSE),
                 false,
                 1,
+                Name.WITCH_CURSE,
                 new Trigger[] {Trigger.ATTACK},
                 new Elements.Name[] {Elements.Name.ALL}
             )
@@ -122,7 +127,8 @@ public final class Shields
                 -1,
                 Effects.getEffect(Effects.Name.SACRIFICIAL_GIFT),
                 false,
-                1
+                1,
+                Name.GIFT
             )
         );
 
@@ -136,7 +142,8 @@ public final class Shields
                 -1,
                 Effects.getEffect(Effects.Name.RESURRECT),
                 false,
-                2
+                2,
+                Name.DEATH_DEFIANCE
             )
         );
     }};

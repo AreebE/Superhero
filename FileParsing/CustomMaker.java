@@ -11,7 +11,7 @@ public class CustomMaker {
     System.out.println("You have decided to create a custom superhero... \n \n");
     System.out.println("Enter your new superheros name:  ");
     String name =  new Scanner(System.in).next();
-    return new Entity(name, 10, 100, 0, null);
+    return new Entity(name, 10, 100, 0, States.get(States.Name.NORMAL), null);
   }
 
   public static Ability askNMakeAbility() {

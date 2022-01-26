@@ -15,10 +15,11 @@ public class DualShield extends Shield
         Effect caster, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         Shields.Trigger[] eventTriggers,
         Elements.Name[] elementTriggers)
     {
-        super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
+        super(name, desc, duration, nullifies, uses, enumName, eventTriggers, elementTriggers);
         this.selfApply = self;
         this.casterApply = caster;
     }
@@ -32,10 +33,11 @@ public class DualShield extends Shield
         Effect caster, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         HashSet<Shields.Trigger> eventTriggers,
         HashSet<Elements.Name> elementTriggers)
     {
-        super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
+        super(name, desc, duration, nullifies, uses, enumName, eventTriggers, elementTriggers);
         this.selfApply = self;
         this.casterApply = caster;
     }
@@ -56,7 +58,7 @@ public class DualShield extends Shield
     @Override
     public Shield copy()
     {
-        return new DualShield(getName(), getDesc(), getDuration(), selfApply.copy(), casterApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new DualShield(getName(), getDesc(), getDuration(), selfApply.copy(), casterApply.copy(), isNullifies(), getUses(), getEnumName(), getEventTriggers(), getElementTriggers());
     }
 
 }

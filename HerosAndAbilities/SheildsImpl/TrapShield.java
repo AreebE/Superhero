@@ -14,10 +14,11 @@ public class TrapShield extends Shield
         Effect counter, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         Shields.Trigger[] eventTriggers,
         Elements.Name[] elementTriggers)
     {
-        super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
+        super(name, desc, duration, nullifies, uses, enumName, eventTriggers, elementTriggers);
         this.counter = counter;
     }
     
@@ -29,10 +30,11 @@ public class TrapShield extends Shield
         Effect counter, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         HashSet<Shields.Trigger> eventTriggers,
         HashSet<Elements.Name> elementTriggers)
     {
-        super(name, desc, duration, nullifies, uses, eventTriggers, elementTriggers);
+        super(name, desc, duration, nullifies, uses, enumName, eventTriggers, elementTriggers);
         this.counter = counter;
     }
 
@@ -52,7 +54,7 @@ public class TrapShield extends Shield
     @Override
     public Shield copy()
     {
-        return new TrapShield(getName(), getDesc(), getDuration(), counter.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new TrapShield(getName(), getDesc(), getDuration(), counter.copy(), isNullifies(), getUses(), getEnumName(), getEventTriggers(), getElementTriggers());
     }
 
 }

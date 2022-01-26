@@ -204,7 +204,7 @@ public final class Heroes {
         */
     }};
 
-    public static Entity getHero(Name name, Entity creator)
+    public static Entity get(Name name, Entity creator)
     {
         return HEROS.get(name).create(creator);
     }

@@ -27,7 +27,7 @@ public class AIInfoItem extends EntityInfoItem
         @Override
         public Entity create(Entity creator)
         {
-            AIEntity ai = new AIEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), creator, attackPattern, isTargettable);
+            AIEntity ai = new AIEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), States.get(States.Name.NORMAL), creator, attackPattern, isTargettable);
             super.addItems(ai);
             return ai;
         }

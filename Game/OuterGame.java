@@ -39,15 +39,18 @@ public class OuterGame {
     }
     return null;
   }
+  
   private void makeFixedEntities(){
     
-    Entity A = new Entity("A", 10, 100, 50, null);
+    Entity A = new Entity("A", 10, 100, 50, States.get(States.Name.NORMAL), null);
     Abilities.giveAbility(A, Abilities.Name.FIREBALL, Abilities.Name.SUMMON_SQUIRREL);
 
-    Entity B = new Entity("B", 30, 100, 50, null);
+    Entity B = new Entity("B", 30, 100, 50, States.get(States.Name.NORMAL), null);
     Abilities.giveAbility(B, Abilities.Name.SNOWBALL, Abilities.Name.SUMMON_GOLEM, Abilities.Name.GROUND_SUCTION);
 
     superheros.add(A);
     superheros.add(B);
+    superheros.add(Heroes.get(Heroes.Name.BEEP_BOOP, null));
+    superheros.add(Heroes.get(Heroes.Name.JOE, null));
   }
 }

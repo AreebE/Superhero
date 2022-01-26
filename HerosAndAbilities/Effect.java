@@ -30,6 +30,7 @@ public class Effect
         String name, 
         String desc,
         Element element,
+        Effects.Name enumName,
         EffectModifier[] modifiers) 
     {
         this
@@ -41,6 +42,7 @@ public class Effect
             name, 
             desc, 
             element, 
+            enumName,
             null,
             modifiers
         );
@@ -54,6 +56,7 @@ public class Effect
         String name, 
         String desc,
         Element element, 
+        Effects.Name enumName,
         boolean[] pierces,
         EffectModifier[] modifiers) 
     {
@@ -65,6 +68,7 @@ public class Effect
         this.desc = desc;
         this.element = element;
         this.pierces = pierces;
+        this.enumName = enumName;
         this.modifiers = new EnumMap<>(Effects.Modifier.class);
         for (int i = 0; i < modifiers.length; i++)
         {
@@ -192,6 +196,7 @@ public class Effect
                     name, 
                     desc, 
                     element, 
+                    enumName,
                     pierces,
                     getModifiers()
                 );
@@ -208,6 +213,7 @@ public class Effect
                     name, 
                     desc, 
                     element, 
+                    enumName,
                     pierces,
                     getModifiers()
                 );
@@ -243,6 +249,11 @@ public class Effect
     protected int getStrength() 
     {
         return this.strength;
+    }  
+
+    protected void setName(String newName)
+    {
+        this.name = newName;
     }
 
     protected int getStrength(Entity target) 

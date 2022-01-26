@@ -20,6 +20,7 @@ public abstract class Shield
         int duration, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         Shields.Trigger[] eventTriggers,
         Elements.Name[] elementTriggers)
     {
@@ -28,6 +29,7 @@ public abstract class Shield
         this.duration = duration;
         this.nullifies = nullifies;
         this.uses = uses;
+        this.enumName = enumName;
         this.eventTriggers = new HashSet<>();
         for (int i = 0; i < eventTriggers.length; i++)
         {
@@ -47,6 +49,7 @@ public abstract class Shield
         int duration, 
         boolean nullifies,
         int uses,
+        Shields.Name enumName,
         HashSet<Shields.Trigger> eventTriggers,
         HashSet<Elements.Name> elementTriggers)
     {
@@ -55,6 +58,7 @@ public abstract class Shield
         this.duration = duration;
         this.nullifies = nullifies;
         this.uses = uses;
+        this.enumName = enumName;
         this.eventTriggers = eventTriggers;
         this.elementTriggers = elementTriggers;
     }

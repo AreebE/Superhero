@@ -8,6 +8,7 @@ public class PassiveEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        Effects.Name enumName,
         boolean[] pierces,
         EffectModifier[] modifiers) 
     {
@@ -20,6 +21,7 @@ public class PassiveEffect extends Effect
             name,
             desc, 
             element, 
+            enumName,
             pierces,
             modifiers
         );
@@ -31,6 +33,7 @@ public class PassiveEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        Effects.Name enumName,
         EffectModifier[] modifiers) 
     {
         this
@@ -40,6 +43,7 @@ public class PassiveEffect extends Effect
             name,
             desc, 
             element, 
+            enumName,
             null,
             modifiers
         );
@@ -63,7 +67,8 @@ public class PassiveEffect extends Effect
                     getType(), 
                     getName(), 
                     getDesc(), 
-                    getElement(), 
+                    getElement(),
+                    getEnumName(), 
                     getPierces(),
                     getModifiers()
                 );
@@ -78,6 +83,7 @@ public class PassiveEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getEnumName(),
                         getPierces(),
                         getModifiers()
                     );
