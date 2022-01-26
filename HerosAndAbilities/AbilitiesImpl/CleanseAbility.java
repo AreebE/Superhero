@@ -56,6 +56,7 @@ public class CleanseAbility extends SupportAbility
         List<Entity> allPlayers,
         BattleLog log) 
     {
+        caster.searchForShield(Shields.Trigger.SUPPORT, Elements.getElement(Elements.Name.ALL), caster, target, log);
         target.removeEffects(getElement().getID(), log);
         return;
     }

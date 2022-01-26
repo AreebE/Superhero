@@ -585,6 +585,8 @@ public class Entity implements Comparable<Entity>
         for (int i = shields.size() - 1; i >= 0; i--)
         {
             Shield s = shields.get(i);
+            System.out.println(s.getName() + " " + trigger);
+
             if (s.wouldTrigger(trigger, element))
             {
                 boolean nullify = s.triggerShield(target, caster, log);

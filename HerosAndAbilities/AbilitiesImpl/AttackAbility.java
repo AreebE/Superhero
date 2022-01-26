@@ -77,6 +77,8 @@ public class AttackAbility extends Ability
     {
         // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
         // " + target.getName());
+        caster.searchForShield(Shields.Trigger.ATTACKING, Elements.getElement(Elements.Name.ALL), caster, target, log);
+
         int currentIndex = log.getCurrentIndex(); 
 
         int attackStrength = getStrength() + caster.getBaseAttack();

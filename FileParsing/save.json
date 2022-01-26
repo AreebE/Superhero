@@ -60,7 +60,8 @@
       "CURSE"
     ],
     "shields": [
-      "DEATH_DEFIANCE"
+      "DEATH_DEFIANCE",
+      "MINOR_HEAL"
     ],
     "maxHealth": 100,
     "shieldHealth": 40

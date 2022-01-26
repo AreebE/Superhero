@@ -68,6 +68,7 @@ public final class Heroes {
                 new ArrayList<Shields.Name>()
                 {{
                     add(Shields.Name.DEATH_DEFIANCE);
+                    add(Shields.Name.MINOR_HEAL);
                 }},
                 100,
                 40

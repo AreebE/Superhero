@@ -69,7 +69,9 @@ public class Action {
     public void performAction(BattleLog log)
     {
         // System.out.println("perform action");
+        // System.out.println("Reach");
         ability.useAbility(target, caster, otherTargets, allHeros, log);
+        caster.searchForShield(Shields.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), caster, target, log);
         caster.endOfTurn(log);
         // caster.endOfTurn();
     }

@@ -36,6 +36,7 @@ public class PassAbility extends Ability
         BattleLog log
     )
     {
+        caster.searchForShield(Shields.Trigger.PASS, Elements.getElement(Elements.Name.ALL), caster, target, log);
         Object[] contents = new Object[]{caster.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.PASS, contents));
         return;

@@ -19,13 +19,21 @@ public final class Shields
         WITCH_CURSE,
         DEATH_DEFIANCE,
         ILLUSION,
-        GIFT
+        GIFT,
+        MINOR_HEAL
     }
 
     public static enum Trigger {
         ATTACK,
         SHIELD_BREAK,
         DEATH,
+        ANY_ACTION,
+        ATTACKING,
+        DEFENSE,
+        SUPPORT,
+        SPAWN,
+        PASS,
+        STATE_CHANGE,
         ALL
     }
 
@@ -144,6 +152,23 @@ public final class Shields
                 false,
                 2,
                 Name.DEATH_DEFIANCE
+            )
+        );
+
+        put 
+        (
+            Name.MINOR_HEAL,
+            new SelfShield 
+            (
+                "Minor Heal",
+                "Heal from some damage when struck.",
+                5,
+                Effects.getEffect(Effects.Name.INSTANT_HEAL),
+                false,
+                -1,
+                Name.MINOR_HEAL,
+                new Trigger[] {Trigger.ATTACKING, Trigger.ANY_ACTION, Trigger.DEFENSE, Trigger.SUPPORT, Trigger.SPAWN, Trigger.PASS, Trigger.STATE_CHANGE},
+                new Elements.Name[] {Elements.Name.ALL}
             )
         );
     }};

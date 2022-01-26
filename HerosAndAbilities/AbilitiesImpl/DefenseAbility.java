@@ -63,6 +63,7 @@ public class DefenseAbility extends Ability
         List<Entity> allPlayers,
         BattleLog log) 
     {
+        caster.searchForShield(Shields.Trigger.DEFENSE, Elements.getElement(Elements.Name.ALL), caster, target, log);
         target.addShield(shield.copy());
         Object[] contents = new Object[]{target.getName(), shield.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.DEFENSE, contents));

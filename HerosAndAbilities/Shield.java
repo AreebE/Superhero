@@ -67,6 +67,7 @@ public abstract class Shield
         Shields.Trigger eventTrigger, 
         Element element)
     {
+        System.out.println(eventTriggers);
         return  (
                     eventTriggers.contains(Shields.Trigger.ALL)
                     || eventTriggers.contains(eventTrigger)

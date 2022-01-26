@@ -61,6 +61,7 @@ public class SpawnableAbility extends DefenseAbility
         List<Entity> allPlayers,
         BattleLog log) 
     {
+        caster.searchForShield(Shields.Trigger.SPAWN, Elements.getElement(Elements.Name.ALL), caster, target, log);
         Entity ai = info.create(target);
         Object[] contents = new Object[]{target.getName(), ai.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));

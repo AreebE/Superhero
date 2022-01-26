@@ -42,6 +42,7 @@ public class StateChangeAbility extends SupportAbility
         List<Entity> allPlayers,
         BattleLog log) 
     {
+        caster.searchForShield(Shields.Trigger.STATE_CHANGE, Elements.getElement(Elements.Name.ALL), caster, target, log);
         String oldStateName = target.getState().getName();
         Object[] contents = new Object[]{target.getName(), oldStateName, template.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.STATE_CHANGE, contents));

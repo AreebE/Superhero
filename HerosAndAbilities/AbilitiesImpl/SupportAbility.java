@@ -64,6 +64,7 @@ public class SupportAbility extends Ability
         List<Entity> allPlayers,
         BattleLog log) 
     {
+        caster.searchForShield(Shields.Trigger.SUPPORT, Elements.getElement(Elements.Name.ALL), caster, target, log);
         target.addEffect(template.copy());
         Object[] contents = new Object[]{target.getName(), template.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_APPLIED, contents));
