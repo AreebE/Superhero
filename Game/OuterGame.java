@@ -13,22 +13,64 @@ import java.util.Scanner;
 
 public class OuterGame {
 
-  ArrayList<Entity> superheros;
-
+  ArrayList<Entity> superheros = new ArrayList<Entity>();
+  GUI g = new GUI();
   ScannerInput system;
+  AbilityManager m = new AbilityManager();
+  ArrayList<Command> cmds = Command.getAll();
+  
 
   public OuterGame() {
-    superheros = new ArrayList<Entity>();
-    GUI g = new GUI();
-    JsonIoThing j = new JsonIoThing("FileParsing/save.json");
+    
     makeFixedEntities();
-    j.saveSuperheroArr(superheros);
+    mainMenu();
+    System.out.println("END OF GAME");
+  }
 
-    //load still needs to parse its abilities
-    ArrayList<Entity> e = j.loadSuperheroArr();
-    InnerGame iG = new InnerGame(e, g);
-    iG.playGame();
-    System.out.println("note turns arent implemented yet but loading entitys now is working");
+  private void mainMenu(){
+    System.out.println("welcommen to superheros! \n what would you like to do? (type help for CMDs)");
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    input = input.toLowerCase();
+    ArrayList<String> allCmdsNames = Command.allNames(this.cmds);
+    while(!input.equals("Exit")){
+      if(!Command.isItInHere(input,allCmdsNames)){
+        System.out.println("HEY THATS NOT A VALID COMMAND");
+      }
+      
+      switch(input){
+        case "help":
+         Command.onHelp(cmds);
+        break;
+
+        case "play":
+        System.out.println("Playing Game!");
+        InnerGame iG = new InnerGame(superheros, g);
+        iG.playGame();
+        break;
+
+        case "save superheros":
+        JsonIoThing.saveSuperheroArr(this.superheros,"FileParsing/save.json");
+        break;
+
+        case "load superheros":
+        this.superheros = JsonIoThing.loadSuperheroArr("FileParsing/save.json");
+        break;
+
+        case "create superhero":
+        superheros.add(CustomMaker.askNMakeSuperhero());
+        break;
+
+        case "Exit":
+        System.out.println("Exiting game! thanks for playing");
+        System.exit(69);
+        break;
+      }
+      System.out.println("\n what next?");
+      input = sc.nextLine();
+      input = input.toLowerCase();
+    }
+
   }
 
   private Entity getEntity(String name, ArrayList<Entity> superheros) {

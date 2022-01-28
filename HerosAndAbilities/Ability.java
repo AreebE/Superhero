@@ -8,7 +8,7 @@ public abstract class Ability
 
     public static final int MISS = -1;
 
-    private String name;
+    public String name;
     private String description;
     private int cooldown;
     private int strength;

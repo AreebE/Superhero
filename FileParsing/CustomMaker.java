@@ -7,7 +7,7 @@ import java.util.*;
 public class CustomMaker {
   CustomMaker() {
   }
-  public static Entity AskNMakeSuperhero() {
+  public static Entity askNMakeSuperhero() {
     System.out.println("You have decided to create a custom superhero... \n \n");
     System.out.println("Enter your new superheros name:  ");
     String name =  new Scanner(System.in).next();
