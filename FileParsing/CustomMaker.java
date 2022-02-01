@@ -8,10 +8,25 @@ public class CustomMaker {
   CustomMaker() {
   }
   public static Entity askNMakeSuperhero() {
+    Scanner sc = new Scanner(System.in);
     System.out.println("You have decided to create a custom superhero... \n \n");
     System.out.println("Enter your new superheros name:  ");
-    String name =  new Scanner(System.in).next();
-    return new Entity(name, 10, 100, 0, States.get(States.Name.NORMAL), null);
+    String name = sc.next();
+    System.out.println("Enter your new superheros speed:  ");
+    int speed = sc.nextInt();
+    System.out.println("Enter your new superheros maxhealth:  ");
+    int health = sc.nextInt();
+    System.out.println("Enter your new superheros shieldHealth:  ");
+    int sheildhealth = sc.nextInt();
+    return new Entity(name,speed, health, sheildhealth, States.get(States.Name.NORMAL), null);
+    /*
+    String name, 
+        int speed, 
+        int health, 
+        int shieldHealth,
+        State defaultState,
+        Entity creator
+    */
   }
 
   public static Ability askNMakeAbility() {

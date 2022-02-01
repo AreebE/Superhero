@@ -22,9 +22,12 @@ class Command{
     out.add(new Command("create superhero","prompts you to create your own superhero"));
     out.add(new Command("save superheros","saves the superheros"));
     out.add(new Command("Exit","Exits the game"));
+    out.add(new Command("print all superhero names","prints all the of the superheros names to cons"));
+    
     return out;
   }
-  public static void onHelp(ArrayList<Command> in){
+  public static void onHelp(){
+    ArrayList<Command> in = Command.getAll();
     System.out.println("The Commands are:");
     for(Command t: in){
       System.out.println(t.name + " = "+t.desc);
@@ -38,8 +41,9 @@ class Command{
     out.add("help");
     return out;
   }
-  public static boolean isItInHere(String in,ArrayList<String> here){
-    for(String t:here){
+  public static boolean isItInHere(String in){
+    ArrayList<String> thingys = Command.allNames(Command.getAll());
+    for(String t:thingys){
       if(t.toLowerCase().equals(in.toLowerCase())){
         return true;
       }

@@ -17,7 +17,6 @@ public class OuterGame {
   GUI g = new GUI();
   ScannerInput system;
   AbilityManager m = new AbilityManager();
-  ArrayList<Command> cmds = Command.getAll();
   
 
   public OuterGame() {
@@ -30,17 +29,16 @@ public class OuterGame {
   private void mainMenu(){
     System.out.println("welcommen to superheros! \n what would you like to do? (type help for CMDs)");
     Scanner sc = new Scanner(System.in);
-    String input = sc.nextLine();
-    input = input.toLowerCase();
-    ArrayList<String> allCmdsNames = Command.allNames(this.cmds);
+    String input = sc.nextLine().toLowerCase();
+    
     while(!input.equals("Exit")){
-      if(!Command.isItInHere(input,allCmdsNames)){
+      if(!Command.isItInHere(input)){
         System.out.println("HEY THATS NOT A VALID COMMAND");
       }
-      
       switch(input){
+        
         case "help":
-         Command.onHelp(cmds);
+         Command.onHelp();
         break;
 
         case "play":
@@ -61,10 +59,18 @@ public class OuterGame {
         superheros.add(CustomMaker.askNMakeSuperhero());
         break;
 
-        case "Exit":
+        case "exit":
         System.out.println("Exiting game! thanks for playing");
         System.exit(69);
         break;
+
+        case "print all superhero names":
+        for(Entity t:superheros){
+          System.out.println(t.getName());
+        }
+        break;
+
+
       }
       System.out.println("\n what next?");
       input = sc.nextLine();

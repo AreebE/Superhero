@@ -64,5 +64,16 @@
     ],
     "maxHealth": 100,
     "shieldHealth": 40
+  },
+  {
+    "name": "STEVE",
+    "speed": 69,
+    "abilities": [
+      "PASS_TURN"
+    ],
+    "effects": [],
+    "shields": [],
+    "maxHealth": 420,
+    "shieldHealth": 0
   }
 ]
