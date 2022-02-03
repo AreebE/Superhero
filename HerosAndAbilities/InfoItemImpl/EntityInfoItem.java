@@ -7,16 +7,17 @@ public class EntityInfoItem implements InfoItem<Entity>
 
     public String name;
     public int speed;
-    public ArrayList<Abilities.Name> abilities;
+    public ArrayList<String> abilities;
     public ArrayList<Effects.Name> effects;
     public ArrayList<Shields.Name> shields;
     public int maxHealth;
     public int shieldHealth;
+    private transient AbilityManager abilityManager = OuterGame.getAbManager();
    
     public EntityInfoItem(
         String name,
         int speed,
-        ArrayList<Abilities.Name> abilityNames,
+        ArrayList<String> abilityNames,
         ArrayList<Effects.Name> startingEffects,
         ArrayList<Shields.Name> startingShields,
         int maxHealth,
@@ -44,7 +45,7 @@ public class EntityInfoItem implements InfoItem<Entity>
         Entity e
     )
     {
-        Abilities.giveAbilities(e, abilities);
+        abilityManager.giveAbilities(e, abilitiesNames());
         Effects.giveEffects(e, effects);
         Shields.giveShields(e, shields);
     }
@@ -67,5 +68,8 @@ public class EntityInfoItem implements InfoItem<Entity>
     protected int getShieldHealth()
     {
         return this.shieldHealth;
+    }
+    private ArrayList<String> abilitiesNames(){
+      return this.abilities;
     }
 }

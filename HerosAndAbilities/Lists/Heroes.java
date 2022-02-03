@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public final class Heroes {
     private Heroes(){}
+    /*
 
     public static enum Name{
         BEEP_BOOP,
@@ -201,11 +202,13 @@ public final class Heroes {
         ArrayList<Shields.Name> startingShields,
         int maxHealth,
         int shieldHealth
-        */
+        
     }};
 
     public static Entity get(Name name, Entity creator)
     {
         return HEROS.get(name).create(creator);
     }
+
+    */
 }

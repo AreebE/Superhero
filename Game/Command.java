@@ -23,6 +23,8 @@ class Command{
     out.add(new Command("save superheros","saves the superheros"));
     out.add(new Command("Exit","Exits the game"));
     out.add(new Command("print all superhero names","prints all the of the superheros names to cons"));
+    out.add(new Command("add abilities to hero","allows you to give abilities to heros"));
+    out.add(new Command("print absolute abilities names","Prints all names of every known ability in the game"));
     
     return out;
   }

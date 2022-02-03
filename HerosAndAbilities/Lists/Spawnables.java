@@ -22,9 +22,9 @@ public final class Spawnables
             (
                 "Crystal",
                 1,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.LASER);
+                    add("laser");
                 }},
                 new ArrayList<Effects.Name>()
                 {{
@@ -33,9 +33,9 @@ public final class Spawnables
                 null,
                 10,
                 10,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.LASER);
+                    add("laser");
                 }},
                 true
             )
@@ -48,9 +48,9 @@ public final class Spawnables
             (
                 "Squirrel",
                 1,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.SCRATCH);
+                    add("scratch");
                 }},
                 null,
                 new ArrayList<Shields.Name>()
@@ -59,9 +59,9 @@ public final class Spawnables
                 }},
                 1,
                 0,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.SCRATCH);
+                    add("scratch");
                 }},
                 true
             )
@@ -70,12 +70,12 @@ public final class Spawnables
         /*
             String name,
             int speed,
-            ArrayList<Abilities.Name> abilityNames,
+            ArrayList<String> abilityNames,
             ArrayList<Effects.Name> startingEffects,
             ArrayList<Shields.Name> startingShields,
             int maxHealth,
             int shieldHealth,
-            ArrayList<Abilities.Name> attackPattern,
+            ArrayList<String> attackPattern,
             boolean isTargettable*/
     }};
 

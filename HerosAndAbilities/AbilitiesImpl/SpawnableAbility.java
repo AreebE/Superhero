@@ -12,7 +12,6 @@ public class SpawnableAbility extends DefenseAbility
         String desc, 
         int cooldown, 
         AIInfoItem info, 
-        Abilities.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -22,7 +21,6 @@ public class SpawnableAbility extends DefenseAbility
             desc,
             cooldown, 
             null,
-            enumName, 
             em,
             modifiers
         );
@@ -35,7 +33,6 @@ public class SpawnableAbility extends DefenseAbility
         String desc, 
         int cooldown,
         AIInfoItem info, 
-        Abilities.Name enumName,
         Element em, 
         EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
     {
@@ -45,7 +42,7 @@ public class SpawnableAbility extends DefenseAbility
             desc, 
             cooldown, 
             null, 
-            enumName, 
+
             em, 
             modifiers
         );
@@ -77,9 +74,7 @@ public class SpawnableAbility extends DefenseAbility
                     getDescription(), 
                     getCooldown(),  
                     info,
-                    getEnumName(),
-                    getElement(), 
-                    getModifiers()
+                    getElement()
                 );
     }
 }

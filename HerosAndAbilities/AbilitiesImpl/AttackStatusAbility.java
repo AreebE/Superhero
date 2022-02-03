@@ -12,7 +12,6 @@ public class AttackStatusAbility extends AttackAbility
         String desc, 
         int cooldown, 
         int strength, 
-        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
@@ -25,7 +24,6 @@ public class AttackStatusAbility extends AttackAbility
             desc, 
             cooldown, 
             strength, 
-            enumName, 
             em, 
             ignoresBaseDefense, 
             isPiercing, 
@@ -40,7 +38,6 @@ public class AttackStatusAbility extends AttackAbility
         String desc, 
         int cooldown, 
         int strength, 
-        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
@@ -53,7 +50,6 @@ public class AttackStatusAbility extends AttackAbility
             desc, 
             cooldown, 
             strength, 
-            enumName, 
             em, 
             ignoresBaseDefense, 
             isPiercing, 
@@ -91,12 +87,10 @@ public class AttackStatusAbility extends AttackAbility
                         getDescription(), 
                         getCooldown(), 
                         getStrength(), 
-                        getEnumName(),
                         getElement(), 
                         doesIgnoreBaseDefense(), 
                         isPiercing(), 
-                        sideEffect.copy(),
-                        getModifiers()
+                        sideEffect.copy()
                     );
     }
 }

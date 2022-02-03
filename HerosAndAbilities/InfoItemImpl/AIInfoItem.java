@@ -6,17 +6,17 @@ public class AIInfoItem extends EntityInfoItem
     {
      
         boolean isTargettable;
-        ArrayList<Abilities.Name> attackPattern;
+        ArrayList<String> attackPattern;
 
         public AIInfoItem(
             String name,
             int speed,
-            ArrayList<Abilities.Name> abilityNames,
+            ArrayList<String> abilityNames,
             ArrayList<Effects.Name> startingEffects,
             ArrayList<Shields.Name> startingShields,
             int maxHealth,
             int shieldHealth,
-            ArrayList<Abilities.Name> attackPattern,
+            ArrayList<String> attackPattern,
             boolean isTargettable)
         {
             super(name, speed, abilityNames, startingEffects, startingShields, maxHealth, shieldHealth);

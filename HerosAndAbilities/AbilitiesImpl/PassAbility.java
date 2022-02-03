@@ -10,7 +10,7 @@ public class PassAbility extends Ability
         String desc
     ) 
     {
-        super(name, desc, 0, 0, Abilities.Type.ATTACK, Abilities.Name.PASS_TURN, null);
+        super(name, desc, 0, 0, Abilities.Type.ATTACK,null);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class PassAbility extends Ability
         
     }
 
-    @Override
+    
     public void useAbility
     (
         Entity target, 

@@ -12,7 +12,6 @@ public class DefenseAbility extends Ability
         String desc, 
         int cooldown, 
         Shield shield, 
-        Abilities.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -22,10 +21,8 @@ public class DefenseAbility extends Ability
             desc,
             cooldown, 
             0, 
-            Abilities.Type.DEFENSE, 
-            enumName, 
-            em,
-            modifiers
+            Abilities.Type.DEFENSE,  
+            em
         );
         this.shield = shield;
     }
@@ -36,7 +33,6 @@ public class DefenseAbility extends Ability
         String desc, 
         int cooldown,
         Shield shield, 
-        Abilities.Name enumName,
         Element em, 
         EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
     {
@@ -47,9 +43,7 @@ public class DefenseAbility extends Ability
             cooldown, 
             0, 
             Abilities.Type.DEFENSE, 
-            enumName, 
-            em, 
-            modifiers
+            em
         );
         this.shield = shield;
     }
@@ -78,9 +72,7 @@ public class DefenseAbility extends Ability
                     getDescription(), 
                     getCooldown(),  
                     shield.copy(),
-                    getEnumName(),
-                    getElement(), 
-                    getModifiers()
+                    getElement()
                 );
     }
 }

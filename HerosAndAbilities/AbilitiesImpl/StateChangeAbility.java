@@ -13,11 +13,10 @@ public class StateChangeAbility extends SupportAbility
         String desc, 
         int cooldown, 
         State template, 
-        Abilities.Name enumName,
         Element em, 
         AbilityModifier... modifiers) 
     {
-        super(name, desc, cooldown, null, enumName, em, modifiers);
+        super(name, desc, cooldown, null, em, modifiers);
         this.template = template;
     }
 
@@ -26,11 +25,11 @@ public class StateChangeAbility extends SupportAbility
         String desc, 
         int cooldown, 
         State template, 
-        Abilities.Name enumName,
-        Element em,
-        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
+        Element em)
+        //EnumMap<Abilities.Modifier, AbilityModifier> modifiers
+       
     {
-        super(name, desc, cooldown, null, enumName, em, modifiers);
+        super(name, desc, cooldown, null, em);
         this.template = template;
     }
     
@@ -59,9 +58,8 @@ public class StateChangeAbility extends SupportAbility
                     getDescription(), 
                     getCooldown(), 
                     template, 
-                    getEnumName(), 
-                    getElement(),
-                    getModifiers()
+                    getElement()
+
                 );
     }
 }

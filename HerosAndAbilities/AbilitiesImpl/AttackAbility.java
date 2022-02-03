@@ -15,7 +15,6 @@ public class AttackAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
@@ -28,9 +27,7 @@ public class AttackAbility extends Ability
             cooldown, 
             strength, 
             Abilities.Type.ATTACK, 
-            enumName, 
-            em, 
-            modifiers
+            em
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
@@ -43,7 +40,6 @@ public class AttackAbility extends Ability
         String desc, 
         int cooldown, 
         int strength, 
-        Abilities.Name enumName,
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
@@ -57,9 +53,7 @@ public class AttackAbility extends Ability
             cooldown, 
             strength, 
             Abilities.Type.ATTACK, 
-            enumName, 
-            em, 
-            modifiers
+            em
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
@@ -117,11 +111,9 @@ public class AttackAbility extends Ability
                     getDescription(), 
                     getCooldown(), 
                     getStrength(), 
-                    getEnumName(), 
                     getElement(),
                     ignoresBaseDefense, 
-                    isPiercing, 
-                    getModifiers()
+                    isPiercing
                 );
     }
 

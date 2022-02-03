@@ -24,6 +24,7 @@ public class Entity implements Comparable<Entity>
     private int baseAttack;
     private int baseDefense;
     private static transient Terrain t;
+    private transient AbilityManager abilityManager = OuterGame.getAbManager();
 
 
     public static enum Statistic
@@ -80,7 +81,9 @@ public class Entity implements Comparable<Entity>
         this.baseAttack = 0;
         this.baseDefense = 0;
         this.creator = creator;
-        Abilities.giveAbility(this, Abilities.Name.PASS_TURN);
+        ArrayList<String> abstogive = new ArrayList<String>();
+        abstogive.add("pass turn");
+        abilityManager.giveAbilities(this, abstogive);
     }
 
 
@@ -88,8 +91,8 @@ public class Entity implements Comparable<Entity>
       this.abilities = new ArrayList<>();
       this.effects = new ArrayList<>();
       this.shields = new ArrayList<>();
-      for(Abilities.Name t: in.abilities){
-        this.abilities.add(Abilities.getAbility(t));
+      for(String t: in.abilities){
+        this.abilities.add(abilityManager.getAbility(t));
       }
     
     // System.out.println(effects.toString());
@@ -111,7 +114,7 @@ public class Entity implements Comparable<Entity>
 
     public EntityInfoItem toEII(){
       try{
-        return new EntityInfoItem(name,speed,getAbEnums(),getEffectsEnums(),getStartingShieldEnums(),maxHealth,shieldHealth);
+        return new EntityInfoItem(name,speed,getAbNames(),getEffectsEnums(),getStartingShieldEnums(),maxHealth,shieldHealth);
       }catch(Exception e){
         System.out.println("ERROR CREATING EII");
         e.printStackTrace();
@@ -119,10 +122,10 @@ public class Entity implements Comparable<Entity>
       return null;
     }
 
-    private ArrayList<Abilities.Name> getAbEnums() throws Exception{
-      ArrayList<Abilities.Name> out = new ArrayList<>();
+    private ArrayList<String> getAbNames() throws Exception{
+      ArrayList<String> out = new ArrayList<>();
       for(Ability t:abilities){
-        out.add(t.getEnumName());
+        out.add(t.getName());
       }
       return out;
     }
@@ -284,7 +287,7 @@ public class Entity implements Comparable<Entity>
 
 
     public Ability getAbility(
-        Abilities.Name enumName) 
+        String name) 
     {
         // System.out.println(this);
         for (Ability a : abilities) 
@@ -292,7 +295,7 @@ public class Entity implements Comparable<Entity>
             // System.out.println(a);
             // System.out.println(a.getID());
             // // System.out.println(id);
-            if (a.getEnumName().equals(enumName)) 
+            if (name.equals(a.getName())) 
             {
                 if (a.ableToUseAbility()) 
                 {
@@ -313,13 +316,12 @@ public class Entity implements Comparable<Entity>
     {
         return abilities.contains(ability);
     }
-    
-    public boolean hasGroupAbility(
-        Abilities.Name name)
+    /*
+    public boolean hasGroupAbility(String name)
     {
         return getAbility(name).hasModifier(Abilities.Modifier.GROUP);
     }
-    /*
+    
      * Methods involving a player's health
      */
     public void addShieldHealth(int shield) 

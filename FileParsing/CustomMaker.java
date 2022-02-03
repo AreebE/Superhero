@@ -11,7 +11,7 @@ public class CustomMaker {
     Scanner sc = new Scanner(System.in);
     System.out.println("You have decided to create a custom superhero... \n \n");
     System.out.println("Enter your new superheros name:  ");
-    String name = sc.next();
+    String name = sc.nextLine();
     System.out.println("Enter your new superheros speed:  ");
     int speed = sc.nextInt();
     System.out.println("Enter your new superheros maxhealth:  ");

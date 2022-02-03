@@ -2,6 +2,7 @@ package battlesystem;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Ability 
 {
@@ -14,10 +15,9 @@ public abstract class Ability
     private int strength;
     private int turnsSinceUse;
     private Abilities.Type type;
-    private Abilities.Name enumName;
+    //private Abilities.Name enumName;
     private Element em;
     private int chance;
-    private EnumMap<Abilities.Modifier, AbilityModifier> modifiers;
 
     private boolean keepGoing;
 
@@ -27,9 +27,7 @@ public abstract class Ability
         int cooldown, 
         int strength, 
         Abilities.Type type,
-        Abilities.Name enumName, 
-        Element em, 
-        AbilityModifier... modifiers) 
+        Element em) 
     {
         this.name = name;
         this.description = desc;
@@ -37,32 +35,33 @@ public abstract class Ability
         this.strength = strength;
         this.type = type;
         this.turnsSinceUse = cooldown;
-        this.enumName = enumName;
         this.em = em;
+        /*
         this.modifiers = new EnumMap<>(Abilities.Modifier.class);
+        
         for (AbilityModifier m : modifiers) 
         {
-            // System.out.println(m + ", " + m.getModifier());
+            System.out.println(m + ", " + m.getModifier());
             this.modifiers.put(m.getModifier(), m);
         }
+        */
         // System.out.println(this.modifiers);
     }
 
-
+/*
     public Ability(
         String name, 
         String desc, 
         int cooldown, 
         int strength, 
         Abilities.Type type,
-        Abilities.Name enumName, 
-        Element em,
+        Element em/*,
         EnumMap<Abilities.Modifier, 
         AbilityModifier> modifiers) 
     {
-        this(name, desc, cooldown, strength, type, enumName, em);
-        this.modifiers = modifiers;
-    }
+        this(name, desc, cooldown, strength, type, em);
+        //this.modifiers = modifiers;
+    }*/
 
 
 
@@ -95,19 +94,7 @@ public abstract class Ability
         return em;
     }
 
-
-    public Abilities.Name getEnumName() 
-    {
-        return enumName;
-    }
-
-
-    protected EnumMap<Abilities.Modifier, AbilityModifier> getModifiers() 
-    {
-        return modifiers;
-    }
-
-
+    /*
     public void useAbility(
         Entity target, 
         Entity caster,
@@ -120,11 +107,13 @@ public abstract class Ability
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
         
         turnsSinceUse -= cooldown;
+        
         RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.Modifier.RECOIL);
         RandomModifier random = (RandomModifier) modifiers.get(Abilities.Modifier.RANDOM);
         MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.Modifier.MULTICAST);
         PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.Modifier.PERCENTAGE);
         GroupModifier group = (GroupModifier) modifiers.get(Abilities.Modifier.GROUP);
+        
         // System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
@@ -152,7 +141,7 @@ public abstract class Ability
                 castAbility(target, caster, otherTargets, allPlayers, log);
                 if (group != null)
                 {
-                    strength *= group.triggerModifier(target, caster);
+                    //strength *= group.triggerModifier(target, caster);
                     // System.out.println(strength);
                     for (int j = 0; j < otherTargets.size(); j++)
                     {
@@ -174,7 +163,7 @@ public abstract class Ability
         contents = new Object[]{BattleLog.Entry.Interruption.RANDOM};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
         return;
-    }
+    }*/
 
 
     protected abstract void castAbility
@@ -240,17 +229,21 @@ public abstract class Ability
 
 
     public abstract Ability copy();
-
+    /*
     public boolean hasModifier(Abilities.Modifier modifierName)
     {
         return modifiers.containsKey(modifierName);
     }
-
+    
     public AbilityModifier getModifier(Abilities.Modifier modifierName)
     {
         return modifiers.get(modifierName);
     }
-
+    
+    public ArrayList<AbilityModifier> getModifiers(){
+      return this.modifiers;
+    }
+    */
     protected void stopAttack()
     {
         keepGoing = false;

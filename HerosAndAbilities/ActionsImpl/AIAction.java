@@ -1,7 +1,7 @@
 package battlesystem;
 
 import java.util.List;
-
+/*
 public class AIAction extends Action
 {
     private AIEntity caster;
@@ -26,3 +26,4 @@ public class AIAction extends Action
     }
 
 }
+*/

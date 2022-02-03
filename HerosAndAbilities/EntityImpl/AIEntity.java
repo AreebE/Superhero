@@ -9,7 +9,7 @@ public class AIEntity extends Entity
     int currentAbility;
     // Entity creator;
     boolean isTargettable;
-    ArrayList<Abilities.Name> attackPattern;
+    ArrayList<String> attackPattern;
 
     public AIEntity(
         String name, 
@@ -18,7 +18,7 @@ public class AIEntity extends Entity
         int shieldHealth,
         State defaultState,
         Entity creator,
-        ArrayList<Abilities.Name> attackPattern,
+        ArrayList<String> attackPattern,
         boolean isTargettable)
     {
         super(name, speed, health, shieldHealth, defaultState, creator);
@@ -90,7 +90,7 @@ public class AIEntity extends Entity
         return isTargettable;
     }
 
-    public ArrayList<Abilities.Name> getAttackPattern()
+    public ArrayList<String> getAttackPattern()
     {
         return this.attackPattern;
     }

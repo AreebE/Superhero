@@ -15,25 +15,22 @@ class AbilityManager {
   public static enum Type {
     ATTACK, DEFENSE, SUPPORT
   }
+
   public ArrayList<Ability> allAbilities = new ArrayList<>();
-
-
+  //private AbilityManager abilityManager = OuterGame.getAbManager();
   public AbilityManager() {
-    //System.out.println("ABILITYMANAGER IS BEING MADE");
-    
-    
-
   }
 
-  public void loadAbs(){
+  public void load() {
     try {
       this.allAbilities = JsonIoThing.loadAbArray("FileParsing/Abilities.json");
     } catch (Exception e) {
-      //e.printStackTrace();
+      // e.printStackTrace();
       System.out.println("\u001B[31m WARNING LOAD AB ARRAY COULD NOT LOAD \n LOADING DEFAULT INSTEAD... \u001B[37m");
       loadDefaultAbs();
     }
   }
+
   public void addAbilityToList(Ability in) {
     this.allAbilities.add(in);
   }
@@ -48,17 +45,45 @@ class AbilityManager {
   }
 
   public void save() {
-    JsonIoThing.saveAbArray(this.allAbilities,"FileParsing/Abilities.json");
+    JsonIoThing.saveAbArray(this.allAbilities, "FileParsing/Abilities.json");
   }
 
   // only intended to be called incase it doesnt find anything in the file
   // or some other error happens
-  public void loadDefaultAbs(){
-    Abilities.Name[] allNames = Abilities.Name.values();
-    for(Abilities.Name t:allNames){
-      //System.out.println("IN LOADDEF LOOP");
-      allAbilities.add(Abilities.getAbility(t));
+  public void loadDefaultAbs() {
+    this.allAbilities = AbilityStorage.getAll();
+  }
+
+  public void printAllNames() {
+    System.out.println(allAbStrings());
+  }
+
+  public Ability getAbility(String input) {
+    input = input.toLowerCase();
+    allAbilities.remove(null);
+    for (Ability t : allAbilities) {
+      if (t.getName().toLowerCase().equals(input.toLowerCase())) {
+        return t;
+      }
+    }
+    return null;
+  }
+
+  public ArrayList<String> allAbStrings() {
+    ArrayList<String> out = new ArrayList<String>();
+    for (Ability t : allAbilities) {
+      out.add(t.getName());
+    }
+    return out;
+  }
+
+  public void giveAbilities(Entity target, ArrayList<String> names) {
+    for (String name : names) {
+      if (!allAbilities.contains(name)) {
+        target.addAbility(getAbility(name).copy());
+      }
     }
   }
+  
 
 }

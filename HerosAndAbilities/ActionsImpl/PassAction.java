@@ -1,5 +1,5 @@
 package battlesystem;
-
+/*
 public class PassAction extends Action 
 {
     public PassAction
@@ -7,7 +7,7 @@ public class PassAction extends Action
         Entity victim
     )
     {
-        super(victim, victim, Abilities.getName("pass"), null, null);
+        super(victim, victim,"pass", null, null);
     }
 
     @Override 
@@ -17,3 +17,4 @@ public class PassAction extends Action
     }
 
 }
+*/

@@ -9,7 +9,6 @@ public class CleanseAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        Abilities.Name enumName, 
         Element em,
         AbilityModifier... modifiers) 
     {
@@ -19,7 +18,6 @@ public class CleanseAbility extends SupportAbility
             desc, 
             cooldown, 
             null, 
-            enumName, 
             em, 
             modifiers
         );
@@ -30,8 +28,6 @@ public class CleanseAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        Abilities.Name 
-        enumName, 
         Element em,
         EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
     {
@@ -41,7 +37,6 @@ public class CleanseAbility extends SupportAbility
             desc, 
             cooldown, 
             null, 
-            enumName, 
             em, 
             modifiers
         );
@@ -69,9 +64,7 @@ public class CleanseAbility extends SupportAbility
                     getName(), 
                     getDescription(), 
                     getCooldown(), 
-                    getEnumName(), 
-                    getElement(),
-                    getModifiers()
+                    getElement()
                 );
     }
 }

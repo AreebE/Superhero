@@ -45,35 +45,28 @@
     "maxHealth": 100,
     "shieldHealth": 40
   },
-  {
-    "name": "Joe",
-    "speed": 60,
-    "abilities": [
-      "PASS_TURN",
-      "SNOWBALL",
-      "PROTECT",
-      "DEFENSE_UP",
-      "COUNTER",
-      "WIDE_SLASH"
-    ],
-    "effects": [
-      "CURSE"
-    ],
-    "shields": [
-      "DEATH_DEFIANCE"
-    ],
-    "maxHealth": 100,
-    "shieldHealth": 40
-  },
+  null,
   {
     "name": "STEVE",
     "speed": 69,
     "abilities": [
-      "PASS_TURN"
+      "PASS_TURN",
+      "EARTHQUAKE"
     ],
     "effects": [],
     "shields": [],
     "maxHealth": 420,
     "shieldHealth": 0
+  },
+  {
+    "name": "DUMMY HEAD",
+    "speed": 1,
+    "abilities": [
+      "PASS_TURN"
+    ],
+    "effects": [],
+    "shields": [],
+    "maxHealth": 500,
+    "shieldHealth": 10
   }
 ]
