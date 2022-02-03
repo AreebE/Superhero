@@ -6,6 +6,21 @@ import java.util.ArrayList;
 
 public abstract class Ability 
 {
+    public static enum Modifier
+    {
+        RANDOM,
+        RECOIL,
+        MULTICAST,
+        PERCENTAGE,
+        GROUP
+    }
+    
+    public static enum Type
+    {
+        ATTACK, 
+        DEFENSE, 
+        SUPPORT
+    }
 
     public static final int MISS = -1;
 
@@ -14,10 +29,12 @@ public abstract class Ability
     private int cooldown;
     private int strength;
     private int turnsSinceUse;
-    private Abilities.Type type;
-    //private Abilities.Name enumName;
+    private Ability.Type type;
+    //private Ability.Name enumName;
     private Element em;
+    private EnumMap<Ability.Modifier, AbilityModifier> modifiers;
     private int chance;
+    public static final int MAX_CHANCE = 256;
 
     private boolean keepGoing;
 
@@ -26,8 +43,9 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        Abilities.Type type,
-        Element em) 
+        Ability.Type type,
+        Element em,
+        AbilityModifier... modifiers) 
     {
         this.name = name;
         this.description = desc;
@@ -36,32 +54,30 @@ public abstract class Ability
         this.type = type;
         this.turnsSinceUse = cooldown;
         this.em = em;
-        /*
-        this.modifiers = new EnumMap<>(Abilities.Modifier.class);
+        this.modifiers = new EnumMap<>(Ability.Modifier.class);
         
         for (AbilityModifier m : modifiers) 
         {
             System.out.println(m + ", " + m.getModifier());
             this.modifiers.put(m.getModifier(), m);
         }
-        */
-        // System.out.println(this.modifiers);
+        System.out.println(this.modifiers);
     }
 
-/*
+
     public Ability(
         String name, 
         String desc, 
         int cooldown, 
         int strength, 
-        Abilities.Type type,
-        Element em/*,
-        EnumMap<Abilities.Modifier, 
+        Ability.Type type,
+        Element em,
+        EnumMap<Ability.Modifier, 
         AbilityModifier> modifiers) 
     {
         this(name, desc, cooldown, strength, type, em);
-        //this.modifiers = modifiers;
-    }*/
+        this.modifiers = modifiers;
+    }
 
 
 
@@ -94,7 +110,7 @@ public abstract class Ability
         return em;
     }
 
-    /*
+    
     public void useAbility(
         Entity target, 
         Entity caster,
@@ -108,11 +124,11 @@ public abstract class Ability
         
         turnsSinceUse -= cooldown;
         
-        RecoilModifier recoil = (RecoilModifier) modifiers.get(Abilities.Modifier.RECOIL);
-        RandomModifier random = (RandomModifier) modifiers.get(Abilities.Modifier.RANDOM);
-        MultiCastModifier multi = (MultiCastModifier) modifiers.get(Abilities.Modifier.MULTICAST);
-        PercentageModifier percent = (PercentageModifier) modifiers.get(Abilities.Modifier.PERCENTAGE);
-        GroupModifier group = (GroupModifier) modifiers.get(Abilities.Modifier.GROUP);
+        RecoilModifier recoil = (RecoilModifier) modifiers.get(Ability.Modifier.RECOIL);
+        RandomModifier random = (RandomModifier) modifiers.get(Ability.Modifier.RANDOM);
+        MultiCastModifier multi = (MultiCastModifier) modifiers.get(Ability.Modifier.MULTICAST);
+        PercentageModifier percent = (PercentageModifier) modifiers.get(Ability.Modifier.PERCENTAGE);
+        GroupModifier group = (GroupModifier) modifiers.get(Ability.Modifier.GROUP);
         
         // System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
         if (random == null 
@@ -163,7 +179,7 @@ public abstract class Ability
         contents = new Object[]{BattleLog.Entry.Interruption.RANDOM};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
         return;
-    }*/
+    }
 
 
     protected abstract void castAbility
@@ -229,21 +245,21 @@ public abstract class Ability
 
 
     public abstract Ability copy();
-    /*
-    public boolean hasModifier(Abilities.Modifier modifierName)
+    
+    public boolean hasModifier(Ability.Modifier modifierName)
     {
         return modifiers.containsKey(modifierName);
     }
     
-    public AbilityModifier getModifier(Abilities.Modifier modifierName)
+    public AbilityModifier getModifier(Ability.Modifier modifierName)
     {
         return modifiers.get(modifierName);
     }
     
-    public ArrayList<AbilityModifier> getModifiers(){
+    public EnumMap<Ability.Modifier, AbilityModifier> getModifiers(){
       return this.modifiers;
     }
-    */
+    
     protected void stopAttack()
     {
         keepGoing = false;

@@ -18,7 +18,7 @@ public class RecoilModifier implements AbilityModifier<String>{
   };
 
   @Override
-  public Abilities.Modifier getModifier(){
-    return Abilities.Modifier.RECOIL;
+  public Ability.Modifier getModifier(){
+    return Ability.Modifier.RECOIL;
   }
 }

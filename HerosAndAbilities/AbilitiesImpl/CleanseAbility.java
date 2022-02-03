@@ -29,7 +29,7 @@ public class CleanseAbility extends SupportAbility
         String desc, 
         int cooldown, 
         Element em,
-        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
+        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
         super
         (

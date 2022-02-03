@@ -30,7 +30,7 @@ public class PercentageModifier implements AbilityModifier<Integer>
     }
 
     @Override
-    public Abilities.Modifier getModifier(){
-        return Abilities.Modifier.PERCENTAGE;
+    public Ability.Modifier getModifier(){
+        return Ability.Modifier.PERCENTAGE;
     }
 }

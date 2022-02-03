@@ -43,16 +43,16 @@ public class CustomMaker {
     int str =  s.nextInt();
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
     String t = s.next();
-    Abilities.Type a = null;
+    Ability.Type a = null;
     switch(t){
       case "ATTACK":
-        a= Abilities.Type.ATTACK;
+        a= Ability.Type.ATTACK;
         break;
       case "DEFENSE":
-        a= Abilities.Type.DEFENSE;
+        a= Ability.Type.DEFENSE;
         break;
       case "SUPPORT":
-        a=Abilities.Type.SUPPORT;
+        a=Ability.Type.SUPPORT;
         break;
     }
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
@@ -67,8 +67,8 @@ public class CustomMaker {
     String desc, 
     int cooldown, 
     int strength, 
-    Abilities.Type Type,
-    Abilities.Name enumName, 
+    Ability.Type Type,
+    Ability.Name enumName, 
     Element em, 
     AbilityModifier... modifiers)
     */

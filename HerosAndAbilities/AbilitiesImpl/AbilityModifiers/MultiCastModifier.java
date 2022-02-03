@@ -13,7 +13,7 @@ public class MultiCastModifier implements AbilityModifier<Integer>{
   }
 
   @Override
-  public Abilities.Modifier getModifier(){
-    return Abilities.Modifier.MULTICAST;
+  public Ability.Modifier getModifier(){
+    return Ability.Modifier.MULTICAST;
   }
 }

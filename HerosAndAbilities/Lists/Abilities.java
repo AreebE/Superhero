@@ -11,21 +11,7 @@ public final class Abilities
 
     private Abilities(){}
 
-    public static enum Modifier
-    {
-        RANDOM,
-        RECOIL,
-        MULTICAST,
-        PERCENTAGE,
-        GROUP
-    }
     
-    public static enum Type
-    {
-        ATTACK, 
-        DEFENSE, 
-        SUPPORT
-    }
     /*
     public static enum Name 
     {

@@ -22,8 +22,9 @@ public class SupportAbility extends Ability
             desc, 
             cooldown, 
             0, 
-            Abilities.Type.SUPPORT, 
-            em
+            Ability.Type.SUPPORT, 
+            em,
+            modifiers
         );
         this.template = template;
     }
@@ -35,7 +36,7 @@ public class SupportAbility extends Ability
         int cooldown, 
         Effect template, 
         Element em,
-        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
+        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
         super
         (
@@ -43,8 +44,9 @@ public class SupportAbility extends Ability
             desc,
             cooldown, 
             0, 
-            Abilities.Type.SUPPORT, 
-            em
+            Ability.Type.SUPPORT, 
+            em,
+            modifiers
         );
         this.template = template;
     }

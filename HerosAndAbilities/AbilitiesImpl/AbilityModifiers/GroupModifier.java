@@ -18,9 +18,9 @@ public class GroupModifier implements AbilityModifier<Double>
     }
 
     @Override
-    public Abilities.Modifier getModifier()
+    public Ability.Modifier getModifier()
     {
-        return Abilities.Modifier.GROUP;
+        return Ability.Modifier.GROUP;
     }
 
     public Integer getLimit()

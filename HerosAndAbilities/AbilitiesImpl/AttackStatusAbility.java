@@ -42,7 +42,7 @@ public class AttackStatusAbility extends AttackAbility
         boolean ignoresBaseDefense, 
         boolean isPiercing,
         Effect sideEffect,
-        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
+        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
         super
         (

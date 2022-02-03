@@ -34,7 +34,7 @@ public class SpawnableAbility extends DefenseAbility
         int cooldown,
         AIInfoItem info, 
         Element em, 
-        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
+        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
         super
         (

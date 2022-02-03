@@ -12,10 +12,7 @@ class AbilityManager {
   // this is indended to sorta "Replace" allAbilities
   // cause with Abilites i cant change or edit the
   // allABILITIES hashmap
-  public static enum Type {
-    ATTACK, DEFENSE, SUPPORT
-  }
-
+ 
   public ArrayList<Ability> allAbilities = new ArrayList<>();
   //private AbilityManager abilityManager = OuterGame.getAbManager();
   public AbilityManager() {

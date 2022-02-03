@@ -21,7 +21,7 @@ public class DefenseAbility extends Ability
             desc,
             cooldown, 
             0, 
-            Abilities.Type.DEFENSE,  
+            Ability.Type.DEFENSE,  
             em
         );
         this.shield = shield;
@@ -34,7 +34,7 @@ public class DefenseAbility extends Ability
         int cooldown,
         Shield shield, 
         Element em, 
-        EnumMap<Abilities.Modifier, AbilityModifier> modifiers) 
+        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
         super
         (
@@ -42,7 +42,7 @@ public class DefenseAbility extends Ability
             desc, 
             cooldown, 
             0, 
-            Abilities.Type.DEFENSE, 
+            Ability.Type.DEFENSE, 
             em
         );
         this.shield = shield;

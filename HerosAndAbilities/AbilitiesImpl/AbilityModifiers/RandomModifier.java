@@ -13,7 +13,7 @@ public class RandomModifier implements AbilityModifier<Boolean>{
   @Override 
   public Boolean triggerModifier(Entity target, Entity caster){
     System.out.println("triggered random");
-    if (randomizer.nextInt(Abilities.MAX_CHANCE) < chance){
+    if (randomizer.nextInt(Ability.MAX_CHANCE) < chance){
       return true;
     } else {
       return false;
@@ -21,7 +21,7 @@ public class RandomModifier implements AbilityModifier<Boolean>{
   }
 
   @Override
-  public Abilities.Modifier getModifier(){
-    return Abilities.Modifier.RANDOM;
+  public Ability.Modifier getModifier(){
+    return Ability.Modifier.RANDOM;
   }
 }

@@ -10,7 +10,7 @@ public class PassAbility extends Ability
         String desc
     ) 
     {
-        super(name, desc, 0, 0, Abilities.Type.ATTACK,null);
+        super(name, desc, 0, 0, Ability.Type.ATTACK,null);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            Abilities.Type.ATTACK, 
+            Ability.Type.ATTACK, 
             em
         );
         this.isPiercing = isPiercing;
@@ -43,7 +43,7 @@ public class AttackAbility extends Ability
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        EnumMap<Abilities.Modifier, 
+        EnumMap<Ability.Modifier, 
         AbilityModifier> modifiers) 
     {
         super
@@ -52,7 +52,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            Abilities.Type.ATTACK, 
+            Ability.Type.ATTACK, 
             em
         );
         this.isPiercing = isPiercing;
