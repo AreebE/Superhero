@@ -5,13 +5,13 @@ import java.util.EnumMap;
 
 public class SpawnableAbility extends DefenseAbility
 {
-    AIInfoItem info;
+    private Spawnables.Name spawnName;
 
     public SpawnableAbility(
         String name, 
         String desc, 
         int cooldown, 
-        AIInfoItem info, 
+        Spawnables.Name spawnName, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -24,7 +24,7 @@ public class SpawnableAbility extends DefenseAbility
             em,
             modifiers
         );
-        this.info = info;
+        this.spawnName = spawnName;
     }
 
 
@@ -32,7 +32,7 @@ public class SpawnableAbility extends DefenseAbility
         String name, 
         String desc, 
         int cooldown,
-        AIInfoItem info, 
+        Spawnables.Name spawnName, 
         Element em, 
         EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
@@ -46,7 +46,7 @@ public class SpawnableAbility extends DefenseAbility
             em, 
             modifiers
         );
-        this.info = info;
+        this.spawnName = spawnName;
     }
     
 
@@ -58,7 +58,7 @@ public class SpawnableAbility extends DefenseAbility
         List<Entity> allPlayers,
         BattleLog log) 
     {
-        Entity ai = info.create(target);
+        Entity ai = Spawnables.get(spawnName).create(target);
         Object[] contents = new Object[]{target.getName(), ai.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
         allPlayers.add(ai);
@@ -73,7 +73,7 @@ public class SpawnableAbility extends DefenseAbility
                     getName(), 
                     getDescription(), 
                     getCooldown(),  
-                    info,
+                    spawnName,
                     getElement()
                 );
     }

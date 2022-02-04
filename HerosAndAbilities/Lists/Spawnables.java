@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public final class Spawnables
 {
-    private Spawnables(){}
+    private Spawnables(){
+    }
 
     public static enum Name
     {
@@ -15,6 +16,7 @@ public final class Spawnables
 
     private final static EnumMap<Name, AIInfoItem> ENTITIES = new EnumMap<>(Name.class)
     {{
+        System.out.println("Created spawnables");
         put
         (
             Name.CRYSTAL,
@@ -66,7 +68,6 @@ public final class Spawnables
                 true
             )
         );
-
         /*
             String name,
             int speed,
@@ -79,8 +80,9 @@ public final class Spawnables
             boolean isTargettable*/
     }};
 
-    public static AIInfoItem getEntityInfo(Name name)
+    public static AIInfoItem get(Name name)
     {
+        System.out.println(ENTITIES);
         return ENTITIES.get(name);
     }
 }

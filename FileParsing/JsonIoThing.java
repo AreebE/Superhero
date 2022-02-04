@@ -7,6 +7,7 @@ import java.nio.file.*;
 import java.io.*;
 import java.net.URI;
 import Game.*;
+import java.util.Arrays;
 
 class JsonIoThing {
   public JsonIoThing() {
@@ -45,6 +46,10 @@ class JsonIoThing {
     }
     ArrayList<Entity> out = new ArrayList<Entity>();
     for (EntityInfoItem t : o) {
+        if (t == null)
+        {
+            continue;
+        }
       out.add(new Entity(t));
     }
     System.out.println("\u001B[32mLoad Heros Success!\u001B[0m");

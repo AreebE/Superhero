@@ -192,7 +192,7 @@ public class AbilityStorage{
           "Summon Squirrel",
           "Summon a small squirrel to help you",
           5,
-          Spawnables.getEntityInfo(Spawnables.Name.SQUIRREL),
+          Spawnables.Name.SQUIRREL,
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -201,7 +201,7 @@ public class AbilityStorage{
           "Summon Golem",
           "Summon a crystal to help you",
           5,
-          Spawnables.getEntityInfo(Spawnables.Name.CRYSTAL),
+          Spawnables.Name.CRYSTAL,
           Elements.getElement(Elements.Name.NULL)
       ),
 
