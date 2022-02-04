@@ -93,6 +93,8 @@ public class Entity implements Comparable<Entity>
       this.shields = new ArrayList<>();
       for(String t: in.abilities){
         this.abilities.add(abilityManager.getAbility(t));
+        System.out.println(in.abilities);
+        System.out.println(abilities);
       }
     
     // System.out.println(effects.toString());
@@ -316,12 +318,13 @@ public class Entity implements Comparable<Entity>
     {
         return abilities.contains(ability);
     }
-    /*
+    
     public boolean hasGroupAbility(String name)
     {
-        return getAbility(name).hasModifier(Abilities.Modifier.GROUP);
+        return getAbility(name).hasModifier(Ability.Modifier.GROUP);
     }
     
+    /*
      * Methods involving a player's health
      */
     public void addShieldHealth(int shield) 

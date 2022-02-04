@@ -339,7 +339,6 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.NULL)
       )
         
-    
     };
     ArrayList<Ability> out = new ArrayList<>(Arrays.asList(a));
     return out;

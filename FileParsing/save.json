@@ -3,9 +3,9 @@
     "name": "A",
     "speed": 10,
     "abilities": [
-      "PASS_TURN",
+      "PASS TURN",
       "FIREBALL",
-      "SUMMON_SQUIRREL"
+      "SUMMON SQUIRREL"
     ],
     "effects": [],
     "shields": [],
@@ -16,10 +16,10 @@
     "name": "B",
     "speed": 30,
     "abilities": [
-      "PASS_TURN",
+      "PASS TURN",
       "SNOWBALL",
-      "SUMMON_GOLEM",
-      "GROUND_SUCTION"
+      "SUMMON GOLEM",
+      "GROUND SUCTION"
     ],
     "effects": [],
     "shields": [],
@@ -30,13 +30,13 @@
     "name": "BeepBoop",
     "speed": 30,
     "abilities": [
-      "PASS_TURN",
-      "LIGHTNING_STRIKE",
+      "PASS TURN",
+      "LIGHTNING STRIKE",
       "COUNTERSTRIKE",
-      "FLARE_UP",
+      "FLARE UP",
       "CONSTRUCT",
-      "WITCH_SPELL",
-      "FIRST_AID"
+      "WITCH SPELL",
+      "FIRST AID"
     ],
     "effects": [
       "EXPONENTIAL_SHIELD"
@@ -50,7 +50,7 @@
     "name": "STEVE",
     "speed": 69,
     "abilities": [
-      "PASS_TURN",
+      "PASS TURN",
       "EARTHQUAKE"
     ],
     "effects": [],
@@ -62,7 +62,7 @@
     "name": "DUMMY HEAD",
     "speed": 1,
     "abilities": [
-      "PASS_TURN"
+      "PASS TURN"
     ],
     "effects": [],
     "shields": [],
