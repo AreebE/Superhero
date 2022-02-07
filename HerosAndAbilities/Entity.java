@@ -176,6 +176,8 @@ public class Entity implements Comparable<Entity>
             for (int i = 0; i < abilities.size(); i++) 
             {
                 Ability a = abilities.get(i);
+                System.out.println(name + ", " + ((a== null)? null: a.getName()));
+
                 EntityString.append("* ")
                                 .append(a.toString());
                 if (!a.ableToUseAbility()) 
@@ -297,7 +299,8 @@ public class Entity implements Comparable<Entity>
             // System.out.println(a);
             // System.out.println(a.getID());
             // // System.out.println(id);
-            if (name.equals(a.getName())) 
+            name = name.replace('_', ' ');
+            if (name.toLowerCase().equals(a.getName().toLowerCase())) 
             {
                 if (a.ableToUseAbility()) 
                 {

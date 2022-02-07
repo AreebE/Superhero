@@ -27,7 +27,7 @@ public class Action {
         {
             
             int limit = ((GroupModifier) ability.getModifier(Ability.Modifier.GROUP)).getLimit();
-            this.otherTargets = input.getSecondaryTargets(limit);
+            this.otherTargets = input.getSecondaryTargets(limit, caster);
             // System.out.println(otherTargets);
         }
     }

@@ -26,7 +26,7 @@ class InnerGame {
     // fighters.get(1).getHealth() + ", " + fighters.get(2).getHealth());
 
     Scanner inputReader = new Scanner(System.in);
-    system = new ScannerInput(inputReader);
+    system = new ScannerInput(inputReader, fighters);
     // int i = 0;
     boolean anyHealthZero = false;
     Terrain t = new Terrain();
@@ -89,68 +89,68 @@ class InnerGame {
     System.out.println(fighters.get(0).getName() + " won!");
   }
 
-  private class ScannerInput implements InputSystem {
-    private Scanner inputReader;
-    private Entity target;
+//   private class ScannerInput implements InputSystem {
+//     private Scanner inputReader;
+//     private Entity target;
 
-    public ScannerInput(Scanner inputReader) {
-      this.inputReader = inputReader;
-    }
+//     public ScannerInput(Scanner inputReader) {
+//       this.inputReader = inputReader;
+//     }
 
-    @Override
-    public String getAbilityName() {
-      System.out.println("Which ability to use?");
-      return inputReader.next();
-    }
+//     @Override
+//     public String getAbilityName() {
+//       System.out.println("Which ability to use?");
+//       return inputReader.next();
+//     }
 
-    @Override
-    public Entity getSingleTarget() {
-      System.out.println("Who to target?");
-      String name = inputReader.next();
-      Entity target = getEntity(name, fighters);
-      while (target == null) {
-        System.out.println("No target specified.");
-        name = inputReader.next();
-        target = getEntity(name, fighters);
-      }
-      this.target = target;
-      return target;
-    }
+//     @Override
+//     public Entity getSingleTarget() {
+//       System.out.println("Who to target?");
+//       String name = inputReader.next();
+//       Entity target = getEntity(name, fighters);
+//       while (target == null) {
+//         System.out.println("No target specified.");
+//         name = inputReader.next();
+//         target = getEntity(name, fighters);
+//       }
+//       this.target = target;
+//       return target;
+//     }
 
-    @Override
-    public List<Entity> getSecondaryTargets(Integer limit) {
-      ArrayList<Entity> otherTargets = new ArrayList<>();
-      if (limit == -1) {
-        for (int i = 0; i < fighters.size(); i++) {
-          if (!fighters.get(i).equals(currentPlayer) && !fighters.get(i).equals(target)) {
-            otherTargets.add(fighters.get(i));
-          }
-        }
-      }
-      for (int i = 0; i < limit && otherTargets.size() < fighters.size() - 1; i++) {
-        System.out.println("Who else to target?");
-        String name = inputReader.next();
-        Entity target = getEntity(name, fighters);
-        while (target == null && otherTargets.contains(target)) {
-          System.out.println("No target specified.");
-          name = inputReader.next();
-          if (name.toLowerCase().equals("pass")) {
-            return null;
-          }
-          target = getEntity(name, fighters);
-        }
-        otherTargets.add(target);
-      }
-      return otherTargets;
-    }
-  }
+//     @Override
+//     public List<Entity> getSecondaryTargets(Integer limit, Entity currentPlayer) {
+//       ArrayList<Entity> otherTargets = new ArrayList<>();
+//       if (limit == -1) {
+//         for (int i = 0; i < fighters.size(); i++) {
+//           if (!fighters.get(i).equals(currentPlayer) && !fighters.get(i).equals(target)) {
+//             otherTargets.add(fighters.get(i));
+//           }
+//         }
+//       }
+//       for (int i = 0; i < limit && otherTargets.size() < fighters.size() - 1; i++) {
+//         System.out.println("Who else to target?");
+//         String name = inputReader.next();
+//         Entity target = getEntity(name, fighters);
+//         while (target == null && otherTargets.contains(target)) {
+//           System.out.println("No target specified.");
+//           name = inputReader.next();
+//           if (name.toLowerCase().equals("pass")) {
+//             return null;
+//           }
+//           target = getEntity(name, fighters);
+//         }
+//         otherTargets.add(target);
+//       }
+//       return otherTargets;
+//     }
+//   }
 
-  private Entity getEntity(String name, ArrayList<Entity> fighters) {
-    for (int i = 0; i < fighters.size(); i++) {
-      if (fighters.get(i).getName().equals(name)) {
-        return fighters.get(i);
-      }
-    }
-    return null;
-  }
+//   private Entity getEntity(String name, ArrayList<Entity> fighters) {
+//     for (int i = 0; i < fighters.size(); i++) {
+//       if (fighters.get(i).getName().equals(name)) {
+//         return fighters.get(i);
+//       }
+//     }
+//     return null;
+//   }
 }

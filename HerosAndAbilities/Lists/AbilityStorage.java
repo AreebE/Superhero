@@ -162,7 +162,7 @@ public class AbilityStorage{
 
       new DefenseAbility
       (
-          "Witch's spell", 
+          "Witch spell", 
           "When attacked, cast a curse on whoever attacked you", 
           3, 
           Shields.getShield(Shields.Name.WITCH_CURSE), 
@@ -180,7 +180,7 @@ public class AbilityStorage{
 
       new DefenseAbility
       (
-          "First id", 
+          "First aid", 
           "Heal oneself upon hit", 
           3, 
           Shields.getShield(Shields.Name.SELF_CARE), 
