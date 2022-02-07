@@ -58,8 +58,8 @@ public class StateChangeAbility extends SupportAbility
                     getDescription(), 
                     getCooldown(), 
                     template, 
-                    getElement()
-
+                    getElement(),
+                    getModifiers()
                 );
     }
 }

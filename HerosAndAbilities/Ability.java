@@ -58,10 +58,10 @@ public abstract class Ability
         
         for (AbilityModifier m : modifiers) 
         {
-            System.out.println(m + ", " + m.getModifier());
+            // System.out.println(m + ", " + m.getModifier());
             this.modifiers.put(m.getModifier(), m);
         }
-        System.out.println(this.modifiers);
+        // System.out.println(this.modifiers);
     }
 
 
@@ -130,7 +130,7 @@ public abstract class Ability
         PercentageModifier percent = (PercentageModifier) modifiers.get(Ability.Modifier.PERCENTAGE);
         GroupModifier group = (GroupModifier) modifiers.get(Ability.Modifier.GROUP);
         
-        // System.out.println(recoil + ", " + random + ", " + multi + ", " + percent);
+        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent + ", " + group);
         if (random == null 
             ||  random.triggerModifier(target, caster)) 
         {

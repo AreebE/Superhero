@@ -27,7 +27,8 @@ public class AttackAbility extends Ability
             cooldown, 
             strength, 
             Ability.Type.ATTACK, 
-            em
+            em,
+            modifiers
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
@@ -53,7 +54,8 @@ public class AttackAbility extends Ability
             cooldown, 
             strength, 
             Ability.Type.ATTACK, 
-            em
+            em,
+            modifiers
         );
         this.isPiercing = isPiercing;
         this.ignoresBaseDefense = ignoresBaseDefense;
@@ -105,6 +107,7 @@ public class AttackAbility extends Ability
     @Override
     public Ability copy() 
     {
+        // System.out.println(getName() + ": " + getModifiers().toString());
         return new AttackAbility
                 (
                     getName(), 
@@ -113,7 +116,8 @@ public class AttackAbility extends Ability
                     getStrength(), 
                     getElement(),
                     ignoresBaseDefense, 
-                    isPiercing
+                    isPiercing,
+                    getModifiers()
                 );
     }
 

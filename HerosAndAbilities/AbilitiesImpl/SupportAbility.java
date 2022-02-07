@@ -76,7 +76,8 @@ public class SupportAbility extends Ability
                     getDescription(), 
                     getCooldown(), 
                     template, 
-                    getElement()
+                    getElement(),
+                    getModifiers()
                 );
     }
     

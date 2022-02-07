@@ -64,7 +64,8 @@ public class CleanseAbility extends SupportAbility
                     getName(), 
                     getDescription(), 
                     getCooldown(), 
-                    getElement()
+                    getElement(),
+                    getModifiers()
                 );
     }
 }

@@ -42,7 +42,6 @@ public class SpawnableAbility extends DefenseAbility
             desc, 
             cooldown, 
             null, 
-
             em, 
             modifiers
         );
@@ -74,7 +73,8 @@ public class SpawnableAbility extends DefenseAbility
                     getDescription(), 
                     getCooldown(),  
                     spawnName,
-                    getElement()
+                    getElement(),
+                    getModifiers()
                 );
     }
 }

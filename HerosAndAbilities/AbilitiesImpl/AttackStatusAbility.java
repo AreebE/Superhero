@@ -90,7 +90,8 @@ public class AttackStatusAbility extends AttackAbility
                         getElement(), 
                         doesIgnoreBaseDefense(), 
                         isPiercing(), 
-                        sideEffect.copy()
+                        sideEffect.copy(),
+                        getModifiers()
                     );
     }
 }

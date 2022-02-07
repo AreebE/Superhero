@@ -60,7 +60,7 @@ class AbilityManager {
     allAbilities.remove(null);
     for (Ability t : allAbilities) {
       if (t.getName().toLowerCase().equals(input.toLowerCase())) {
-        return t;
+        return t.copy();
       }
     }
     return null;

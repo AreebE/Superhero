@@ -22,7 +22,8 @@ public class DefenseAbility extends Ability
             cooldown, 
             0, 
             Ability.Type.DEFENSE,  
-            em
+            em,
+            modifiers
         );
         this.shield = shield;
     }
@@ -43,7 +44,8 @@ public class DefenseAbility extends Ability
             cooldown, 
             0, 
             Ability.Type.DEFENSE, 
-            em
+            em,
+            modifiers
         );
         this.shield = shield;
     }
@@ -72,7 +74,8 @@ public class DefenseAbility extends Ability
                     getDescription(), 
                     getCooldown(),  
                     shield.copy(),
-                    getElement()
+                    getElement(),
+                    getModifiers()
                 );
     }
 }

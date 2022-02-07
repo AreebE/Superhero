@@ -93,8 +93,8 @@ public class Entity implements Comparable<Entity>
       this.shields = new ArrayList<>();
       for(String t: in.abilities){
         this.abilities.add(abilityManager.getAbility(t));
-        System.out.println(in.abilities);
-        System.out.println(abilities);
+        // System.out.println(in.abilities);
+        // System.out.println(abilities);
       }
     
     // System.out.println(effects.toString());
