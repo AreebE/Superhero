@@ -94,4 +94,5 @@ public class AttackStatusAbility extends AttackAbility
                         getModifiers()
                     );
     }
+
 }

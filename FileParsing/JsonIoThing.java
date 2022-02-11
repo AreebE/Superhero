@@ -21,14 +21,7 @@ class JsonIoThing {
       toSave.add(t.toEII());
     }
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    try {
-      FileWriter fw = new FileWriter(file);
-      gson.toJson(toSave, fw);
-      fw.flush();
-    } catch (IOException e) {
-      e.printStackTrace();
-      System.exit(69);
-    }
+    saveObj(toSave, s);
     System.out.println("\u001B[32mSave Success!\u001B[0m");
 
   }
@@ -36,7 +29,6 @@ class JsonIoThing {
   public static ArrayList<Entity> loadSuperheroArr(String s) {
     File file = new File(s);
     System.out.println("\n\u001B[33m" + "loadin Entities... " + "\u001B[0m\n ");
-    
     EntityInfoItem[] o = null;
     try {
       o = new Gson().fromJson(Files.readString(file.toPath()), EntityInfoItem[].class);
@@ -48,7 +40,7 @@ class JsonIoThing {
     for (EntityInfoItem t : o) {
         if (t == null)
         {
-            continue;
+          continue;
         }
       out.add(new Entity(t));
     }
@@ -56,39 +48,21 @@ class JsonIoThing {
     return out;
   }
 
-  public static void saveAbArray(ArrayList<Ability> in,String s) {
-    System.out.println("\n\u001B[33m" + "Savin Abilities... " + "\u001B[0m\n ");
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    File file = new File(s);
-    try {
-      FileWriter fw = new FileWriter(file);
-      gson.toJson(in.toArray(), fw);
-      fw.flush();
-    } catch (IOException e) {
-      e.printStackTrace();
-      System.exit(69);
-    }
-    System.out.println("\u001B[32mAbility Save Success!\u001B[0m");
 
-  }
-
-  public static ArrayList<Ability> loadAbArray(String s) {
-    File file = new File(s);
-    System.out.println("\n\u001B[33m" + "loadin Abilites... " + "\u001B[0m\n ");
-    try {
-      Ability[] o = new Gson().fromJson(Files.readString(file.toPath()), Ability[].class);
-      ArrayList<Ability> out = new ArrayList<Ability>();
-      for (Ability t : o) {
-        out.add(t);
-      }
-       System.out.println("\u001B[32mLoad Abs Success!\u001B[0m");
-      return out;
-    } catch (IOException e) {
-      e.printStackTrace();
-      System.exit(69);
-    }
+    
    
 
-    return null;
+
+  
+  public static void saveObj( Object in,String fileName){
+    try{
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      FileWriter fw = new FileWriter(new File(fileName));
+      gson.toJson(in, fw);
+      fw.flush();
+    }catch (IOException e) {
+      e.printStackTrace();
+      System.exit(69);
+    }
   }
 }

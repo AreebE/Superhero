@@ -1,72 +1,35 @@
 [
   {
-    "name": "A",
-    "speed": 10,
-    "abilities": [
-      "PASS TURN",
-      "FIREBALL",
-      "SUMMON SQUIRREL"
-    ],
-    "effects": [],
-    "shields": [],
-    "maxHealth": 100,
-    "shieldHealth": 50
-  },
-  {
-    "name": "B",
-    "speed": 30,
-    "abilities": [
-      "PASS TURN",
-      "SNOWBALL",
-      "SUMMON GOLEM",
-      "GROUND SUCTION"
-    ],
-    "effects": [],
-    "shields": [],
-    "maxHealth": 100,
-    "shieldHealth": 50
-  },
-  {
-    "name": "BeepBoop",
-    "speed": 30,
-    "abilities": [
-      "PASS TURN",
-      "LIGHTNING STRIKE",
-      "COUNTERSTRIKE",
-      "FLARE UP",
-      "CONSTRUCT",
-      "WITCH SPELL",
-      "FIRST AID"
-    ],
-    "effects": [
-      "EXPONENTIAL_SHIELD"
-    ],
-    "shields": [],
-    "maxHealth": 100,
-    "shieldHealth": 40
-  },
-  null,
-  {
-    "name": "STEVE",
-    "speed": 69,
-    "abilities": [
-      "PASS TURN",
-      "EARTHQUAKE"
-    ],
-    "effects": [],
-    "shields": [],
-    "maxHealth": 420,
-    "shieldHealth": 0
-  },
-  {
-    "name": "DUMMY HEAD",
+    "name": "JOE BIDOME",
     "speed": 1,
     "abilities": [
-      "PASS TURN"
+      "Pass turn"
     ],
     "effects": [],
     "shields": [],
-    "maxHealth": 500,
-    "shieldHealth": 10
+    "maxHealth": 200,
+    "shieldHealth": 300
+  },
+  {
+    "name": "Obama Prism",
+    "speed": 0,
+    "abilities": [
+      "Pass turn"
+    ],
+    "effects": [],
+    "shields": [],
+    "maxHealth": 100000,
+    "shieldHealth": 100000
+  },
+  {
+    "name": "Steve Bobs",
+    "speed": 100,
+    "abilities": [
+      "Pass turn"
+    ],
+    "effects": [],
+    "shields": [],
+    "maxHealth": 20,
+    "shieldHealth": 30
   }
 ]

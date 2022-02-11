@@ -1,7 +1,7 @@
 package battlesystem;
 
 import java.util.List;
-/*
+
 public class AIAction extends Action
 {
     private AIEntity caster;
@@ -12,7 +12,7 @@ public class AIAction extends Action
         List<Entity> allHeros,
         InputSystem inputReader)
     {
-        super(target, caster, caster.getCurrentAbility().getEnumName(), allHeros, inputReader);
+        super(target, caster, caster.getCurrentAbility().getName(), allHeros, inputReader);
         this.caster = caster;
     }
 
@@ -26,4 +26,3 @@ public class AIAction extends Action
     }
 
 }
-*/

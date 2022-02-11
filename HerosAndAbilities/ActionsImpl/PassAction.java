@@ -1,5 +1,5 @@
 package battlesystem;
-/*
+
 public class PassAction extends Action 
 {
     public PassAction
@@ -17,4 +17,3 @@ public class PassAction extends Action
     }
 
 }
-*/

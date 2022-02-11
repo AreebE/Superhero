@@ -12,16 +12,16 @@
       {
         "id": "0783cc98-83f7-4cde-92ea-a459d199b0cf",
         "line": 12,
-        "version": 9859,
-        "index": 232
+        "version": 9,
+        "index": 236
       }
     ],
     "HerosAndAbilities/InfoItemImpl/AIInfoItem.java": [
       {
         "id": "18cdba50-fc4c-46cd-9b35-c5a137dc302a",
-        "line": 8,
-        "version": 485,
-        "index": 135
+        "line": 7,
+        "version": 3,
+        "index": 104
       }
     ],
     "ablilites/SupportAbility.java": [

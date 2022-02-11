@@ -24,7 +24,6 @@ public class Entity implements Comparable<Entity>
     private int baseAttack;
     private int baseDefense;
     private static transient Terrain t;
-    private transient AbilityManager abilityManager = OuterGame.getAbManager();
 
 
     public static enum Statistic
@@ -83,7 +82,7 @@ public class Entity implements Comparable<Entity>
         this.creator = creator;
         ArrayList<String> abstogive = new ArrayList<String>();
         abstogive.add("pass turn");
-        abilityManager.giveAbilities(this, abstogive);
+        AbilityManager.giveAbilities(this, abstogive);
     }
 
 
@@ -92,7 +91,7 @@ public class Entity implements Comparable<Entity>
       this.effects = new ArrayList<>();
       this.shields = new ArrayList<>();
       for(String t: in.abilities){
-        this.abilities.add(abilityManager.getAbility(t));
+        this.abilities.add(AbilityManager.getAbility(t));
         // System.out.println(in.abilities);
         // System.out.println(abilities);
       }

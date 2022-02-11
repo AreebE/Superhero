@@ -12,7 +12,6 @@ public class EntityInfoItem implements InfoItem<Entity>
     public ArrayList<Shields.Name> shields;
     public int maxHealth;
     public int shieldHealth;
-    private transient AbilityManager abilityManager = OuterGame.getAbManager();
    
     public EntityInfoItem(
         String name,
@@ -45,7 +44,7 @@ public class EntityInfoItem implements InfoItem<Entity>
         Entity e
     )
     {
-        abilityManager.giveAbilities(e, abilitiesNames());
+        AbilityManager.giveAbilities(e, abilitiesNames());
         Effects.giveEffects(e, effects);
         Shields.giveShields(e, shields);
     }

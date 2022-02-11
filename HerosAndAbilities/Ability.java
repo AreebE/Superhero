@@ -30,13 +30,22 @@ public abstract class Ability
     private int strength;
     private int turnsSinceUse;
     private Ability.Type type;
-    //private Ability.Name enumName;
     private Element em;
     private EnumMap<Ability.Modifier, AbilityModifier> modifiers;
     private int chance;
-    public static final int MAX_CHANCE = 256;
+    public transient static final int MAX_CHANCE = 256;
 
     private boolean keepGoing;
+    public Ability(Ability tocopy){
+      this.name = tocopy.getName();
+      this.description = tocopy.getDescription();
+      this.cooldown = tocopy.getCooldown();
+      this.strength = tocopy.getStrength();
+      this.type = tocopy.getType();
+      this.turnsSinceUse = tocopy.getCooldown();
+      this.em = tocopy.getElement();
+      this.modifiers = new EnumMap<>(Ability.Modifier.class);
+    }
 
     public Ability(
         String name, 
@@ -242,6 +251,13 @@ public abstract class Ability
     {
         return cooldown - turnsSinceUse;
     }
+    public Type getType(){
+      return this.type;
+    }
+
+    public int getChance(){
+      return this.chance;
+    }
 
 
     public abstract Ability copy();
@@ -264,4 +280,6 @@ public abstract class Ability
     {
         keepGoing = false;
     }
+
+
 }

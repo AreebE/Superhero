@@ -80,8 +80,8 @@ public class SupportAbility extends Ability
                     getModifiers()
                 );
     }
-    
 }
+
 
 // Ideas: arena elemental affects, any sort of effect that causes a player to be
 // at an advantage/disadvantage

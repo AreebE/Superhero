@@ -1,7 +1,0 @@
-what i changed:
-i tried to remove the Abilities.Name Enum entirely
-like from all of the constructors and everything
-
-inorder to get it in a somewhat working order i had
-to "hide" all of the ability modifiers using // and /**/
-so we will have to figure out what to do with that

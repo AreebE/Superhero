@@ -35,7 +35,10 @@ public class AttackAbility extends Ability
         this.em = em;
     }
 
-
+    public AttackAbility(Ability parent,String info){
+      super(parent);
+      System.out.println("INFO IS "+info+" IN ATTACKAB");
+    }
     public AttackAbility(
         String name, 
         String desc, 
@@ -148,5 +151,6 @@ public class AttackAbility extends Ability
     {
         return isPiercing;
     }
+    
 }
 //

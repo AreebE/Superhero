@@ -78,6 +78,8 @@ public class DefenseAbility extends Ability
                     getModifiers()
                 );
     }
+
+
 }
 
 // regeneration, heal, and shields/ resistance effects

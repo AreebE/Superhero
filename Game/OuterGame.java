@@ -18,13 +18,11 @@ public class OuterGame {
   ArrayList<Entity> superheros = new ArrayList<Entity>();
   GUI g = new GUI();
   ScannerInput system;
-  AbilityManager m = getAbManager();
+  AbilityManager abilityMan = new AbilityManager();
   Scanner sc = new Scanner(System.in);
 
   public OuterGame() {
-    
     this.superheros = JsonIoThing.loadSuperheroArr("FileParsing/save.json");
-    setAbManager();
     mainMenu();
     System.out.println("END OF GAME");
   }
@@ -45,44 +43,51 @@ public class OuterGame {
          Command.onHelp();
         break;
 
+        case "p":
         case "play":
         System.out.println("Playing Game!");
         InnerGame iG = new InnerGame(superheros, g);
         iG.playGame();
         break;
 
+        case "ss":
         case "save superheros":
         JsonIoThing.saveSuperheroArr(this.superheros,"FileParsing/save.json");
         break;
 
+        case "ls":
         case "load superheros":
         this.superheros = JsonIoThing.loadSuperheroArr("FileParsing/save.json");
         break;
 
+        case "cs":
         case "create superhero":
         superheros.add(CustomMaker.askNMakeSuperhero());
         break;
 
+        case "e":
         case "exit":
         System.out.println("Exiting game! thanks for playing");
         System.exit(69);
         break;
 
+        case "ps":
         case "print all superhero names":
         for(Entity t:superheros){
           System.out.println(t.getName());
         }
         break;
 
+        case "ah":
         case "add abilities to hero":
         askAndAddAbilityToHero();
         break;
 
+        case "pa":
         case "print absolute abilities names":
-        m.printAllNames();
+        abilityMan.printAllNames();
         break;
-
-
+        
       }
       System.out.println("\n what next?");
       input = sc.nextLine();
@@ -105,7 +110,7 @@ public class OuterGame {
     ArrayList<String> names = new ArrayList<String>();
     String input = sc.nextLine();
     while (!input.equals("finished")){
-      Ability temporary = m.getAbility(input);
+      Ability temporary = abilityMan.getAbility(input);
       if(temporary !=null){
         System.out.println("Ability found!, you can input more abilities or type finished to add them to the hero");
         names.add(temporary.getName());
@@ -115,7 +120,7 @@ public class OuterGame {
       input = sc.nextLine();
       input = input.toLowerCase();
     }
-    m.giveAbilities(temp,names);
+    abilityMan.giveAbilities(temp,names);
   }
 
 
@@ -144,12 +149,7 @@ public class OuterGame {
     //superheros.add(Heroes.get(Heroes.Name.BEEP_BOOP, null));
     //superheros.add(Heroes.get(Heroes.Name.JOE, null));
   }
-  public static AbilityManager getAbManager(){
-    AbilityManager out =new AbilityManager();
-    out.load();
-    return out;
-  }
-  private void setAbManager(){
-    this.m = getAbManager();
+  public AbilityManager getAbManager(){
+    return this.abilityMan;
   }
 }
