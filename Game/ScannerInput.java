@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // very wip i dont even know if i will use this...
+/*
 class ScannerInput implements InputSystem{
         private Scanner inputReader;
         private Entity target;
@@ -83,4 +84,4 @@ class ScannerInput implements InputSystem{
             }
             return null;
         }
-    }
+    }*/

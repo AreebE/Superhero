@@ -6,6 +6,8 @@ import java.util.Arrays;
 public class AbilityStorage{
   AbilityStorage(){
   }
+  //note SpawnableAbilitys arent working atm;
+  
   public static ArrayList<Ability> getAll(){
     Ability[] a = new Ability[100];
     a=new Ability[]{
@@ -186,7 +188,7 @@ public class AbilityStorage{
           Shields.getShield(Shields.Name.SELF_CARE), 
           Elements.getElement(Elements.Name.NULL)
       ),
-
+      /*
       new SpawnableAbility
       (
           "Summon Squirrel",
@@ -204,7 +206,7 @@ public class AbilityStorage{
           Spawnables.Name.CRYSTAL,
           Elements.getElement(Elements.Name.NULL)
       ),
-
+      */
       new SupportAbility
       (
           "Heal pulse", 
