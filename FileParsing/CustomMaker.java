@@ -58,20 +58,6 @@ public class CustomMaker {
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
 
     System.out.println("NEW AB IS \n"+name+desc+cldn+str);
-    /*
-    ATTACK, 
-    DEFENSE, 
-    SUPPORT
-
-    String name, 
-    String desc, 
-    int cooldown, 
-    int strength, 
-    Ability.Type Type,
-    Ability.Name enumName, 
-    Element em, 
-    AbilityModifier... modifiers)
-    */
     return null;
   }
 }

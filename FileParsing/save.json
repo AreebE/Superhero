@@ -3,7 +3,9 @@
     "name": "JOE BIDOME",
     "speed": 1,
     "abilities": [
-      "Pass turn"
+      "Pass turn",
+      "Earthquake",
+      "Fireball"
     ],
     "effects": [],
     "shields": [],
@@ -31,5 +33,27 @@
     "shields": [],
     "maxHealth": 20,
     "shieldHealth": 30
+  },
+  {
+    "name": "A",
+    "speed": 1,
+    "abilities": [
+      "Pass turn"
+    ],
+    "effects": [],
+    "shields": [],
+    "maxHealth": 1,
+    "shieldHealth": 1
+  },
+  {
+    "name": "B",
+    "speed": 1,
+    "abilities": [
+      "Pass turn"
+    ],
+    "effects": [],
+    "shields": [],
+    "maxHealth": 1,
+    "shieldHealth": 1
   }
 ]

@@ -46,7 +46,7 @@ public class Entity implements Comparable<Entity>
       this.baseAttack = 0;
       this.baseDefense = 0;
       this.creator = creator;
-    setStuffFromEII(in);
+      setStuffFromEII(in);
 
       /*
       private String name;
@@ -92,11 +92,7 @@ public class Entity implements Comparable<Entity>
       this.shields = new ArrayList<>();
       for(String t: in.abilities){
         this.abilities.add(AbilityManager.getAbility(t));
-        // System.out.println(in.abilities);
-        // System.out.println(abilities);
       }
-    
-    // System.out.println(effects.toString());
         
             for(Effects.Name t: in.effects){
                 this.effects.add(Effects.getEffect(t));
@@ -175,9 +171,7 @@ public class Entity implements Comparable<Entity>
             for (int i = 0; i < abilities.size(); i++) 
             {
                 Ability a = abilities.get(i);
-                System.out.println(name + ", " + ((a== null)? null: a.getName()));
-
-                EntityString.append("* ")
+                EntityString.append("*    ")
                                 .append(a.toString());
                 if (!a.ableToUseAbility()) 
                 {
@@ -292,12 +286,9 @@ public class Entity implements Comparable<Entity>
     public Ability getAbility(
         String name) 
     {
-        // System.out.println(this);
+        
         for (Ability a : abilities) 
         {
-            // System.out.println(a);
-            // System.out.println(a.getID());
-            // // System.out.println(id);
             name = name.replace('_', ' ');
             if (name.toLowerCase().equals(a.getName().toLowerCase())) 
             {
@@ -350,7 +341,6 @@ public class Entity implements Comparable<Entity>
     public void healHealth(
         int healed) 
     {
-        // System.out.println("called the heal health");
         health += healed;
         if (health > maxHealth) 
         {
@@ -764,7 +754,6 @@ public class Entity implements Comparable<Entity>
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
         {
-            // System.out.println(this);
             Effect b = effects.get(i);
             b.useEffect(this, log);
         }
