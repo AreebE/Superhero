@@ -2,7 +2,12 @@ package battlesystem.abilityImpls;
 
 import java.util.List;
 import java.util.EnumMap;
+
 import battlesystem.EntityInfoItem;
+import battlesystem.Element;
+import battlesystem.Entity;
+import battlesystem.BattleLog;
+import battlesystem.Ability;
 
 public class SpawnableAbility extends DefenseAbility
 {
@@ -12,7 +17,7 @@ public class SpawnableAbility extends DefenseAbility
         String name, 
         String desc, 
         int cooldown, 
-        Spawnables.Name template, 
+        EntityInfoItem template, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -25,7 +30,7 @@ public class SpawnableAbility extends DefenseAbility
             em,
             modifiers
         );
-        this.spawnName = spawnName;
+        this.template = template;
     }
 
 
@@ -33,7 +38,7 @@ public class SpawnableAbility extends DefenseAbility
         String name, 
         String desc, 
         int cooldown,
-        Spawnables.Name spawnName, 
+        EntityInfoItem template, 
         Element em, 
         EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
     {
@@ -46,7 +51,7 @@ public class SpawnableAbility extends DefenseAbility
             em, 
             modifiers
         );
-        this.spawnName = spawnName;
+        this.template = template;
     }
     
 
@@ -58,7 +63,7 @@ public class SpawnableAbility extends DefenseAbility
         List<Entity> allPlayers,
         BattleLog log) 
     {
-        Entity ai = Spawnables.get(spawnName).create(target);
+        Entity ai = template.create();
         Object[] contents = new Object[]{target.getName(), ai.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
         allPlayers.add(ai);
@@ -73,7 +78,7 @@ public class SpawnableAbility extends DefenseAbility
                     getName(), 
                     getDescription(), 
                     getCooldown(),  
-                    spawnName,
+                    template,
                     getElement(),
                     getModifiers()
                 );
