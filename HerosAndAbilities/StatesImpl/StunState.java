@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.stateImpls;
 
 public class StunState extends State 
 {

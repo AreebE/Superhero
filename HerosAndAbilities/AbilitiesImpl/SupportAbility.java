@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.abilityImpls;
 
 import java.util.EnumMap;
 import java.util.List;

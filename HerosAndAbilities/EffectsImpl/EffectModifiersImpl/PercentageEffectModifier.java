@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.effectImpls.modifierImpl;
 
 public class PercentageEffectModifier implements EffectModifier<Integer>
 {

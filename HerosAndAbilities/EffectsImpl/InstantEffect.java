@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.effectImpls;
 
 // package Game.ablilites.Effects;
 

@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.abilityImpls.modifierImpl;
 
 import java.util.Random;
 

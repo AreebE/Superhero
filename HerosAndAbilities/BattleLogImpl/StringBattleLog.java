@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.battleLogImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

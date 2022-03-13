@@ -1,17 +1,18 @@
-package battlesystem;
+package battlesystem.abilityImpls;
 
 import java.util.List;
 import java.util.EnumMap;
+import battlesystem.EntityInfoItem;
 
 public class SpawnableAbility extends DefenseAbility
 {
-    private Spawnables.Name spawnName;
+    private EntityInfoItem template;
 
     public SpawnableAbility(
         String name, 
         String desc, 
         int cooldown, 
-        Spawnables.Name spawnName, 
+        Spawnables.Name template, 
         Element em, 
         AbilityModifier... modifiers) 
     {

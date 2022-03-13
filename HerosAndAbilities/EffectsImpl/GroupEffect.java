@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.effectImpls;
 
 import java.util.ArrayList;
 

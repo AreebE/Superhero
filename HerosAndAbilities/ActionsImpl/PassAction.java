@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.actionImpls;
 
 public class PassAction extends Action 
 {

@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.effectImpls;
 
 public class OneTimeEffect extends Effect 
 {

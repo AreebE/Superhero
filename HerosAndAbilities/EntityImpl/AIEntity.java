@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.entityImpls;
 
 import java.util.ArrayList;
 import java.util.List;

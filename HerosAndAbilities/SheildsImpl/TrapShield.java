@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.shieldImpls;
 
 import java.util.HashSet;
 

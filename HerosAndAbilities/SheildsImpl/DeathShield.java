@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.shieldImpls;
 
 public class DeathShield extends Shield
 {

@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.abilityImpls.modifierImpl;
 
 public class MultiCastModifier implements AbilityModifier<Integer>{
   private int times;

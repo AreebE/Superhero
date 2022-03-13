@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.effectImpls;
 
 public class DelayedEffect extends Effect 
 {

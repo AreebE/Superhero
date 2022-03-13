@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.infoItems;
 
 import java.util.ArrayList;
 

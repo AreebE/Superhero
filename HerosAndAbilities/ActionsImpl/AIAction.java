@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.actionImpls;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package battlesystem;
+package battlesystem.abilityImpls;
 
 import java.util.List;
 public class PassAbility extends Ability 
