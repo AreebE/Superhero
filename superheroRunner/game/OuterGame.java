@@ -51,8 +51,9 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        InnerGame iG = new InnerGame(superheros, g);
-        iG.playGame();
+        InnerGame iG = new InnerGame(g);
+        //going to add exploration here soon
+        iG.Fight(superheros);
         break;
 
         case "ss":

@@ -693,6 +693,12 @@ public class Entity implements Comparable<Entity>
         return actions;
     }
 
+        public List<Action> onTurn(ArrayList<Entity> fighters,InnerGame.ScannerInput scanInput){
+      System.out.println(this);
+        List<Action> playerActions = this.getActions(fighters, scanInput);
+        return playerActions;
+    }  
+
     /*
     *
     */

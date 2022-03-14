@@ -39,7 +39,13 @@ public class AIEntity extends Entity
         currentAbility = 0;
     }
 
-  
+    @Override
+  public List<Action> onTurn(ArrayList<Entity> fighters,InnerGame.ScannerInput scanInput){
+    System.out.println(this);
+    System.out.println("WOOOO Look at me go i have gained sentience(AiEntity needs to be figured out)");
+    //List<Action> playerActions = this.getActions(fighters, scanInput);
+    return null;
+  } 
 
     @Override
     public List<Action> getActions(

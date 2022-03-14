@@ -21,6 +21,9 @@ class InnerGame {
   Entity currentPlayer;
   ScannerInput scanInput;
 
+public InnerGame(GUI g) {
+    this.g = g;
+}
   public InnerGame(ArrayList<Entity> fighters, GUI g) {
     this.fighters = fighters;
     this.g = g;
@@ -76,6 +79,30 @@ class InnerGame {
     System.out.println(fighters.get(0).getName() + " won!");
   }
 
+public void Fight(ArrayList<Entity> entities) {
+    //we will have to figure out teams at some point 
+    this.fighters = entities;
+    ScannerInput scanInput = new ScannerInput();
+    
+    boolean anyHealthZero = false;
+    Terrain t = new Terrain();
+    t.setsTerrianElement(Elements.getElement(Elements.Name.ICE));
+    for (int i = 0; i < fighters.size(); i++) {
+        currentPlayer = fighters.get(i);
+        for(Action a:currentPlayer.onTurn(fighters,scanInput)){
+          actionsToPreform.add(a);
+        }
+    }
+public void playGame() {
+  //asks players for what actions to preform
+  for (int i = 0; i < fighters.size(); i++) {
+    currentPlayer = fighters.get(i);
+    for(Action a:currentPlayer.onTurn(fighters,scanInput)){
+      actionsToPreform.add(a);
+    }
+
+  }
+
   private Entity getEntity(String name, ArrayList<Entity> fighters) {
     for (int i = 0; i < fighters.size(); i++) {
       if (fighters.get(i).getName().equals(name)) {
@@ -85,7 +112,7 @@ class InnerGame {
     return null;
   }
 
-  private class ScannerInput implements InputSystem {
+  public class ScannerInput implements InputSystem {
     private Scanner inputReader;
     private Entity target;
 
