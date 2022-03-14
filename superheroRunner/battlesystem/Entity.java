@@ -685,6 +685,7 @@ public class Entity implements Comparable<Entity>
             Action a = null;
             while (a == null || !a.isLegalAction())
             {
+                System.out.println("Getting action");
                 Entity target = inputReader.getSingleTarget();
                 String name = inputReader.getAbilityName();
                 a = new Action(target, this, name, allHeros, inputReader);

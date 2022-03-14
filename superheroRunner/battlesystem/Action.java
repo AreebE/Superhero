@@ -22,7 +22,7 @@ public class Action {
         this.allHeros = allHeros;
         this.otherTargets = null;
         this.ability = caster.getAbility(abilityName);
-        
+        // System.out.println("Action created for " + caster.getName());
         if (ability != null && caster.hasGroupAbility(abilityName))
         {
             
@@ -36,6 +36,7 @@ public class Action {
     {
         if (ability == null)
         {
+            // System.out.println("No ability found");
             return false;
         }
         if (otherTargets != null)
@@ -43,7 +44,7 @@ public class Action {
             for (int i = 0; i < otherTargets.size(); i++)
             {  
                 Entity singleTarget = otherTargets.get(i);
-                if (singleTarget.isTargettable() )
+                if (!singleTarget.isTargettable() )
                 {
                     return false;
                 }

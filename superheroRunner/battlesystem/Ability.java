@@ -3,7 +3,11 @@ package battlesystem;
 import java.util.EnumMap;
 import java.util.List;
 
-import modifiers.*;
+import modifiers.RandomModifier;
+import modifiers.GroupModifier;
+import modifiers.RecoilModifier;
+import modifiers.MultiCastModifier;
+import modifiers.PercentageModifier;
 
 import java.util.ArrayList;
 
@@ -288,7 +292,7 @@ public abstract class Ability
     {
     	try 
     	{
-    		return ((GroupModifier) modifiers.get(Modifier.GROUP)).getLimit();
+    		return ((modifiers.GroupModifier) modifiers.get(Modifier.GROUP)).getLimit();
     	}
     	catch (NullPointerException npe)
     	{
