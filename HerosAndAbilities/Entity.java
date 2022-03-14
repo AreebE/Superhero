@@ -106,6 +106,11 @@ public class Entity implements Comparable<Entity>
         
 
     }
+    public List<Action> onTurn(ArrayList<Entity> fighters,InnerGame.ScannerInput scanInput){
+      System.out.println(this);
+        List<Action> playerActions = this.getActions(fighters, scanInput);
+        return playerActions;
+    } 
 
 
 

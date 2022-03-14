@@ -8,21 +8,19 @@ import java.util.Scanner;
 class InnerGame {
   ArrayList<Entity> fighters;
   GUI g;
-
   Terrain t = new Terrain();
   Entity currentPlayer;
   ScannerInput scanInput;
 
-  public InnerGame(ArrayList<Entity> fighters, GUI g) {
-    this.fighters = fighters;
+  public InnerGame(GUI g) {
     this.g = g;
-    // System.out.println("Starting game!");
   }
 
-  public void playGame() {
-
+  public void Fight(ArrayList<Entity> entities) {
+    //we will have to figure out teams at some point 
+    this.fighters = entities;
     ScannerInput scanInput = new ScannerInput();
-    // int i = 0;
+    
     boolean anyHealthZero = false;
     Terrain t = new Terrain();
     t.setsTerrianElement(Elements.getElement(Elements.Name.ICE));
@@ -34,11 +32,10 @@ class InnerGame {
       //asks players for what actions to preform
       for (int i = 0; i < fighters.size(); i++) {
         currentPlayer = fighters.get(i);
-        System.out.println(currentPlayer);
-        List<Action> playerActions = currentPlayer.getActions(fighters, scanInput);
-        for (Action a : playerActions) {
-          actionsToPreform.add(0, a);
+        for(Action a:currentPlayer.onTurn(fighters,scanInput)){
+          actionsToPreform.add(a);
         }
+        
       }
       
       //executes actionsToPreform
@@ -77,7 +74,7 @@ class InnerGame {
     return null;
   }
 
-  private class ScannerInput implements InputSystem {
+  public class ScannerInput implements InputSystem {
     private Scanner inputReader;
     private Entity target;
 

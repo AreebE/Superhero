@@ -2,12 +2,10 @@ package battlesystem;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.util.*;
 import java.nio.file.*;
 import java.io.*;
-import java.net.URI;
-import Game.*;
-import java.util.Arrays;
 
 class JsonIoThing {
   public JsonIoThing() {

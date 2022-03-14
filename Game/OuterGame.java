@@ -6,12 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import com.google.gson.JsonIOException;
 
-//The outer game is going to be in charge 
-//of things like saving loading creating and editing  
-//abilities and heros and stuff like that 
-// while innergame is for the actual gameplay like fighting and stuff
 
 public class OuterGame {
 
@@ -46,8 +41,9 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        InnerGame iG = new InnerGame(superheros, g);
-        iG.playGame();
+        InnerGame iG = new InnerGame(g);
+        //going to add exploration here soon
+        iG.Fight(superheros);
         break;
 
         case "ss":
