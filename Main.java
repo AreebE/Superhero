@@ -1,6 +1,7 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
-import battlesystem.*;
+import game.OuterGame;
 
 
 //should we make like a "main menu" type of thing so that
