@@ -15,10 +15,19 @@ public abstract class Shield
     boolean nullifies;
 
     public static enum Trigger {
-        ATTACK,
-        SHIELD_BREAK,
-        DEATH,
-        ALL
+        ANY_ACTION, // When making a move
+        ATTACK, // When the person is attacked
+        ATTACKING, // When attacking another player
+        CLEANSE, // When cleansing oneself
+        DEATH, // Upon this player's death
+        DEFENSE, // Upon using a defense skill
+        // EFFECT_APPLIED, // Upon being given an effect
+        SHIELD_BREAK, // Upon shield breaking
+        SPAWN, // Upon spawning another thing
+        STATE_CHANGE, // Upon changing state
+        GIVE_EFFECT, // Upon giving an effect
+        PASS, // Upon passing a turn
+        ALL // When any of the above triggers (Ex. trigerring when taking an action and passing.)
     }
     
     public Shield(
