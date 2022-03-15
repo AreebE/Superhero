@@ -1,0 +1,32 @@
+package game.battlesystem.infoItemImpls;
+
+import java.util.ArrayList;
+
+import game.battlesystem.Entity;
+import game.battlesystem.EntityInfoItem;
+import game.battlesystem.databaseImpls.Effects;
+import game.battlesystem.databaseImpls.Shields;
+import game.battlesystem.databaseImpls.States;
+import game.battlesystem.entityImpls.AIEntity;
+
+public class AIInfoItem extends EntityInfoItem {
+
+  boolean isTargettable;
+  ArrayList<String> attackPattern;
+
+  public AIInfoItem(String name, int speed, ArrayList<String> abilityNames, ArrayList<Effects.Name> startingEffects,
+      ArrayList<Shields.Name> startingShields, int maxHealth, int shieldHealth, ArrayList<String> attackPattern,
+      boolean isTargettable) {
+    super(name, speed, abilityNames, startingEffects, startingShields, maxHealth, shieldHealth);
+    this.attackPattern = attackPattern;
+    this.isTargettable = isTargettable;
+  }
+
+  @Override
+  public Entity create(Entity creator) {
+    AIEntity ai = new AIEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), States.get(States.Name.NORMAL),
+        creator, attackPattern, isTargettable);
+    super.addItems(ai);
+    return ai;
+  }
+}

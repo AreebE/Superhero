@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
-import game.OuterGame;
+import game.game.OuterGame;
 
 
 //should we make like a "main menu" type of thing so that
