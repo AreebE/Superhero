@@ -13,6 +13,7 @@ import game.battlesystem.Entity;
 import game.battlesystem.databaseImpls.*;
 import game.loaders.CustomMaker;
 import game.loaders.JsonIoThing;
+import game.gui.GUI;
 //The outer game is going to be in charge 
 //of things like saving loading creating and editing  
 //abilities and heros and stuff like that 
@@ -21,8 +22,7 @@ import game.loaders.JsonIoThing;
 public class OuterGame {
 
   ArrayList<Entity> superheros = new ArrayList<Entity>();
-  GUI g = new GUI();
-//  ScannerInput system;
+  GUI g = GUI.giveGUI();
   AbilityManager abilityMan = new AbilityManager();
   Scanner sc = new Scanner(System.in);
 
@@ -50,10 +50,7 @@ public class OuterGame {
 
         case "p":
         case "play":
-        System.out.println("Playing Game!");
-        InnerGame iG = new InnerGame(g);
-        //going to add exploration here soon
-        iG.Fight(superheros);
+        playDaGame();
         break;
 
         case "ss":
@@ -158,5 +155,13 @@ public class OuterGame {
   }
   public AbilityManager getAbManager(){
     return this.abilityMan;
+  }
+  public static void playDaGame(){
+    //charactercreation or selection
+    boolean notDead = true;
+    while(notDead){
+      notDead = Asker.askYN("ARE YOU DEAD");
+    }
+    
   }
 }
