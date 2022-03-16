@@ -11,6 +11,10 @@ import modifiers.PercentageModifier;
 
 import java.util.ArrayList;
 
+/**
+ * A class for the ability. 
+ *
+ */
 public abstract class Ability 
 {
     public static enum Modifier
@@ -41,8 +45,13 @@ public abstract class Ability
     private EnumMap<Ability.Modifier, AbilityModifier> modifiers;
     private int chance;
     public transient static final int MAX_CHANCE = 256;
-
+    
     private boolean keepGoing;
+    
+    /**
+     * A constructor for when it is given an ability
+     * @param tocopy the ability to copy from.
+     */
     public Ability(Ability tocopy){
       this.name = tocopy.getName();
       this.description = tocopy.getDescription();
@@ -54,6 +63,16 @@ public abstract class Ability
       this.modifiers = new EnumMap<>(Ability.Modifier.class);
     }
 
+    /**
+     * A more descriptive constructor.
+     * @param name the name of the ability
+     * @param desc the description of how it works.
+     * @param cooldown How much cooldown it has
+     * @param strength Its base strength
+     * @param type The type it is
+     * @param em the element it has
+     * @param modifiers What modifiers it has.
+     */
     public Ability(
         String name, 
         String desc, 
@@ -81,6 +100,16 @@ public abstract class Ability
     }
 
 
+    /**
+     * An overloaded constructor 
+     * @param name the name of the ability
+     * @param desc the description of how it works
+     * @param cooldown the cooldown after use
+     * @param strength the strength of the attck
+     * @param type the type of ability 
+     * @param em its element
+     * @param modifiers what modifiers it has (this is an EnumMap)
+     */
     public Ability(
         String name, 
         String desc, 
@@ -96,37 +125,61 @@ public abstract class Ability
     }
 
 
-
+    /**
+     * get name
+     * @return Get the name of this ability
+     */
     public String getName() 
     {
         return name;
     }
 
 
+    /**
+     * get description
+     * @return Get the description of this ability.
+     */
     public String getDescription() 
     {
         return description;
     }
 
-
+    /**
+     * get cooldown
+     * @return Get how many turns this will be off for after use.
+     */
     public int getCooldown() 
     {
         return cooldown;
     }
 
-
+    /**
+     * get the strength
+     * @return the base strength of this ability
+     */
     public int getStrength() 
     {
         return strength;
     }
 
-
+    /**
+     * get element
+     * @return the element this ability belongs to.
+     */
     public Element getElement() 
     {
         return em;
     }
 
-    
+    /**
+     * Use the ability. This will also trigger the modifiers that this ability has.
+     * 
+     * @param target the entity to target
+     * @param caster the caster of this spell
+     * @param otherTargets any other targets to target.
+     * @param allPlayers  the other players in this battle
+     * @param log the log to store actions.
+     */
     public void useAbility(
         Entity target, 
         Entity caster,
@@ -198,6 +251,14 @@ public abstract class Ability
     }
 
 
+    /**
+     * Cast the ability. Do not call this one: call useAbility instead. This is meant to be overriden by other classes.
+     * @param target the target
+     * @param caster the caster
+     * @param otherTargets the other targets to hit
+     * @param allPlayers all other players
+     * @param log the battlelog to record actions
+     */
     public abstract void castAbility
     (
         Entity target, 
@@ -207,7 +268,9 @@ public abstract class Ability
         BattleLog log
     );
 
-
+    /**
+     * The string representation of the ability. Starts with name, then description, then cooldown
+     */
     @Override
     public String toString() 
     {
@@ -229,6 +292,10 @@ public abstract class Ability
     }
 
 
+    /**
+     * Return if they are equal based on the name
+     * @return if they really are equal
+     */
     @Override
     public boolean equals(
         Object other) 
@@ -238,6 +305,9 @@ public abstract class Ability
     }
 
 
+    /**
+     * update the turns used since the ability was cast.
+     */
     public void reduceCooldown() 
     {
         if (turnsSinceUse < cooldown) 
@@ -247,6 +317,10 @@ public abstract class Ability
     }
 
 
+    /**
+     * Only returns true if the turns since it was used is the same as its cooldown.
+     * @return if this ability can be used
+     */
     public boolean ableToUseAbility() 
     {
         // System.out.println("turns since use for " + name + ": " + turnsSinceUse);
@@ -254,40 +328,77 @@ public abstract class Ability
     }
 
 
+    /**
+     * Get how many turns this will be on cooldown for.
+     * @return how many turns are needed.
+     */
     public int getTurnsNeeded() 
     {
         return cooldown - turnsSinceUse;
     }
+    
+    /**
+     * 
+     * @return the type of this ability
+     */
     public Type getType(){
       return this.type;
     }
 
+    /**
+     * 
+     * @return the chance this ability has to hit.
+     */
     public int getChance(){
       return this.chance;
     }
 
-
+    /**
+     * A method for copying this ability
+     * @return the copy of this.
+     */
     public abstract Ability copy();
     
+    /**
+     * check if this has a modifier
+     * @param modifierName the name of this modifier
+     * @return if it has a certain one.
+     */
     public boolean hasModifier(Ability.Modifier modifierName)
     {
         return modifiers.containsKey(modifierName);
     }
     
+    /**
+     * return the modifier 
+     * @param modifierName the name of this modifier
+     * @return the modifier asked for
+     */
     public AbilityModifier getModifier(Ability.Modifier modifierName)
     {
         return modifiers.get(modifierName);
     }
     
+    /**
+     * get all modifiers
+     * @return all modifiers
+     */
     public EnumMap<Ability.Modifier, AbilityModifier> getModifiers(){
       return this.modifiers;
     }
     
+    /**
+     * A method used to notify the program when to stop attacking
+     */
     protected void stopAttack()
     {
         keepGoing = false;
     }
     
+    /**
+     * Get how many people this can target, though return 1 at most.
+     * @return the number of targets.
+     */
     public int getTargetAmount()
     {
     	try 

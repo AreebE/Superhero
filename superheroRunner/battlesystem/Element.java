@@ -2,6 +2,10 @@ package battlesystem;
 
 import battlesystem.databaseImpls.Elements;
 
+/**
+ * A class for storing elemental properties.
+ *
+ */
 public class Element {
   //private int type;
   
@@ -9,6 +13,12 @@ public class Element {
   private String description;
   private Elements.Name elementID;
 
+  /**
+   * A constructor for the element
+   * @param name the name of this element
+   * @param description The description of the element.
+   * @param elementID This element's id
+   */
   public Element(String name, String description, Elements.Name elementID){
     //this.type = type;
     this.name = name;
@@ -21,11 +31,20 @@ public class Element {
 
   }
 
+  /**
+   * get this element's id
+   * @return the element's id
+   */
   public Elements.Name getID(){
     return elementID;
   }
   
-  @Override 
+ 
+  /**
+   * Represent how this object looks like as a string.
+   * @return the name and the description.
+   */
+  @Override
   public String toString(){
     return name + ", " + description;
   }

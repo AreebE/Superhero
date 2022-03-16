@@ -2,12 +2,21 @@ package battlesystem;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ *
+ * @param <T> the type of thing to return
+ * 
+ */
 public abstract class BattleLog<T>
 {   
 
     private int currentEntry;
     private ArrayList<Entry> entries;
     
+    /**
+     *  An inner class that is a single entry 
+     */
     public static class Entry  
     {
         private Object[] contents;
@@ -35,12 +44,21 @@ public abstract class BattleLog<T>
             STAT_DISPLAY
         } 
 
+        /**
+         * Types of interruption that can occur.
+         *
+         */
         public enum Interruption 
         {
             SHIELD,
             RANDOM
         }
 
+        /**
+         * A constructor for a basic entry
+         * @param type the type of this entry.
+         * @param contents the contents of this entry
+         */
         public Entry(    
             Type type,
             Object[] contents
@@ -50,11 +68,19 @@ public abstract class BattleLog<T>
             this.contents = contents;
         }
 
+        /**
+         * 
+         * @return the type of entry
+         */
         public Type getType()
         {
             return type;
         }
 
+        /**
+         * 
+         * @return the contents of this array.
+         */
         public Object[] getContents()
         {
             return this.contents;
