@@ -6,6 +6,9 @@ import java.util.Arrays;
 // package Game.ablilites.Effects;
 // i dont think multiplayer replit and github branches work
 // that's probably true
+/**
+ * Acts as a long-lasting thing that will affect an entity
+ */
 public class Effect 
 {
 
@@ -21,6 +24,10 @@ public class Effect
     private boolean[] pierces;
     private EnumMap<Modifier, EffectModifier> modifiers;
     
+    /**
+     * A basic enum for the types of effects.
+     *
+     */
     public static enum Type
     {
         ATTACK("attack"), 
@@ -39,12 +46,23 @@ public class Effect
             this.name = name;
         }
     } 
-
+    
     public static enum Modifier 
     {
         PERCENT
     }
-
+    
+    /**
+     * A basic constructor for Effect.
+     * @param strength the base strength of this effect
+     * @param type the type of effect
+     * @param duration the duration of the effect
+     * @param permanent whether the change is permanent
+     * @param name the name of the effect
+     * @param desc the description
+     * @param element the element of this effect
+     * @param modifiers any modifiers.
+     */
     public Effect(
         int strength, 
         Type type, 
@@ -69,6 +87,19 @@ public class Effect
         );
     }
 
+    /**
+     * Another constructor, but for damage
+     * 
+     * @param strength the base strength of this effect
+     * @param type the type of effect
+     * @param duration the duration of the effect
+     * @param permanent whether the change is permanent
+     * @param name the name of the effect
+     * @param desc the description
+     * @param element the element of this effect
+     * @param pierces if it pierces defense and if it pierces shield
+     * @param modifiers any modifiers.
+     */
     public Effect(
         int strength, 
         Effect.Type type, 
@@ -99,6 +130,9 @@ public class Effect
 
     /**
      * Will apply its effect to the given Entity
+     * 
+     * @param target the receiver of this effect
+     * @param log the battle log to record what was done
      */
     public void useEffect(
         Entity target,
@@ -110,6 +144,11 @@ public class Effect
     }
 
 
+    /**
+     * Apply the effect onto this character.
+     * @param target the reciever of the attack
+     * @param log the log to record what was done
+     */ 
     public void applyEffect(
         Entity target,
         BattleLog log) 
@@ -123,6 +162,11 @@ public class Effect
         this.applyEffect(target, power);
     }
 
+    /**
+     * Do something to the character
+     * @param target the entity to affect
+     * @param power the amount to change the statistic by
+     */
     protected void applyEffect(
         Entity target, 
         int power) 
@@ -160,6 +204,12 @@ public class Effect
     }
 
 
+    /**
+     * reduce the duration of this effect; remove it when the cooldown is over
+     * 
+     * @param target the entity to target
+     * @param log the log to record what was done
+     */
     public void reduceDuration(
         Entity target,
         BattleLog log) 
@@ -173,12 +223,20 @@ public class Effect
         }
     }
 
+    /**
+     * reduce the duration of this effect
+     */
     public void reduceDuration()
     {
         duration--;
     }
 
 
+    /**
+     * remove this effect. If it isn't permanent, then remove the effects.
+     * @param target the entity that has this effect
+     * @param log the battlelog
+     */
     protected void removeEffect(
         Entity target,
         BattleLog log) 
@@ -204,6 +262,10 @@ public class Effect
     /*
      * Creates a copy of the Effect so that two people wouldn't share the same one
      */
+    /**
+     * Create a copy of this effect
+     * @return the copy
+     */
     public Effect copy() 
     {
         return new Effect
@@ -220,6 +282,11 @@ public class Effect
                 );
     }
 
+    /**
+     * Create a copy of this effect based on some additional strength
+     * @param additionalStrength the additional strength to add
+     * @return the given copy
+     */
     public Effect copy(int additionalStrength) 
     {
         return new Effect
@@ -236,18 +303,28 @@ public class Effect
                 );
     }
 
-
+    /**
+     * If this effect can be removed through cleansing effects
+     * @return true if it can be removed.
+     */
     public boolean isRemovable() 
     {
         return true;
     }
 
-
+    /**
+     * The type of effect this is
+     * @return the type
+     */
     protected Effect.Type getType() 
     {
         return this.typeOfEffect;
     }
 
+    /**
+     * all effect modifiers this has
+     * @return the modifiers
+     */
     protected EffectModifier[] getModifiers()
     {
         // System.out.println(modifiers);
@@ -263,28 +340,48 @@ public class Effect
         return mods;
     }
 
+    /**
+     * get the strength of this character
+     * @return the strength
+     */
     protected int getStrength() 
     {
         return this.strength;
     }  
 
+    /**
+     * Change the name of this effect
+     * @param newName the new name to give.
+     */
     public void setName(String newName)
     {
         this.name = newName;
     }
 
+    /**
+     * Get the effective strength
+     * @param target the entity to draw strength from
+     * @return how much effective strength this has
+     */
     protected int getStrength(Entity target) 
     {
         PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effect.Modifier.PERCENT);
         return this.strength + ((percent == null)? 0: percent.applyEffect(target));
     }
 
+    /**
+     * the current duration of the effect
+     * @return the amount of turns this will stay for.
+     */
     public int getDuration() 
     {
         return this.duration;
     }
 
-
+    /**
+     * If this effect's effects are permanent
+     * @return true if the buffs will stay.
+     */
     protected boolean isPermanent() 
     {
         return permanent;

@@ -4,6 +4,10 @@ import java.util.HashSet;
 
 import battlesystem.databaseImpls.Elements;
 
+/**
+ * A class for entities that does something when a trigger is done.
+ *  
+ */
 public abstract class Shield
 {
     private String name;
@@ -30,6 +34,16 @@ public abstract class Shield
         ALL // When any of the above triggers (Ex. trigerring when taking an action and passing.)
     }
     
+    /**
+     * A basic constructor for shield
+     * @param name the name of the shield
+     * @param desc a description of how it works
+     * @param duration how long it lasts
+     * @param nullifies if it nullifies upcoming attacks
+     * @param uses how many uses it has
+     * @param eventTriggers what will trigger the shield
+     * @param elementTriggers what elements will trigger the shield.
+     */
     public Shield(
         String name,
         String desc,
@@ -56,7 +70,17 @@ public abstract class Shield
         }
     }
     
-
+    /**
+     * An overloaded constructor used for copying.
+     * 
+     * @param name the name of the shield
+     * @param desc the description
+     * @param duration how long it lasts
+     * @param nullifies if it nullifies upcoming attacks
+     * @param uses the amount of times it can be used
+     * @param eventTriggers all event triggers
+     * @param elementTriggers all elemental triggers
+     */
     public Shield(
         String name,
         String desc,
@@ -75,6 +99,12 @@ public abstract class Shield
         this.elementTriggers = elementTriggers;
     }
 
+    /**
+     * If this would be able to trigger the shield
+     * @param eventTrigger the type of event
+     * @param element the type of element
+     * @return if both conditions are met.
+     */
     public boolean wouldTrigger(
         Shield.Trigger eventTrigger, 
         Element element)
@@ -91,6 +121,13 @@ public abstract class Shield
     }
 
 
+    /** 
+     * Triggering the shield
+     * @param target the person who is targetted by the shield
+     * @param caster the person who has the shield
+     * @param log the battle log to record what was done
+     * @return if upcoming attacks should be nullified.
+     */
     public boolean triggerShield(Entity target, Entity caster, BattleLog log)
     {
         applyShield(target, caster, log);
@@ -107,8 +144,19 @@ public abstract class Shield
         return nullifies;
     }
 
+    /** 
+     * An apply shield method, used to apply effects.
+     * @param target the person targetted by shield
+     * @param caster the holder of the shield
+     * @param log a log for recording actions
+     */
     protected abstract void applyShield(Entity target, Entity caster, BattleLog log);
 
+    /**
+     * Reduce the duration, but remove once it reaches 0.
+     * @param target the entity to target
+     * @param log the battlelog to record the removal
+     */
     public void passTurn(
         Entity target, 
         BattleLog log)
@@ -123,8 +171,18 @@ public abstract class Shield
         }
     }
 
+    /**
+     * A copy method
+     * @return a shield that is identical to the one it was copied from
+     */
     public abstract Shield copy();
 
+    /**
+     * Remove the shield from the entity
+     * @param target (hopefully) who has the shield
+     * @param caster (if target is null) the person who has the shield
+     * @param log records the removal of ashield
+     */
     public void removeShield(
         Entity target,
         Entity caster,
@@ -143,6 +201,9 @@ public abstract class Shield
         }
     }
 
+    /**
+     * A string representation of the shield with its name, description, duration, and uses
+     */
     public String toString()
     {
         StringBuilder builder = new StringBuilder();
@@ -174,34 +235,62 @@ public abstract class Shield
         return builder.toString();
     }
 
+    /**
+     * get name
+     * @return the name
+     */
     public String getName()
     {
         return this.name;
     }
 
+    /**
+     * get desc
+     * @return the description
+     */
     public String getDesc()
     {
         return this.desc;
     }
 
+    /**
+     * get event triggers
+     * @return the event triggers
+     */
     protected HashSet<Shield.Trigger> getEventTriggers()
     {
         return this.eventTriggers;
     }
 
+    /**
+     * get element triggers
+     * @return the elemental triggers
+     */
     protected HashSet<Elements.Name> getElementTriggers()
     {
         return this.elementTriggers;
     }
 
+    /**
+     * get the duration
+     * @return the duration remaining on this shield
+     */
     public int getDuration(){
         return this.duration;
     }
 
+    /**
+     * the number of uses left
+     * @return how many uses are left
+     */
     public int getUses(){
         return this.uses;
     }
 
+    /**
+     * if this nullifies attacks
+     * @return if it nullifies attacks
+     */
     public boolean isNullifies(){
         return this.nullifies;
     }

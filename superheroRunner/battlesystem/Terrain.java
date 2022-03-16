@@ -1,5 +1,9 @@
 package battlesystem;
 
+/**
+ * A terrain that can be changed.
+ *
+ */
 public class Terrain{
 
   private boolean buff; 

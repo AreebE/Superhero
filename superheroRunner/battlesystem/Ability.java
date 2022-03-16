@@ -12,7 +12,7 @@ import modifiers.PercentageModifier;
 import java.util.ArrayList;
 
 /**
- * A class for the ability. 
+ * A class for the ability so heros can do things.
  *
  */
 public abstract class Ability 

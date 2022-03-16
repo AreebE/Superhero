@@ -7,6 +7,10 @@ import battlesystem.databaseImpls.Effects;
 import battlesystem.databaseImpls.Shields;
 import battlesystem.databaseImpls.States;
 
+/**
+ * an item for creating an entity.
+ *
+ */
 public class EntityInfoItem implements InfoItem<Entity>
 {
 
@@ -18,6 +22,16 @@ public class EntityInfoItem implements InfoItem<Entity>
     public int maxHealth;
     public int shieldHealth;
    
+    /**
+     * a basic constructor for an entity
+     * @param name the name of the entity
+     * @param speed the speed of the entity
+     * @param abilityNames the abilities it starts with
+     * @param startingEffects the starting effects it has
+     * @param startingShields the starting shields it has
+     * @param maxHealth the max health it starts with
+     * @param shieldHealth the starting amount of shield health
+     */
     public EntityInfoItem(
         String name,
         int speed,
@@ -37,6 +51,9 @@ public class EntityInfoItem implements InfoItem<Entity>
     }
 
 
+    /**
+     * Create an entity object
+     */
     @Override
     public Entity create(Entity creator)
     {
@@ -45,6 +62,10 @@ public class EntityInfoItem implements InfoItem<Entity>
         return e;
     }
 
+    /**
+     * Add some abilities, effects, and shields to the entity
+     * @param e the recipient
+     */
     protected void addItems(
         Entity e
     )
@@ -54,25 +75,46 @@ public class EntityInfoItem implements InfoItem<Entity>
         Shields.giveShields(e, shields);
     }
 
+    /**
+     * the name of the person
+     * @return the name
+     */
     protected String getName()
     {
         return this.name;
     }
 
+    /**
+     * get speed
+     * @return speed
+     */
     protected int getSpeed()
     {
         return this.speed;
     }
 
+    /**
+     * get max health
+     * @return max health
+     */
     protected int getMaxHealth()
     {
         return this.maxHealth;
     }
 
+    /**
+     * get starting shield
+     * @return starting shield
+     */
     protected int getShieldHealth()
     {
         return this.shieldHealth;
     }
+    
+    /**
+     * get the ability names
+     * @return the ability names.
+     */
     private ArrayList<String> abilitiesNames(){
       return this.abilities;
     }
