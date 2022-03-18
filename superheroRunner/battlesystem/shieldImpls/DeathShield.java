@@ -6,11 +6,25 @@ import battlesystem.Entity;
 import battlesystem.Shield;
 import battlesystem.databaseImpls.Elements;
 
+/**
+ * This shield is triggered whenever this character is about to die.
+ *
+ */
 public class DeathShield extends Shield
 {
 
     private Effect effect;
 
+    /**
+     * A basic constructor for this shield
+     * 
+     * @param name the name of this shield
+     * @param desc the description of what it does
+     * @param duration the duration this lasts for
+     * @param effect the effect it will apply
+     * @param nullifies if it nullifies future attacks.
+     * @param uses how many uses it has
+     */
     public DeathShield(
         String name,
         String desc,
@@ -24,6 +38,9 @@ public class DeathShield extends Shield
         // System.out.println(effect);
     }
   
+    /**
+     * A method for creating a copy of this ability
+     */
     @Override
     public Shield copy()
     {
@@ -38,6 +55,13 @@ public class DeathShield extends Shield
         );
     }
 
+    /**
+     * Apply the shield upon death to the 'victim.'
+     *  
+     *  @param victim the person about to die
+     *  @param caster the creator of the victim.
+     *  @param log record the shield used.
+     */
     @Override
     protected void applyShield(
         Entity victim, 
@@ -50,6 +74,10 @@ public class DeathShield extends Shield
         caster.applyEffect(effect.copy(), log);
     }
 
+    /**
+     * A method to get the effect of this shield.
+     * @return the effect
+     */
     protected Effect getEffect()
     {
         return effect;

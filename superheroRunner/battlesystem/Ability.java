@@ -17,6 +17,10 @@ import java.util.ArrayList;
  */
 public abstract class Ability 
 {
+	/**
+	 * This enum of modifiers is used to classify between the different types of modifiers. This is one of the few things that remains static, justifying the use of set enums.
+	 *
+	 */
     public static enum Modifier
     {
         RANDOM,
@@ -26,7 +30,10 @@ public abstract class Ability
         GROUP
     }
     
-    public static enum Type
+    /**
+     * This is just a general category for each ability
+     */
+    public static enum Category
     {
         ATTACK, 
         DEFENSE, 
@@ -40,7 +47,7 @@ public abstract class Ability
     private int cooldown;
     private int strength;
     private int turnsSinceUse;
-    private Ability.Type type;
+    private Ability.Category category;
     private Element em;
     private EnumMap<Ability.Modifier, AbilityModifier> modifiers;
     private int chance;
@@ -57,7 +64,7 @@ public abstract class Ability
       this.description = tocopy.getDescription();
       this.cooldown = tocopy.getCooldown();
       this.strength = tocopy.getStrength();
-      this.type = tocopy.getType();
+      this.category = tocopy.getType();
       this.turnsSinceUse = tocopy.getCooldown();
       this.em = tocopy.getElement();
       this.modifiers = new EnumMap<>(Ability.Modifier.class);
@@ -78,7 +85,7 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        Ability.Type type,
+        Ability.Category type,
         Element em,
         AbilityModifier... modifiers) 
     {
@@ -86,7 +93,7 @@ public abstract class Ability
         this.description = desc;
         this.cooldown = cooldown;
         this.strength = strength;
-        this.type = type;
+        this.category = type;
         this.turnsSinceUse = cooldown;
         this.em = em;
         this.modifiers = new EnumMap<>(Ability.Modifier.class);
@@ -115,7 +122,7 @@ public abstract class Ability
         String desc, 
         int cooldown, 
         int strength, 
-        Ability.Type type,
+        Ability.Category type,
         Element em,
         EnumMap<Ability.Modifier, 
         AbilityModifier> modifiers) 
@@ -173,6 +180,11 @@ public abstract class Ability
 
     /**
      * Use the ability. This will also trigger the modifiers that this ability has.
+     * First random to see if the move hits,
+     * Then recoil for some base damage,
+     * Then multitime to see how many times this should execite,
+     * then percentage modifier to update the strength,
+     * and group modifier to attack all others in the group. It can be interrupted though.
      * 
      * @param target the entity to target
      * @param caster the caster of this spell
@@ -341,8 +353,8 @@ public abstract class Ability
      * 
      * @return the type of this ability
      */
-    public Type getType(){
-      return this.type;
+    public Category getType(){
+      return this.category;
     }
 
     /**

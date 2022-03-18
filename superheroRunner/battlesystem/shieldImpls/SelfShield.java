@@ -8,11 +8,27 @@ import battlesystem.Entity;
 import battlesystem.Shield;
 import battlesystem.databaseImpls.Elements;
 
+/**
+ * This shield will affect the the person who has this shield
+ *
+ */
 public class SelfShield extends Shield
 {
     private Effect selfApply;
 
 
+    /**
+     * The basic constructor of this shield
+     * 
+     * @param name the name of the shield
+     * @param desc the description of how it works
+     * @param duration the duration of how long this lasts
+     * @param selfApply *NEW* the effect to apply to the victim.
+     * @param nullifies if it nullifies future attacks
+     * @param uses the uses left
+     * @param eventTriggers what events it triggers for
+     * @param elementTriggers what elements it triggers for.
+     */
     public SelfShield(
         String name,
         String desc,
@@ -28,6 +44,17 @@ public class SelfShield extends Shield
     }
     
 
+    /** 
+     * The constructor for the copy method
+     * @param name the name of this ability
+     * @param desc the description of how it works
+     * @param duration the duration of how long it lasts
+     * @param selfApply The effect to apply to the victim
+     * @param nullifies if it nullifies future effects
+     * @param uses how many uses it has left
+     * @param eventTriggers what events it triggers for
+     * @param elementTriggers what elements it triggers for.
+     */
     public SelfShield(
         String name,
         String desc,
@@ -43,6 +70,12 @@ public class SelfShield extends Shield
     }
 
 
+    /**
+     * This will give an effect to the victim.
+     * @param victim the person who receives the effect
+     * @param caster the person who caused the event
+     * @param log records the shield used and the effect given.
+     */
     @Override
     protected void applyShield(
         Entity victim, 

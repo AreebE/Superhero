@@ -10,10 +10,24 @@ import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Shield;
 
+/**
+ * The defense ability used to produce a shield and give it to a player.
+ *
+ */
 public class DefenseAbility extends Ability 
 {
     private Shield shield;
 
+    /**
+     * The basic constructor for the defense ability.
+     * 
+     * @param name the name of the ability
+     * @param desc the description of how it works
+     * @param cooldown how many turns it will be on cooldown for
+     * @param shield *NEW* the shield that this will apply to the target
+     * @param em the elemental attributes of the spell
+     * @param modifiers the extra modifiers of this ability
+     */
     public DefenseAbility(
         String name, 
         String desc, 
@@ -28,7 +42,7 @@ public class DefenseAbility extends Ability
             desc,
             cooldown, 
             0, 
-            Ability.Type.DEFENSE,  
+            Ability.Category.DEFENSE,  
             em,
             modifiers
         );
@@ -36,6 +50,16 @@ public class DefenseAbility extends Ability
     }
 
 
+    /**
+     * The constructor for the copy method
+     * 
+     * @param name the name of the ability
+     * @param desc the description of how it works
+     * @param cooldown the cooldown of the ability
+     * @param shield the shield that will be given to the target
+     * @param em the elemental attributes of the skill
+     * @param modifiers the modifiers to add to this ability
+     */
     public DefenseAbility(
         String name, 
         String desc, 
@@ -50,7 +74,7 @@ public class DefenseAbility extends Ability
             desc, 
             cooldown, 
             0, 
-            Ability.Type.DEFENSE, 
+            Ability.Category.DEFENSE, 
             em,
             modifiers
         );
@@ -58,6 +82,15 @@ public class DefenseAbility extends Ability
     }
 
 
+    /**
+     * The method to cast the ability. In this case, it will give the shield to the target.
+     * 
+     * @param target the target to give the shield to
+     * @param caster the person who is using the ability.
+     * @param otherTargets the other targets to attack
+     * @param allPlayers the other players in the list
+     * @param log the battlelog to record the shield given
+     */
     @Override
     public void castAbility(
         Entity target, 
@@ -72,6 +105,10 @@ public class DefenseAbility extends Ability
         return;
     }
 
+    /**
+     * Create a copy of the defense ability.
+     * @return a copy of the defense ability.
+     */
     @Override
     public Ability copy() 
     {

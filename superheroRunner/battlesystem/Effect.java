@@ -388,30 +388,46 @@ public class Effect
     }
 
 
+    /**
+     * Get the information about piercing.
+     * @return if it pierces defense + shield
+     */
     protected boolean[] getPierces() 
     {
         return pierces;
     }
 
-
+    /**
+     * the name of this effect
+     * @return the name
+     */
     public String getName() 
     {
         return this.name;
     }
 
-
+    /**
+     * the description of this description
+     * @return the description
+     */
     public String getDesc() 
     {
         return this.desc;
     }
 
-
+    /**
+     * the elemental attributes
+     * @return the element
+     */
     public Element getElement() 
     {
         return this.element;
     }
 
-
+    /**
+     * The string version of this effect.
+     * @return the name, then the description, then how many turns are left.
+     */
     @Override
     public String toString()
      {

@@ -10,11 +10,25 @@ import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.State;
 
+/**
+ * An ability meant to change the state of an entity
+ *
+ */
 public class StateChangeAbility extends SupportAbility
 {
 
     private State template;
 
+    /**
+     * A basic constructor to change state 
+     * 
+     * @param name the name of the ability
+     * @param desc the description of the ability
+     * @param cooldown the cooldown of the ability
+     * @param template *NEW* the state to copy.
+     * @param em the elemental attributes
+     * @param modifiers the modifiers
+     */
     public StateChangeAbility(
         String name, 
         String desc, 
@@ -27,6 +41,16 @@ public class StateChangeAbility extends SupportAbility
         this.template = template;
     }
 
+    /**
+     * The constructor for the copy method
+     * 
+     * @param name the name of the ability
+     * @param desc the description of the ability
+     * @param cooldown the cooldown on the ability
+     * @param template the template to copy the state from
+     * @param em the elemental attributes
+     * @param modifiers the modifiers of the ability
+     */
     public StateChangeAbility(
         String name, 
         String desc, 
@@ -40,6 +64,15 @@ public class StateChangeAbility extends SupportAbility
         this.template = template;
     }
     
+    /**
+     * In this case, this will apply the state to the new player
+     * 
+     * @param target the target who has their state changed
+     * @param caster the caster of the ability
+     * @param otherTargets the other targets
+     * @param allPlayers the other players there
+     * @param log to record the transform from the old state to the new state.
+     */
     @Override
     public void castAbility(
         Entity target, 
@@ -56,6 +89,10 @@ public class StateChangeAbility extends SupportAbility
     }
 
 
+    /**
+     * A method for creating a copy of a state changing ability
+     * @return a state change ability copy
+     */
     @Override
     public Ability copy() 
     {

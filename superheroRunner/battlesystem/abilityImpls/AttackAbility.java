@@ -11,12 +11,27 @@ import battlesystem.Entity;
 import battlesystem.Terrain;
 
 
+/**
+ * This ability is meant to execute a basic attack.
+ *
+ */
 public class AttackAbility extends Ability 
 {
     private boolean isPiercing;
     private boolean ignoresBaseDefense;
     private Element em;
 
+    /**
+     * A basic constructor that calls its super class
+     * @param name the name of the ability
+     * @param desc its description
+     * @param cooldown how much cooldown it has
+     * @param strength base strength 
+     * @param em the element
+     * @param ignoresBaseDefense *NEW* It allows the attack to ignore base defense
+     * @param isPiercing *NEW* It allows the attack to ignore shield
+     * @param modifiers Modifies the ability itself.
+     */
     public AttackAbility(
         String name, 
         String desc, 
@@ -33,7 +48,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            Ability.Type.ATTACK, 
+            Ability.Category.ATTACK, 
             em,
             modifiers
         );
@@ -42,10 +57,27 @@ public class AttackAbility extends Ability
         this.em = em;
     }
 
+    /**
+     * Another instructor for copying abilities
+     * @param parent its parent
+     * @param info the information it has?
+     */
     public AttackAbility(Ability parent,String info){
       super(parent);
       System.out.println("INFO IS "+info+" IN ATTACKAB");
     }
+    
+    /**
+     * Another constructor for the copy method
+     * @param name the name of the ability
+     * @param desc the description
+     * @param cooldown the cooldown
+     * @param strength the base strength
+     * @param em the element
+     * @param ignoresBaseDefense if it ignores defense
+     * @param isPiercing if it ignores shield
+     * @param modifiers the modifiers it has
+     */
     public AttackAbility(
         String name, 
         String desc, 
@@ -63,7 +95,7 @@ public class AttackAbility extends Ability
             desc, 
             cooldown, 
             strength, 
-            Ability.Type.ATTACK, 
+            Ability.Category.ATTACK, 
             em,
             modifiers
         );
@@ -73,6 +105,15 @@ public class AttackAbility extends Ability
     }
 
 
+    /**
+     * Do an attack with this method, updating strength
+     * 
+     * @param target the target to attack.
+     * @param caster the caster of the spell.
+     * @param otherTargets what other targets there are to attack.
+     * @param allPlayers the other players present in this battle
+     * @param log the battlelog to record the attack.
+     */
     @Override
 	public void castAbility(
         Entity target, 
@@ -114,6 +155,11 @@ public class AttackAbility extends Ability
         return;
     }
 
+    /**
+     * The copy ability to produce another attack ability.
+     * 
+     * @return the copied ability.
+     */
     @Override
     public Ability copy() 
     {
@@ -132,6 +178,9 @@ public class AttackAbility extends Ability
     }
 
 
+    /**
+     * The toString method that prints what the ability would look like.
+     */
     @Override
     public String toString() 
     {
@@ -147,13 +196,21 @@ public class AttackAbility extends Ability
         return sBuilder.toString();
     }
 
-
+    
+    /**
+     * If this ignores the defense
+     * @return if it ignores defense
+     */
     protected boolean doesIgnoreBaseDefense() 
     {
         return ignoresBaseDefense;
     }
 
 
+    /**
+     * Does it pierces shield?
+     * @return if it ignores shield?
+     */
     protected boolean isPiercing() 
     {
         return isPiercing;

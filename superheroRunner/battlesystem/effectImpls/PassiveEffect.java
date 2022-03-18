@@ -6,8 +6,22 @@ import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
+/**
+ * A long term passive effect for some characters
+ *
+ */
 public class PassiveEffect extends Effect 
 {
+	/**
+	 * The basic constructor for a passive effect that applies damage
+	 * @param strength the base strength
+	 * @param type the type of effect
+	 * @param name the name of the effect
+	 * @param desc the description of what it does
+	 * @param element the element it belongs to
+	 * @param pierces if it pierces defense + shield
+	 * @param modifiers the modifiers this effect has
+	 */
     public PassiveEffect(
         int strength, 
         Effect.Type type, 
@@ -31,6 +45,16 @@ public class PassiveEffect extends Effect
         );
     }
     
+    /**
+     * The constructor that won't work with damage effects
+     * 
+     * @param strength the base strength of this effect
+     * @param type the type of effect
+     * @param name the name of the effect
+     * @param desc the description of how it works
+     * @param element the element it belongs to
+     * @param modifiers what modifiers it has
+     */
     public PassiveEffect(
         int strength, 
         Effect.Type type, 
@@ -52,6 +76,11 @@ public class PassiveEffect extends Effect
     }
 
 
+    /**
+     * Just to prevent the effect from ever ending.
+     * @param target is meaningless here
+     * @param log is meaningless here
+     */
     @Override
     public void reduceDuration(
         Entity target,
@@ -59,7 +88,10 @@ public class PassiveEffect extends Effect
     {
     }
 
-
+    /**
+     * The basic copy version; nothing much to say
+     * @return a new passive effect
+     */
     @Override
     public Effect copy() 
     {
@@ -75,6 +107,11 @@ public class PassiveEffect extends Effect
                 );
     }
 
+    /**
+     * The upgraded version for the copy effect
+     * @param the additional strength to add on top of the base
+     * @return the upgraded effect
+     */
     @Override
     public Effect copy(int additionalStrength) {
         return new PassiveEffect
@@ -89,6 +126,10 @@ public class PassiveEffect extends Effect
                     );
         }
 
+    /**
+     * Overrided this method just so nothing can remove it.
+     * @return false. Nothing can remove a passive effect.
+     */
     @Override
     public boolean isRemovable() 
     {

@@ -7,8 +7,16 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.databaseImpls.Effects;
 
+/**
+ * A battle log for a basic text output
+ *
+ */
 public class StringBattleLog extends BattleLog<ArrayList<String>>
 {   
+	/**
+	 * Just a single method to get the full log.
+	 * @return all entries in this list.
+	 */
     @Override 
     public ArrayList<String> getFullLog()
     {

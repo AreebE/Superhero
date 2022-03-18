@@ -48,16 +48,16 @@ public class CustomMaker {
     int str =  s.nextInt();
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
     String t = s.next();
-    Ability.Type a = null;
+    Ability.Category a = null;
     switch(t){
       case "ATTACK":
-        a= Ability.Type.ATTACK;
+        a= Ability.Category.ATTACK;
         break;
       case "DEFENSE":
-        a= Ability.Type.DEFENSE;
+        a= Ability.Category.DEFENSE;
         break;
       case "SUPPORT":
-        a=Ability.Type.SUPPORT;
+        a=Ability.Category.SUPPORT;
         break;
     }
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");

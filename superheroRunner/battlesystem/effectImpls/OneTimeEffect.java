@@ -6,10 +6,26 @@ import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
+/**
+ * An effect intended to only apply its buff once.
+ *
+ */
 public class OneTimeEffect extends Effect 
 {
     private boolean used;
     
+    /**
+     * Create a basic version
+     * 
+     * @param strength the base strength
+     * @param type the type of effect
+     * @param duration the lenth it lasts for
+     * @param name the name of the effect
+     * @param desc the description of what it does
+     * @param element what element it belongs to
+     * @param pierces if it pierces the shield
+     * @param modifiers the modifiers it has
+     */
     public OneTimeEffect(
         int strength, 
         Effect.Type type, 
@@ -34,6 +50,15 @@ public class OneTimeEffect extends Effect
         );
     }
 
+    /**
+     * An overloaded version not meant for damaging effects
+     * 
+     * @param strength the base strength of this effect
+     * @param type the type of effect
+     * @param duration the length this effect lasts
+     * @param name the name of this effect
+     * @param desc the description of how this effect works
+     */
     public OneTimeEffect(
         int strength, 
         Effect.Type type, 
@@ -56,6 +81,11 @@ public class OneTimeEffect extends Effect
         );
     }
 
+    /**
+     * Only apply the effect if it hasn't been used
+     * @param target the target who has the effect
+     * @param log the battle log used to contain what the effect did
+     */
     @Override
     public void useEffect(
         Entity target,
@@ -69,7 +99,11 @@ public class OneTimeEffect extends Effect
         reduceDuration(target, log);
     }
 
-
+    /**
+     * Remove the effect, depending on if it was permanent or not.
+     * @param target the person with the effect
+     * @param log to record the removed effect
+     */
     @Override
     public void removeEffect(
         Entity target,
@@ -93,6 +127,10 @@ public class OneTimeEffect extends Effect
     }
 
 
+    /**
+     * A basic version of the copy
+     * @return a new effect of this type
+     */
     @Override
     public Effect copy() 
     {
@@ -109,6 +147,11 @@ public class OneTimeEffect extends Effect
                     );
     }
 
+    /**
+     * An upgraded version of the copy
+     * @param additionalStrength the amount of strength to add
+     * @return the copied effect
+     */
     @Override
     public Effect copy(int additionalStrength) {
         return new OneTimeEffect
