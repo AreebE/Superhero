@@ -11,7 +11,7 @@ public class MultiCastModifier implements AbilityModifier<Integer>{
     this.times = times;
   } 
 
-  @Override 
+  @Override
   public Integer triggerModifier(Entity target, Entity caster){
     return times;
   }
