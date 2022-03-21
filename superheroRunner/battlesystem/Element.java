@@ -1,11 +1,11 @@
 package battlesystem;
 
-import battlesystem.databaseImpls.Elements;
-
 /**
  * A class for storing elemental properties.
- *
+ *`
  */
+
+
 public class Element {
   //private int type;
   
@@ -48,5 +48,8 @@ public class Element {
   public String toString(){
     return name + ", " + description;
   }
+  
+
+  
 }
 

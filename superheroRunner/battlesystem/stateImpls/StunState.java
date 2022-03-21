@@ -1,5 +1,7 @@
 package battlesystem.stateImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.Entity;
 import battlesystem.State;
 
@@ -40,4 +42,9 @@ public class StunState extends State
     {
         return new StunState(getName(), getDesc(), getDuration());
     }
+    
+    public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		return null;
+	}
 }

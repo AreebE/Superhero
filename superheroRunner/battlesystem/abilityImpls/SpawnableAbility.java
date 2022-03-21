@@ -1,6 +1,9 @@
 package battlesystem.abilityImpls;
 
 import java.util.List;
+
+import org.json.JSONObject;
+
 import java.util.EnumMap;
 
 import battlesystem.EntityInfoItem;
@@ -97,10 +100,10 @@ public class SpawnableAbility extends DefenseAbility
         List<Entity> allPlayers,
         BattleLog log) 
     {
-        Entity ai = template.create(caster);
-        Object[] contents = new Object[]{target.getName(), ai.getName()};
-        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
-        allPlayers.add(ai);
+//        Entity ai = template.create(caster);
+//        Object[] contents = new Object[]{target.getName(), ai.getName()};
+//        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
+//        allPlayers.add(ai);
         return;
     }
 
@@ -122,5 +125,9 @@ public class SpawnableAbility extends DefenseAbility
                     getModifiers()
                 );
     }
-
+    
+    public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		return null;
+	}
 }

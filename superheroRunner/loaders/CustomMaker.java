@@ -5,8 +5,8 @@ import java.util.*;
 
 import battlesystem.Ability;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.*;
 import battlesystem.State;
+import battlesystem.objectMapImpls.*;
 //this thing is kinda nuts and needs some work also it no longer 
 // deals with files so i dont think it needs to be in FileParsing
 public class CustomMaker {

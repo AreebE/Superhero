@@ -4,9 +4,9 @@ import java.util.HashSet;
 
 import battlesystem.BattleLog;
 import battlesystem.Effect;
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Shield;
-import battlesystem.databaseImpls.Elements;
 
 /**
  * This shield will affect the the person who has this shield

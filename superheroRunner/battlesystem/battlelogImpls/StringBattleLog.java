@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.databaseImpls.Effects;
+import battlesystem.objectMapImpls.Effects;
 
 /**
  * A battle log for a basic text output

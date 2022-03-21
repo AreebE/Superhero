@@ -438,4 +438,5 @@ public class Effect
                 + getDuration() 
                 + " turns left)";
     }
+    
 }

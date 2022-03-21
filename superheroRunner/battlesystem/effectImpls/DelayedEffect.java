@@ -5,7 +5,7 @@ import battlesystem.Effect;
 import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.Effects;
+import battlesystem.objectMapImpls.Effects;
 
 /**
  * The delayed effect is intended to take place after some turns pass.

@@ -1,12 +1,13 @@
-package battlesystem.databaseImpls;
+package battlesystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import battlesystem.Element;
-
 import java.util.EnumMap;
 
+/**
+ * This will store all of the elements used. Despite being a place where elements are stored, this is NOT extending the database subclass, mainly because the elements are intended to be static and unchanging.
+ *
+ */
 public final class Elements{
 
   //private final static EnumMap<AbilityNames, Ability> LIST_OF_ABILITIES_2 = new EnumMap<>(AbilityNames.class)

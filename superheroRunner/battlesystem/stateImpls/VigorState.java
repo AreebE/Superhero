@@ -1,5 +1,7 @@
 package battlesystem.stateImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.Entity;
 import battlesystem.State;
 
@@ -53,4 +55,9 @@ public class VigorState extends State
     {
         return new VigorState(getName(), getDesc(), getDuration(), numActions);
     }
+    
+    public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		return null;
+	}
 }

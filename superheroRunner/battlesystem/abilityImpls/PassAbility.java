@@ -2,6 +2,8 @@ package battlesystem.abilityImpls;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
 import battlesystem.Ability;
 import battlesystem.BattleLog;
 import battlesystem.Entity;
@@ -74,5 +76,10 @@ public class PassAbility extends Ability
     public Ability copy()
     {
         return new PassAbility(getName(), getDescription());
-    }
+    } 
+    
+    public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		return null;
+	}
 }

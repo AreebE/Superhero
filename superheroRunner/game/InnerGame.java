@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 import battlesystem.Action;
 import battlesystem.BattleLog;
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.InputSystem;
 import battlesystem.Terrain;
 import battlesystem.battlelogImpls.StringBattleLog;
-import battlesystem.databaseImpls.Elements;
 
 class InnerGame {
   ArrayList<Entity> fighters;

@@ -2,43 +2,77 @@ package battlesystem;
 
 import java.util.Random;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
-* This class is going to store important information, though only for one generic type of object.
-* It also contains 2 hashmaps; one for strings, the other for keys. Seems a bit redundant at first, but this is so keys 
-* can be changed with relative ease.
-*
-* @param <T> the object that this database will store.
+* 
+* 
+* @param <T> the object that this map will store.
 */
-public abstract class Database<T> 
+public abstract class ObjectMap <T> 
 {
-    HashMap<String, Key> keyDatabase;
-    HashMap<Key, T> objectDatabase;
+	String pathway;
+    HashMap<String, T> objectMap;
     
-    public Database()
+    public ObjectMap(String pathway)
     {
-       keyDatabase = new HashMap<String, Key>();
-        objectDatabase = new HashMap<Key, T>();
+//       keyDatabase = new HashMap<String, Key>();
+        this.pathway = pathway;
+    	objectMap = new HashMap<String, T>();
     }
-
+/*
+ * Ability: Fireball
+ * 
+ * T = type Ability
+ * 
+ * "fire"  ->  Fireball  
+ * Ability : Lightning Strike
+ * 
+ * "lightning"
+ * "light strike"
+ * 
+ *   
+ */
+    public void addEntries(String[][] identifiers, Integer[] types, Object[][] parameters)
+    {
+    	for (int i = 0; i < identifiers.length; i++)
+    	{
+    		addEntry(identifiers[i], constructObject(types[i], parameters[i]));
+    	}
+    }
+    
+    
+    public void addEntries(String[][] identifiers, T[] items)
+    {
+    	for (int i = 0; i < identifiers.length; i++)
+    	{
+    		addEntry(identifiers[i], items[i]);
+    	}
+    }
+    
     public void addEntry(String[] identifiers, T thingToAdd)
     {
-        HashSet<String> list = new HashSet<String>();
-        Key k = new Key(list);
         for (String i: identifiers)
         {
-            list.add(i);
-            keyDatabase.put(i, k);
+            objectMap.put(i, thingToAdd);
         }
-        objectDatabase.put(k, thingToAdd);
-        assignKey(k, thingToAdd);
     }
 
-    protected abstract void assignKey(Key k, T object);
 
     public T getEntry(String identifier)
     {
-        return objectDatabase.get(keyDatabase.get(identifier));
+        return objectMap.get(identifier);
+    }
+    
+    public abstract T constructObject(Integer type, Object[] parameters);
+//    public abstract void loadFile(File f);
+    
+    @Override
+    public String toString()
+    {
+    	return objectMap.toString();
     }
 }

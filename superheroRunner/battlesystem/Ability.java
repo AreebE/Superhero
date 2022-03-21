@@ -3,6 +3,8 @@ package battlesystem;
 import java.util.EnumMap;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import modifiers.RandomModifier;
 import modifiers.GroupModifier;
 import modifiers.RecoilModifier;
@@ -422,6 +424,6 @@ public abstract class Ability
     		return 1;
     	}
     }
-
-
+    
+    public abstract JSONObject toJson();
 }

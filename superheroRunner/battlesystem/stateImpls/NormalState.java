@@ -1,5 +1,7 @@
 package battlesystem.stateImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.Entity;
 import battlesystem.State;
 
@@ -9,6 +11,10 @@ import battlesystem.State;
  */
 public class NormalState extends State 
 {
+	
+	private static final String NAME_KEY = "name json";
+	private static final String DESC_KEY = "desc json";
+	private static final String DURATION_KEY = "duration json";
 	/**
 	 * The most basic consturctor
 	 * @param name the name of the state
@@ -40,4 +46,13 @@ public class NormalState extends State
     {
         return new NormalState(getName(), getDesc(), getDuration());
     }
+
+	@Override
+	public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		start.append(NAME_KEY, getName());
+		start.append(DESC_KEY, getDesc());
+		start.append(DURATION_KEY, getDuration());
+		return start;
+	}
 }

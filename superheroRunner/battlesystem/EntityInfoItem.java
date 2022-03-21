@@ -2,23 +2,21 @@ package battlesystem;
 
 import java.util.ArrayList;
 
-import battlesystem.databaseImpls.AbilityManager;
-import battlesystem.databaseImpls.Effects;
-import battlesystem.databaseImpls.Shields;
-import battlesystem.databaseImpls.States;
+
 
 /**
  * an item for creating an entity.
  *
  */
-public class EntityInfoItem implements InfoItem<Entity>
+public class EntityInfoItem
 {
 
     public String name;
     public int speed;
     public ArrayList<String> abilities;
-    public ArrayList<Effects.Name> effects;
-    public ArrayList<Shields.Name> shields;
+    public ArrayList<String> effects;
+    public ArrayList<String> shields;
+    public String defaultState;
     public int maxHealth;
     public int shieldHealth;
    
@@ -29,6 +27,7 @@ public class EntityInfoItem implements InfoItem<Entity>
      * @param abilityNames the abilities it starts with
      * @param startingEffects the starting effects it has
      * @param startingShields the starting shields it has
+     * @param defaultState the default state of the entity
      * @param maxHealth the max health it starts with
      * @param shieldHealth the starting amount of shield health
      */
@@ -36,8 +35,9 @@ public class EntityInfoItem implements InfoItem<Entity>
         String name,
         int speed,
         ArrayList<String> abilityNames,
-        ArrayList<Effects.Name> startingEffects,
-        ArrayList<Shields.Name> startingShields,
+        ArrayList<String> startingEffects,
+        ArrayList<String> startingShields,
+        String defaultState,
         int maxHealth,
         int shieldHealth)
     {
@@ -47,6 +47,7 @@ public class EntityInfoItem implements InfoItem<Entity>
         this.effects = startingEffects;
         this.shields = startingShields;
         this.maxHealth = maxHealth;
+        this.defaultState = defaultState;
         this.shieldHealth = shieldHealth;
     }
 
@@ -54,11 +55,15 @@ public class EntityInfoItem implements InfoItem<Entity>
     /**
      * Create an entity object
      */
-    @Override
-    public Entity create(Entity creator)
+    public Entity create(
+    		Entity creator,
+    		ObjectMap<Ability> abDatabase,
+    		ObjectMap<Effect> efDatabase,
+    		ObjectMap<Shield> shDatabase,
+    		ObjectMap<State> stDatabase)
     {
-        Entity e = new Entity(name, speed, maxHealth, shieldHealth, States.get(States.Name.NORMAL), creator);
-        addItems(e);
+        Entity e = new Entity(name, speed, maxHealth, shieldHealth, stDatabase.getEntry(defaultState), creator);
+        addItems(e, abDatabase, efDatabase, shDatabase);
         return e;
     }
 
@@ -67,12 +72,24 @@ public class EntityInfoItem implements InfoItem<Entity>
      * @param e the recipient
      */
     protected void addItems(
-        Entity e
+        Entity e,
+        ObjectMap<Ability> abDatabase,
+        ObjectMap<Effect> efDatabase,
+        ObjectMap<Shield> shMap
     )
     {
-        AbilityManager.giveAbilities(e, abilitiesNames());
-        Effects.giveEffects(e, effects);
-        Shields.giveShields(e, shields);
+        for (String a: abilities)
+        {
+        	e.addAbility(abDatabase.getEntry(a));
+        }
+        for (String ef: effects)
+        {
+        	e.addEffect(efDatabase.getEntry(ef));
+        }
+        for (String s: shields)
+        {
+        	e.addShield(shMap.getEntry(s));
+        }
     }
 
     /**

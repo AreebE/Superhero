@@ -1,4 +1,4 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.List;
 import battlesystem.Effect;
 import battlesystem.Effect.Type;
 import battlesystem.Element;
+import battlesystem.Elements;
 import battlesystem.EffectModifier;
 import battlesystem.Entity;
 import battlesystem.effectImpls.InstantEffect;

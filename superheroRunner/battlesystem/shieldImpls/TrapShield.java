@@ -4,9 +4,9 @@ import java.util.HashSet;
 
 import battlesystem.BattleLog;
 import battlesystem.Effect;
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Shield;
-import battlesystem.databaseImpls.Elements;
 
 /**
  * When this shield triggers, then it gives an effect to the caster.

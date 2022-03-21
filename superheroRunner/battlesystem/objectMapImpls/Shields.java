@@ -1,8 +1,9 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
 import java.util.List;
 
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Shield;
 import battlesystem.shieldImpls.*;

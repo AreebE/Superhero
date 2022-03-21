@@ -3,6 +3,8 @@ package battlesystem.abilityImpls;
 import java.util.EnumMap;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
@@ -144,5 +146,9 @@ public class AttackStatusAbility extends AttackAbility
                         getModifiers()
                     );
     }
-
+    
+    public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		return null;
+	}
 }

@@ -1,5 +1,7 @@
 package battlesystem;
 
+import org.json.JSONObject;
+
 /**
  * States will affect how many actions a player is allowed to have
  *
@@ -105,4 +107,5 @@ public abstract class State
      * @return the copy of this state.
      */
     public abstract State copy();
+    public abstract JSONObject toJson();
 }   

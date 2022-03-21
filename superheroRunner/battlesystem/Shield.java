@@ -2,8 +2,6 @@ package battlesystem;
 
 import java.util.HashSet;
 
-import battlesystem.databaseImpls.Elements;
-
 /**
  * A class for entities that does something when a trigger is done.
  *  

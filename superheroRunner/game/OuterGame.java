@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import battlesystem.Ability;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.*;
+import battlesystem.objectMapImpls.*;
 import loaders.CustomMaker;
 import loaders.JsonIoThing;
 //The outer game is going to be in charge 

@@ -3,6 +3,8 @@ package battlesystem.abilityImpls;
 import java.util.EnumMap;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
@@ -123,7 +125,10 @@ public class DefenseAbility extends Ability
                 );
     }
 
-
+    public JSONObject toJson() {
+		JSONObject start = new JSONObject();
+		return null;
+	}
 }
 
 // regeneration, heal, and shields/ resistance effects

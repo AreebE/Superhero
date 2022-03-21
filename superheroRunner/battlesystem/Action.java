@@ -2,8 +2,6 @@ package battlesystem;
 
 import java.util.List;
 
-import battlesystem.databaseImpls.Elements;
-
 /**
  * Get an action
  *

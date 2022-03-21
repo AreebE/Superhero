@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import battlesystem.databaseImpls.AbilityManager;
-import battlesystem.databaseImpls.Effects;
-import battlesystem.databaseImpls.Effects.Name;
-import battlesystem.databaseImpls.Elements;
-import battlesystem.databaseImpls.Shields;
-import battlesystem.databaseImpls.States;
+import battlesystem.objectMapImpls.AbilityManager;
+import battlesystem.objectMapImpls.Effects;
+import battlesystem.objectMapImpls.Shields;
+import battlesystem.objectMapImpls.States;
+import battlesystem.objectMapImpls.Effects.Name;
 
 import java.util.Arrays;
 /**
@@ -36,6 +35,7 @@ public class Entity implements Comparable<Entity>
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
+    private Key k;
     private static transient Terrain t;
 
 
@@ -71,7 +71,7 @@ public class Entity implements Comparable<Entity>
       this.baseAttack = 0;
       this.baseDefense = 0;
       this.creator = creator;
-      setStuffFromEII(in);
+//      setStuffFromEII(in);
 
       /*
       private String name;
@@ -126,26 +126,26 @@ public class Entity implements Comparable<Entity>
      * 
      * @param in The info item that contains all of the names.
      */
-    private void setStuffFromEII(EntityInfoItem in){
-      this.abilities = new ArrayList<>();
-      this.effects = new ArrayList<>();
-      this.shields = new ArrayList<>();
-      for(String t: in.abilities){
-        this.abilities.add(AbilityManager.getAbility(t));
-      }
-        
-            for(Effects.Name t: in.effects){
-                this.effects.add(Effects.getEffect(t));
-            }
-        
-      
-        
-            for(Shields.Name t: in.shields){
-                this.shields.add(Shields.getShield(t));
-            }
-        
-
-    }
+//    private void setStuffFromEII(EntityInfoItem in){
+//      this.abilities = new ArrayList<>();
+//      this.effects = new ArrayList<>();
+//      this.shields = new ArrayList<>();
+//      for(String t: in.abilities){
+//        this.abilities.add(AbilityManager.getAbility(t));
+//      }
+//        
+//            for(Effects.Name t: in.effects){
+//                this.effects.add(Effects.getEffect(t));
+//            }
+//        
+//      
+//        
+//            for(Shields.Name t: in.shields){
+//                this.shields.add(Shields.getShield(t));
+//            }
+//        
+//
+//    }
     
 
 
@@ -338,7 +338,8 @@ public class Entity implements Comparable<Entity>
     {
         abilities.add(newAbility);
     }
-
+    
+   
 
     /**
      * Get all of the abilities of this player.
@@ -1032,6 +1033,11 @@ public class Entity implements Comparable<Entity>
     public boolean isTargettable()
     {
     	return true;
+    }
+    
+    private void setName(String newName)
+    {
+    	this.name = newName;
     }
 
 }

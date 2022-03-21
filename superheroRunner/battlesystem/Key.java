@@ -41,4 +41,9 @@ public class Key
     {
         this.identifiers = identifiers;
     }
+    
+    public HashSet<String> getIdentifiers()
+    {
+    	return this.identifiers;
+    }
 }

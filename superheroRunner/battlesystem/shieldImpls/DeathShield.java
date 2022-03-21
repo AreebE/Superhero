@@ -2,9 +2,9 @@ package battlesystem.shieldImpls;
 
 import battlesystem.BattleLog;
 import battlesystem.Effect;
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Shield;
-import battlesystem.databaseImpls.Elements;
 
 /**
  * This shield is triggered whenever this character is about to die.

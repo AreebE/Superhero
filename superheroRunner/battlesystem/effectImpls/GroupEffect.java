@@ -7,7 +7,7 @@ import battlesystem.Effect;
 import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.Effects;
+import battlesystem.objectMapImpls.Effects;
 
 /**
  * A group effect that contains several other effects. Its duration will end once the other effects do.
@@ -64,7 +64,7 @@ public class GroupEffect extends Effect
      * @param element the element of this effect
      * @param effects the subeffects.
      */
-    private GroupEffect(
+    public GroupEffect(
         String name, 
         String desc, 
         Element element, 

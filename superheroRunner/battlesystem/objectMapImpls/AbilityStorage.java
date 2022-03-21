@@ -1,9 +1,10 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import battlesystem.Ability;
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.abilityImpls.*;
 import modifiers.*;
