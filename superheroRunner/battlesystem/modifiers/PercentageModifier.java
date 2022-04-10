@@ -6,6 +6,7 @@ import battlesystem.Ability;
 import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 public class PercentageModifier implements AbilityModifier
 {
@@ -31,6 +32,7 @@ public class PercentageModifier implements AbilityModifier
         List<Entity> targets, 
         Entity caster,
         Ability holder,
+        Game g,
         BattleLog log
         )
     {

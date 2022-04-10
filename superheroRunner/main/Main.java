@@ -38,6 +38,6 @@ class Main {
 		e.printStackTrace();
 	}
 	  
-	     new OuterGame();
+//	     new OuterGame();
   }
 }

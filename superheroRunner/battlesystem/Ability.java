@@ -195,16 +195,15 @@ public abstract class Ability
      * then percentage modifier to update the strength,
      * and group modifier to attack all others in the group. It can be interrupted though.
      * 
-     * @param target the entity to target
+     * @param targets the entity/entities to target
      * @param caster the caster of this spell
-     * @param otherTargets any other targets to target.
-     * @param allPlayers  the other players in this battle
+     * @param g 	the game class, which can make calls to get certain things.
      * @param log the log to store actions.
      */
     public void useAbility(
         List<Entity> targets, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
         keepGoing = true;
@@ -219,11 +218,11 @@ public abstract class Ability
         boolean shouldContinue = true;
         for (int i = 0; i < modifiers.size() && shouldContinue; i++)
         {
-        	shouldContinue = modifiers.get(i).triggerModifier(targets, caster, this, log);
+        	shouldContinue = modifiers.get(i).triggerModifier(targets, caster, this, g, log);
         }
         if (modifiers.size() == 0)
         {
-        	castAbility(targets.get(0), caster, allPlayers, log);
+        	castAbility(targets.get(0), caster, g, log);
         }
         
     }
@@ -241,7 +240,7 @@ public abstract class Ability
     (
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log
     );
 

@@ -6,6 +6,7 @@ import battlesystem.Ability;
 import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 public class MultiCastModifier implements AbilityModifier{
   private int times;
@@ -15,12 +16,12 @@ public class MultiCastModifier implements AbilityModifier{
   } 
 
   @Override
-  public boolean triggerModifier(List<Entity> targets, Entity caster, Ability holder, BattleLog log)
+  public boolean triggerModifier(List<Entity> targets, Entity caster, Ability holder, Game g, BattleLog log)
   {
 	  Entity target = targets.get(0);
 	  for (int i = 0; i < times; i++)
 	  {
-		  holder.castAbility(target, caster, targets, log);
+		  holder.castAbility(target, caster, g, log);
 		  if (!holder.continueAttacking())
 		  {
 			  Object[] contents = new Object[]{BattleLog.Entry.Interruption.SHIELD};

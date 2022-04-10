@@ -78,13 +78,13 @@ public class Action {
      * Perform the action, whether it is technically legal or not. 
      * @param log the battle log to recourd actions.
      */
-    public void performAction(BattleLog log)
+    public void performAction(BattleLog log, Game g)
     {
         // System.out.println("perform action");
-        caster.searchForShield(Shield.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), mainTarget, caster, log);
+        caster.searchForShield(Shield.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), mainTarget, caster, g, log);
         otherTargets.add(0, mainTarget);
-        ability.useAbility(otherTargets, caster, allHeros, log);
-        caster.endOfTurn(log);
+        ability.useAbility(otherTargets, caster, g, log);
+        caster.endOfTurn(log, g);
         // caster.endOfTurn();
     }
 

@@ -6,6 +6,7 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Shield;
 
 /**
@@ -14,7 +15,7 @@ import battlesystem.Shield;
  */
 public class SelfShield extends Shield
 {
-    private Effect selfApply;
+    private String selfApply;
 
 
     /**
@@ -33,7 +34,7 @@ public class SelfShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect selfApply, 
+        String selfApply, 
         boolean nullifies,
         int uses,
         Shield.Trigger[] eventTriggers,
@@ -59,7 +60,7 @@ public class SelfShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect selfApply, 
+        String selfApply, 
         boolean nullifies,
         int uses,
         HashSet<Shield.Trigger> eventTriggers,
@@ -80,17 +81,18 @@ public class SelfShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster, 
+        Game g,
         BattleLog log)
     {
-        Object[] contents = new Object[]{victim.getName(), getUses() - 1, victim.getName(), selfApply.getName(), null, getName()};
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, victim.getName(), selfApply, null, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        victim.addEffect(selfApply.copy());
+        victim.addEffect(g.getEffect(selfApply));
     }
 
     @Override
     public Shield copy()
     {
-        return new SelfShield(getName(), getDesc(), getDuration(), selfApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new SelfShield(getName(), getDesc(), getDuration(), selfApply, isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
 }

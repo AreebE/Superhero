@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import battlesystem.Ability;
 import battlesystem.BattleLog;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 /**
  * A pass ability intended to pass turns. For the sake of convenience, it is recorded as an attack skill.
@@ -37,8 +38,8 @@ public class PassAbility extends Ability
     (
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
-        BattleLog battleLog
+        Game g,
+		BattleLog battleLog
     )
     {
         
@@ -58,7 +59,7 @@ public class PassAbility extends Ability
     (
         List<Entity> targets, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log
     )
     {

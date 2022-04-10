@@ -11,6 +11,7 @@ import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.State;
 
 /**
@@ -20,7 +21,7 @@ import battlesystem.State;
 public class StateChangeAbility extends SupportAbility
 {
 
-    private State template;
+    private String template;
 
     /**
      * A basic constructor to change state 
@@ -36,7 +37,7 @@ public class StateChangeAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        State template, 
+        String template, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -58,7 +59,7 @@ public class StateChangeAbility extends SupportAbility
         String name, 
         String desc, 
         int cooldown, 
-        State template, 
+        String template, 
         Element em,
         ArrayList<AbilityModifier> modifiers
         )
@@ -80,13 +81,13 @@ public class StateChangeAbility extends SupportAbility
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
         String oldStateName = target.getState().getName();
-        Object[] contents = new Object[]{target.getName(), oldStateName, template.getName()};
+        Object[] contents = new Object[]{target.getName(), oldStateName, template};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.STATE_CHANGE, contents));
-        target.replaceState(template.copy());
+        target.replaceState(g.getState(template));
         return; 
     }
 

@@ -6,6 +6,7 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Shield;
 
 /**
@@ -14,7 +15,7 @@ import battlesystem.Shield;
  */
 public class TrapShield extends Shield
 {
-    private Effect counter;
+    private String counter;
 
     
     /**
@@ -32,7 +33,7 @@ public class TrapShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect counter, 
+        String counter, 
         boolean nullifies,
         int uses,
         Shield.Trigger[] eventTriggers,
@@ -59,7 +60,7 @@ public class TrapShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect counter, 
+        String counter, 
         boolean nullifies,
         int uses,
         HashSet<Shield.Trigger> eventTriggers,
@@ -74,18 +75,19 @@ public class TrapShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster,
+        Game g,
         BattleLog log)
     {
-        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), counter.getName(), null, getName()};
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), counter, null, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
                 // System.out.println("Apply " + isNullifies());
-        caster.addEffect(counter.copy());
+        caster.addEffect(g.getEffect(counter));
     }
 
     @Override
     public Shield copy()
     {
-        return new TrapShield(getName(), getDesc(), getDuration(), counter.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new TrapShield(getName(), getDesc(), getDuration(), counter, isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
 }

@@ -9,6 +9,7 @@ import battlesystem.Action;
 import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.InputSystem;
 import battlesystem.PassAction;
 import battlesystem.State;
@@ -119,12 +120,13 @@ public class AIEntity extends Entity
         boolean ignoresDefense,
         Entity caster,
         Element e,
+        Game g,
         BattleLog log
     )
     {
         if (isTargettable)
         {
-            return super.dealDamage(damageDealt, isPiercing, ignoresDefense, caster, e, log);
+            return super.dealDamage(damageDealt, isPiercing, ignoresDefense, caster, e, g, log);
         }
         return new Object[]{super.getName(), 0, 0, 0, 0, 0, 0};
     }
@@ -134,9 +136,9 @@ public class AIEntity extends Entity
      * @param log the the log to store what happens here.
      */
     @Override
-    public void endOfTurn(BattleLog log)
+    public void endOfTurn(BattleLog log, Game g)
     {
-        super.endOfTurn(log);
+        super.endOfTurn(log, g);
         currentAbility = (currentAbility + 1) % attackPattern.size();
     }
 

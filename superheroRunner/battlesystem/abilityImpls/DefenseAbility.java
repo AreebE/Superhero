@@ -11,6 +11,7 @@ import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Shield;
 
 /**
@@ -19,7 +20,7 @@ import battlesystem.Shield;
  */
 public class DefenseAbility extends Ability 
 {
-    private Shield shield;
+    private String shield;
 
     /**
      * The basic constructor for the defense ability.
@@ -35,7 +36,7 @@ public class DefenseAbility extends Ability
         String name, 
         String desc, 
         int cooldown, 
-        Shield shield, 
+        String shield, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -67,7 +68,7 @@ public class DefenseAbility extends Ability
         String name, 
         String desc, 
         int cooldown,
-        Shield shield, 
+        String shield, 
         Element em, 
         ArrayList<AbilityModifier> modifiers) 
     {
@@ -98,11 +99,11 @@ public class DefenseAbility extends Ability
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
-        target.addShield(shield.copy());
-        Object[] contents = new Object[]{target.getName(), shield.getName()};
+        target.addShield(g.getShield(shield));
+        Object[] contents = new Object[]{target.getName(), shield};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.DEFENSE, contents));
         return;
     }
@@ -119,7 +120,7 @@ public class DefenseAbility extends Ability
                     getName(), 
                     getDescription(), 
                     getCooldown(),  
-                    shield.copy(),
+                    shield,
                     getElement(),
                     getModifiers()
                 );

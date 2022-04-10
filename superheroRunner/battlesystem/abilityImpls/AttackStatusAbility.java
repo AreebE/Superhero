@@ -12,6 +12,7 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 /**
  * This extension of attack ability is going to add an effect to the target.
@@ -19,7 +20,7 @@ import battlesystem.Entity;
 public class AttackStatusAbility extends AttackAbility 
 {
 	
-    private Effect sideEffect;
+    private String sideEffect;
     
     /**
      * One key difference, compared to the other one:
@@ -42,7 +43,7 @@ public class AttackStatusAbility extends AttackAbility
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
-        Effect sideEffect,
+        String sideEffect,
         AbilityModifier... modifiers) 
     {
         super
@@ -81,7 +82,7 @@ public class AttackStatusAbility extends AttackAbility
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        Effect sideEffect,
+        String sideEffect,
         ArrayList<AbilityModifier> modifiers) 
     {
         super
@@ -112,15 +113,15 @@ public class AttackStatusAbility extends AttackAbility
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
-        super.castAbility(target, caster, allPlayers, log);
+        super.castAbility(target, caster, g, log);
         if (isPiercing() 
             || !target.hasShield()) 
         {
-            target.addEffect(sideEffect.copy());
-            Object[] contents = new Object[]{target.getName(), sideEffect.getName()};
+            target.addEffect(g.getEffect(sideEffect));
+            Object[] contents = new Object[]{target.getName(), sideEffect};
             log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
         }
         return;
@@ -142,7 +143,7 @@ public class AttackStatusAbility extends AttackAbility
                         getElement(), 
                         doesIgnoreBaseDefense(), 
                         isPiercing(), 
-                        sideEffect.copy(),
+                        sideEffect,
                         getModifiers()
                     );
     }

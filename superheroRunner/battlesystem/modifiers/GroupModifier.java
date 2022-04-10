@@ -6,6 +6,7 @@ import battlesystem.Ability;
 import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 public class GroupModifier implements AbilityModifier
 {
@@ -19,12 +20,12 @@ public class GroupModifier implements AbilityModifier
     }
 
     @Override 
-    public boolean triggerModifier(List<Entity> targets, Entity caster, Ability holder, BattleLog log)
+    public boolean triggerModifier(List<Entity> targets, Entity caster, Ability holder, Game g, BattleLog log)
     {
     	holder.adjustAdditionalStrength(percentage, true);
     	for (int i = 0; i < targets.size(); i++)
     	{
-    		holder.castAbility(targets.get(i), caster, targets, log);
+    		holder.castAbility(targets.get(i), caster, g, log);
     		if (!holder.continueAttacking())
     		{
     			Object[] contents = new Object[]{BattleLog.Entry.Interruption.SHIELD};

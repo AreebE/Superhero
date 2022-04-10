@@ -11,6 +11,7 @@ import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Terrain;
 
 
@@ -120,7 +121,7 @@ public class AttackAbility extends Ability
 	public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
 //         System.out.println("Attack Ability \'" + this.getName() + "\' used on player
@@ -146,6 +147,7 @@ public class AttackAbility extends Ability
             ignoresBaseDefense,
             caster,
             getElement(),
+            g,
             log
         );
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK, results), currentIndex);

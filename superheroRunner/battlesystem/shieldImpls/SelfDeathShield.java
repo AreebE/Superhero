@@ -3,6 +3,7 @@ package battlesystem.shieldImpls;
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Shield;
 
 /**
@@ -25,7 +26,7 @@ public class SelfDeathShield extends DeathShield
         String name,
         String desc,
         int duration, 
-        Effect effect,
+        String effect,
         boolean nullifies,
         int uses)
     {
@@ -44,7 +45,7 @@ public class SelfDeathShield extends DeathShield
             getName(),
             getDesc(),
             getDuration(),
-            getEffect().copy(),
+            getEffect(),
             isNullifies(),
             getUses()
         );
@@ -61,16 +62,17 @@ public class SelfDeathShield extends DeathShield
     protected void applyShield(
         Entity victim, 
         Entity caster,
+        Game g,
         BattleLog log)
     {
         Object[] contents = new Object[]{
             victim.getName(), 
             getUses() - 1, 
             victim.getName(), 
-            getEffect().getName(), 
+            getEffect(), 
             null,
             getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        victim.applyEffect(getEffect().copy(), log);
+        victim.applyEffect(g.getEffect(getEffect()), log);
     }
 }

@@ -57,13 +57,10 @@ public class EntityInfoItem
      */
     public Entity create(
     		Entity creator,
-    		ObjectMap<Ability> abDatabase,
-    		ObjectMap<Effect> efDatabase,
-    		ObjectMap<Shield> shDatabase,
-    		ObjectMap<State> stDatabase)
+    		Game g)
     {
-        Entity e = new Entity(name, speed, maxHealth, shieldHealth, stDatabase.getEntry(defaultState), creator);
-        addItems(e, abDatabase, efDatabase, shDatabase);
+        Entity e = new Entity(name, speed, maxHealth, shieldHealth, g.getState(defaultState), creator);
+        addItems(e, g);
         return e;
     }
 
@@ -73,22 +70,20 @@ public class EntityInfoItem
      */
     protected void addItems(
         Entity e,
-        ObjectMap<Ability> abDatabase,
-        ObjectMap<Effect> efDatabase,
-        ObjectMap<Shield> shMap
+        Game g
     )
     {
         for (String a: abilities)
         {
-        	e.addAbility(abDatabase.getEntry(a));
+        	e.addAbility(g.getAbility(a));
         }
         for (String ef: effects)
         {
-        	e.addEffect(efDatabase.getEntry(ef));
+        	e.addEffect(g.getEffect(ef));
         }
         for (String s: shields)
         {
-        	e.addShield(shMap.getEntry(s));
+        	e.addShield(g.getShield(s));
         }
     }
 

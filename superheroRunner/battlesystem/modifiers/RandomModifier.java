@@ -7,6 +7,7 @@ import battlesystem.Ability;
 import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 public class RandomModifier implements AbilityModifier{
   private static final Random randomizer = new Random();
@@ -17,7 +18,7 @@ public class RandomModifier implements AbilityModifier{
   } 
   
   @Override
-  public boolean triggerModifier(List<Entity> targets, Entity caster, Ability ability, BattleLog log)
+  public boolean triggerModifier(List<Entity> targets, Entity caster, Ability ability, Game g, BattleLog log)
   {
 //    System.out.println("triggered random");
     if (randomizer.nextInt(Ability.MAX_CHANCE) < chance)

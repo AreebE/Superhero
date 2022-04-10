@@ -8,6 +8,7 @@ import battlesystem.ObjectMap;
 import battlesystem.Effect;
 import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
+import battlesystem.Game;
 import battlesystem.Shield;
 import battlesystem.State;
 import battlesystem.entityImpls.AIEntity;
@@ -63,14 +64,11 @@ public class AIInfoItem extends EntityInfoItem {
   @Override
   public Entity create(
 		  Entity creator,
-		  ObjectMap<Ability> abObjectMap,
-		  ObjectMap<Effect> efObjectMap,
-		  ObjectMap<Shield> shObjectMap,
-		  ObjectMap<State> stObjectMap) 
+		  Game g) 
   {
-    AIEntity ai = new AIEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), stObjectMap.getEntry(super.defaultState),
+    AIEntity ai = new AIEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), g.getState(super.defaultState),
         creator, attackPattern, isTargettable);
-    super.addItems(ai, abObjectMap, efObjectMap, shObjectMap);
+    super.addItems(ai, g);
     return ai;
   }
 }

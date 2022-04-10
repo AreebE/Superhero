@@ -133,7 +133,7 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.NULL),
           false,
           false,
-          Effects.getEffect(Effects.Name.POISON)
+          "poison"
       ),
       new PassAbility
       (
@@ -150,7 +150,7 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.EARTH),
           true, 
           true,
-          Effects.getEffect(Effects.Name.BLEED)
+          "bleed"
       ),
 
       new DefenseAbility
@@ -158,7 +158,7 @@ public class AbilityStorage{
           "Counter", 
           "counter the next attack that comes", 
           3, 
-          Shields.getShield(Shields.Name.COUNTER),  
+          "counter",  
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -167,7 +167,7 @@ public class AbilityStorage{
           "Warning", 
           "The user will be warned not to break your shield", 
           3, 
-          Shields.getShield(Shields.Name.SELF_DESTRUCT), 
+          "self destruct", 
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -176,7 +176,7 @@ public class AbilityStorage{
           "Witch spell", 
           "When attacked, cast a curse on whoever attacked you", 
           3, 
-          Shields.getShield(Shields.Name.WITCH_CURSE), 
+          "witch curse",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -185,7 +185,7 @@ public class AbilityStorage{
           "Illusion spell", 
           "Create an illusion that retaliates when attacked", 
           3, 
-          Shields.getShield(Shields.Name.ILLUSION), 
+          "illusion",
           Elements.getElement(Elements.Name.LIGHT)
       ),
 
@@ -194,7 +194,7 @@ public class AbilityStorage{
           "First aid", 
           "Heal oneself upon hit", 
           3, 
-          Shields.getShield(Shields.Name.SELF_CARE), 
+          "self care",
           Elements.getElement(Elements.Name.NULL)
       ),
       /*
@@ -221,7 +221,7 @@ public class AbilityStorage{
           "Heal pulse", 
           "boosts defense for x amount of time",
           1, 
-          Effects.getEffect(Effects.Name.INSTANT_HEAL), 
+          "instant heal", 
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -230,7 +230,7 @@ public class AbilityStorage{
           "Spore", 
           "Gives the opponent an infection",
           9, 
-          Effects.getEffect(Effects.Name.FUNGAL_INFECTION), 
+          "fungal infection",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -239,7 +239,7 @@ public class AbilityStorage{
           "Protect", 
           "protects the user from any hit",
           3, 
-          Effects.getEffect(Effects.Name.INSTANT_SHIELD), 
+          "instant shield",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -248,7 +248,7 @@ public class AbilityStorage{
           "burn up", 
           "The target will burn up for a short amount of time",
           3, 
-          Effects.getEffect(Effects.Name.BURNOUT), 
+          "burnout",
           Elements.getElement(Elements.Name.FIRE)
       ),
 
@@ -257,7 +257,7 @@ public class AbilityStorage{
           "Counterstrike", 
           "Adds a lot of shield",
           3, 
-          Effects.getEffect(Effects.Name.INSTANT_SHIELD_X), 
+          "instant shield x",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -266,7 +266,7 @@ public class AbilityStorage{
           "attack up", 
           "boosts damage for x amount of time", 
           5, 
-          Effects.getEffect(Effects.Name.ATTACK_BOOST),  
+          "attack boost",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -275,7 +275,7 @@ public class AbilityStorage{
           "defense up", 
           "boosts defense for x amount of time",
           5, 
-          Effects.getEffect(Effects.Name.DEFENSE_BOOST), 
+          "defense boost",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -284,7 +284,7 @@ public class AbilityStorage{
           "flare up", 
           "Makes the user charge up their attacks", 
           10, 
-          Effects.getEffect(Effects.Name.CHARGE), 
+          "charge",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -293,7 +293,7 @@ public class AbilityStorage{
           "Poison", 
           "Will poison the person targeted", 
           0, 
-          Effects.getEffect(Effects.Name.POISON), 
+          "poison",
           Elements.getElement(Elements.Name.NULL),
           new RandomModifier(256 / 4 * 3)
       ),
@@ -303,7 +303,7 @@ public class AbilityStorage{
           "Sacrifice", 
           "Injures the user to cause more damage later", 
           4, 
-          Effects.getEffect(Effects.Name.CURSE), 
+          "curse",
           Elements.getElement(Elements.Name.NULL)
 //          new RecoilModifier
 //          (
@@ -318,7 +318,7 @@ public class AbilityStorage{
           "Defensive Stance", 
           "The user decides to be cautious for some time", 
           3, 
-          Effects.getEffect(Effects.Name.GUARD), 
+          "guard",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -327,8 +327,7 @@ public class AbilityStorage{
           "Construct", 
           "The user starts to build up their stats", 
           2, 
-          Effects.getEffect(Effects.Name.BUILD_UP), 
-
+          "build up",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -337,7 +336,7 @@ public class AbilityStorage{
           "Stun Spore", 
           "Paralyze the target, preventing them from doing anything", 
           2, 
-          States.get(States.Name.PARALYZED),
+          "paralyzed",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -346,7 +345,7 @@ public class AbilityStorage{
           "Invigorate", 
           "Energize the target, allowing them to make more moves per turn", 
           2, 
-          States.get(States.Name.ENERGIZED), 
+          "energized",
           Elements.getElement(Elements.Name.NULL)
       )
         

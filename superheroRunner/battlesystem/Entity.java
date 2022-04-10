@@ -35,7 +35,7 @@ public class Entity implements Comparable<Entity>
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
-    private Key k;
+    private int teamID;
     private static transient Terrain t;
 
 
@@ -471,11 +471,11 @@ public class Entity implements Comparable<Entity>
      * @param log a battlelog to record if any players died.
      * @return if the health is 0 AFTER any death shields have been triggered.
      */
-    public boolean isHealthZero(BattleLog log) 
+    public boolean isHealthZero(BattleLog log, Game g) 
     {
         if (this.health <= 0)
         {
-            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, log);
+            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, g, log);
         }
         return this.health <= 0;
     }
@@ -498,6 +498,7 @@ public class Entity implements Comparable<Entity>
      * 
      * @param e				The element of this attack.
      * 
+     * @param g				the game class
      * @param log			The battle log to record an event.
      * 
      * @return     			{name, shieldDamageDone, ShieldLeft, healthDamageDone, HealthLeft, canKeepAttacking}
@@ -508,6 +509,7 @@ public class Entity implements Comparable<Entity>
         boolean ignoresDefense,
         Entity caster,
         Element e,
+        Game g,
         BattleLog log) 
     {   
         Object[] logValues = new Object[]{this.name, 0, 0, 0, 0, false};
@@ -532,7 +534,7 @@ public class Entity implements Comparable<Entity>
             if (type != null)
             {
                 System.out.println();
-                endAttack = searchForShield(type, e, this, caster, log);
+                endAttack = searchForShield(type, e, this, caster, g, log);
             }
             if (endAttack){
                 logValues[5] = true;
@@ -555,10 +557,10 @@ public class Entity implements Comparable<Entity>
             logValues[4] = 0;
             damageDealt -= shieldHealth;
             shieldHealth = 0;
-            endAttack = searchForShield(Shield.Trigger.SHIELD_BREAK, e, this, caster, log);
+            endAttack = searchForShield(Shield.Trigger.SHIELD_BREAK, e, this, caster, g, log);
             if (type != null)
             {
-                endAttack = endAttack || searchForShield(type, e, this, caster, log);
+                endAttack = endAttack || searchForShield(type, e, this, caster, g, log);
             }
             if (endAttack){
                 logValues[5] = true;
@@ -572,7 +574,7 @@ public class Entity implements Comparable<Entity>
         if (health < 0) 
         {
             health = 0;
-            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), this, creator, log);
+            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), this, creator, g, log);
         }
         return logValues;
     }
@@ -740,6 +742,7 @@ public class Entity implements Comparable<Entity>
         Element element,
         Entity target, 
         Entity caster,
+        Game g,
         BattleLog log)
     {
         boolean nullifyEffect = false;
@@ -748,7 +751,7 @@ public class Entity implements Comparable<Entity>
             Shield s = shields.get(i);
             if (s.wouldTrigger(trigger, element))
             {
-                boolean nullify = s.triggerShield(target, caster, log);
+                boolean nullify = s.triggerShield(target, caster, g, log);
                 if (nullify)
                 {
                     nullifyEffect = true;
@@ -973,7 +976,7 @@ public class Entity implements Comparable<Entity>
      *  * See if the health is 0
      * @param log for recording all of these events.
      */
-     public void endOfTurn(BattleLog log) 
+     public void endOfTurn(BattleLog log, Game g) 
     {
         Object[] contents = new Object[]{name};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.END_OF_TURN, contents));
@@ -982,7 +985,7 @@ public class Entity implements Comparable<Entity>
         reduceCooldowns(log);
         reduceShieldDurations(log);
         reduceStateDurations();
-        isHealthZero(log);
+        isHealthZero(log, g);
 
         contents = new Object[]{name, state.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.CURRENT_STATE, contents));
@@ -1040,4 +1043,13 @@ public class Entity implements Comparable<Entity>
     	this.name = newName;
     }
 
+    public int getTeamID()
+    {
+    	return teamID;
+    }
+    
+    public void setTeamID(int newID)
+    {
+    	this.teamID = newID;
+    }
 }

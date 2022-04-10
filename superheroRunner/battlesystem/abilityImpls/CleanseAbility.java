@@ -11,6 +11,7 @@ import battlesystem.AbilityModifier;
 import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 /**
  * This ability is intended to cleanse some effects, based on elemental attributes..
@@ -86,7 +87,7 @@ public class CleanseAbility extends SupportAbility
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
         target.removeEffects(getElement().getID(), log);

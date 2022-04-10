@@ -126,9 +126,9 @@ public abstract class Shield
      * @param log the battle log to record what was done
      * @return if upcoming attacks should be nullified.
      */
-    public boolean triggerShield(Entity target, Entity caster, BattleLog log)
+    public boolean triggerShield(Entity target, Entity caster, Game g, BattleLog log)
     {
-        applyShield(target, caster, log);
+        applyShield(target, caster, g, log);
         // System.out.println("Trigger " + nullifies);
         if (uses != -1) 
         {
@@ -148,7 +148,7 @@ public abstract class Shield
      * @param caster the holder of the shield
      * @param log a log for recording actions
      */
-    protected abstract void applyShield(Entity target, Entity caster, BattleLog log);
+    protected abstract void applyShield(Entity target, Entity caster, Game g, BattleLog log);
 
     /**
      * Reduce the duration, but remove once it reaches 0.

@@ -4,6 +4,7 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Shield;
 
 /**
@@ -13,7 +14,7 @@ import battlesystem.Shield;
 public class DeathShield extends Shield
 {
 
-    private Effect effect;
+    private String effect;
 
     /**
      * A basic constructor for this shield
@@ -29,7 +30,7 @@ public class DeathShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect effect,
+        String effect,
         boolean nullifies,
         int uses)
     {
@@ -49,7 +50,7 @@ public class DeathShield extends Shield
             getName(),
             getDesc(),
             getDuration(),
-            effect.copy(),
+            effect,
             isNullifies(),
             getUses()
         );
@@ -66,19 +67,20 @@ public class DeathShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster,
+        Game g,
         BattleLog log)
     {
         // System.out.println("appltied death shield to " + victim.getName());
-        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), effect.getName(), null, getName()};
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), effect, null, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        caster.applyEffect(effect.copy(), log);
+        caster.applyEffect(g.getEffect(effect), log);
     }
 
     /**
      * A method to get the effect of this shield.
      * @return the effect
      */
-    protected Effect getEffect()
+    protected String getEffect()
     {
         return effect;
     }

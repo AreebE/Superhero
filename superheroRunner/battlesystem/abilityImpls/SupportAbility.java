@@ -12,6 +12,7 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Element;
 import battlesystem.Entity;
+import battlesystem.Game;
 
 /**
  * This ability is intended to give an effect to an entity
@@ -20,7 +21,7 @@ import battlesystem.Entity;
 public class SupportAbility extends Ability 
 {
     // Effect types
-    private Effect template;
+    private String template;
 
 
     /**
@@ -36,7 +37,7 @@ public class SupportAbility extends Ability
         String name, 
         String desc, 
         int cooldown, 
-        Effect template, 
+        String template, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -65,7 +66,7 @@ public class SupportAbility extends Ability
         String name, 
         String desc, 
         int cooldown, 
-        Effect template, 
+        String template, 
         Element em,
         ArrayList<AbilityModifier> modifiers) 
     {
@@ -96,11 +97,11 @@ public class SupportAbility extends Ability
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
-        target.addEffect(template.copy());
-        Object[] contents = new Object[]{target.getName(), template.getName()};
+        target.addEffect(g.getEffect(template));
+        Object[] contents = new Object[]{target.getName(), template};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_APPLIED, contents));
         return;
     }

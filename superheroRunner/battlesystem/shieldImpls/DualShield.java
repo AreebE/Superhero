@@ -6,6 +6,7 @@ import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.Game;
 import battlesystem.Shield;
 
 /**
@@ -15,8 +16,8 @@ import battlesystem.Shield;
  */
 public class DualShield extends Shield
 {
-    private Effect selfApply;
-    private Effect casterApply;
+    private String selfApply;
+    private String casterApply;
 
     /**
      * the constructor for a dual shield.
@@ -35,8 +36,8 @@ public class DualShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect self,
-        Effect caster, 
+        String self,
+        String caster, 
         boolean nullifies,
         int uses,
         Shield.Trigger[] eventTriggers,
@@ -65,8 +66,8 @@ public class DualShield extends Shield
         String name,
         String desc,
         int duration, 
-        Effect self,
-        Effect caster, 
+        String self,
+        String caster, 
         boolean nullifies,
         int uses,
         HashSet<Shield.Trigger> eventTriggers,
@@ -88,12 +89,13 @@ public class DualShield extends Shield
     protected void applyShield(
         Entity victim, 
         Entity caster,
+        Game g,
         BattleLog log)
     {
-        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), casterApply.getName(), selfApply.getName(), getName()};
+        Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), casterApply, selfApply, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        victim.addEffect(selfApply.copy());
-        caster.addEffect(casterApply.copy());
+        victim.addEffect(g.getEffect(selfApply));
+        caster.addEffect(g.getEffect(casterApply));
     }
 
     /**
@@ -103,7 +105,7 @@ public class DualShield extends Shield
     @Override
     public Shield copy()
     {
-        return new DualShield(getName(), getDesc(), getDuration(), selfApply.copy(), casterApply.copy(), isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
+        return new DualShield(getName(), getDesc(), getDuration(), selfApply, casterApply, isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
 }

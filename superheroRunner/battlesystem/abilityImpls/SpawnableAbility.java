@@ -10,6 +10,7 @@ import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
+import battlesystem.Game;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -21,7 +22,7 @@ import java.util.EnumMap;
  */
 public class SpawnableAbility extends DefenseAbility
 {
-    private EntityInfoItem template;
+    private String template;
 
     /**
      * The basic constructor 
@@ -37,7 +38,7 @@ public class SpawnableAbility extends DefenseAbility
         String name, 
         String desc, 
         int cooldown, 
-        EntityInfoItem template, 
+        String template, 
         Element em, 
         AbilityModifier... modifiers) 
     {
@@ -67,7 +68,7 @@ public class SpawnableAbility extends DefenseAbility
         String name, 
         String desc, 
         int cooldown,
-        EntityInfoItem template, 
+        String template, 
         Element em, 
         ArrayList<AbilityModifier> modifiers) 
     {
@@ -97,13 +98,13 @@ public class SpawnableAbility extends DefenseAbility
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> allPlayers,
+        Game g,
         BattleLog log) 
     {
-//        Entity ai = template.create(caster);
-//        Object[] contents = new Object[]{target.getName(), ai.getName()};
-//        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
-//        allPlayers.add(ai);
+        Entity ai = g.getSpawnable(template).create(caster, g);
+        Object[] contents = new Object[]{target.getName(), ai.getName()};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
+        g.addMember(ai, target.getTeamID());
         return;
     }
 
