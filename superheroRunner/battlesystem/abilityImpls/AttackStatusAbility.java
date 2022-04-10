@@ -1,5 +1,6 @@
 package battlesystem.abilityImpls;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -81,7 +82,7 @@ public class AttackStatusAbility extends AttackAbility
         boolean ignoresBaseDefense, 
         boolean isPiercing,
         Effect sideEffect,
-        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
+        ArrayList<AbilityModifier> modifiers) 
     {
         super
         (
@@ -111,11 +112,10 @@ public class AttackStatusAbility extends AttackAbility
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log) 
     {
-        super.castAbility(target, caster, otherTargets, allPlayers, log);
+        super.castAbility(target, caster, allPlayers, log);
         if (isPiercing() 
             || !target.hasShield()) 
         {

@@ -1,11 +1,12 @@
 package battlesystem;
 
+import java.util.List;
+
 /**
  * A class used to modify certain abilities
- * @param <T> the type of value this should return
  */
-public interface AbilityModifier<T> {
-  public T triggerModifier(Entity target, Entity caster);
-  public Ability.Modifier getModifier();
+public interface AbilityModifier {
+  public boolean triggerModifier(List<Entity> target, Entity caster, Ability holder, BattleLog Log);
+  public int getPriority();
   
 }

@@ -1,5 +1,6 @@
 package battlesystem.abilityImpls;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -88,8 +89,7 @@ public class AttackAbility extends Ability
         Element em, 
         boolean ignoresBaseDefense, 
         boolean isPiercing,
-        EnumMap<Ability.Modifier, 
-        AbilityModifier> modifiers) 
+        ArrayList<AbilityModifier> modifiers) 
     {
         super
         (
@@ -120,12 +120,11 @@ public class AttackAbility extends Ability
 	public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log) 
     {
-        // System.out.println("Attack Ability \'" + this.getName() + "\' used on player
-        // " + target.getName());
+//         System.out.println("Attack Ability \'" + this.getName() + "\' used on player
+//         " + target.getName());
         int currentIndex = log.getCurrentIndex(); 
 
         int attackStrength = getStrength() + caster.getBaseAttack();

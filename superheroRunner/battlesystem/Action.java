@@ -1,5 +1,6 @@
 package battlesystem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *
  */
 public class Action {
-    private Entity target;
+    private Entity mainTarget;
     private Entity caster;
     private List<Entity> otherTargets;
     private List<Entity> allHeros;
@@ -29,10 +30,10 @@ public class Action {
         List<Entity> allHeros,
         InputSystem input)
     {
-        this.target = target;
+        this.mainTarget = target;
         this.caster = caster;
         this.allHeros = allHeros;
-        this.otherTargets = null;
+        this.otherTargets = new ArrayList<>();
         this.ability = caster.getAbility(abilityName);
         // System.out.println("Action created for " + caster.getName());
         if (ability != null && caster.hasGroupAbility(abilityName))
@@ -70,7 +71,7 @@ public class Action {
             }
         }
         
-        return target.isTargettable();
+        return mainTarget.isTargettable();
     }
     
     /**
@@ -80,8 +81,9 @@ public class Action {
     public void performAction(BattleLog log)
     {
         // System.out.println("perform action");
-        caster.searchForShield(Shield.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), target, caster, log);
-        ability.useAbility(target, caster, otherTargets, allHeros, log);
+        caster.searchForShield(Shield.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), mainTarget, caster, log);
+        otherTargets.add(0, mainTarget);
+        ability.useAbility(otherTargets, caster, allHeros, log);
         caster.endOfTurn(log);
         // caster.endOfTurn();
     }
@@ -92,7 +94,7 @@ public class Action {
      */
     public Entity getTarget()
     {
-        return target;
+        return mainTarget;
     }
 
     /**

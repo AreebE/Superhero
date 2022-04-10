@@ -1,5 +1,6 @@
 package battlesystem.abilityImpls;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class SupportAbility extends Ability
         int cooldown, 
         Effect template, 
         Element em,
-        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
+        ArrayList<AbilityModifier> modifiers) 
     {
         super
         (
@@ -95,7 +96,6 @@ public class SupportAbility extends Ability
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log) 
     {

@@ -1,5 +1,6 @@
 package battlesystem.abilityImpls;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class DefenseAbility extends Ability
         int cooldown,
         Shield shield, 
         Element em, 
-        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
+        ArrayList<AbilityModifier> modifiers) 
     {
         super
         (
@@ -97,7 +98,6 @@ public class DefenseAbility extends Ability
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log) 
     {

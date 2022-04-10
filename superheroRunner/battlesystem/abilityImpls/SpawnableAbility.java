@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import java.util.EnumMap;
-
-import battlesystem.EntityInfoItem;
-import battlesystem.Element;
-import battlesystem.Entity;
-import battlesystem.BattleLog;
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
+import battlesystem.BattleLog;
+import battlesystem.Element;
+import battlesystem.Entity;
+import battlesystem.EntityInfoItem;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
 
 /**
  * Note: Currently broken
@@ -68,7 +69,7 @@ public class SpawnableAbility extends DefenseAbility
         int cooldown,
         EntityInfoItem template, 
         Element em, 
-        EnumMap<Ability.Modifier, AbilityModifier> modifiers) 
+        ArrayList<AbilityModifier> modifiers) 
     {
         super
         (
@@ -96,7 +97,6 @@ public class SpawnableAbility extends DefenseAbility
     public void castAbility(
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log) 
     {

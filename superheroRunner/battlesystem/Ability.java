@@ -5,13 +5,11 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import modifiers.RandomModifier;
-import modifiers.GroupModifier;
-import modifiers.RecoilModifier;
-import modifiers.MultiCastModifier;
-import modifiers.PercentageModifier;
+import battlesystem.modifiers.GroupModifier;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A class for the ability so heros can do things.
@@ -19,18 +17,15 @@ import java.util.ArrayList;
  */
 public abstract class Ability 
 {
-	/**
-	 * This enum of modifiers is used to classify between the different types of modifiers. This is one of the few things that remains static, justifying the use of set enums.
-	 *
-	 */
-    public static enum Modifier
-    {
-        RANDOM,
-        RECOIL,
-        MULTICAST,
-        PERCENTAGE,
-        GROUP
-    }
+	
+	
+	
+	
+	public static final int HIT_PRIORITY 		= 	0;
+	public static final int ADJUSTMENT_PRIORITY	= 	1;
+	public static final int ATTACK_PRIORITY 	=  	2;
+			
+	
     
     /**
      * This is just a general category for each ability
@@ -51,8 +46,9 @@ public abstract class Ability
     private int turnsSinceUse;
     private Ability.Category category;
     private Element em;
-    private EnumMap<Ability.Modifier, AbilityModifier> modifiers;
+    private ArrayList<AbilityModifier> modifiers;
     private int chance;
+    private int additionalStrength;
     public transient static final int MAX_CHANCE = 256;
     
     private boolean keepGoing;
@@ -69,7 +65,8 @@ public abstract class Ability
       this.category = tocopy.getType();
       this.turnsSinceUse = tocopy.getCooldown();
       this.em = tocopy.getElement();
-      this.modifiers = new EnumMap<>(Ability.Modifier.class);
+      this.modifiers = tocopy.getModifiers();
+      this.additionalStrength = 0;
     }
 
     /**
@@ -98,13 +95,24 @@ public abstract class Ability
         this.category = type;
         this.turnsSinceUse = cooldown;
         this.em = em;
-        this.modifiers = new EnumMap<>(Ability.Modifier.class);
+        this.modifiers = new ArrayList<>();
+        this.additionalStrength = 0;
         
         for (AbilityModifier m : modifiers) 
         {
             // System.out.println(m + ", " + m.getModifier());
-            this.modifiers.put(m.getModifier(), m);
+            this.modifiers.add(m);
         }
+        Collections.sort(this.modifiers, new Comparator<AbilityModifier>()
+        {
+
+			@Override
+			public int compare(AbilityModifier o1, AbilityModifier o2) {
+				// TODO Auto-generated method stub
+				return o1.getPriority() - o2.getPriority();
+			}
+        	
+        });
         // System.out.println(this.modifiers);
     }
 
@@ -117,7 +125,7 @@ public abstract class Ability
      * @param strength the strength of the attck
      * @param type the type of ability 
      * @param em its element
-     * @param modifiers what modifiers it has (this is an EnumMap)
+     * @param modifiers what modifiers it has (this is an array list)
      */
     public Ability(
         String name, 
@@ -126,8 +134,7 @@ public abstract class Ability
         int strength, 
         Ability.Category type,
         Element em,
-        EnumMap<Ability.Modifier, 
-        AbilityModifier> modifiers) 
+        ArrayList<AbilityModifier> modifiers) 
     {
         this(name, desc, cooldown, strength, type, em);
         this.modifiers = modifiers;
@@ -195,73 +202,30 @@ public abstract class Ability
      * @param log the log to store actions.
      */
     public void useAbility(
-        Entity target, 
+        List<Entity> targets, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log) 
     {
         keepGoing = true;
-        Object[] contents = new Object[]{caster.getName(), target.getName(), name, (otherTargets == null)? 0: otherTargets.size()};
+        Object[] contents = new Object[]{caster.getName(), targets.get(0).getName(), name, targets.size() - 1};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
         
         turnsSinceUse -= cooldown;
         
-        RecoilModifier recoil = (RecoilModifier) modifiers.get(Ability.Modifier.RECOIL);
-        RandomModifier random = (RandomModifier) modifiers.get(Ability.Modifier.RANDOM);
-        MultiCastModifier multi = (MultiCastModifier) modifiers.get(Ability.Modifier.MULTICAST);
-        PercentageModifier percent = (PercentageModifier) modifiers.get(Ability.Modifier.PERCENTAGE);
-        GroupModifier group = (GroupModifier) modifiers.get(Ability.Modifier.GROUP);
+       
         
-        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent + ", " + group);
-        if (random == null 
-            ||  random.triggerModifier(target, caster)) 
+//        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent + ", " + group);
+        boolean shouldContinue = true;
+        for (int i = 0; i < modifiers.size() && shouldContinue; i++)
         {
-            if (recoil != null) 
-            {
-                recoil.triggerModifier(target, caster);
-            }
-            int times = 1;
-            if (multi != null)
-            {
-                times = multi.triggerModifier(target, caster);
-            }
-            for (int i = 0; i < times; i++)
-            {
-                int baseStrength = strength;
-                int additionalStrength = 0;
-                if (percent != null)
-                {
-                    // System.out.println("called percent");
-                    additionalStrength = percent.triggerModifier(target, caster);
-                }
-                strength += additionalStrength;
-                // System.out.println(strength);
-                castAbility(target, caster, otherTargets, allPlayers, log);
-                if (group != null)
-                {
-                    //strength *= group.triggerModifier(target, caster);
-                    // System.out.println(strength);
-                    for (int j = 0; j < otherTargets.size(); j++)
-                    {
-                        castAbility(otherTargets.get(j), caster, otherTargets, allPlayers, log);
-                    }
-                }
-                  
-                strength = baseStrength;
-                if (!keepGoing){
-                    contents = new Object[]{BattleLog.Entry.Interruption.SHIELD};
-                    log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
-                    return;                
-                }
-            }
-            // contents = new Object[]{caster.getName(), target.getName(), name, (group == null)? 0: group.getLimit()};
-            // log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
-            return;
+        	shouldContinue = modifiers.get(i).triggerModifier(targets, caster, this, log);
         }
-        contents = new Object[]{BattleLog.Entry.Interruption.RANDOM};
-        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
-        return;
+        if (modifiers.size() == 0)
+        {
+        	castAbility(targets.get(0), caster, allPlayers, log);
+        }
+        
     }
 
 
@@ -277,7 +241,6 @@ public abstract class Ability
     (
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log
     );
@@ -374,30 +337,10 @@ public abstract class Ability
     public abstract Ability copy();
     
     /**
-     * check if this has a modifier
-     * @param modifierName the name of this modifier
-     * @return if it has a certain one.
-     */
-    public boolean hasModifier(Ability.Modifier modifierName)
-    {
-        return modifiers.containsKey(modifierName);
-    }
-    
-    /**
-     * return the modifier 
-     * @param modifierName the name of this modifier
-     * @return the modifier asked for
-     */
-    public AbilityModifier getModifier(Ability.Modifier modifierName)
-    {
-        return modifiers.get(modifierName);
-    }
-    
-    /**
      * get all modifiers
      * @return all modifiers
      */
-    public EnumMap<Ability.Modifier, AbilityModifier> getModifiers(){
+    public ArrayList<AbilityModifier> getModifiers(){
       return this.modifiers;
     }
     
@@ -410,20 +353,42 @@ public abstract class Ability
     }
     
     /**
-     * Get how many people this can target, though return 1 at most.
+     * 
+     */
+    public boolean continueAttacking()
+    {
+    	return keepGoing;
+    }
+    
+    /**
+     * Get how many people this can target, though return 1 at most, but -1 if hitting eve ryone.
      * @return the number of targets.
      */
     public int getTargetAmount()
     {
+    	
     	try 
     	{
-    		return ((modifiers.GroupModifier) modifiers.get(Modifier.GROUP)).getLimit();
-    	}
-    	catch (NullPointerException npe)
+    		return ((GroupModifier) modifiers.get(modifiers.size() - 1)).getLimit();
+    	}-
+    	catch (NullPointerException|ClassCastException|IndexOutOfBoundsException npe)
     	{
     		return 1;
     	}
     }
     
+    
+    /**
+     * 
+     */
+    public void adjustAdditionalStrength(int number, boolean isPercentage)
+    {
+    	
+    }
+    
+    /**
+     * Convert the ability to a json file
+     * @return the json object.
+     */
     public abstract JSONObject toJson();
 }

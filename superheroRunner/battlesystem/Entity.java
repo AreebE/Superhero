@@ -71,7 +71,7 @@ public class Entity implements Comparable<Entity>
       this.baseAttack = 0;
       this.baseDefense = 0;
       this.creator = creator;
-//      setStuffFromEII(in);
+      setStuffFromEII(in);
 
       /*
       private String name;
@@ -126,26 +126,26 @@ public class Entity implements Comparable<Entity>
      * 
      * @param in The info item that contains all of the names.
      */
-//    private void setStuffFromEII(EntityInfoItem in){
-//      this.abilities = new ArrayList<>();
-//      this.effects = new ArrayList<>();
-//      this.shields = new ArrayList<>();
-//      for(String t: in.abilities){
-//        this.abilities.add(AbilityManager.getAbility(t));
-//      }
-//        
-//            for(Effects.Name t: in.effects){
+    private void setStuffFromEII(EntityInfoItem in){
+      this.abilities = new ArrayList<>();
+      this.effects = new ArrayList<>();
+      this.shields = new ArrayList<>();
+      for(String t: in.abilities){
+        this.abilities.add(AbilityManager.getAbility(t));
+      }
+        
+//            for(String t: in.effects){
 //                this.effects.add(Effects.getEffect(t));
 //            }
-//        
-//      
-//        
-//            for(Shields.Name t: in.shields){
+        
+      
+        
+//            for( t: in.shields){
 //                this.shields.add(Shields.getShield(t));
 //            }
-//        
-//
-//    }
+        
+
+    }
     
 
 
@@ -399,7 +399,7 @@ public class Entity implements Comparable<Entity>
      */
     public boolean hasGroupAbility(String name)
     {
-        return getAbility(name).hasModifier(Ability.Modifier.GROUP);
+        return getAbility(name).getTargetAmount() != 1;
     }
     
     /*

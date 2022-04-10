@@ -14,23 +14,25 @@ import battlesystem.Terrain;
 import battlesystem.battlelogImpls.StringBattleLog;
 
 class InnerGame {
-  ArrayList<Entity> fighters;
-  GUI g;
-  Terrain t = new Terrain();
-  Entity currentPlayer;
-  ScannerInput scanInput;
+	  ArrayList<Entity> fighters;
+	  GUI g;
+	  Terrain t = new Terrain();
+	  Entity currentPlayer;
+	  ScannerInput scanInput;
 
-public InnerGame(GUI g) {
-    this.g = g;
-}
+	public InnerGame(GUI g) {
+	    this.g = g;
+	}
   public InnerGame(ArrayList<Entity> fighters, GUI g) {
     this.fighters = fighters;
+//    System.out.println(fighters.size());
     this.g = g;
   }
 
   public void Fight(ArrayList<Entity> entities) {
     //we will have to figure out teams at some point 
     this.fighters = entities;
+//    System.out.println(fighters);
     ScannerInput scanInput = new ScannerInput();
     
     boolean anyHealthZero = false;

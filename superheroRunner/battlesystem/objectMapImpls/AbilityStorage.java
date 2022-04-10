@@ -7,7 +7,10 @@ import battlesystem.Ability;
 import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.abilityImpls.*;
-import modifiers.*;
+import battlesystem.modifiers.GroupModifier;
+import battlesystem.modifiers.MultiCastModifier;
+import battlesystem.modifiers.PercentageModifier;
+import battlesystem.modifiers.RandomModifier;
 
 public class AbilityStorage{
   AbilityStorage(){
@@ -291,7 +294,7 @@ public class AbilityStorage{
           "Will poison the person targeted", 
           0, 
           Effects.getEffect(Effects.Name.POISON), 
-          Elements.getElement(Elements.Name.NULL), 
+          Elements.getElement(Elements.Name.NULL),
           new RandomModifier(256 / 4 * 3)
       ),
 
@@ -301,13 +304,13 @@ public class AbilityStorage{
           "Injures the user to cause more damage later", 
           4, 
           Effects.getEffect(Effects.Name.CURSE), 
-          Elements.getElement(Elements.Name.NULL), 
-          new RecoilModifier
-          (
-              2, 
-              true, 
-              true
-          )
+          Elements.getElement(Elements.Name.NULL)
+//          new RecoilModifier
+//          (
+//              2, 
+//              true, 
+//              true
+//          )
       ),
 
       new SupportAbility

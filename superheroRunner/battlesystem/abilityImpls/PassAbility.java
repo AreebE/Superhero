@@ -37,7 +37,6 @@ public class PassAbility extends Ability
     (
         Entity target, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog battleLog
     )
@@ -57,9 +56,8 @@ public class PassAbility extends Ability
     @Override
     public void useAbility
     (
-        Entity target, 
+        List<Entity> targets, 
         Entity caster,
-        List<Entity> otherTargets,
         List<Entity> allPlayers,
         BattleLog log
     )

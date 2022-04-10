@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import battlesystem.modifiers.RandomModifier;
 import battlesystem.objectMapImpls.States;
 import game.OuterGame;
 
@@ -25,6 +26,7 @@ class Main {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
+//	  new RandomModifier(20);
 	  OutputStream o = new FileOutputStream(f);
 	  String file = States.get(States.Name.NORMAL).toJson().toString();
 	  System.out.println(file);
@@ -35,6 +37,7 @@ class Main {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	  //   new OuterGame();
+	  
+	     new OuterGame();
   }
 }
