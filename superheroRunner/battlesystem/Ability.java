@@ -370,7 +370,7 @@ public abstract class Ability
     	try 
     	{
     		return ((GroupModifier) modifiers.get(modifiers.size() - 1)).getLimit();
-    	}-
+    	}
     	catch (NullPointerException|ClassCastException|IndexOutOfBoundsException npe)
     	{
     		return 1;
