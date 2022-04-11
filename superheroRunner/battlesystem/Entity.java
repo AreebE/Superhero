@@ -47,12 +47,40 @@ public class Entity implements Comparable<Entity>
      */
     public static enum Statistic
     {
-        SPEED,
-        MAX_HEALTH,
-        HEALTH,
-        BASE_ATTACK,
-        BASE_DEFENSE,
-        SHIELD
+        SPEED("speed"),
+        MAX_HEALTH("max health"),
+        HEALTH("health"),
+        BASE_ATTACK("attack"),
+        BASE_DEFENSE("defense"),
+        SHIELD("shield");
+    	
+    	
+    	public final String name;
+    	
+    	Statistic(String name)
+    	{
+    		this.name = name;
+    	}
+    	
+    	public static Statistic getStatistic(String name)
+    	{
+    		switch (name)
+    		{
+    			case "speed":
+    				return SPEED;
+    			case "max health":
+    				return MAX_HEALTH;
+    			case "health":
+    				return HEALTH;
+    			case "attack":
+    				return BASE_ATTACK;
+    			case "defense":
+    				return BASE_DEFENSE;
+    			case "shield":
+    			default:
+    				return SHIELD;
+    		}
+    	}
     }
     
     //alt constructor using EII

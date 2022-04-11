@@ -21,10 +21,20 @@ import battlesystem.Terrain;
  */
 public class AttackAbility extends Ability 
 {
+	private static final String PIERCING_KEY = "pierces";
+	private static final String DEFENSE_KEY = "ignores defense";
     private boolean isPiercing;
     private boolean ignoresBaseDefense;
     private Element em;
 
+    public AttackAbility(JSONObject json)
+    {
+    	super(json);
+    	super.setCategory(Ability.Category.ATTACK);
+    	isPiercing = json.getBoolean(DEFENSE_KEY);
+    	ignoresBaseDefense = json.getBoolean(PIERCING_KEY);
+    	em = super.getElement();
+    }
     /**
      * A basic constructor that calls its super class
      * @param name the name of the ability
@@ -219,9 +229,13 @@ public class AttackAbility extends Ability
         return isPiercing;
     }
     
+    @Override
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "attack");
+		ability.put(DEFENSE_KEY, ignoresBaseDefense);
+		ability.put(PIERCING_KEY, isPiercing);
+		return ability;
 	}
 }
 //

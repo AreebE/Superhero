@@ -22,8 +22,14 @@ import java.util.EnumMap;
  */
 public class SpawnableAbility extends DefenseAbility
 {
+	private static final String SPAWNABLE_KEY = "spawnable";
     private String template;
 
+    public SpawnableAbility(JSONObject json)
+    {
+    	super(json);
+    	template = json.getString(SPAWNABLE_KEY);
+    }
     /**
      * The basic constructor 
      * 
@@ -128,7 +134,9 @@ public class SpawnableAbility extends DefenseAbility
     }
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "spawnable");
+		ability.put(SPAWNABLE_KEY, template);
+		return ability;
 	}
 }

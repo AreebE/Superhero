@@ -18,6 +18,11 @@ import battlesystem.Game;
  */
 public class CleanseAbility extends SupportAbility 
 {
+	
+	public CleanseAbility(JSONObject json)
+	{
+		super(json);
+	}
 	/**
 	 * This is a base constructor for the cleanse ability, though it's notably smaller than the others.
 	 * 
@@ -114,7 +119,8 @@ public class CleanseAbility extends SupportAbility
     }
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+    	JSONObject ability = super.toJson();
+    	ability.put(TYPE_KEY, "cleanse");
+		return ability;
 	}
 }

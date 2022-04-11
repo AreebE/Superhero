@@ -20,8 +20,15 @@ import battlesystem.Shield;
  */
 public class DefenseAbility extends Ability 
 {
+	private static final String SHIELD_KEY = "shield";
     private String shield;
 
+    public DefenseAbility(JSONObject json)
+    {
+    	super(json);
+    	shield = json.getString(SHIELD_KEY);
+    	super.setCategory(Ability.Category.DEFENSE);
+    }
     /**
      * The basic constructor for the defense ability.
      * 
@@ -127,8 +134,10 @@ public class DefenseAbility extends Ability
     }
 
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "defense");
+		ability.put(SHIELD_KEY, shield);
+		return ability;
 	}
 }
 

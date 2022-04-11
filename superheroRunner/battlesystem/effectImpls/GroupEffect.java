@@ -2,9 +2,11 @@ package battlesystem.effectImpls;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.objectMapImpls.Effects;
@@ -15,9 +17,21 @@ import battlesystem.objectMapImpls.Effects;
  */
 public class GroupEffect extends Effect 
 {
+	private static final String LIST_OF_EFFECTS = "all effects";
     private int groupDuration;
     public ArrayList<Effect> listOfEffects;
 
+    public GroupEffect(JSONObject json)
+    {
+    	super(json);
+    	JSONArray jsonEffects = json.getJSONArray(LIST_OF_EFFECTS);
+    	listOfEffects = new ArrayList<>();
+    	for (int i = 0; i < jsonEffects.length(); i++)
+    	{
+//    		listOfEffects = EffectLoader.load(jsonEffects.getJSONObject(i));
+    	}
+    }
+    
     /**
      * A basic constructor that sets all subeffects to the name of this one.
      * @param name the name of this effect
@@ -39,8 +53,7 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element,
-            new EffectModifier[0]
+            element
         );
         listOfEffects = new ArrayList<>();
         groupDuration = 0;
@@ -78,8 +91,7 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element,
-            new EffectModifier[0]
+            element
         );
 
         listOfEffects = new ArrayList<>();
@@ -119,8 +131,7 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element,
-            new EffectModifier[0]
+            element
         );
 
         listOfEffects = new ArrayList<>();
@@ -228,5 +239,18 @@ public class GroupEffect extends Effect
     @Override
     public int getDuration() {
         return groupDuration;
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, "group");
+    	JSONArray effects = new JSONArray();
+    	for (Effect e: listOfEffects)
+    	{
+    		effects.put(e.toJson());
+    	}
+    	return effect;
     }
 }

@@ -19,9 +19,14 @@ import battlesystem.Game;
  */
 public class AttackStatusAbility extends AttackAbility 
 {
-	
+	private static final String SIDE_EFFECT_KEY = "side effect";
     private String sideEffect;
     
+    public AttackStatusAbility(JSONObject json)
+    {
+    	super(json);
+    	sideEffect = json.getString(SIDE_EFFECT_KEY);
+    }
     /**
      * One key difference, compared to the other one:
      *  
@@ -149,7 +154,9 @@ public class AttackStatusAbility extends AttackAbility
     }
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "attack status");
+		ability.put(SIDE_EFFECT_KEY, sideEffect);
+		return ability;
 	}
 }

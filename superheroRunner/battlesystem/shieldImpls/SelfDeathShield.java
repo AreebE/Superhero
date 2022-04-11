@@ -1,5 +1,7 @@
 package battlesystem.shieldImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Entity;
@@ -13,6 +15,10 @@ import battlesystem.Shield;
 public class SelfDeathShield extends DeathShield 
 {
 
+	public SelfDeathShield(JSONObject json)
+	{
+		super(json);
+	}
 	/**
 	 * The basic constructor for this
 	 * @param name the name of the shield
@@ -74,5 +80,13 @@ public class SelfDeathShield extends DeathShield
             getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
         victim.applyEffect(g.getEffect(getEffect()), log);
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject shield = super.toJson();
+    	shield.put(TYPE_KEY, "self death");
+    	return shield;
     }
 }

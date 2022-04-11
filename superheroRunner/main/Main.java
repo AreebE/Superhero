@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import battlesystem.modifiers.RandomModifier;
+import battlesystem.abilityImpls.RandomModifier;
 import battlesystem.objectMapImpls.States;
 import game.OuterGame;
 

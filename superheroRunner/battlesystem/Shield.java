@@ -1,6 +1,10 @@
 package battlesystem;
 
 import java.util.HashSet;
+import java.util.Iterator;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * A class for entities that does something when a trigger is done.
@@ -8,6 +12,15 @@ import java.util.HashSet;
  */
 public abstract class Shield
 {
+	public static final String TYPE_KEY = "type";
+	private static final String NAME_KEY = "name";
+	private static final String DESC_KEY = "desc";
+	private static final String EVENT_TRIGGER_KEYS = "event triggers";
+	private static final String ELEMENT_TRIGGER_KEYS = "element triggers";
+	private static final String DURATION_KEY = "duration";
+	private static final String USES_KEY = "uses";
+	private static final String NULLIFIES_KEY = "nullifies";
+	
     private String name;
     private String desc;
     private HashSet<Shield.Trigger> eventTriggers;
@@ -17,20 +30,83 @@ public abstract class Shield
     boolean nullifies;
 
     public static enum Trigger {
-        ANY_ACTION, // When making a move
-        ATTACK, // When the person is attacked
-        ATTACKING, // When attacking another player
-        CLEANSE, // When cleansing oneself
-        DEATH, // Upon this player's death
-        DEFENSE, // Upon using a defense skill
+        ANY_ACTION("any"), // When making a move
+        ATTACK("attacked"), // When the person is attacked
+        ATTACKING("attacking"), // When attacking another player
+        CLEANSE("cleanse"), // When cleansing oneself
+        DEATH("death"), // Upon this player's death
+        DEFENSE("defense"), // Upon using a defense skill
         // EFFECT_APPLIED, // Upon being given an effect
-        SHIELD_BREAK, // Upon shield breaking
-        SPAWN, // Upon spawning another thing
-        STATE_CHANGE, // Upon changing state
-        GIVE_EFFECT, // Upon giving an effect
-        PASS, // Upon passing a turn
-        ALL // When any of the above triggers (Ex. trigerring when taking an action and passing.)
+        SHIELD_BREAK("shieldBreak"), // Upon shield breaking
+        SPAWN("spawn"), // Upon spawning another thing
+        STATE_CHANGE("changeState"), // Upon changing state
+        GIVE_EFFECT("giveEffect"), // Upon giving an effect
+        PASS("pass"), // Upon passing a turn
+        ALL("all") ;// When any of the above triggers (Ex. trigerring when taking an action and passing.)
+    
+        private final String name;
+        Trigger(String name)
+        {
+        	this.name = name;
+        }
+        public static Trigger getTrigger(String name)
+        {
+        	switch(name)
+        	{
+        		case "any":
+        		default:
+        			return ANY_ACTION;
+        		case "attacked":
+        			return ATTACK;
+        		case "attacking":
+        			return ATTACKING;
+        		case "cleanse":
+        			return CLEANSE;
+        		case "death":
+        			return DEATH;
+        		case "defense":
+        			return DEFENSE;
+        		case "shieldBreak":
+        			return SHIELD_BREAK;
+        		case "spawn":
+        			return SPAWN;
+        		case "changeState":
+        			return STATE_CHANGE;
+        		case "giveEffect":
+        			return GIVE_EFFECT;
+        		case "pass":
+        			return PASS;
+        		case "all":
+        			return ALL;
+        	}
+        }
     }
+    
+    public Shield(JSONObject json)
+    {
+    	name = json.getString(NAME_KEY);
+        desc = json.getString(DESC_KEY);
+        
+        HashSet<Shield.Trigger> eventTriggers = new HashSet<Shield.Trigger>();
+        JSONArray events = json.getJSONArray(EVENT_TRIGGER_KEYS);
+        for (int i = 0; i < events.length(); i++)
+        {
+        	eventTriggers.add(Trigger.getTrigger(events.getString(i)));
+        }
+        
+        HashSet<Elements.Name> elementTriggers = new HashSet<Elements.Name>();
+        JSONArray elements = json.getJSONArray(ELEMENT_TRIGGER_KEYS);
+        for (int i = 0; i < elements.length(); i++)
+        {
+        	elementTriggers.add(Elements.getElement(elements.getString(i)).getID());
+        }
+        
+        
+        duration = json.getInt(DURATION_KEY);
+        uses = json.getInt(USES_KEY);
+        nullifies = json.getBoolean(NULLIFIES_KEY);
+    }
+    
     
     /**
      * A basic constructor for shield
@@ -291,6 +367,35 @@ public abstract class Shield
      */
     public boolean isNullifies(){
         return this.nullifies;
+    }
+    
+
+    public JSONObject toJson()
+    {
+    	JSONObject shield = new JSONObject();
+    	shield.put(NAME_KEY, name);
+    	shield.put(DESC_KEY, desc);
+    	shield.put(DURATION_KEY, duration);
+    	shield.put(USES_KEY, uses);
+    	shield.put(NULLIFIES_KEY, nullifies);
+    	
+    	JSONArray jsonShieldTriggers = new JSONArray();
+    	Iterator<Trigger> shieldTriggers = eventTriggers.iterator();
+    	while (shieldTriggers.hasNext())
+    	{
+    		jsonShieldTriggers.put(shieldTriggers.next().name);
+    	}
+    	shield.put(EVENT_TRIGGER_KEYS, jsonShieldTriggers);
+    	
+    	JSONArray jsonElementTriggers = new JSONArray();
+    	Iterator<Elements.Name> elementTriggers = this.elementTriggers.iterator();
+    	while (elementTriggers.hasNext())
+    	{
+    		jsonElementTriggers.put(Elements.getElement(elementTriggers.next()).getName());
+    	}
+    	shield.put(ELEMENT_TRIGGER_KEYS, jsonElementTriggers);
+    	
+    	return shield;
     }
    
 }

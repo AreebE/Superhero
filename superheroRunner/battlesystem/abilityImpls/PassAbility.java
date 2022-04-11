@@ -15,6 +15,12 @@ import battlesystem.Game;
  */
 public class PassAbility extends Ability 
 {
+	
+	public PassAbility(JSONObject json)
+	{
+		super(json);
+		super.setCategory(Ability.Category.ATTACK);
+	}
 
 	/**
 	 * A basic constructor
@@ -78,7 +84,8 @@ public class PassAbility extends Ability
     } 
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "pass");
+		return ability;
 	}
 }

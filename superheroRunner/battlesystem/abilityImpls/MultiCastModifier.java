@@ -1,6 +1,8 @@
-package battlesystem.modifiers;
+package battlesystem.abilityImpls;
 
 import java.util.List;
+
+import org.json.JSONObject;
 
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
@@ -9,8 +11,13 @@ import battlesystem.Entity;
 import battlesystem.Game;
 
 public class MultiCastModifier implements AbilityModifier{
-  private int times;
+  private static final String TIMES_KEY = "times";
+	private int times;
   
+	public MultiCastModifier(JSONObject json)
+	{
+		times = json.getInt(TIMES_KEY);
+	}
   public MultiCastModifier(int times){
     this.times = times;
   } 
@@ -35,5 +42,14 @@ public class MultiCastModifier implements AbilityModifier{
   @Override
   public int getPriority(){
     return Ability.HIT_PRIORITY;
+  }
+  
+  @Override
+  public JSONObject toJson()
+  {
+	  JSONObject modifier = new JSONObject();
+	  modifier.put(TYPE_KEY, "multicast");
+	  modifier.put(TIMES_KEY, times);
+	  return modifier;
   }
 }

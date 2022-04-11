@@ -1,8 +1,9 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
@@ -14,12 +15,16 @@ public class OneTimeEffect extends Effect
 {
     private boolean used;
     
+    public OneTimeEffect(JSONObject json)
+    {
+    	super(json);
+    }
     /**
      * Create a basic version
      * 
      * @param strength the base strength
      * @param type the type of effect
-     * @param duration the lenth it lasts for
+     * @param duration the length it lasts for
      * @param name the name of the effect
      * @param desc the description of what it does
      * @param element what element it belongs to
@@ -33,8 +38,7 @@ public class OneTimeEffect extends Effect
         String name, 
         String desc,
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         super
         (
@@ -45,8 +49,7 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
-            pierces,
-            modifiers
+            pierces
         );
     }
 
@@ -65,8 +68,7 @@ public class OneTimeEffect extends Effect
         int duration, 
         String name, 
         String desc,
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -76,8 +78,7 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
-            null,
-            modifiers
+            null
         );
     }
 
@@ -142,8 +143,7 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
     }
 
@@ -162,8 +162,15 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, "one time");
+    	return effect;
     }
 }

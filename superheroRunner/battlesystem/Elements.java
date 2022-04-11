@@ -42,5 +42,24 @@ public final class Elements{
     return LIST_OF_ELEMENTS.get(name);
   }
 
-  
+  public static Element getElement(String name)
+  {
+	  switch(name)
+	  {
+	  		case "fire":
+	  			return getElement(Name.FIRE);
+	  		case "electricity":
+	  			return getElement(Name.ELECTRICITY);
+	  		case "ice":
+	  			return getElement(Name.ICE);
+	  		case "null":
+	  			return getElement(Name.NULL);
+	  		case "earth":
+	  			return getElement(Name.EARTH);
+	  		case "light":
+	  			return getElement(Name.LIGHT);
+	  		default:
+	  			return getElement(Name.NULL);
+	  }
+  }
 }

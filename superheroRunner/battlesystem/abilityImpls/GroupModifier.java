@@ -1,6 +1,8 @@
-package battlesystem.modifiers;
+package battlesystem.abilityImpls;
 
 import java.util.List;
+
+import org.json.JSONObject;
 
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
@@ -10,9 +12,17 @@ import battlesystem.Game;
 
 public class GroupModifier implements AbilityModifier
 {
+	private static final String PERCENTAGE_KEY = "percentage";
+	private static final String LIMIT_KEY = "limit";
     private int percentage;
     private int limit;
 
+    public GroupModifier(JSONObject json)
+    {
+    	percentage = json.getInt(PERCENTAGE_KEY);
+    	limit = json.getInt(LIMIT_KEY);
+    }
+    
     public GroupModifier(int percentage, int limit)
     {
         this.percentage = percentage;
@@ -46,5 +56,15 @@ public class GroupModifier implements AbilityModifier
     {
     	return limit;
     }
+
+	@Override
+	public JSONObject toJson() 
+	{
+		JSONObject modifier = new JSONObject();
+		modifier.put(TYPE_KEY, "group");
+		modifier.put(LIMIT_KEY, limit);
+		modifier.put(PERCENTAGE_KEY, percentage);
+		return null;
+	}
     
 }

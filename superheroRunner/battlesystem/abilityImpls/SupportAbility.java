@@ -21,8 +21,15 @@ import battlesystem.Game;
 public class SupportAbility extends Ability 
 {
     // Effect types
+	private static final String EFFECT_KEY = "effect";
     private String template;
 
+    public SupportAbility(JSONObject json)
+    {
+    	super(json);
+    	super.setCategory(Ability.Category.SUPPORT);
+    	template = json.getString(EFFECT_KEY);
+    }
 
     /**
      * The basic constructor for a support ability
@@ -126,8 +133,10 @@ public class SupportAbility extends Ability
     }
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "support");
+		ability.put(EFFECT_KEY, template);
+		return ability;
 	}
 }
 

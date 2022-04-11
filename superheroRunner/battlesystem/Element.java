@@ -49,6 +49,10 @@ public class Element {
     return name + ", " + description;
   }
   
+  public String getName()
+  {
+	  return name;
+  }
 
   
 }

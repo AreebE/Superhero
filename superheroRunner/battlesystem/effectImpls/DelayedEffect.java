@@ -1,8 +1,9 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.objectMapImpls.Effects;
@@ -13,6 +14,11 @@ import battlesystem.objectMapImpls.Effects;
  */
 public class DelayedEffect extends Effect 
 {
+	
+	public DelayedEffect(JSONObject json)
+	{
+		super(json);
+	}
 
 	/**
 	 * The delayed effect basic constructor
@@ -31,8 +37,7 @@ public class DelayedEffect extends Effect
         int timer, 
         String name, 
         String desc, 
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -42,8 +47,7 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element, 
-            null, 
-            modifiers
+            null
         );
     }
     
@@ -65,8 +69,7 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         super
         (
@@ -77,8 +80,7 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element,
-            pierces,
-            modifiers
+            pierces
         );
     }
     
@@ -126,8 +128,7 @@ public class DelayedEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(), 
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
     }
 
@@ -147,8 +148,15 @@ public class DelayedEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces(),
-                    getModifiers()
+                    getPierces()
                 );
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, "delay");
+    	return effect;
     }
 }

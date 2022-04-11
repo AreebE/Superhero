@@ -11,6 +11,11 @@ import battlesystem.State;
  */
 public class StunState extends State 
 {
+	
+	public StunState(JSONObject json)
+	{
+		super(json);
+	}
 	/**
 	 * Just a basic constructor: not much else to say.
 	 * @param name The name of the state 
@@ -43,8 +48,10 @@ public class StunState extends State
         return new StunState(getName(), getDesc(), getDuration());
     }
     
+    @Override
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+    	JSONObject json = super.toJson();
+    	json.put(TYPE_KEY, "stun");
+    	return json;
 	}
 }

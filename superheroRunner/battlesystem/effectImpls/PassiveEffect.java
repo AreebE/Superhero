@@ -1,8 +1,9 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
@@ -12,6 +13,11 @@ import battlesystem.Entity;
  */
 public class PassiveEffect extends Effect 
 {
+	
+	public PassiveEffect(JSONObject json)
+	{
+		super(json);
+	}
 	/**
 	 * The basic constructor for a passive effect that applies damage
 	 * @param strength the base strength
@@ -28,8 +34,7 @@ public class PassiveEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         super
         (
@@ -40,8 +45,7 @@ public class PassiveEffect extends Effect
             name,
             desc, 
             element, 
-            pierces,
-            modifiers
+            pierces
         );
     }
     
@@ -60,8 +64,7 @@ public class PassiveEffect extends Effect
         Effect.Type type, 
         String name, 
         String desc, 
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -70,8 +73,7 @@ public class PassiveEffect extends Effect
             name,
             desc, 
             element, 
-            null,
-            modifiers
+            null
         );
     }
 
@@ -102,8 +104,7 @@ public class PassiveEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces(),
-                    getModifiers()
+                    getPierces()
                 );
     }
 
@@ -121,8 +122,7 @@ public class PassiveEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
         }
 
@@ -134,5 +134,13 @@ public class PassiveEffect extends Effect
     public boolean isRemovable() 
     {
         return false;
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, "passive");
+    	return effect;
     }
 }

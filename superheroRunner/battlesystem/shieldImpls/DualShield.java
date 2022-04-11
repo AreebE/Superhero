@@ -2,6 +2,8 @@ package battlesystem.shieldImpls;
 
 import java.util.HashSet;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
@@ -16,9 +18,22 @@ import battlesystem.Shield;
  */
 public class DualShield extends Shield
 {
+	
+	
+	
+	private static final String SELF_APPLY_EFFECT_KEY = "self apply";
+	private static final String CASTER_APPLY_EFFECT_KEY = "caster apply";
+	
     private String selfApply;
     private String casterApply;
 
+    public DualShield(JSONObject json)
+	{
+    	super(json);
+		selfApply = json.getString(SELF_APPLY_EFFECT_KEY);
+		casterApply = json.getString(CASTER_APPLY_EFFECT_KEY);
+	}
+    
     /**
      * the constructor for a dual shield.
      * 
@@ -107,5 +122,14 @@ public class DualShield extends Shield
     {
         return new DualShield(getName(), getDesc(), getDuration(), selfApply, casterApply, isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
-
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject shield = super.toJson();
+    	shield.put(TYPE_KEY, "dual");
+    	shield.put(CASTER_APPLY_EFFECT_KEY, casterApply);
+    	shield.put(SELF_APPLY_EFFECT_KEY, selfApply);
+    	return shield;
+    }
 }

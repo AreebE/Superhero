@@ -2,6 +2,8 @@ package battlesystem.infoItemImpls;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import battlesystem.Ability;
 import battlesystem.ObjectMap;
@@ -22,8 +24,11 @@ import battlesystem.objectMapImpls.States;
  */
 public class AIInfoItem extends EntityInfoItem {
 
+	private static final String TARGETTABLE_KEY = "is targettable";
+	private static final String ATTACK_PATTERN_KEY = "attack pattern";
   boolean isTargettable;
   ArrayList<String> attackPattern;
+  
 
   /**
    * A basic constructor
@@ -70,5 +75,21 @@ public class AIInfoItem extends EntityInfoItem {
         creator, attackPattern, isTargettable);
     super.addItems(ai, g);
     return ai;
+  }
+  
+  @Override 
+  public JSONObject toJson()
+  {
+	  JSONObject item = super.toJson();
+	  item.put(TYPE_KEY, "simple ai");
+	  item.put(TARGETTABLE_KEY, isTargettable);
+	  
+	  JSONArray pattern = new JSONArray();
+	  for (int i = 0; i < attackPattern.size(); i++)
+	  {
+		  pattern.put(attackPattern.get(i));
+	  }
+	  item.put(ATTACK_PATTERN_KEY, pattern);
+	  return item;
   }
 }

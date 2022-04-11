@@ -1,7 +1,9 @@
-package battlesystem.modifiers;
+package battlesystem.abilityImpls;
 
 import java.util.List;
 import java.util.Random;
+
+import org.json.JSONObject;
 
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
@@ -11,8 +13,14 @@ import battlesystem.Game;
 
 public class RandomModifier implements AbilityModifier{
   private static final Random randomizer = new Random();
+  
+  private static final String CHANCE_KEY = "chance";
   private int chance;
   
+  public RandomModifier(JSONObject json)
+  {
+	  chance = json.getInt(CHANCE_KEY);
+  }
   public RandomModifier(int chance){
     this.chance = chance;
   } 
@@ -36,4 +44,14 @@ public class RandomModifier implements AbilityModifier{
   public int getPriority(){
     return Ability.HIT_PRIORITY;
   }
+
+  @Override
+	public JSONObject toJson() {
+	  JSONObject modifier = new JSONObject();
+	  modifier.put(TYPE_KEY, "random");
+	  modifier.put(CHANCE_KEY, chance);
+		return modifier;
+	}
+  
+  
 }

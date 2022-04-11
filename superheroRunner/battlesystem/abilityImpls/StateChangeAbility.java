@@ -20,9 +20,14 @@ import battlesystem.State;
  */
 public class StateChangeAbility extends SupportAbility
 {
-
+	private static final String STATE_KEY = "state";
     private String template;
 
+    public StateChangeAbility(JSONObject json)
+    {
+    	super(json);
+    	template = json.getString(STATE_KEY);
+    }
     /**
      * A basic constructor to change state 
      * 
@@ -111,7 +116,9 @@ public class StateChangeAbility extends SupportAbility
     }
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+		JSONObject ability = super.toJson();
+		ability.put(TYPE_KEY, "state");
+		ability.put(STATE_KEY, template);
+		return ability;
 	}
 }

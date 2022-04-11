@@ -3,9 +3,10 @@ package battlesystem;
 import java.util.EnumMap;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import battlesystem.modifiers.GroupModifier;
+import battlesystem.abilityImpls.GroupModifier;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,20 +40,53 @@ public abstract class Ability
 
     public static final int MISS = -1;
 
+    public static final String TYPE_KEY = "type";
+    private static final String NAME_KEY = "name";
+    private static final String DESC_KEY = "desc";
+    private static final String COOLDOWN_KEY = "cooldown";
+    private static final String STRENGTH_KEY = "strength";
+    private static final String ELEMENT_KEY = "element";
+    private static final String MODIFIERS_KEY = "modifiers";
+    
     public String name;
     private String description;
     private int cooldown;
     private int strength;
-    private int turnsSinceUse;
     private Ability.Category category;
     private Element em;
     private ArrayList<AbilityModifier> modifiers;
-    private int chance;
+
+    private int turnsSinceUse;
     private int additionalStrength;
     public transient static final int MAX_CHANCE = 256;
     
     private boolean keepGoing;
     
+    public Ability(JSONObject json)
+    {
+    	name = json.getString(NAME_KEY);
+    	description = json.getString(DESC_KEY);
+    	cooldown = json.getInt(COOLDOWN_KEY);
+    	strength = json.getInt(STRENGTH_KEY);
+    	em = Elements.getElement(json.getString(ELEMENT_KEY));
+    	
+    	modifiers = new ArrayList<>();
+    	JSONArray jsonModifiers = json.getJSONArray(MODIFIERS_KEY);
+    	for (int i = 0; i < jsonModifiers.length(); i++)
+    	{
+    		// modifiers.add(i, ModifierLoader(jsonModifiers.get(i));
+    	}
+		 Collections.sort(this.modifiers, new Comparator<AbilityModifier>()
+	     {
+	
+			@Override
+			public int compare(AbilityModifier o1, AbilityModifier o2) {
+				// TODO Auto-generated method stub
+				return o1.getPriority() - o2.getPriority();
+			}
+	     	
+	     });
+    }
     /**
      * A constructor for when it is given an ability
      * @param tocopy the ability to copy from.
@@ -321,13 +355,7 @@ public abstract class Ability
       return this.category;
     }
 
-    /**
-     * 
-     * @return the chance this ability has to hit.
-     */
-    public int getChance(){
-      return this.chance;
-    }
+
 
     /**
      * A method for copying this ability
@@ -376,7 +404,10 @@ public abstract class Ability
     	}
     }
     
-    
+    protected void setCategory(Category c)
+    {
+    	this.category = c;
+    }
     /**
      * 
      */
@@ -389,5 +420,21 @@ public abstract class Ability
      * Convert the ability to a json file
      * @return the json object.
      */
-    public abstract JSONObject toJson();
+    public JSONObject toJson()
+    {
+    	JSONObject ability = new JSONObject();
+    	ability.put(COOLDOWN_KEY, cooldown);
+    	ability.put(DESC_KEY, description);
+    	ability.put(ELEMENT_KEY, em.getName());
+    	ability.put(NAME_KEY, name);
+    	ability.put(STRENGTH_KEY, strength);
+    	
+    	JSONArray jsonModifiers = new JSONArray();
+    	for (int i = 0; i < modifiers.size(); i++)
+    	{
+    		jsonModifiers.put(modifiers.get(i).toJson());
+    	}
+    	ability.put(MODIFIERS_KEY, jsonModifiers);
+    	return ability;
+    }
 }

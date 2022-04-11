@@ -1,8 +1,9 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
@@ -15,6 +16,10 @@ import battlesystem.Entity;
  */
 public class InstantEffect extends Effect 
 {
+	public InstantEffect(JSONObject json)
+	{
+		super(json);
+	}
 	
 	/**
 	 * a basic constructor
@@ -30,8 +35,7 @@ public class InstantEffect extends Effect
         Effect.Type type, 
         String name, 
         String desc, 
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -40,8 +44,7 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
-            null,
-            modifiers
+            null
         );
     }
 
@@ -62,8 +65,7 @@ public class InstantEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         super
         (
@@ -74,8 +76,7 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
-            pierces,
-            modifiers
+            pierces
         );
     }
     
@@ -105,8 +106,7 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
     }
 
@@ -124,8 +124,15 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
+    }
+    
+    @Override 
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, "instant");
+    	return effect;
     }
 }

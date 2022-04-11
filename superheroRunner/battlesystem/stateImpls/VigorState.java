@@ -11,8 +11,15 @@ import battlesystem.State;
  */
 public class VigorState extends State 
 {
+	private static final String NUM_ACTIONS_KEY = "actions";
     private int numActions;
     
+    public VigorState(
+    		JSONObject json)
+    {
+    	super(json);
+    	numActions = json.getInt(NUM_ACTIONS_KEY);
+    }
     /**
      * the basic constructor for this.
      * 
@@ -57,7 +64,9 @@ public class VigorState extends State
     }
     
     public JSONObject toJson() {
-		JSONObject start = new JSONObject();
-		return null;
+    	JSONObject json = super.toJson();
+    	json.put(NUM_ACTIONS_KEY, numActions);
+    	json.put(TYPE_KEY, "vigor");
+    	return json;
 	}
 }

@@ -3,6 +3,8 @@ package battlesystem;
 import java.util.EnumMap;
 import java.util.Collection;
 import java.util.Arrays;
+
+import org.json.JSONObject;
 // package Game.ablilites.Effects;
 // i dont think multiplayer replit and github branches work
 // that's probably true
@@ -11,7 +13,17 @@ import java.util.Arrays;
  */
 public class Effect 
 {
-
+	public static final String TYPE_KEY = "type";
+	private static final String STRENGTH_KEY = "strength";
+	private static final String STAT_KEY = "stat";
+	private static final String DURATION_KEY = "duration";
+	private static final String IS_PERMANENT_KEY = "permanent";
+	private static final String NAME_KEY = "name";
+	private static final String DESC_KEY = "desc";
+	private static final String ELEMENT_KEY = "element";
+	private static final String PIERCES_DEFENSE_KEY = "pierces defense";
+	private static final String PIERCES_SHIELD_KEY = "pierces shield";
+	
     private final static int PIERCES_DEFENSE_INDEX = 0;
     private final static int PIERCES_SHIELD_INDEX = 1;
     private int strength;
@@ -22,7 +34,6 @@ public class Effect
     private String desc;
     private Element element;
     private boolean[] pierces;
-    private EnumMap<Modifier, EffectModifier> modifiers;
     
     /**
      * A basic enum for the types of effects.
@@ -33,9 +44,9 @@ public class Effect
         ATTACK("attack"), 
         DEFENSE("defense"), 
         HEALTH("health"),
-        MAX_HEALTH("Max health"),
+        MAX_HEALTH("max health"),
         SHIELD("shield"), 
-        DAMAGE("health"), 
+        DAMAGE("damage"), 
         SPEED("speed"),
         GROUP("");
 
@@ -45,13 +56,46 @@ public class Effect
         {
             this.name = name;
         }
+        
+        public static Type getType(String name)
+        {
+        	switch(name)
+        	{
+        		default:
+        		case "attack":
+        			return ATTACK;
+        		case "defense":
+        			return DEFENSE;
+        		case "health":
+        			return HEALTH;
+        		case "max health":
+        			return MAX_HEALTH;
+        		case "shield":
+        			return SHIELD;
+        		case "damage":
+        			return DAMAGE;
+        		case "speed":
+        			return SPEED;
+        		case "":
+        			return GROUP;
+        		
+        		
+        	}
+        }
     } 
     
-    public static enum Modifier 
+    public Effect(
+    		JSONObject json)
     {
-        PERCENT
+    	this.strength = json.getInt(STRENGTH_KEY);
+    	this.typeOfEffect = Type.getType(json.getString(STAT_KEY));
+    	this.duration = json.getInt(DURATION_KEY);
+    	this.permanent = json.getBoolean(IS_PERMANENT_KEY);
+    	this.name = json.getString(NAME_KEY);
+    	this.desc = json.getString(DESC_KEY);
+    	this.element = Elements.getElement(json.getString(ELEMENT_KEY));
+    	this.pierces = new boolean[] {json.getBoolean(PIERCES_DEFENSE_KEY), json.getBoolean(PIERCES_SHIELD_KEY)};
     }
-    
     /**
      * A basic constructor for Effect.
      * @param strength the base strength of this effect
@@ -70,8 +114,7 @@ public class Effect
         boolean permanent, 
         String name, 
         String desc,
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -82,8 +125,7 @@ public class Effect
             name, 
             desc, 
             element, 
-            null,
-            modifiers
+            null
         );
     }
 
@@ -108,8 +150,7 @@ public class Effect
         String name, 
         String desc,
         Element element, 
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         this.strength = strength;
         this.typeOfEffect = type;
@@ -119,12 +160,8 @@ public class Effect
         this.desc = desc;
         this.element = element;
         this.pierces = pierces;
-        this.modifiers = new EnumMap<>(Modifier.class);
-        for (int i = 0; i < modifiers.length; i++)
-        {
-            EffectModifier modifier = modifiers[0];
-            this.modifiers.put(modifier.getName(), modifier);
-        }
+      
+   
     }
 
 
@@ -153,8 +190,7 @@ public class Effect
         Entity target,
         BattleLog log) 
     {
-        PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Modifier.PERCENT);
-        int power = this.strength + ((percent == null) ? 0: percent.applyEffect(target));
+        int power = this.strength;
 
         Object[] contents = new Object[]{target.getName(), typeOfEffect, power, name};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.APPLY_EFFECT, contents));
@@ -277,8 +313,7 @@ public class Effect
                     name, 
                     desc, 
                     element, 
-                    pierces,
-                    getModifiers()
+                    pierces
                 );
     }
 
@@ -298,8 +333,7 @@ public class Effect
                     name, 
                     desc, 
                     element, 
-                    pierces,
-                    getModifiers()
+                    pierces
                 );
     }
 
@@ -321,25 +355,7 @@ public class Effect
         return this.typeOfEffect;
     }
 
-    /**
-     * all effect modifiers this has
-     * @return the modifiers
-     */
-    protected EffectModifier[] getModifiers()
-    {
-        // System.out.println(modifiers);
-        Collection<EffectModifier> modifierCollection = modifiers.values();
-        EffectModifier[] mods = new EffectModifier[]{};
-        if (modifierCollection != null)
-        {
-            // System.out.println(Arrays.toString(modifierCollection.toArray(mods)));
-            mods = modifierCollection.toArray(mods);
-                        // System.out.println(Arrays.toString(mods));
-
-        }
-        return mods;
-    }
-
+  
     /**
      * get the strength of this character
      * @return the strength
@@ -358,17 +374,7 @@ public class Effect
         this.name = newName;
     }
 
-    /**
-     * Get the effective strength
-     * @param target the entity to draw strength from
-     * @return how much effective strength this has
-     */
-    protected int getStrength(Entity target) 
-    {
-        PercentageEffectModifier percent = (PercentageEffectModifier) modifiers.get(Effect.Modifier.PERCENT);
-        return this.strength + ((percent == null)? 0: percent.applyEffect(target));
-    }
-
+  
     /**
      * the current duration of the effect
      * @return the amount of turns this will stay for.
@@ -439,4 +445,20 @@ public class Effect
                 + " turns left)";
     }
     
+
+    public JSONObject toJson()
+    {
+    	JSONObject effect = new JSONObject();
+    	effect.put(TYPE_KEY, "standard");
+    	effect.put(STRENGTH_KEY, strength);
+    	effect.put(STAT_KEY, typeOfEffect.name);
+    	effect.put(DURATION_KEY, duration);
+    	effect.put(IS_PERMANENT_KEY, permanent);
+    	effect.put(NAME_KEY, name);
+    	effect.put(DESC_KEY, desc);
+    	effect.put(ELEMENT_KEY, element.getName());
+    	effect.put(PIERCES_DEFENSE_KEY, pierces[PIERCES_DEFENSE_INDEX]);
+    	effect.put(PIERCES_SHIELD_KEY, pierces[PIERCES_SHIELD_INDEX]);
+    	return effect;
+    }
 }

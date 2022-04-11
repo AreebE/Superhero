@@ -2,6 +2,8 @@ package battlesystem.shieldImpls;
 
 import java.util.HashSet;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
@@ -15,9 +17,14 @@ import battlesystem.Shield;
  */
 public class SelfShield extends Shield
 {
+	private static final String SELF_APPLY_KEY = "self apply";
     private String selfApply;
 
-
+    public SelfShield(JSONObject json)
+    {
+    	super(json);
+    	selfApply = json.getString(SELF_APPLY_KEY);
+    }
     /**
      * The basic constructor of this shield
      * 
@@ -95,4 +102,12 @@ public class SelfShield extends Shield
         return new SelfShield(getName(), getDesc(), getDuration(), selfApply, isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject json = super.toJson();
+    	json.put(TYPE_KEY, "self");
+    	json.put(SELF_APPLY_KEY, selfApply);
+    	return json;
+    }
 }

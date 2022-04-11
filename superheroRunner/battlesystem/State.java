@@ -1,5 +1,7 @@
 package battlesystem;
 
+
+
 import org.json.JSONObject;
 
 /**
@@ -8,11 +10,23 @@ import org.json.JSONObject;
  */
 public abstract class State 
 {
-
+	
+	public static final String TYPE_KEY = "type";
+	private static final String NAME_KEY = "name";
+	private static final String DESC_KEY = "desc";
+	private static final String DURATION_KEY = "duration";
+	
     private int duration;
     private String name;
     private String desc;
     
+    public State(
+    		JSONObject json)
+    {
+    	this.duration = json.getInt(DURATION_KEY);
+    	this.desc = json.getString(DESC_KEY);
+    	this.name = json.getString(NAME_KEY);
+    }
     /**
      * Basic constructor
      * @param name the name of the state
@@ -107,5 +121,13 @@ public abstract class State
      * @return the copy of this state.
      */
     public abstract State copy();
-    public abstract JSONObject toJson();
+    
+    public JSONObject toJson() 
+    {
+    	JSONObject start = new JSONObject();
+		start.append(NAME_KEY, getName());
+		start.append(DESC_KEY, getDesc());
+		start.append(DURATION_KEY, getDuration());
+		return start;
+    }
 }   

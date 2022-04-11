@@ -1,6 +1,8 @@
-package battlesystem.modifiers;
+package battlesystem.abilityImpls;
 
 import java.util.List;
+
+import org.json.JSONObject;
 
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
@@ -11,10 +13,19 @@ import battlesystem.Game;
 public class PercentageModifier implements AbilityModifier
 {
 
+	private static final String PERCENTAGE_KEY = "percentage";
+	private static final String STAT_KEY = "stat";
+	private static final String CASTER_KEY = "use caster";
     private int percentage;
     private Entity.Statistic stat;
     private boolean useCaster;
 
+    public PercentageModifier(JSONObject json)
+    {
+    	percentage = json.getInt(PERCENTAGE_KEY);
+    	stat = Entity.Statistic.getStatistic(json.getString(STAT_KEY));
+    	useCaster = json.getBoolean(CASTER_KEY);
+    }
     public PercentageModifier(
         int percentage,
         Entity.Statistic stat,
@@ -46,4 +57,15 @@ public class PercentageModifier implements AbilityModifier
     public int getPriority(){
         return Ability.ADJUSTMENT_PRIORITY;
     }
+
+
+	@Override
+	public JSONObject toJson() {
+		JSONObject modifier = new JSONObject();
+		modifier.put(TYPE_KEY, "percentage");
+		modifier.put(CASTER_KEY, useCaster);
+		modifier.put(PERCENTAGE_KEY, percentage);
+		modifier.put(STAT_KEY, stat.name);
+		return modifier;
+	}
 }

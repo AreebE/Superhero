@@ -1,5 +1,7 @@
 package battlesystem.shieldImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
@@ -13,9 +15,14 @@ import battlesystem.Shield;
  */
 public class DeathShield extends Shield
 {
-
+	private static final String EFFECT_KEY = "effect";
     private String effect;
 
+    public DeathShield(JSONObject json)
+    {
+    	super(json);
+    	effect = json.getString(EFFECT_KEY);
+    }
     /**
      * A basic constructor for this shield
      * 
@@ -83,5 +90,14 @@ public class DeathShield extends Shield
     protected String getEffect()
     {
         return effect;
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject shield = super.toJson();
+    	shield.put(TYPE_KEY, "death");
+    	shield.put(EFFECT_KEY, effect);
+    	return shield;
     }
 }

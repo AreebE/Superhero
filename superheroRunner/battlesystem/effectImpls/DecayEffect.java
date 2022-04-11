@@ -1,8 +1,9 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
@@ -11,10 +12,22 @@ import battlesystem.Entity;
  *
  */
 public class DecayEffect extends Effect{
+	
+	private static final String COUNT_KEY = "count";
+	private static final String DECAY_KEY = "decay";
+	private static final String TURN_OF_DECAY_KEY = "turn decay starts";
     private int count;
     private int decayRate;
     private int turnDecayStarts;
 
+    
+    public DecayEffect(JSONObject json)
+    {
+    	super(json);
+    	this.count = json.getInt(COUNT_KEY);
+    	this.decayRate = json.getInt(DECAY_KEY);
+    	this.turnDecayStarts = json.getInt(TURN_OF_DECAY_KEY);
+    }
     /**
      * A basic constructor
      * 
@@ -36,10 +49,9 @@ public class DecayEffect extends Effect{
         int duration,  
         String name, 
         String desc,
-        Element element,
-        EffectModifier[] modifiers)
+        Element element)
     {
-        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null, modifiers);
+        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null);
     }
     
     /**
@@ -64,10 +76,9 @@ public class DecayEffect extends Effect{
         String name, 
         String desc,
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers)
+        boolean[] pierces)
     {
-        super(basePower, type, duration, true, name, desc, element, pierces, modifiers);
+        super(basePower, type, duration, true, name, desc, element, pierces);
         this.decayRate = decayRate;
         this.count = 0;
         this.turnDecayStarts = turnDecayStarts;
@@ -86,7 +97,7 @@ public class DecayEffect extends Effect{
     {
         if (count < turnDecayStarts)
         {
-            super.applyEffect(target, super.getStrength(target));
+            super.applyEffect(target, super.getStrength());
         }
         else 
         {
@@ -126,8 +137,7 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces(),
-                    getModifiers()
+                    getPierces()
                 );
     }
 
@@ -149,8 +159,18 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces(),
-                    getModifiers()
+                    getPierces()
                 );
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, "decay");
+    	effect.put(COUNT_KEY, count);
+    	effect.put(DECAY_KEY, decayRate);
+    	effect.put(TURN_OF_DECAY_KEY, turnDecayStarts);
+    	return effect;
     }
 }

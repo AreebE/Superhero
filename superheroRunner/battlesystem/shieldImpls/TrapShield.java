@@ -2,6 +2,8 @@ package battlesystem.shieldImpls;
 
 import java.util.HashSet;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
@@ -15,9 +17,14 @@ import battlesystem.Shield;
  */
 public class TrapShield extends Shield
 {
+	private static final String COUNTER_KEY = "counter";
     private String counter;
 
-    
+    public TrapShield(JSONObject json)
+    {
+    	super(json);
+    	counter = json.getString(COUNTER_KEY);
+    }
     /**
      * The basic constructor for the default shield
      * @param name the name of the shield 
@@ -90,4 +97,12 @@ public class TrapShield extends Shield
         return new TrapShield(getName(), getDesc(), getDuration(), counter, isNullifies(), getUses(), getEventTriggers(), getElementTriggers());
     }
 
+    @Override 
+    public JSONObject toJson()
+    {
+    	JSONObject json = super.toJson();
+    	json.put(TYPE_KEY, "trap");
+    	json.put(COUNTER_KEY, "counter");
+    	return json;
+    }
 }
