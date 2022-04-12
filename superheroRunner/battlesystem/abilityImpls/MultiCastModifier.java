@@ -48,7 +48,7 @@ public class MultiCastModifier implements AbilityModifier{
   public JSONObject toJson()
   {
 	  JSONObject modifier = new JSONObject();
-	  modifier.put(TYPE_KEY, "multicast");
+	  modifier.put(TYPE_KEY, AbilityLoader.MULTI_CAST);
 	  modifier.put(TIMES_KEY, times);
 	  return modifier;
   }

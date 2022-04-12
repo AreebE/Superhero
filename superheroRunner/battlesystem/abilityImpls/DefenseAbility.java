@@ -26,7 +26,7 @@ public class DefenseAbility extends Ability
     public DefenseAbility(JSONObject json)
     {
     	super(json);
-    	shield = json.getString(SHIELD_KEY);
+    	shield = json.getString(SHIELD_KEY).toLowerCase();
     	super.setCategory(Ability.Category.DEFENSE);
     }
     /**
@@ -135,8 +135,8 @@ public class DefenseAbility extends Ability
 
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "defense");
-		ability.put(SHIELD_KEY, shield);
+		ability.put(TYPE_KEY, AbilityLoader.DEFENSE);
+		ability.put(SHIELD_KEY, (shield == null)? "": shield);
 		return ability;
 	}
 }

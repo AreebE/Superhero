@@ -28,7 +28,7 @@ public class SpawnableAbility extends DefenseAbility
     public SpawnableAbility(JSONObject json)
     {
     	super(json);
-    	template = json.getString(SPAWNABLE_KEY);
+    	template = json.getString(SPAWNABLE_KEY).toLowerCase();
     }
     /**
      * The basic constructor 
@@ -135,7 +135,7 @@ public class SpawnableAbility extends DefenseAbility
     
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "spawnable");
+		ability.put(TYPE_KEY, AbilityLoader.SPAWNABLE);
 		ability.put(SPAWNABLE_KEY, template);
 		return ability;
 	}

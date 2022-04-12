@@ -1,11 +1,15 @@
 package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
+
+import org.json.JSONArray;
 
 import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Shield;
+import battlesystem.objectMapImpls.Effects.Name;
 import battlesystem.shieldImpls.*;
 
 public final class Shields 
@@ -157,5 +161,16 @@ public final class Shields
         {
             e.addShield(getShield(n).copy());
         }
+    }
+    
+    public static JSONArray loadShields()
+    {
+    	JSONArray json = new JSONArray();
+    	Iterator<Name> shields = SHIELDS.keySet().iterator();
+    	while (shields.hasNext())
+    	{
+    		json.put(SHIELDS.get(shields.next()).toJson());
+    	}
+		return json;
     }
 }

@@ -26,9 +26,15 @@ public class GroupEffect extends Effect
     	super(json);
     	JSONArray jsonEffects = json.getJSONArray(LIST_OF_EFFECTS);
     	listOfEffects = new ArrayList<>();
+    	int groupDuration = 0;
     	for (int i = 0; i < jsonEffects.length(); i++)
     	{
-//    		listOfEffects = EffectLoader.load(jsonEffects.getJSONObject(i));
+    		Effect e = EffectLoader.loadEffect(jsonEffects.getJSONObject(i));
+    		listOfEffects.add(e);
+    		if (e.getDuration() > groupDuration)
+    		{
+    			groupDuration = e.getDuration();
+    		}
     	}
     }
     
@@ -245,12 +251,13 @@ public class GroupEffect extends Effect
     public JSONObject toJson()
     {
     	JSONObject effect = super.toJson();
-    	effect.put(TYPE_KEY, "group");
+    	effect.put(TYPE_KEY, EffectLoader.GROUP);
     	JSONArray effects = new JSONArray();
     	for (Effect e: listOfEffects)
     	{
     		effects.put(e.toJson());
     	}
+    	effect.put(LIST_OF_EFFECTS, effects);
     	return effect;
     }
 }

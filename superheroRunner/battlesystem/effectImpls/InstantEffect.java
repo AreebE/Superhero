@@ -132,7 +132,7 @@ public class InstantEffect extends Effect
     public JSONObject toJson()
     {
     	JSONObject effect = super.toJson();
-    	effect.put(TYPE_KEY, "instant");
+    	effect.put(TYPE_KEY, EffectLoader.INSTANT);
     	return effect;
     }
 }

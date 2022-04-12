@@ -48,7 +48,7 @@ public class RandomModifier implements AbilityModifier{
   @Override
 	public JSONObject toJson() {
 	  JSONObject modifier = new JSONObject();
-	  modifier.put(TYPE_KEY, "random");
+	  modifier.put(TYPE_KEY, AbilityLoader.RANDOM);
 	  modifier.put(CHANCE_KEY, chance);
 		return modifier;
 	}

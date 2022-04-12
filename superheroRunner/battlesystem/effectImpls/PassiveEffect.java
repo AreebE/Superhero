@@ -140,7 +140,7 @@ public class PassiveEffect extends Effect
     public JSONObject toJson()
     {
     	JSONObject effect = super.toJson();
-    	effect.put(TYPE_KEY, "passive");
+    	effect.put(TYPE_KEY, EffectLoader.PASSIVE);
     	return effect;
     }
 }

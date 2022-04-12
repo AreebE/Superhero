@@ -23,7 +23,7 @@ public class TrapShield extends Shield
     public TrapShield(JSONObject json)
     {
     	super(json);
-    	counter = json.getString(COUNTER_KEY);
+    	counter = json.getString(COUNTER_KEY).toLowerCase();
     }
     /**
      * The basic constructor for the default shield
@@ -101,7 +101,7 @@ public class TrapShield extends Shield
     public JSONObject toJson()
     {
     	JSONObject json = super.toJson();
-    	json.put(TYPE_KEY, "trap");
+    	json.put(TYPE_KEY, ShieldLoader.TRAP);
     	json.put(COUNTER_KEY, "counter");
     	return json;
     }

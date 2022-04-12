@@ -170,7 +170,7 @@ public class OneTimeEffect extends Effect
     public JSONObject toJson()
     {
     	JSONObject effect = super.toJson();
-    	effect.put(TYPE_KEY, "one time");
+    	effect.put(TYPE_KEY, EffectLoader.ONE_TIME);
     	return effect;
     }
 }

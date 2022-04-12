@@ -51,7 +51,7 @@ public class StunState extends State
     @Override
     public JSONObject toJson() {
     	JSONObject json = super.toJson();
-    	json.put(TYPE_KEY, "stun");
+    	json.put(TYPE_KEY, StateLoader.STUN);
     	return json;
 	}
 }

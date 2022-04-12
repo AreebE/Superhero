@@ -45,21 +45,21 @@ public class EntityInfoItem
     	JSONArray jsonAbilities = json.getJSONArray(ABILITIES_KEY);
     	for (int i = 0; i < jsonAbilities.length(); i++)
     	{
-    		abilities.add(jsonAbilities.getString(i));
+    		abilities.add(jsonAbilities.getString(i).toLowerCase());
     	}
     	
     	shields = new ArrayList<>();
     	JSONArray jsonShields = json.getJSONArray(SHIELDS_KEY);
     	for (int i = 0; i < jsonShields.length(); i++)
     	{
-    		abilities.add(jsonShields.getString(i));
+    		shields.add(jsonShields.getString(i).toLowerCase());
     	}
     	
     	effects = new ArrayList<>();
     	JSONArray jsonEffects = json.getJSONArray(EFFECTS_KEY);
     	for (int i = 0; i < jsonEffects.length(); i++)
     	{
-    		abilities.add(jsonEffects.getString(i));
+    		effects.add(jsonEffects.getString(i).toLowerCase());
     	}
     }
     /**
@@ -102,6 +102,7 @@ public class EntityInfoItem
     		Game g)
     {
         Entity e = new Entity(name, speed, maxHealth, shieldHealth, g.getState(defaultState), creator);
+//        System.out.println(e.getName());
         addItems(e, g);
         return e;
     }
@@ -117,14 +118,18 @@ public class EntityInfoItem
     {
         for (String a: abilities)
         {
+//        	System.out.println(a);
         	e.addAbility(g.getAbility(a));
         }
+        e.addAbility(g.getAbility("pass turn"));
         for (String ef: effects)
         {
+//        	System.out.println(ef);
         	e.addEffect(g.getEffect(ef));
         }
         for (String s: shields)
         {
+//        	System.out.println(s);
         	e.addShield(g.getShield(s));
         }
     }
@@ -133,7 +138,7 @@ public class EntityInfoItem
      * the name of the person
      * @return the name
      */
-    protected String getName()
+    public String getName()
     {
         return this.name;
     }

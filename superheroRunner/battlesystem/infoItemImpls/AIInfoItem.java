@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import battlesystem.Ability;
-import battlesystem.ObjectMap;
 import battlesystem.Effect;
 import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
@@ -26,9 +25,19 @@ public class AIInfoItem extends EntityInfoItem {
 
 	private static final String TARGETTABLE_KEY = "is targettable";
 	private static final String ATTACK_PATTERN_KEY = "attack pattern";
-  boolean isTargettable;
-  ArrayList<String> attackPattern;
+  private boolean isTargettable;
+  private ArrayList<String> attackPattern;
   
+  public AIInfoItem(JSONObject json) {
+	  super(json);
+	  isTargettable = json.getBoolean(TARGETTABLE_KEY);
+	  attackPattern = new ArrayList<>();
+	  JSONArray jsonAttackPattern = json.getJSONArray(ATTACK_PATTERN_KEY);
+	  for (int i = 0; i < jsonAttackPattern.length(); i++)
+	  {
+		  attackPattern.add(jsonAttackPattern.getString(i));
+	  }
+  }
 
   /**
    * A basic constructor
@@ -61,7 +70,9 @@ public class AIInfoItem extends EntityInfoItem {
     this.isTargettable = isTargettable;
   }
 
-  /**
+ 
+
+/**
    * Create the AI entity
    * @param creator the creator of this entity
    * @return the successfully created ai.
@@ -81,13 +92,13 @@ public class AIInfoItem extends EntityInfoItem {
   public JSONObject toJson()
   {
 	  JSONObject item = super.toJson();
-	  item.put(TYPE_KEY, "simple ai");
+	  item.put(TYPE_KEY, InfoItemReader.PATTERN_AI_INFO);
 	  item.put(TARGETTABLE_KEY, isTargettable);
 	  
 	  JSONArray pattern = new JSONArray();
 	  for (int i = 0; i < attackPattern.size(); i++)
 	  {
-		  pattern.put(attackPattern.get(i));
+		  pattern.put(attackPattern.get(i).toLowerCase());
 	  }
 	  item.put(ATTACK_PATTERN_KEY, pattern);
 	  return item;

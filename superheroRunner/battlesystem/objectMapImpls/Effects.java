@@ -2,7 +2,10 @@ package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+
+import org.json.JSONArray;
 
 import battlesystem.Effect;
 import battlesystem.Effect.Type;
@@ -475,4 +478,14 @@ public DecayEffect(
         }
     }
     
+    public static JSONArray loadEffects()
+    {
+    	JSONArray json = new JSONArray();
+    	Iterator<Name> effects = EFFECTS.keySet().iterator();
+    	while (effects.hasNext())
+    	{
+    		json.put(EFFECTS.get(effects.next()).toJson());
+    	}
+		return json;
+    }
 }

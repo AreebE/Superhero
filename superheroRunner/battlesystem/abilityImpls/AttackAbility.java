@@ -144,11 +144,11 @@ public class AttackAbility extends Ability
             attackStrength = 0;
         }
 
-        Terrain t = caster.getTerrain();
-
-        if(t.isTerrainBuffed(this.em)){
-          attackStrength += attackStrength;
-        }
+//        Terrain t = caster.getTerrain();
+//
+//        if(t.isTerrainBuffed(this.em)){
+//          attackStrength += attackStrength;
+//        }
 
         Object[] results = target.dealDamage
         (
@@ -232,7 +232,7 @@ public class AttackAbility extends Ability
     @Override
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "attack");
+		ability.put(TYPE_KEY, AbilityLoader.ATTACK);
 		ability.put(DEFENSE_KEY, ignoresBaseDefense);
 		ability.put(PIERCING_KEY, isPiercing);
 		return ability;

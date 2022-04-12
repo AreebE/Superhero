@@ -33,7 +33,7 @@ public class Game {
 		
 		protected void addMember(Entity member)
 		{
-			members.add(members.size() - 1, member);
+			members.add(members.size(), member);
 		}
 	}
 	
@@ -53,15 +53,20 @@ public class Game {
 			HashMap<String, Effect> effects,
 			HashMap<String, EntityInfoItem> spawnables,
 			HashMap<String, Shield> shields,
-			HashMap<String, State> states)
+			HashMap<String, State> states,
+			InputSystem input)
 	{
 		this.abilities = abilities;
 		this.effects = effects;
 		this.spawnables = spawnables;
 		this.shields = shields;
 		this.states = states;
+		this.input = input;
+		this.teams = new ArrayList<>();
+		this.allFighters = new ArrayList<>();
 		for (int i = 0; i < initialFighters.size(); i++)
 		{
+//			System.out.println(initialFighters.get(i).defaultState);
 			Entity e = initialFighters.get(i).create(null, this);
 			Team t = new Team();
 			t.addMember(e);
@@ -69,6 +74,11 @@ public class Game {
 			teams.add(t);
 			allFighters.add(e);
 		}
+	}
+	
+	public void setInputSystem(InputSystem input)
+	{
+		this.input = input;
 	}
 	
 	public Ability getAbility(String name)
@@ -146,6 +156,11 @@ public class Game {
 	    // allFighters.get(1).getHealth() + ", " + allFighters.get(2).getHealth());
 	    System.out.println(allFighters.get(0).getName() + " won!");
 
+	}
+
+	public ArrayList<Entity> getFighters() {
+		// TODO Auto-generated method stub
+		return allFighters;
 	}
 
 

@@ -125,9 +125,10 @@ public abstract class State
     public JSONObject toJson() 
     {
     	JSONObject start = new JSONObject();
-		start.append(NAME_KEY, getName());
-		start.append(DESC_KEY, getDesc());
-		start.append(DURATION_KEY, getDuration());
+		start.put(NAME_KEY, getName());
+		start.put(DESC_KEY, getDesc());
+		start.put(DURATION_KEY, getDuration());
+//		System.out.println(start);
 		return start;
     }
 }   

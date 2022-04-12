@@ -30,8 +30,8 @@ public class DualShield extends Shield
     public DualShield(JSONObject json)
 	{
     	super(json);
-		selfApply = json.getString(SELF_APPLY_EFFECT_KEY);
-		casterApply = json.getString(CASTER_APPLY_EFFECT_KEY);
+		selfApply = json.getString(SELF_APPLY_EFFECT_KEY).toLowerCase();
+		casterApply = json.getString(CASTER_APPLY_EFFECT_KEY).toLowerCase();
 	}
     
     /**
@@ -127,7 +127,7 @@ public class DualShield extends Shield
     public JSONObject toJson()
     {
     	JSONObject shield = super.toJson();
-    	shield.put(TYPE_KEY, "dual");
+    	shield.put(TYPE_KEY, ShieldLoader.DUAL);
     	shield.put(CASTER_APPLY_EFFECT_KEY, casterApply);
     	shield.put(SELF_APPLY_EFFECT_KEY, selfApply);
     	return shield;

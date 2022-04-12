@@ -61,7 +61,7 @@ public class GroupModifier implements AbilityModifier
 	public JSONObject toJson() 
 	{
 		JSONObject modifier = new JSONObject();
-		modifier.put(TYPE_KEY, "group");
+		modifier.put(TYPE_KEY, AbilityLoader.GROUP);
 		modifier.put(LIMIT_KEY, limit);
 		modifier.put(PERCENTAGE_KEY, percentage);
 		return null;

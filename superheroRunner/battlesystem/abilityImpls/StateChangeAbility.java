@@ -26,7 +26,7 @@ public class StateChangeAbility extends SupportAbility
     public StateChangeAbility(JSONObject json)
     {
     	super(json);
-    	template = json.getString(STATE_KEY);
+    	template = json.getString(STATE_KEY).toLowerCase();
     }
     /**
      * A basic constructor to change state 
@@ -117,7 +117,8 @@ public class StateChangeAbility extends SupportAbility
     
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "state");
+		System.out.println(ability);
+		ability.put(TYPE_KEY, AbilityLoader.STATE);
 		ability.put(STATE_KEY, template);
 		return ability;
 	}

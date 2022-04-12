@@ -53,7 +53,7 @@ public class NormalState extends State
     public JSONObject toJson()
     {
     	JSONObject json = super.toJson();
-    	json.put(TYPE_KEY, "normal");
+    	json.put(TYPE_KEY, StateLoader.NORMAL);
     	return json;
     }
 }

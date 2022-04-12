@@ -94,7 +94,10 @@ public class Effect
     	this.name = json.getString(NAME_KEY);
     	this.desc = json.getString(DESC_KEY);
     	this.element = Elements.getElement(json.getString(ELEMENT_KEY));
-    	this.pierces = new boolean[] {json.getBoolean(PIERCES_DEFENSE_KEY), json.getBoolean(PIERCES_SHIELD_KEY)};
+    	if (json.has(PIERCES_DEFENSE_KEY))
+    	{
+        	this.pierces = new boolean[] {json.getBoolean(PIERCES_DEFENSE_KEY), json.getBoolean(PIERCES_SHIELD_KEY)};
+    	}
     }
     /**
      * A basic constructor for Effect.
@@ -457,8 +460,11 @@ public class Effect
     	effect.put(NAME_KEY, name);
     	effect.put(DESC_KEY, desc);
     	effect.put(ELEMENT_KEY, element.getName());
-    	effect.put(PIERCES_DEFENSE_KEY, pierces[PIERCES_DEFENSE_INDEX]);
-    	effect.put(PIERCES_SHIELD_KEY, pierces[PIERCES_SHIELD_INDEX]);
+    	if (pierces != null)
+    	{
+    		effect.put(PIERCES_DEFENSE_KEY, pierces[PIERCES_DEFENSE_INDEX]);
+        	effect.put(PIERCES_SHIELD_KEY, pierces[PIERCES_SHIELD_INDEX]);
+    	}
     	return effect;
     }
 }

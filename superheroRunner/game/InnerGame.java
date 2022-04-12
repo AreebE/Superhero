@@ -2,31 +2,48 @@ package game;
 
 import java.util.List;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import battlesystem.Ability;
 import battlesystem.Action;
 import battlesystem.BattleLog;
+import battlesystem.Effect;
 import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.EntityInfoItem;
 import battlesystem.Game;
 import battlesystem.InputSystem;
+import battlesystem.Shield;
+import battlesystem.State;
 import battlesystem.Terrain;
 import battlesystem.battlelogImpls.StringBattleLog;
+import battlesystem.infoItemImpls.AIInfoItem;
 
-class InnerGame extends Game{
+public class InnerGame extends Game{
 	
-  public InnerGame(ArrayList<EntityInfoItem> fighters, GUI g) {
-	
-	  super(fighters,);
+	private GUI g;
+  public InnerGame(
+		  ArrayList<EntityInfoItem> fighters, 
+		  HashMap<String, Ability> abilities, 
+		  HashMap<String, Effect> effects, 
+		  HashMap<String, EntityInfoItem> spawnables,
+		  HashMap<String, Shield> shields,
+		  HashMap<String, State> states,
+		  GUI g) {
+	  super(fighters, abilities, effects, spawnables, shields, states, null);
 //    System.out.println(fighters.size());
+	  ScannerInput input = new ScannerInput();
+	  input.assignFighters(super.getFighters());
+	  this.setInputSystem(input);
 	  this.g = g;
   }
 
 
 
 
-  private Entity getEntity(String name, ArrayList<Entity> fighters) {
+  private static Entity getEntity(String name, ArrayList<Entity> fighters) {
     for (int i = 0; i < fighters.size(); i++) {
       if (fighters.get(i).getName().equals(name)) {
         return fighters.get(i);
@@ -35,9 +52,10 @@ class InnerGame extends Game{
     return null;
   }
 
-  public class ScannerInput implements InputSystem {
+  public static class ScannerInput implements InputSystem {
     private Scanner inputReader;
     private Entity target;
+    private ArrayList<Entity> fighters;
 
     public ScannerInput(Scanner inputReader) {
       this.inputReader = inputReader;
@@ -47,6 +65,11 @@ class InnerGame extends Game{
       this.inputReader = new Scanner(System.in);
     }
 
+    public void assignFighters(ArrayList<Entity> fighters)
+    {
+    	this.fighters = fighters;
+    }
+    
     @Override
     public String getAbilityName() {
       System.out.println("Which ability to use?");

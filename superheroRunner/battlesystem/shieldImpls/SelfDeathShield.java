@@ -86,7 +86,7 @@ public class SelfDeathShield extends DeathShield
     public JSONObject toJson()
     {
     	JSONObject shield = super.toJson();
-    	shield.put(TYPE_KEY, "self death");
+    	shield.put(TYPE_KEY, ShieldLoader.SELF_DEATH);
     	return shield;
     }
 }

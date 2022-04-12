@@ -66,7 +66,7 @@ public class VigorState extends State
     public JSONObject toJson() {
     	JSONObject json = super.toJson();
     	json.put(NUM_ACTIONS_KEY, numActions);
-    	json.put(TYPE_KEY, "vigor");
+    	json.put(TYPE_KEY, StateLoader.VIGOR);
     	return json;
 	}
 }

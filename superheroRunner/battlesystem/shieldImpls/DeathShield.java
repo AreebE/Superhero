@@ -21,7 +21,7 @@ public class DeathShield extends Shield
     public DeathShield(JSONObject json)
     {
     	super(json);
-    	effect = json.getString(EFFECT_KEY);
+    	effect = json.getString(EFFECT_KEY).toLowerCase();
     }
     /**
      * A basic constructor for this shield
@@ -96,7 +96,7 @@ public class DeathShield extends Shield
     public JSONObject toJson()
     {
     	JSONObject shield = super.toJson();
-    	shield.put(TYPE_KEY, "death");
+    	shield.put(TYPE_KEY, ShieldLoader.DEATH);
     	shield.put(EFFECT_KEY, effect);
     	return shield;
     }

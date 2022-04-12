@@ -156,7 +156,7 @@ public class DelayedEffect extends Effect
     public JSONObject toJson()
     {
     	JSONObject effect = super.toJson();
-    	effect.put(TYPE_KEY, "delay");
+    	effect.put(TYPE_KEY, EffectLoader.DELAY);
     	return effect;
     }
 }

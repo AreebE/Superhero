@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import battlesystem.Ability;
 import battlesystem.BattleLog;
+import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
 
@@ -30,10 +31,11 @@ public class PassAbility extends Ability
     public PassAbility
     (
         String name, 
-        String desc
+        String desc,
+        Element em
     ) 
     {
-        super(name, desc, 0, 0, Ability.Category.ATTACK,null);
+        super(name, desc, 0, 0, Ability.Category.ATTACK, em);
     }
 
     /**
@@ -80,12 +82,12 @@ public class PassAbility extends Ability
     @Override
     public Ability copy()
     {
-        return new PassAbility(getName(), getDescription());
+        return new PassAbility(getName(), getDescription(), getElement());
     } 
     
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "pass");
+		ability.put(TYPE_KEY, AbilityLoader.PASS);
 		return ability;
 	}
 }

@@ -23,7 +23,7 @@ public class SelfShield extends Shield
     public SelfShield(JSONObject json)
     {
     	super(json);
-    	selfApply = json.getString(SELF_APPLY_KEY);
+    	selfApply = json.getString(SELF_APPLY_KEY).toLowerCase();
     }
     /**
      * The basic constructor of this shield
@@ -106,7 +106,7 @@ public class SelfShield extends Shield
     public JSONObject toJson()
     {
     	JSONObject json = super.toJson();
-    	json.put(TYPE_KEY, "self");
+    	json.put(TYPE_KEY, ShieldLoader.SELF);
     	json.put(SELF_APPLY_KEY, selfApply);
     	return json;
     }

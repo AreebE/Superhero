@@ -62,7 +62,7 @@ public class PercentageModifier implements AbilityModifier
 	@Override
 	public JSONObject toJson() {
 		JSONObject modifier = new JSONObject();
-		modifier.put(TYPE_KEY, "percentage");
+		modifier.put(TYPE_KEY, AbilityLoader.PERCENTAGE);
 		modifier.put(CASTER_KEY, useCaster);
 		modifier.put(PERCENTAGE_KEY, percentage);
 		modifier.put(STAT_KEY, stat.name);

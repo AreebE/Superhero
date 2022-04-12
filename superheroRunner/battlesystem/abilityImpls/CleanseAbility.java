@@ -120,7 +120,7 @@ public class CleanseAbility extends SupportAbility
     
     public JSONObject toJson() {
     	JSONObject ability = super.toJson();
-    	ability.put(TYPE_KEY, "cleanse");
+    	ability.put(TYPE_KEY, AbilityLoader.CLEANSE);
 		return ability;
 	}
 }

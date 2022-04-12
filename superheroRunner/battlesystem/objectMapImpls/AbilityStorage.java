@@ -2,11 +2,15 @@ package battlesystem.objectMapImpls;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+
+import org.json.JSONArray;
 
 import battlesystem.Ability;
 import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.abilityImpls.*;
+import battlesystem.objectMapImpls.Effects.Name;
 
 public class AbilityStorage{
   AbilityStorage(){
@@ -134,7 +138,8 @@ public class AbilityStorage{
       new PassAbility
       (
           "Pass turn", 
-          "Allows the user to skip their turn"
+          "Allows the user to skip their turn",
+          Elements.getElement(Elements.Name.NULL)
       ),
 
       new AttackStatusAbility 
@@ -193,13 +198,13 @@ public class AbilityStorage{
           "self care",
           Elements.getElement(Elements.Name.NULL)
       ),
-      /*
+      
       new SpawnableAbility
       (
           "Summon Squirrel",
           "Summon a small squirrel to help you",
           5,
-          Spawnables.Name.SQUIRREL,
+          "squirrel",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -208,10 +213,10 @@ public class AbilityStorage{
           "Summon Golem",
           "Summon a crystal to help you",
           5,
-          Spawnables.Name.CRYSTAL,
+          "crystal",
           Elements.getElement(Elements.Name.NULL)
       ),
-      */
+      
       new SupportAbility
       (
           "Heal pulse", 
@@ -343,10 +348,29 @@ public class AbilityStorage{
           2, 
           "energized",
           Elements.getElement(Elements.Name.NULL)
+      ),
+      
+      new CleanseAbility
+      (
+        "Pray",
+        "cleanse oneself of all effects",
+        5,
+        Elements.getElement(Elements.Name.ALL)
       )
-        
     };
     ArrayList<Ability> out = new ArrayList<>(Arrays.asList(a));
     return out;
+  }
+  
+  public static JSONArray loadAbilities()
+  {
+  	JSONArray json = new JSONArray();
+  	ArrayList<Ability> abilities = getAll();
+//  	Iterator<Name> effects = EFFECTS.keySet().iterator();
+  	for (int i = 0; i < abilities.size(); i++)
+  	{
+  		json.put(abilities.get(i).toJson());
+  	}
+	return json;
   }
 }

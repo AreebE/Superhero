@@ -25,7 +25,7 @@ public class AttackStatusAbility extends AttackAbility
     public AttackStatusAbility(JSONObject json)
     {
     	super(json);
-    	sideEffect = json.getString(SIDE_EFFECT_KEY);
+    	sideEffect = json.getString(SIDE_EFFECT_KEY).toLowerCase();
     }
     /**
      * One key difference, compared to the other one:
@@ -155,7 +155,7 @@ public class AttackStatusAbility extends AttackAbility
     
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "attack status");
+		ability.put(TYPE_KEY, AbilityLoader.ATTACK_STATUS);
 		ability.put(SIDE_EFFECT_KEY, sideEffect);
 		return ability;
 	}

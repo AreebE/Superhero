@@ -28,7 +28,7 @@ public class SupportAbility extends Ability
     {
     	super(json);
     	super.setCategory(Ability.Category.SUPPORT);
-    	template = json.getString(EFFECT_KEY);
+    	template = json.getString(EFFECT_KEY).toLowerCase();
     }
 
     /**
@@ -134,8 +134,8 @@ public class SupportAbility extends Ability
     
     public JSONObject toJson() {
 		JSONObject ability = super.toJson();
-		ability.put(TYPE_KEY, "support");
-		ability.put(EFFECT_KEY, template);
+		ability.put(TYPE_KEY, AbilityLoader.SUPPORT);
+		ability.put(EFFECT_KEY, (template == null)? "": template);
 		return ability;
 	}
 }

@@ -167,7 +167,7 @@ public class DecayEffect extends Effect{
     public JSONObject toJson()
     {
     	JSONObject effect = super.toJson();
-    	effect.put(TYPE_KEY, "decay");
+    	effect.put(TYPE_KEY, EffectLoader.DECAY);
     	effect.put(COUNT_KEY, count);
     	effect.put(DECAY_KEY, decayRate);
     	effect.put(TURN_OF_DECAY_KEY, turnDecayStarts);
