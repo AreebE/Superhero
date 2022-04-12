@@ -6,8 +6,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import battlesystem.abilityImpls.GroupModifier;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -74,7 +72,7 @@ public abstract class Ability
     	JSONArray jsonModifiers = json.getJSONArray(MODIFIERS_KEY);
     	for (int i = 0; i < jsonModifiers.length(); i++)
     	{
-    		// modifiers.add(i, ModifierLoader(jsonModifiers.get(i));
+    		 modifiers.add(i, ModifierLoader.loadModifier(jsonModifiers.getJSONObject(i)));
     	}
 		 Collections.sort(this.modifiers, new Comparator<AbilityModifier>()
 	     {

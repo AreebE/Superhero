@@ -102,7 +102,7 @@ public class TrapShield extends Shield
     {
     	JSONObject json = super.toJson();
     	json.put(TYPE_KEY, ShieldLoader.TRAP);
-    	json.put(COUNTER_KEY, "counter");
+    	json.put(COUNTER_KEY, counter);
     	return json;
     }
 }

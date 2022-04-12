@@ -1,14 +1,10 @@
-package battlesystem.abilityImpls;
+package battlesystem;
 
 import java.util.List;
 
 import org.json.JSONObject;
 
-import battlesystem.Ability;
-import battlesystem.AbilityModifier;
-import battlesystem.BattleLog;
-import battlesystem.Entity;
-import battlesystem.Game;
+import battlesystem.abilityImpls.AbilityLoader;
 
 public class PercentageModifier implements AbilityModifier
 {
@@ -62,7 +58,7 @@ public class PercentageModifier implements AbilityModifier
 	@Override
 	public JSONObject toJson() {
 		JSONObject modifier = new JSONObject();
-		modifier.put(TYPE_KEY, AbilityLoader.PERCENTAGE);
+		modifier.put(TYPE_KEY, ModifierLoader.PERCENTAGE);
 		modifier.put(CASTER_KEY, useCaster);
 		modifier.put(PERCENTAGE_KEY, percentage);
 		modifier.put(STAT_KEY, stat.name);

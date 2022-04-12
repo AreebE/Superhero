@@ -1,14 +1,10 @@
-package battlesystem.abilityImpls;
+package battlesystem;
 
 import java.util.List;
 
 import org.json.JSONObject;
 
-import battlesystem.Ability;
-import battlesystem.AbilityModifier;
-import battlesystem.BattleLog;
-import battlesystem.Entity;
-import battlesystem.Game;
+import battlesystem.abilityImpls.AbilityLoader;
 
 public class MultiCastModifier implements AbilityModifier{
   private static final String TIMES_KEY = "times";
@@ -48,7 +44,7 @@ public class MultiCastModifier implements AbilityModifier{
   public JSONObject toJson()
   {
 	  JSONObject modifier = new JSONObject();
-	  modifier.put(TYPE_KEY, AbilityLoader.MULTI_CAST);
+	  modifier.put(TYPE_KEY, ModifierLoader.MULTI_CAST);
 	  modifier.put(TIMES_KEY, times);
 	  return modifier;
   }

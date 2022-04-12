@@ -87,14 +87,14 @@ public abstract class Shield
     	name = json.getString(NAME_KEY);
         desc = json.getString(DESC_KEY);
         
-        HashSet<Shield.Trigger> eventTriggers = new HashSet<Shield.Trigger>();
+        eventTriggers = new HashSet<Shield.Trigger>();
         JSONArray events = json.getJSONArray(EVENT_TRIGGER_KEYS);
         for (int i = 0; i < events.length(); i++)
         {
         	eventTriggers.add(Trigger.getTrigger(events.getString(i)));
         }
         
-        HashSet<Elements.Name> elementTriggers = new HashSet<Elements.Name>();
+        elementTriggers = new HashSet<Elements.Name>();
         JSONArray elements = json.getJSONArray(ELEMENT_TRIGGER_KEYS);
         for (int i = 0; i < elements.length(); i++)
         {

@@ -8,6 +8,10 @@ import java.util.Scanner;
 
 import battlesystem.Ability;
 import battlesystem.AbilityModifier;
+import battlesystem.GroupModifier;
+import battlesystem.MultiCastModifier;
+import battlesystem.PercentageModifier;
+import battlesystem.RandomModifier;
 
 import org.json.JSONTokener;
 import org.json.JSONArray;
@@ -24,10 +28,6 @@ public class AbilityLoader {
 	public static final String STATE = "state";
 	public static final String SUPPORT = "support";
 	
-	public static final String GROUP = "group";
-	public static final String MULTI_CAST = "multi cast";
-	public static final String PERCENTAGE = "percentage";
-	public static final String RANDOM = "random";
 	
 	public static HashMap<String, Ability> parseJSONFile(String src) throws FileNotFoundException
 	{
@@ -79,20 +79,5 @@ public class AbilityLoader {
 		return null;
 	}
 	
-	static AbilityModifier loadModifier(JSONObject json)
-	{
-		switch(json.getString(AbilityModifier.TYPE_KEY))
-		{
-			case GROUP:
-				return new GroupModifier(json);
-			case MULTI_CAST:
-				return new MultiCastModifier(json);
-			case RANDOM:
-				return new RandomModifier(json);
-			case PERCENTAGE:
-				return new PercentageModifier(json);
-		}
-		return null;
-	}
-
+	
 }

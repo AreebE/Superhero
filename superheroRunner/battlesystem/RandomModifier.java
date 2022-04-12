@@ -1,15 +1,11 @@
-package battlesystem.abilityImpls;
+package battlesystem;
 
 import java.util.List;
 import java.util.Random;
 
 import org.json.JSONObject;
 
-import battlesystem.Ability;
-import battlesystem.AbilityModifier;
-import battlesystem.BattleLog;
-import battlesystem.Entity;
-import battlesystem.Game;
+import battlesystem.abilityImpls.AbilityLoader;
 
 public class RandomModifier implements AbilityModifier{
   private static final Random randomizer = new Random();
@@ -48,7 +44,7 @@ public class RandomModifier implements AbilityModifier{
   @Override
 	public JSONObject toJson() {
 	  JSONObject modifier = new JSONObject();
-	  modifier.put(TYPE_KEY, AbilityLoader.RANDOM);
+	  modifier.put(TYPE_KEY, ModifierLoader.RANDOM);
 	  modifier.put(CHANCE_KEY, chance);
 		return modifier;
 	}

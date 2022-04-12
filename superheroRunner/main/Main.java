@@ -13,10 +13,10 @@ import java.util.Iterator;
 import battlesystem.Ability;
 import battlesystem.Effect;
 import battlesystem.EntityInfoItem;
+import battlesystem.RandomModifier;
 import battlesystem.Shield;
 import battlesystem.State;
 import battlesystem.abilityImpls.AbilityLoader;
-import battlesystem.abilityImpls.RandomModifier;
 import battlesystem.effectImpls.EffectLoader;
 import battlesystem.infoItemImpls.InfoItemReader;
 import battlesystem.objectMapImpls.AbilityStorage;
@@ -36,7 +36,7 @@ import game.InnerGame;
 
 class Main {
   public static void main(String[] args) throws FileNotFoundException {
-	  File f = new File("res/abilities.json");
+	  File f = new File("res/shields.json");
 	  try {
 		f.createNewFile();
 	} catch (IOException e1) {
@@ -46,7 +46,8 @@ class Main {
 //	  new RandomModifier(20);
 	  OutputStream o = new FileOutputStream(f);
 //	  String file = Heroes.loadHeroes().toString();
-	  String file = AbilityStorage.loadAbilities().toString();
+//	  String file = AbilityStorage.loadAbilities().toString();
+	  String file = Shields.loadShields().toString();
 	  System.out.println(file);
 	  try {
 		o.write(file.getBytes());

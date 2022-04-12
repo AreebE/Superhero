@@ -9,6 +9,10 @@ import org.json.JSONArray;
 import battlesystem.Ability;
 import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.GroupModifier;
+import battlesystem.MultiCastModifier;
+import battlesystem.PercentageModifier;
+import battlesystem.RandomModifier;
 import battlesystem.abilityImpls.*;
 import battlesystem.objectMapImpls.Effects.Name;
 
