@@ -49,7 +49,7 @@ public class AbilityLoader {
 			}
 			catch(JSONException|NullPointerException jsone)
 			{
-				System.out.println(jsone + ", " + json);
+				System.out.println(jsone + ", " + json.toString());
 			}
 		}
 		return listOfAbilities;

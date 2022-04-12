@@ -42,7 +42,7 @@ public class StateLoader {
 			}
 			catch(JSONException|NullPointerException jsone)
 			{
-//				System.out.println("exception " + jsone.toString() + ", " + json.get("duration").getClass());
+				System.out.println("exception " + jsone.toString() + ", " + json.toString());
 			}
 		}
 		return listOfStates;

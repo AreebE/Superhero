@@ -122,13 +122,11 @@ public class AttackStatusAbility extends AttackAbility
         BattleLog log) 
     {
         super.castAbility(target, caster, g, log);
-        if (isPiercing() 
-            || !target.hasShield()) 
-        {
+        
             target.addEffect(g.getEffect(sideEffect));
             Object[] contents = new Object[]{target.getName(), sideEffect};
             log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
-        }
+        
         return;
     }
 

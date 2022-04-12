@@ -114,4 +114,9 @@ public abstract class BattleLog<T>
     }
 
     public abstract T getFullLog();
+    
+    public void clear()
+    {
+    	entries.clear();
+    }
 }

@@ -43,7 +43,7 @@ public final class Spawnables
                 {{
                     add("curse");
                 }},
-                "normal",
+                "relaxed",
                 10,
                 10,
                 new ArrayList<String>()
@@ -73,7 +73,7 @@ public final class Spawnables
                 {{
                     add("gift");
                 }},
-                "normal",
+                "relaxed",
                 1,
                 0,
                 new ArrayList<String>()

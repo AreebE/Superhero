@@ -32,7 +32,7 @@ public class InnerGame extends Game{
 		  HashMap<String, Shield> shields,
 		  HashMap<String, State> states,
 		  GUI g) {
-	  super(fighters, abilities, effects, spawnables, shields, states, null);
+	  super(fighters, abilities, effects, spawnables, shields, states, new StringBattleLog());
 //    System.out.println(fighters.size());
 	  ScannerInput input = new ScannerInput();
 	  input.assignFighters(super.getFighters());
@@ -118,4 +118,14 @@ public class InnerGame extends Game{
     }
   }
 
+  @Override 
+  public void printLog(BattleLog log)
+  {
+	StringBattleLog stringLog = (StringBattleLog) log;
+	ArrayList<String> entries = stringLog.getFullLog();
+	for (int i = 0; i < entries.size(); i++)
+	{
+		System.out.println(entries.get(i));
+	}
+  }
 }

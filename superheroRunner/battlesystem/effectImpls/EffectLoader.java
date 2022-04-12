@@ -41,7 +41,7 @@ public class EffectLoader {
 			}
 			catch(JSONException|NullPointerException jsone)
 			{
-				
+				System.out.println(jsone + " , " + json.toString());
 			}
 		}
 		return listOfEffects;

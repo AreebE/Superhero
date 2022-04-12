@@ -46,6 +46,7 @@ public class Game {
 	
 	private ArrayList<Entity> allFighters;
 	private ArrayList<Team> teams;
+	private BattleLog log;
 	
 	public Game(
 			ArrayList<EntityInfoItem> initialFighters,
@@ -54,7 +55,7 @@ public class Game {
 			HashMap<String, EntityInfoItem> spawnables,
 			HashMap<String, Shield> shields,
 			HashMap<String, State> states,
-			InputSystem input)
+			BattleLog log)
 	{
 		this.abilities = abilities;
 		this.effects = effects;
@@ -64,6 +65,7 @@ public class Game {
 		this.input = input;
 		this.teams = new ArrayList<>();
 		this.allFighters = new ArrayList<>();
+		this.log = log;
 		for (int i = 0; i < initialFighters.size(); i++)
 		{
 //			System.out.println(initialFighters.get(i).defaultState);
@@ -120,7 +122,6 @@ public class Game {
 //	    allFighters.get(0).setTerrain(t);
 //	    allFighters.get(1).setTerrain(t);
 	    while (allFighters.size() > 1) {
-	      BattleLog log = new StringBattleLog();
 	      //asks players for what actions to preform
 	      for (int i = 0; i < allFighters.size(); i++) {
 	        Entity currentPlayer = allFighters.get(i);
@@ -144,8 +145,8 @@ public class Game {
 	        }
 	      }
 	      //prints whats happened
-	      ArrayList<String> fullLog = (ArrayList<String>) log.getFullLog();
-	      System.out.println(fullLog);
+	      printLog(log);
+	      log.clear();
 	      actionsToPreform.clear();
 	      Collections.sort(allFighters);
 	      Collections.reverse(allFighters);
@@ -163,5 +164,9 @@ public class Game {
 		return allFighters;
 	}
 
+	protected void printLog(BattleLog log)
+	{
+		
+	}
 
 }

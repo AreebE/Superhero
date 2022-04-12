@@ -28,6 +28,7 @@ import battlesystem.objectMapImpls.States;
 import battlesystem.shieldImpls.ShieldLoader;
 import battlesystem.stateImpls.StateLoader;
 import game.InnerGame;
+import game.OuterGame;
 
 
 //should we make like a "main menu" type of thing so that
@@ -36,7 +37,7 @@ import game.InnerGame;
 
 class Main {
   public static void main(String[] args) throws FileNotFoundException {
-	  File f = new File("res/shields.json");
+	  File f = new File("res/entities.json");
 	  try {
 		f.createNewFile();
 	} catch (IOException e1) {
@@ -47,7 +48,8 @@ class Main {
 	  OutputStream o = new FileOutputStream(f);
 //	  String file = Heroes.loadHeroes().toString();
 //	  String file = AbilityStorage.loadAbilities().toString();
-	  String file = Shields.loadShields().toString();
+//	  String file = Shields.loadShields().toString();
+	  String file = Spawnables.loadSpawnables().toString();
 	  System.out.println(file);
 	  try {
 		o.write(file.getBytes());
@@ -56,22 +58,29 @@ class Main {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	  HashMap<String, Ability> abilities = AbilityLoader.parseJSONFile("res/abilities.json");
-//	  System.out.println(abilities.get("summon squirrel"));
-	  HashMap<String, Effect> effects = EffectLoader.parseJSONFile("res/effects.json");
-	  HashMap<String, State> states = StateLoader.parseJSONFile("res/states.json");
-	  HashMap<String, EntityInfoItem> spawnables = InfoItemReader.parseJSONFile("res/entities.json");
-	  HashMap<String, EntityInfoItem> heroes = InfoItemReader.parseJSONFile("res/heroes.json");
-	  HashMap<String, Shield> shields = ShieldLoader.parseJSONFile("res/shields.json");
-	  
-	  Iterator<String> heroNames = heroes.keySet().iterator();
-	  ArrayList<EntityInfoItem> initialHeroes = new ArrayList<>();
-	  while (heroNames.hasNext())
-	  {
-		  initialHeroes.add(heroes.get(heroNames.next()));
-	  }
+//	  HashMap<String, Ability> abilities = AbilityLoader.parseJSONFile("res/abilities.json");
+////	  System.out.println(abilities.get("summon squirrel"));
+//	  HashMap<String, Effect> effects = EffectLoader.parseJSONFile("res/effects.json");
+//	  HashMap<String, State> states = StateLoader.parseJSONFile("res/states.json");
+//	  HashMap<String, EntityInfoItem> spawnables = InfoItemReader.parseJSONFile("res/entities.json");
+//	  HashMap<String, EntityInfoItem> heroes = InfoItemReader.parseJSONFile("res/heroes.json");
+//	  HashMap<String, Shield> shields = ShieldLoader.parseJSONFile("res/shields.json");
+//	  
+//	  Iterator<String> heroNames = heroes.keySet().iterator();
+//	  ArrayList<EntityInfoItem> initialHeroes = new ArrayList<>();
+//	  while (heroNames.hasNext())
+//	  {
+//		  initialHeroes.add(heroes.get(heroNames.next()));
+//	  }
 //	  System.out.println(states);
-	  new InnerGame(initialHeroes, abilities, effects, spawnables, shields, states, null).startFight();
-//	     new OuterGame();
+//	  new InnerGame(initialHeroes, abilities, effects, spawnables, shields, states, null).startFight();
+	 String[] fileSources = new String[6];
+	 fileSources[OuterGame.ABILITIES_INDEX] = "res/abilities.json";
+	 fileSources[OuterGame.EFFECTS_INDEX] = "res/effects.json";
+	 fileSources[OuterGame.SHIELDS_INDEX] = "res/shields.json";
+	 fileSources[OuterGame.SPAWNABLES_INDEX] = "res/entities.json";
+	 fileSources[OuterGame.STATES_INDEX] = "res/states.json";
+	 fileSources[OuterGame.HEROES_INDEX] = "res/heroes.json";
+	  new OuterGame(fileSources);
   }
 }

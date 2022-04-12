@@ -43,7 +43,7 @@ public class InfoItemReader {
 			}
 			catch(JSONException|NullPointerException jsone)
 			{
-				
+				System.out.println(jsone + ", kmolk" + json.getString("name"));
 			}
 		}
 		return listOfEntities;

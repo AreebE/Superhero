@@ -45,7 +45,7 @@ public class ShieldLoader {
 			}
 			catch(JSONException|NullPointerException jsone)
 			{
-				System.out.println(jsone.toString());
+				System.out.println(jsone.toString() + " , " + json.toString());
 			}
 		}
 		return listOfShields;
