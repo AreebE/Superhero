@@ -64,7 +64,7 @@ public class AIEntity extends Entity
      */
     @Override
   public List<Action> onTurn(ArrayList<Entity> fighters, InputSystem scanInput){
-//    System.out.println(this);
+    System.out.println(this);
 //    System.out.println("WOOOO Look at me go i have gained sentience(AiEntity needs to be figured out)");
     List<Action> playerActions = this.getActions(fighters, scanInput);
     return playerActions;
@@ -96,6 +96,8 @@ public class AIEntity extends Entity
                 a = new AIAction(target, this, allHeros, inputReader);
             }
             actions.add(a);
+//            System.out.println(a.getCaster().getBaseAttack());
+//            System.out.println(getCurrentAbility().getStrength());
         }
         return actions;
     }
@@ -106,6 +108,7 @@ public class AIEntity extends Entity
      */
     public Ability getCurrentAbility()
     {
+    	
         // System.out.println(currentAbility + ", " + attackPattern.get(currentAbility));
         return super.getAbility(attackPattern.get(currentAbility));
     }

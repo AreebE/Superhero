@@ -58,8 +58,11 @@ public final class Elements{
 	  			return getElement(Name.EARTH);
 	  		case "light":
 	  			return getElement(Name.LIGHT);
+	  		case "all":
+	  			return getElement(Name.ALL);
 	  		default:
-	  			return getElement(Name.NULL);
+//	  			return getElement(Name.NULL);
 	  }
+	  return null;
   }
 }

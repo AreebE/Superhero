@@ -101,7 +101,7 @@ public class SupportAbility extends Ability
      * @param log meant to record the effect applied.
      */
     @Override
-    public void castAbility(
+    protected void performCast(
         Entity target, 
         Entity caster,
         Game g,

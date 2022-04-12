@@ -103,7 +103,7 @@ public class DefenseAbility extends Ability
      * @param log the battlelog to record the shield given
      */
     @Override
-    public void castAbility(
+    protected void performCast(
         Entity target, 
         Entity caster,
         Game g,

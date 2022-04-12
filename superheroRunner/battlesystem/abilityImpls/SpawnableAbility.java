@@ -101,13 +101,13 @@ public class SpawnableAbility extends DefenseAbility
      * @param log the battlelog to record the new person spawned.
      */
     @Override
-    public void castAbility(
+    protected void performCast(
         Entity target, 
         Entity caster,
         Game g,
         BattleLog log) 
     {
-        Entity ai = g.getSpawnable(template).create(caster, g);
+        Entity ai = g.getSpawnable(template).create(target, g);
         Object[] contents = new Object[]{target.getName(), ai.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
         g.addMember(ai, target.getTeamID());

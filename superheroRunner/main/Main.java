@@ -37,28 +37,31 @@ import game.OuterGame;
 
 class Main {
   public static void main(String[] args) throws FileNotFoundException {
-	  File f = new File("res/abilities.json");
-	  try {
-		f.createNewFile();
-	} catch (IOException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}
+//	  File f = new File("res/entities.json");
+//	  File f = new File("res/abilities.json");
+//	  File f = new File("res/effects.json");
+//	  File f = new File("res/shields.json");
+//	  try {
+//		f.createNewFile();
+//	} catch (IOException e1) {
+//		// TODO Auto-generated catch block
+//		e1.printStackTrace();
+//	}
 //	  new RandomModifier(20);
-	  OutputStream o = new FileOutputStream(f);
+//	  OutputStream o = new FileOutputStream(f);
 //	  String file = Heroes.loadHeroes().toString();
-	  String file = AbilityStorage.loadAbilities().toString();
+//	  String file = AbilityStorage.loadAbilities().toString();
 //	  String file = Shields.loadShields().toString();
 //	  String file = Spawnables.loadSpawnables().toString();
 //	  String file = Effects.loadEffects().toString();
-	  System.out.println(file);
-	  try {
-		o.write(file.getBytes());
-		System.out.println("written" + f.getAbsolutePath());
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+//	  System.out.println(file);
+//	  try {
+//		o.write(file.getBytes());
+//		System.out.println("written" + f.getAbsolutePath());
+//	} catch (IOException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
 //	  HashMap<String, Ability> abilities = AbilityLoader.parseJSONFile("res/abilities.json");
 ////	  System.out.println(abilities.get("summon squirrel"));
 //	  HashMap<String, Effect> effects = EffectLoader.parseJSONFile("res/effects.json");

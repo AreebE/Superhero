@@ -93,7 +93,9 @@ public class Effect
     	this.permanent = json.getBoolean(IS_PERMANENT_KEY);
     	this.name = json.getString(NAME_KEY);
     	this.desc = json.getString(DESC_KEY);
-    	this.element = Elements.getElement(json.getString(ELEMENT_KEY));
+//    	this.element = Elements.getElement(json.getString(ELEMENT_KEY));
+    	
+//    	System.out.println(name + ", " + element);
     	if (json.has(PIERCES_DEFENSE_KEY))
     	{
         	this.pierces = new boolean[] {json.getBoolean(PIERCES_DEFENSE_KEY), json.getBoolean(PIERCES_SHIELD_KEY)};
@@ -459,7 +461,7 @@ public class Effect
     	effect.put(IS_PERMANENT_KEY, permanent);
     	effect.put(NAME_KEY, name);
     	effect.put(DESC_KEY, desc);
-    	effect.put(ELEMENT_KEY, element.getName());
+    	effect.put(ELEMENT_KEY, element.getName().toLowerCase());
     	if (pierces != null)
     	{
     		effect.put(PIERCES_DEFENSE_KEY, pierces[PIERCES_DEFENSE_INDEX]);

@@ -83,7 +83,7 @@ public class StateChangeAbility extends SupportAbility
      * @param log to record the transform from the old state to the new state.
      */
     @Override
-    public void castAbility(
+    protected void performCast(
         Entity target, 
         Entity caster,
         Game g,

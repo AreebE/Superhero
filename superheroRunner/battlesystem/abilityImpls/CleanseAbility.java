@@ -89,7 +89,7 @@ public class CleanseAbility extends SupportAbility
      * @param log the battle log to record all effects removed.
      */
     @Override
-    public void castAbility(
+    protected void performCast(
         Entity target, 
         Entity caster,
         Game g,

@@ -37,11 +37,12 @@ public final class Spawnables
                 }},
                 new ArrayList<String>()
                 {{
-                	
+                    add("curse");
+
                 }},
                 new ArrayList<String>()
                 {{
-                    add("curse");
+
                 }},
                 "relaxed",
                 10,

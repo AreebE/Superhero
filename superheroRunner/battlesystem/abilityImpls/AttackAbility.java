@@ -128,7 +128,7 @@ public class AttackAbility extends Ability
      * @param log the battlelog to record the attack.
      */
     @Override
-	public void castAbility(
+	protected void performCast(
         Entity target, 
         Entity caster,
         Game g,
@@ -149,7 +149,7 @@ public class AttackAbility extends Ability
 //        if(t.isTerrainBuffed(this.em)){
 //          attackStrength += attackStrength;
 //        }
-
+       
         Object[] results = target.dealDamage
         (
             attackStrength, 
@@ -160,6 +160,7 @@ public class AttackAbility extends Ability
             g,
             log
         );
+//        System.out.println(results[4] + "EEEEEE");
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK, results), currentIndex);
         if ((Boolean) results[5])
         {

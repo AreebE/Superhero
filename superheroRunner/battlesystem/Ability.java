@@ -56,6 +56,7 @@ public abstract class Ability
 
     private int turnsSinceUse;
     private int additionalStrength;
+    private boolean haveCastedAbility;
     public transient static final int MAX_CHANCE = 256;
     
     private boolean keepGoing;
@@ -66,8 +67,8 @@ public abstract class Ability
     	description = json.getString(DESC_KEY);
     	cooldown = json.getInt(COOLDOWN_KEY);
     	strength = json.getInt(STRENGTH_KEY);
-    	em = Elements.getElement(json.getString(ELEMENT_KEY));
-    	
+//    	em = Elements.getElement(json.getString(ELEMENT_KEY));
+//    	System.out.println(name + ", " + em);
     	modifiers = new ArrayList<>();
     	JSONArray jsonModifiers = json.getJSONArray(MODIFIERS_KEY);
     	for (int i = 0; i < jsonModifiers.length(); i++)
@@ -238,6 +239,7 @@ public abstract class Ability
         Game g,
         BattleLog log) 
     {
+    	haveCastedAbility = false;
         keepGoing = true;
         Object[] contents = new Object[]{caster.getName(), targets.get(0).getName(), name, targets.size() - 1};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
@@ -246,19 +248,23 @@ public abstract class Ability
         
        
         
+//        System.out.println("using ability " + name);
 //        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent + ", " + group);
         boolean shouldContinue = true;
         for (int i = 0; i < modifiers.size() && shouldContinue; i++)
         {
+//        	System.out.println("checking modifier " + modifiers.get(i).getClass().toString());
         	shouldContinue = modifiers.get(i).triggerModifier(targets, caster, this, g, log);
         }
-        if (modifiers.size() == 0)
+        if (!haveCastedAbility)
         {
+//        	System.out.println("casting ability " + name);
         	castAbility(targets.get(0), caster, g, log);
         }
         
     }
 
+   
 
     /**
      * Cast the ability. Do not call this one: call useAbility instead. This is meant to be overriden by other classes.
@@ -268,14 +274,24 @@ public abstract class Ability
      * @param allPlayers all other players
      * @param log the battlelog to record actions
      */
-    public abstract void castAbility
+    public void castAbility
     (
         Entity target, 
         Entity caster,
         Game g,
         BattleLog log
-    );
-
+    )
+    {
+    	haveCastedAbility = true;
+    	performCast(target, caster, g, log);
+    }
+    
+    protected abstract void performCast(
+    		Entity target,
+    		Entity caster,
+    		Game g,
+    		BattleLog log
+    		);
     /**
      * The string representation of the ability. Starts with name, then description, then cooldown
      */
@@ -423,7 +439,7 @@ public abstract class Ability
     	JSONObject ability = new JSONObject();
     	ability.put(COOLDOWN_KEY, cooldown);
     	ability.put(DESC_KEY, description);
-    	ability.put(ELEMENT_KEY, em.getName());
+    	ability.put(ELEMENT_KEY, em.getName().toLowerCase());
     	ability.put(NAME_KEY, name);
     	ability.put(STRENGTH_KEY, strength);
     	

@@ -93,13 +93,15 @@ public abstract class Shield
         {
         	eventTriggers.add(Trigger.getTrigger(events.getString(i)));
         }
-        
+//        System.out.println(name);
+//        System.out.println(eventTriggers.toString());
         elementTriggers = new HashSet<Elements.Name>();
         JSONArray elements = json.getJSONArray(ELEMENT_TRIGGER_KEYS);
         for (int i = 0; i < elements.length(); i++)
         {
         	elementTriggers.add(Elements.getElement(elements.getString(i)).getID());
         }
+//        System.out.println(elementTriggers.toString());
         
         
         duration = json.getInt(DURATION_KEY);
@@ -391,7 +393,7 @@ public abstract class Shield
     	Iterator<Elements.Name> elementTriggers = this.elementTriggers.iterator();
     	while (elementTriggers.hasNext())
     	{
-    		jsonElementTriggers.put(Elements.getElement(elementTriggers.next()).getName());
+    		jsonElementTriggers.put(Elements.getElement(elementTriggers.next()).getName().toLowerCase());
     	}
     	shield.put(ELEMENT_TRIGGER_KEYS, jsonElementTriggers);
     	

@@ -115,7 +115,7 @@ public class AttackStatusAbility extends AttackAbility
      * @param allPlayers all other players.
      */
     @Override
-    public void castAbility(
+    protected void performCast(
         Entity target, 
         Entity caster,
         Game g,

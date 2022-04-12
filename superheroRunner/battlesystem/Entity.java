@@ -561,7 +561,7 @@ public class Entity implements Comparable<Entity>
         {
             if (type != null)
             {
-                System.out.println();
+//                System.out.println();
                 endAttack = searchForShield(type, e, this, caster, g, log);
             }
             if (endAttack){
@@ -777,7 +777,7 @@ public class Entity implements Comparable<Entity>
         for (int i = shields.size() - 1; i >= 0; i--)
         {
             Shield s = shields.get(i);
-            System.out.println(s.getName());
+//            System.out.println(s.getName());
             if (s.wouldTrigger(trigger, element))
             {
                 boolean nullify = s.triggerShield(target, caster, g, log);
@@ -916,7 +916,7 @@ public class Entity implements Comparable<Entity>
             Action a = null;
             while (a == null || !a.isLegalAction())
             {
-                System.out.println("Getting action");
+//                System.out.println("Getting action");
                 Entity target = inputReader.getSingleTarget();
                 String name = inputReader.getAbilityName();
                 a = new Action(target, this, name, allHeros, inputReader);

@@ -42,7 +42,7 @@ public class PassAbility extends Ability
      * For all effects and purposes, this method won't be called. None of the parameters matter too much.
      */
     @Override
-	public void castAbility
+    protected void performCast
     (
         Entity target, 
         Entity caster,
