@@ -107,6 +107,7 @@ public class SupportAbility extends Ability
         Game g,
         BattleLog log) 
     {
+    	System.out.println(template);
         target.addEffect(g.getEffect(template));
         Object[] contents = new Object[]{target.getName(), template};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_APPLIED, contents));

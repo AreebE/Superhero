@@ -280,7 +280,7 @@ public class AbilityStorage{
           "defense up", 
           "boosts defense for x amount of time",
           5, 
-          "defense boost",
+          "defense up",
           Elements.getElement(Elements.Name.NULL)
       ),
 

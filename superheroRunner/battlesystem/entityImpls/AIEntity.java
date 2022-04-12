@@ -64,10 +64,10 @@ public class AIEntity extends Entity
      */
     @Override
   public List<Action> onTurn(ArrayList<Entity> fighters, InputSystem scanInput){
-    System.out.println(this);
-    System.out.println("WOOOO Look at me go i have gained sentience(AiEntity needs to be figured out)");
-    //List<Action> playerActions = this.getActions(fighters, scanInput);
-    return null;
+//    System.out.println(this);
+//    System.out.println("WOOOO Look at me go i have gained sentience(AiEntity needs to be figured out)");
+    List<Action> playerActions = this.getActions(fighters, scanInput);
+    return playerActions;
   } 
 
     /**

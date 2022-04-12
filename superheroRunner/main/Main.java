@@ -37,7 +37,7 @@ import game.OuterGame;
 
 class Main {
   public static void main(String[] args) throws FileNotFoundException {
-	  File f = new File("res/entities.json");
+	  File f = new File("res/abilities.json");
 	  try {
 		f.createNewFile();
 	} catch (IOException e1) {
@@ -47,9 +47,10 @@ class Main {
 //	  new RandomModifier(20);
 	  OutputStream o = new FileOutputStream(f);
 //	  String file = Heroes.loadHeroes().toString();
-//	  String file = AbilityStorage.loadAbilities().toString();
+	  String file = AbilityStorage.loadAbilities().toString();
 //	  String file = Shields.loadShields().toString();
-	  String file = Spawnables.loadSpawnables().toString();
+//	  String file = Spawnables.loadSpawnables().toString();
+//	  String file = Effects.loadEffects().toString();
 	  System.out.println(file);
 	  try {
 		o.write(file.getBytes());
