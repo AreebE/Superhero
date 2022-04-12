@@ -1,11 +1,20 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
+import java.util.Iterator;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import battlesystem.Entity;
+import battlesystem.EntityInfoItem;
+import battlesystem.objectMapImpls.Effects.Name;
+
 import java.util.ArrayList;
 
 public final class Heroes {
     private Heroes(){}
-    /*
+    
 
     public static enum Name{
         BEEP_BOOP,
@@ -16,7 +25,7 @@ public final class Heroes {
         SECOND_TEST
     }
 
-    private final static EnumMap<Name, EntityInfoItem> HEROS = new EnumMap<>(Name.class)
+    private final static EnumMap<Name, EntityInfoItem> HEROS = new EnumMap<Name, EntityInfoItem>(Name.class)
     {{
         put
         (
@@ -25,23 +34,24 @@ public final class Heroes {
             (
                 "BeepBoop",
                 30,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.LIGHTNING_STRIKE);
-                    add(Abilities.Name.COUNTERSTRIKE);
-                    add(Abilities.Name.FLARE_UP);
-                    add(Abilities.Name.CONSTRUCT);
-                    add(Abilities.Name.WITCH_SPELL);
-                    add(Abilities.Name.FIRST_AID);
+                    add("lightning strike");
+                    add("counterstrike");
+                    add("flare up");
+                    add("construct");
+                    add("witch spell");
+                    add("first aid");
                 }},
-                new ArrayList<Effects.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Effects.Name.EXPONENTIAL_SHIELD);
+                    add("exponential shield");
                 }},
-                new ArrayList<Shields.Name>()
+                new ArrayList<String>()
                 {{
                     // add(Shields.Name.COUNTER);
                 }},
+                "relaxed",
                 100,
                 40
             )  
@@ -54,22 +64,23 @@ public final class Heroes {
             (
                 "Joe",
                 60,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.SNOWBALL);
-                    add(Abilities.Name.PROTECT);
-                    add(Abilities.Name.DEFENSE_UP);
-                    add(Abilities.Name.COUNTER);
-                    add(Abilities.Name.WIDE_SLASH);
+                    add("snowball");
+                    add("protect");
+                    add("defense up");
+                    add("counter");
+                    add("wide slash");
                 }},
-                new ArrayList<Effects.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Effects.Name.CURSE);
+                    add("curse");
                 }},
-                new ArrayList<Shields.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Shields.Name.DEATH_DEFIANCE);
+                    add("deathly defiance");
                 }},
+                "relaxed",
                 100,
                 40
             )  
@@ -82,23 +93,24 @@ public final class Heroes {
             (
                 "EEEEEE",
                 100,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.SUMMON_SQUIRREL);
-                    add(Abilities.Name.SUMMON_GOLEM);
-                    add(Abilities.Name.FIREBALL);
-                    add(Abilities.Name.PROTECT);
-                    add(Abilities.Name.ATTACK_UP);
-                    add(Abilities.Name.STUN_SPORE);
+                    add("summon squirrel");
+                    add("summon golem");
+                    add("fireball");
+                    add("protect");
+                    add("attack up");
+                    add("stun spore");
                 }},
-                new ArrayList<Effects.Name>()
+                new ArrayList<String>()
                 {{
                     // add(Effects.Name.);
                 }},
-                new ArrayList<Shields.Name>()
+                new ArrayList<String>()
                 {{
                     // add(Shields.Name.);
                 }},
+                "relaxed",
                 100,
                 40
             )  
@@ -111,23 +123,24 @@ public final class Heroes {
             (
                 "TestSubject",
                 200,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.EARTHQUAKE);
-                    add(Abilities.Name.ILLUSION_SPELL);
-                    add(Abilities.Name.TELEKINESIS);
+                    add("earthquake");
+                    add("illusion spell");
+                    add("telekinesis");
                     // add(Abilities.Name.PROTECT);
                     // add(Abilities.Name.ATTACK_UP);
                     // add(Abilities.Name.STUN_SPORE);
                 }},
-                new ArrayList<Effects.Name>()
+                new ArrayList<String>()
                 {{
                     // add(Effects.Name.);
                 }},
-                new ArrayList<Shields.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Shields.Name.ILLUSION);
+                    add("illusion");
                 }},
+                "relaxed",
                 100,
                 40
             )  
@@ -140,24 +153,25 @@ public final class Heroes {
             (
                 "SecondestSubject",
                 300,
-                new ArrayList<Abilities.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Abilities.Name.POISON_SLASH);
-                    add(Abilities.Name.ILLUSION_SPELL);
-                    add(Abilities.Name.TELEKINESIS);
-                    add(Abilities.Name.EARTHQUAKE);
-                    add(Abilities.Name.DEFENSIVE_STANCE);
-                    add(Abilities.Name.PRAY);
+                    add("poison slash");
+                    add("illusion spell");
+                    add("telekinesis");
+                    add("earthquake");
+                    add("defensive stance");
+                    add("pray");
                     // add(Abilities.Name.STUN_SPORE);
                 }},
-                new ArrayList<Effects.Name>()
+                new ArrayList<String>()
                 {{
                     // add(Effects.Name.);
                 }},
-                new ArrayList<Shields.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Shields.Name.ILLUSION);
+                    add("illusion");
                 }},
+                "relaxed",
                 100,
                 40
             )  
@@ -194,21 +208,28 @@ public final class Heroes {
             )  
         );
         */
-        /*
-        String name,
-        int speed,
-        ArrayList<Abilities.Name> abilityNames,
-        ArrayList<Effects.Name> startingEffects,
-        ArrayList<Shields.Name> startingShields,
-        int maxHealth,
-        int shieldHealth
+       
         
     }};
 
-    public static Entity get(Name name, Entity creator)
+    public static EntityInfoItem get(Name name, Entity creator)
     {
-        return HEROS.get(name).create(creator);
+        return HEROS.get(name);
+    }
+    
+    public static JSONArray loadHeroes()
+    {
+    	JSONArray json = new JSONArray();
+    	Iterator<Name> heros = HEROS.keySet().iterator();
+    	while (heros.hasNext())
+    	{
+    		JSONObject hero = HEROS.get(heros.next()).toJson();
+    		json.put(hero);
+//    		System.out.println(hero.toString());
+    		
+    	}
+		return json;
     }
 
-    */
+    
 }

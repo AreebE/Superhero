@@ -1,12 +1,20 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+
+import org.json.JSONArray;
 
 import battlesystem.Ability;
+import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.GroupModifier;
+import battlesystem.MultiCastModifier;
+import battlesystem.PercentageModifier;
+import battlesystem.RandomModifier;
 import battlesystem.abilityImpls.*;
-import modifiers.*;
+import battlesystem.objectMapImpls.Effects.Name;
 
 public class AbilityStorage{
   AbilityStorage(){
@@ -129,12 +137,13 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.NULL),
           false,
           false,
-          Effects.getEffect(Effects.Name.POISON)
+          "poison"
       ),
       new PassAbility
       (
           "Pass turn", 
-          "Allows the user to skip their turn"
+          "Allows the user to skip their turn",
+          Elements.getElement(Elements.Name.NULL)
       ),
 
       new AttackStatusAbility 
@@ -146,7 +155,7 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.EARTH),
           true, 
           true,
-          Effects.getEffect(Effects.Name.BLEED)
+          "bleed"
       ),
 
       new DefenseAbility
@@ -154,7 +163,7 @@ public class AbilityStorage{
           "Counter", 
           "counter the next attack that comes", 
           3, 
-          Shields.getShield(Shields.Name.COUNTER),  
+          "counter",  
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -163,7 +172,7 @@ public class AbilityStorage{
           "Warning", 
           "The user will be warned not to break your shield", 
           3, 
-          Shields.getShield(Shields.Name.SELF_DESTRUCT), 
+          "self destruct", 
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -172,7 +181,7 @@ public class AbilityStorage{
           "Witch spell", 
           "When attacked, cast a curse on whoever attacked you", 
           3, 
-          Shields.getShield(Shields.Name.WITCH_CURSE), 
+          "witch curse",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -181,7 +190,7 @@ public class AbilityStorage{
           "Illusion spell", 
           "Create an illusion that retaliates when attacked", 
           3, 
-          Shields.getShield(Shields.Name.ILLUSION), 
+          "illusion",
           Elements.getElement(Elements.Name.LIGHT)
       ),
 
@@ -190,16 +199,16 @@ public class AbilityStorage{
           "First aid", 
           "Heal oneself upon hit", 
           3, 
-          Shields.getShield(Shields.Name.SELF_CARE), 
+          "self care",
           Elements.getElement(Elements.Name.NULL)
       ),
-      /*
+      
       new SpawnableAbility
       (
           "Summon Squirrel",
           "Summon a small squirrel to help you",
           5,
-          Spawnables.Name.SQUIRREL,
+          "squirrel",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -208,16 +217,16 @@ public class AbilityStorage{
           "Summon Golem",
           "Summon a crystal to help you",
           5,
-          Spawnables.Name.CRYSTAL,
+          "crystal",
           Elements.getElement(Elements.Name.NULL)
       ),
-      */
+      
       new SupportAbility
       (
           "Heal pulse", 
           "boosts defense for x amount of time",
           1, 
-          Effects.getEffect(Effects.Name.INSTANT_HEAL), 
+          "instant heal", 
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -226,7 +235,7 @@ public class AbilityStorage{
           "Spore", 
           "Gives the opponent an infection",
           9, 
-          Effects.getEffect(Effects.Name.FUNGAL_INFECTION), 
+          "fungal infection",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -235,7 +244,7 @@ public class AbilityStorage{
           "Protect", 
           "protects the user from any hit",
           3, 
-          Effects.getEffect(Effects.Name.INSTANT_SHIELD), 
+          "instant shield",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -244,7 +253,7 @@ public class AbilityStorage{
           "burn up", 
           "The target will burn up for a short amount of time",
           3, 
-          Effects.getEffect(Effects.Name.BURNOUT), 
+          "burnout",
           Elements.getElement(Elements.Name.FIRE)
       ),
 
@@ -253,7 +262,7 @@ public class AbilityStorage{
           "Counterstrike", 
           "Adds a lot of shield",
           3, 
-          Effects.getEffect(Effects.Name.INSTANT_SHIELD_X), 
+          "instant shield x",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -262,7 +271,7 @@ public class AbilityStorage{
           "attack up", 
           "boosts damage for x amount of time", 
           5, 
-          Effects.getEffect(Effects.Name.ATTACK_BOOST),  
+          "attack boost",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -271,7 +280,7 @@ public class AbilityStorage{
           "defense up", 
           "boosts defense for x amount of time",
           5, 
-          Effects.getEffect(Effects.Name.DEFENSE_BOOST), 
+          "defense up",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -280,7 +289,7 @@ public class AbilityStorage{
           "flare up", 
           "Makes the user charge up their attacks", 
           10, 
-          Effects.getEffect(Effects.Name.CHARGE), 
+          "charge",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -289,8 +298,8 @@ public class AbilityStorage{
           "Poison", 
           "Will poison the person targeted", 
           0, 
-          Effects.getEffect(Effects.Name.POISON), 
-          Elements.getElement(Elements.Name.NULL), 
+          "poison",
+          Elements.getElement(Elements.Name.NULL),
           new RandomModifier(256 / 4 * 3)
       ),
 
@@ -299,14 +308,14 @@ public class AbilityStorage{
           "Sacrifice", 
           "Injures the user to cause more damage later", 
           4, 
-          Effects.getEffect(Effects.Name.CURSE), 
-          Elements.getElement(Elements.Name.NULL), 
-          new RecoilModifier
-          (
-              2, 
-              true, 
-              true
-          )
+          "curse",
+          Elements.getElement(Elements.Name.NULL)
+//          new RecoilModifier
+//          (
+//              2, 
+//              true, 
+//              true
+//          )
       ),
 
       new SupportAbility
@@ -314,7 +323,7 @@ public class AbilityStorage{
           "Defensive Stance", 
           "The user decides to be cautious for some time", 
           3, 
-          Effects.getEffect(Effects.Name.GUARD), 
+          "guard",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -323,8 +332,7 @@ public class AbilityStorage{
           "Construct", 
           "The user starts to build up their stats", 
           2, 
-          Effects.getEffect(Effects.Name.BUILD_UP), 
-
+          "build up",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -333,7 +341,7 @@ public class AbilityStorage{
           "Stun Spore", 
           "Paralyze the target, preventing them from doing anything", 
           2, 
-          States.get(States.Name.PARALYZED),
+          "paralyzed",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -342,12 +350,31 @@ public class AbilityStorage{
           "Invigorate", 
           "Energize the target, allowing them to make more moves per turn", 
           2, 
-          States.get(States.Name.ENERGIZED), 
+          "energized",
           Elements.getElement(Elements.Name.NULL)
+      ),
+      
+      new CleanseAbility
+      (
+        "Pray",
+        "cleanse oneself of all effects",
+        5,
+        Elements.getElement(Elements.Name.ALL)
       )
-        
     };
     ArrayList<Ability> out = new ArrayList<>(Arrays.asList(a));
     return out;
+  }
+  
+  public static JSONArray loadAbilities()
+  {
+  	JSONArray json = new JSONArray();
+  	ArrayList<Ability> abilities = getAll();
+//  	Iterator<Name> effects = EFFECTS.keySet().iterator();
+  	for (int i = 0; i < abilities.size(); i++)
+  	{
+  		json.put(abilities.get(i).toJson());
+  	}
+	return json;
   }
 }

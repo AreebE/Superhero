@@ -1,10 +1,15 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
+
+import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Shield;
+import battlesystem.objectMapImpls.Effects.Name;
 import battlesystem.shieldImpls.*;
 
 public final class Shields 
@@ -37,7 +42,7 @@ public final class Shields
                 "Counter",
                 "Deal some damage when struck",
                 3,
-                Effects.getEffect(Effects.Name.RETALIATE),
+                "retaliate",
                 true,
                 1,
                 new Shield.Trigger[] {Shield.Trigger.ATTACK},
@@ -53,7 +58,7 @@ public final class Shields
                 "Illusion",
                 "Redirects the person's attack",
                 2,
-                Effects.getEffect(Effects.Name.ILLUSIONARY_BLAST),
+                "illusionary blast",
                 true,
                 1,
                 new Shield.Trigger[] {Shield.Trigger.ATTACK},
@@ -69,7 +74,7 @@ public final class Shields
                 "Self care",
                 "Heal from some damage when struck.",
                 3,
-                Effects.getEffect(Effects.Name.INSTANT_HEAL),
+                "instant heal",
                 false,
                 -1,
                 new Shield.Trigger[] {Shield.Trigger.ATTACK},
@@ -85,8 +90,8 @@ public final class Shields
                 "Self destruct",
                 "Deals damage to both the user and the attacker once the shield breaks",
                 5,
-                Effects.getEffect(Effects.Name.EXPLODE),
-                Effects.getEffect(Effects.Name.EXPLODE),
+                "explode",
+                "explode",
                 false,
                 1,
                 new Shield.Trigger[] {Shield.Trigger.SHIELD_BREAK},
@@ -102,8 +107,8 @@ public final class Shields
                 "Witch's Curse",
                 "The enemy will be cursed for attacking the user, who will start healing some health",
                 -1,
-                Effects.getEffect(Effects.Name.REGEN),
-                Effects.getEffect(Effects.Name.CURSE),
+                "regen",
+                "curse",
                 false,
                 1,
                 new Shield.Trigger[] {Shield.Trigger.ATTACK},
@@ -119,7 +124,7 @@ public final class Shields
                 "Gift",
                 "Give the creator some extra stats",
                 -1,
-                Effects.getEffect(Effects.Name.SACRIFICIAL_GIFT),
+                "sacrificial gift",
                 false,
                 1
             )
@@ -133,7 +138,7 @@ public final class Shields
                 "Deathly Defiance",
                 "Defy death",
                 -1,
-                Effects.getEffect(Effects.Name.RESURRECT),
+                "resurrect",
                 false,
                 2
             )
@@ -156,5 +161,16 @@ public final class Shields
         {
             e.addShield(getShield(n).copy());
         }
+    }
+    
+    public static JSONArray loadShields()
+    {
+    	JSONArray json = new JSONArray();
+    	Iterator<Name> shields = SHIELDS.keySet().iterator();
+    	while (shields.hasNext())
+    	{
+    		json.put(SHIELDS.get(shields.next()).toJson());
+    	}
+		return json;
     }
 }

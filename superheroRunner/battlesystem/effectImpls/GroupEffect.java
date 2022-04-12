@@ -2,19 +2,49 @@ package battlesystem.effectImpls;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.Effects;
+import battlesystem.objectMapImpls.Effects;
 
+/**
+ * A group effect that contains several other effects. Its duration will end once the other effects do.
+ *
+ */
 public class GroupEffect extends Effect 
 {
+	private static final String LIST_OF_EFFECTS = "all effects";
     private int groupDuration;
     public ArrayList<Effect> listOfEffects;
 
-
+    public GroupEffect(JSONObject json)
+    {
+    	super(json);
+    	JSONArray jsonEffects = json.getJSONArray(LIST_OF_EFFECTS);
+    	listOfEffects = new ArrayList<>();
+    	int groupDuration = 0;
+    	for (int i = 0; i < jsonEffects.length(); i++)
+    	{
+    		Effect e = EffectLoader.loadEffect(jsonEffects.getJSONObject(i));
+    		listOfEffects.add(e);
+    		if (e.getDuration() > groupDuration)
+    		{
+    			groupDuration = e.getDuration();
+    		}
+    	}
+    }
+    
+    /**
+     * A basic constructor that sets all subeffects to the name of this one.
+     * @param name the name of this effect
+     * @param desc the description of what it is.
+     * @param element the elemental attribute
+     * @param effects the subeffects to use.
+     */
     public GroupEffect(
         String name, 
         String desc, 
@@ -29,8 +59,7 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element,
-            new EffectModifier[0]
+            element
         );
         listOfEffects = new ArrayList<>();
         groupDuration = 0;
@@ -47,8 +76,14 @@ public class GroupEffect extends Effect
         }
     }
 
-
-    private GroupEffect(
+    /**
+     * Another overloaded constructor for the copy ability
+     * @param name the name of the group effect
+     * @param desc the description of what it does
+     * @param element the element of this effect
+     * @param effects the subeffects.
+     */
+    public GroupEffect(
         String name, 
         String desc, 
         Element element, 
@@ -62,8 +97,7 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element,
-            new EffectModifier[0]
+            element
         );
 
         listOfEffects = new ArrayList<>();
@@ -80,6 +114,14 @@ public class GroupEffect extends Effect
         }
     }
 
+    /**
+     * Another overloaded constructor
+     * @param name the name of this effect
+     * @param desc the description of how it works
+     * @param element its elemental attribute
+     * @param effects the effects it has
+     * @param additionalStrength what additional strength it has and the one to add more strength to other effects.
+     */
     private GroupEffect(
         String name, 
         String desc, 
@@ -95,8 +137,7 @@ public class GroupEffect extends Effect
             true, 
             name, 
             desc, 
-            element,
-            new EffectModifier[0]
+            element
         );
 
         listOfEffects = new ArrayList<>();
@@ -114,6 +155,12 @@ public class GroupEffect extends Effect
     }
 
 
+    /**
+     * It reduces all of the effects and if their duration reaches 0, it removes them from the list.
+     * 
+     * @param target the entity with the target
+     * @param log the battle log to record if the effect was removed.
+     */
     @Override
     public void reduceDuration(
         Entity target,
@@ -138,7 +185,13 @@ public class GroupEffect extends Effect
         }
     }
 
-
+    
+    /**
+     * Applies each of the subeffects
+     * 
+     * @param target the person with the effect
+     * @param log the log that records what happens when the effects were applied.
+     */
     @Override
     public void applyEffect(
         Entity target,
@@ -151,7 +204,10 @@ public class GroupEffect extends Effect
         }
     }
 
-    
+    /**
+     * Copy the effect
+     * @return a copied version
+     */
     @Override
     public Effect copy() 
     {
@@ -163,7 +219,12 @@ public class GroupEffect extends Effect
                         listOfEffects
                     );
     }
-
+    
+    /**
+     * copy the effect
+     * @param additionalStrength the additional strength to add
+     * @return the new group effect
+     */
     @Override
     public Effect copy(int additionalStrength) 
     {
@@ -176,9 +237,27 @@ public class GroupEffect extends Effect
                     additionalStrength
                 );
     }
-
+    
+    /**
+     * Get the duration of this effect.
+     * @return the total group duration.
+     */
     @Override
     public int getDuration() {
         return groupDuration;
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, EffectLoader.GROUP);
+    	JSONArray effects = new JSONArray();
+    	for (Effect e: listOfEffects)
+    	{
+    		effects.put(e.toJson());
+    	}
+    	effect.put(LIST_OF_EFFECTS, effects);
+    	return effect;
     }
 }

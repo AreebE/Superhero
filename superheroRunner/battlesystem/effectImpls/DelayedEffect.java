@@ -1,23 +1,43 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.Effects;
+import battlesystem.objectMapImpls.Effects;
 
+/**
+ * The delayed effect is intended to take place after some turns pass.
+ *
+ */
 public class DelayedEffect extends Effect 
 {
+	
+	public DelayedEffect(JSONObject json)
+	{
+		super(json);
+	}
 
+	/**
+	 * The delayed effect basic constructor
+	 * 
+	 * @param strength how much base strength this has
+	 * @param type the type of effect
+	 * @param timer *NEW* how much time will pass before the effect triggers
+	 * @param name the name of the ability
+	 * @param desc the description of how this works
+	 * @param element the element of this effection
+	 * @param modifiers the modifiers this has
+	 */
     public DelayedEffect(
         int strength, 
         Effect.Type type, 
         int timer, 
         String name, 
         String desc, 
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -27,11 +47,21 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element, 
-            null, 
-            modifiers
+            null
         );
     }
-
+    
+    /**
+     * The version for the attack version
+     * @param strength the base strength of this effect
+     * @param type the time of effect
+     * @param timer how many turns need to pass
+     * @param name the name of this effect
+     * @param desc the description of this effect
+     * @param element the element of this effect
+     * @param pierces if it pierces shield + defense
+     * @param modifiers the modifiers of this effect
+     */
     public DelayedEffect(
         int strength, 
         Effect.Type type, 
@@ -39,8 +69,7 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         super
         (
@@ -51,11 +80,15 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element,
-            pierces,
-            modifiers
+            pierces
         );
     }
-
+    
+    /**
+     * This is so the effect doesn't activate prematurely.
+     * @param target the person with the effect
+     * @param log the log to store events.
+     */
     @Override
     public void useEffect(
         Entity target,
@@ -65,6 +98,11 @@ public class DelayedEffect extends Effect
     }
 
 
+    /**
+     * When removing the effect, it applies it.
+     * @param target the person who had the effect
+     * @param log the battle log for recording the events
+     */
     @Override
     protected void removeEffect(
         Entity target,
@@ -75,6 +113,10 @@ public class DelayedEffect extends Effect
     }
 
 
+    /**
+     * a copy method to get a copy of the effect
+     * @return the new delayed effect
+     */
     @Override
     public Effect copy() 
     {
@@ -86,11 +128,15 @@ public class DelayedEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(), 
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
     }
 
+    /**
+     * A copy method to get a new one.
+     * @param additionalStrength add some strength to this effect.
+     * @return a new effect with the strength modified
+     */
     @Override
     public Effect copy(int additionalStrength) 
     {
@@ -102,8 +148,15 @@ public class DelayedEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
-                    getPierces(),
-                    getModifiers()
+                    getPierces()
                 );
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, EffectLoader.DELAY);
+    	return effect;
     }
 }

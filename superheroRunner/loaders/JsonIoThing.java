@@ -43,6 +43,7 @@ public class JsonIoThing {
     }
     ArrayList<Entity> out = new ArrayList<Entity>();
     for (EntityInfoItem t : o) {
+//    	System.out.println(t.abilities);
         if (t == null)
         {
           continue;

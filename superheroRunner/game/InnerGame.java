@@ -2,83 +2,48 @@ package game;
 
 import java.util.List;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import battlesystem.Ability;
 import battlesystem.Action;
 import battlesystem.BattleLog;
+import battlesystem.Effect;
+import battlesystem.Elements;
 import battlesystem.Entity;
+import battlesystem.EntityInfoItem;
+import battlesystem.Game;
 import battlesystem.InputSystem;
+import battlesystem.Shield;
+import battlesystem.State;
 import battlesystem.Terrain;
 import battlesystem.battlelogImpls.StringBattleLog;
-import battlesystem.databaseImpls.Elements;
+import battlesystem.infoItemImpls.AIInfoItem;
 
-class InnerGame {
-  ArrayList<Entity> fighters;
-  GUI g;
-  Terrain t = new Terrain();
-  Entity currentPlayer;
-  ScannerInput scanInput;
-
-public InnerGame(GUI g) {
-    this.g = g;
-}
-  public InnerGame(ArrayList<Entity> fighters, GUI g) {
-    this.fighters = fighters;
-    this.g = g;
-  }
-
-  public void Fight(ArrayList<Entity> entities) {
-    //we will have to figure out teams at some point 
-    this.fighters = entities;
-    ScannerInput scanInput = new ScannerInput();
-    
-    boolean anyHealthZero = false;
-    Terrain t = new Terrain();
-    t.setsTerrianElement(Elements.getElement(Elements.Name.ICE));
-    ArrayList<Action> actionsToPreform = new ArrayList<Action>();
-    fighters.get(0).setTerrain(t);
-    fighters.get(1).setTerrain(t);
-    while (fighters.size() > 1) {
-      BattleLog log = new StringBattleLog();
-      //asks players for what actions to preform
-      for (int i = 0; i < fighters.size(); i++) {
-        currentPlayer = fighters.get(i);
-        for(Action a:currentPlayer.onTurn(fighters,scanInput)){
-          actionsToPreform.add(a);
-        }
-        
-      }
-      
-      //executes actionsToPreform
-      for (Action q : actionsToPreform) {
-        q.performAction(log);
-        System.out.println();
-      }
-      
-      //checks for dead people
-      for (int i = fighters.size() - 1; i >= 0; i--) {
-        if (fighters.get(i).isHealthZero(log)) {
-          Entity target = fighters.remove(i);
-          System.out.println(target.getName() + " was eliminated. " + target.toString());
-        }
-      }
-      //prints whats happened
-      ArrayList<String> fullLog = (ArrayList<String>) log.getFullLog();
-      System.out.println(fullLog);
-      actionsToPreform.clear();
-      Collections.sort(fighters);
-      Collections.reverse(fighters);
-      System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-    }
-    // scanInput.close();
-    // System.out.println(fighters.get(0).getHealth() + ", " +
-    // fighters.get(1).getHealth() + ", " + fighters.get(2).getHealth());
-    System.out.println(fighters.get(0).getName() + " won!");
+public class InnerGame extends Game{
+	
+	private GUI g;
+  public InnerGame(
+		  ArrayList<EntityInfoItem> fighters, 
+		  HashMap<String, Ability> abilities, 
+		  HashMap<String, Effect> effects, 
+		  HashMap<String, EntityInfoItem> spawnables,
+		  HashMap<String, Shield> shields,
+		  HashMap<String, State> states,
+		  GUI g) {
+	  super(fighters, abilities, effects, spawnables, shields, states, new StringBattleLog());
+//    System.out.println(fighters.size());
+	  ScannerInput input = new ScannerInput();
+	  input.assignFighters(super.getFighters());
+	  this.setInputSystem(input);
+	  this.g = g;
   }
 
 
-  private Entity getEntity(String name, ArrayList<Entity> fighters) {
+
+
+  private static Entity getEntity(String name, ArrayList<Entity> fighters) {
     for (int i = 0; i < fighters.size(); i++) {
       if (fighters.get(i).getName().equals(name)) {
         return fighters.get(i);
@@ -87,9 +52,10 @@ public InnerGame(GUI g) {
     return null;
   }
 
-  public class ScannerInput implements InputSystem {
+  public static class ScannerInput implements InputSystem {
     private Scanner inputReader;
     private Entity target;
+    private ArrayList<Entity> fighters;
 
     public ScannerInput(Scanner inputReader) {
       this.inputReader = inputReader;
@@ -99,6 +65,11 @@ public InnerGame(GUI g) {
       this.inputReader = new Scanner(System.in);
     }
 
+    public void assignFighters(ArrayList<Entity> fighters)
+    {
+    	this.fighters = fighters;
+    }
+    
     @Override
     public String getAbilityName() {
       System.out.println("Which ability to use?");
@@ -147,4 +118,14 @@ public InnerGame(GUI g) {
     }
   }
 
+  @Override 
+  public void printLog(BattleLog log)
+  {
+	StringBattleLog stringLog = (StringBattleLog) log;
+	ArrayList<String> entries = stringLog.getFullLog();
+	for (int i = 0; i < entries.size(); i++)
+	{
+		System.out.println(entries.get(i));
+	}
+  }
 }

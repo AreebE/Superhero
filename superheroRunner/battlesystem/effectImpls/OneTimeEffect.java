@@ -1,15 +1,36 @@
 package battlesystem.effectImpls;
 
+import org.json.JSONObject;
+
 import battlesystem.BattleLog;
 import battlesystem.Effect;
-import battlesystem.EffectModifier;
 import battlesystem.Element;
 import battlesystem.Entity;
 
+/**
+ * An effect intended to only apply its buff once.
+ *
+ */
 public class OneTimeEffect extends Effect 
 {
     private boolean used;
     
+    public OneTimeEffect(JSONObject json)
+    {
+    	super(json);
+    }
+    /**
+     * Create a basic version
+     * 
+     * @param strength the base strength
+     * @param type the type of effect
+     * @param duration the length it lasts for
+     * @param name the name of the effect
+     * @param desc the description of what it does
+     * @param element what element it belongs to
+     * @param pierces if it pierces the shield
+     * @param modifiers the modifiers it has
+     */
     public OneTimeEffect(
         int strength, 
         Effect.Type type, 
@@ -17,8 +38,7 @@ public class OneTimeEffect extends Effect
         String name, 
         String desc,
         Element element,
-        boolean[] pierces,
-        EffectModifier[] modifiers) 
+        boolean[] pierces) 
     {
         super
         (
@@ -29,19 +49,26 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
-            pierces,
-            modifiers
+            pierces
         );
     }
 
+    /**
+     * An overloaded version not meant for damaging effects
+     * 
+     * @param strength the base strength of this effect
+     * @param type the type of effect
+     * @param duration the length this effect lasts
+     * @param name the name of this effect
+     * @param desc the description of how this effect works
+     */
     public OneTimeEffect(
         int strength, 
         Effect.Type type, 
         int duration, 
         String name, 
         String desc,
-        Element element,
-        EffectModifier[] modifiers) 
+        Element element) 
     {
         this
         (
@@ -51,11 +78,15 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
-            null,
-            modifiers
+            null
         );
     }
 
+    /**
+     * Only apply the effect if it hasn't been used
+     * @param target the target who has the effect
+     * @param log the battle log used to contain what the effect did
+     */
     @Override
     public void useEffect(
         Entity target,
@@ -69,7 +100,11 @@ public class OneTimeEffect extends Effect
         reduceDuration(target, log);
     }
 
-
+    /**
+     * Remove the effect, depending on if it was permanent or not.
+     * @param target the person with the effect
+     * @param log to record the removed effect
+     */
     @Override
     public void removeEffect(
         Entity target,
@@ -93,6 +128,10 @@ public class OneTimeEffect extends Effect
     }
 
 
+    /**
+     * A basic version of the copy
+     * @return a new effect of this type
+     */
     @Override
     public Effect copy() 
     {
@@ -104,11 +143,15 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
     }
 
+    /**
+     * An upgraded version of the copy
+     * @param additionalStrength the amount of strength to add
+     * @return the copied effect
+     */
     @Override
     public Effect copy(int additionalStrength) {
         return new OneTimeEffect
@@ -119,8 +162,15 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
-                        getPierces(),
-                        getModifiers()
+                        getPierces()
                     );
+    }
+    
+    @Override
+    public JSONObject toJson()
+    {
+    	JSONObject effect = super.toJson();
+    	effect.put(TYPE_KEY, EffectLoader.ONE_TIME);
+    	return effect;
     }
 }

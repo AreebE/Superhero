@@ -1,8 +1,12 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
+import java.util.Iterator;
+
+import org.json.JSONArray;
 
 import battlesystem.State;
+import battlesystem.objectMapImpls.Shields.Name;
 import battlesystem.stateImpls.NormalState;
 import battlesystem.stateImpls.StunState;
 import battlesystem.stateImpls.VigorState;
@@ -18,7 +22,7 @@ public final class States
         ENERGIZED
     }
 
-    private static final EnumMap<Name, State> STATES = new EnumMap(Name.class)
+    private static final EnumMap<Name, State> STATES = new EnumMap<Name, State>(Name.class)
     {{
         put
         (
@@ -58,5 +62,16 @@ public final class States
     public static State get(Name name)
     {
         return STATES.get(name);
+    }
+    
+    public static JSONArray loadStates()
+    {
+    	JSONArray json = new JSONArray();
+    	Iterator<Name> states = STATES.keySet().iterator();
+    	while (states.hasNext())
+    	{
+    		json.put(STATES.get(states.next()).toJson());
+    	}
+		return json;
     }
 }

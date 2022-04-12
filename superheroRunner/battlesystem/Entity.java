@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import battlesystem.databaseImpls.AbilityManager;
-import battlesystem.databaseImpls.Effects;
-import battlesystem.databaseImpls.Effects.Name;
-import battlesystem.databaseImpls.Elements;
-import battlesystem.databaseImpls.Shields;
-import battlesystem.databaseImpls.States;
+import battlesystem.objectMapImpls.AbilityManager;
+import battlesystem.objectMapImpls.Effects;
+import battlesystem.objectMapImpls.Shields;
+import battlesystem.objectMapImpls.States;
+import battlesystem.objectMapImpls.Effects.Name;
 
 import java.util.Arrays;
-
+/**
+ * 
+ * @author Areeb Emran
+ * 
+ * This class is meant to represent any object, such as a superhero.
+ */
 public class Entity implements Comparable<Entity>
 {
     // free will between 1 and 20;
@@ -31,19 +35,60 @@ public class Entity implements Comparable<Entity>
     private int shieldHealth;
     private int baseAttack;
     private int baseDefense;
+    private int teamID;
     private static transient Terrain t;
 
 
+    /**
+     * 
+     * @author Areeb Emran
+     * 
+     * This is just an enum for getting a specific type of statistic
+     */
     public static enum Statistic
     {
-        SPEED,
-        MAX_HEALTH,
-        HEALTH,
-        BASE_ATTACK,
-        BASE_DEFENSE,
-        SHIELD
+        SPEED("speed"),
+        MAX_HEALTH("max health"),
+        HEALTH("health"),
+        BASE_ATTACK("attack"),
+        BASE_DEFENSE("defense"),
+        SHIELD("shield");
+    	
+    	
+    	public final String name;
+    	
+    	Statistic(String name)
+    	{
+    		this.name = name;
+    	}
+    	
+    	public static Statistic getStatistic(String name)
+    	{
+    		switch (name)
+    		{
+    			case "speed":
+    				return SPEED;
+    			case "max health":
+    				return MAX_HEALTH;
+    			case "health":
+    				return HEALTH;
+    			case "attack":
+    				return BASE_ATTACK;
+    			case "defense":
+    				return BASE_DEFENSE;
+    			case "shield":
+    			default:
+    				return SHIELD;
+    		}
+    	}
     }
+    
     //alt constructor using EII
+    /**
+     * A different constructor that uses the Entity info item.
+     * 
+     * @param in the entity info item used.
+     */
     public Entity(EntityInfoItem in){
       this.name = in.name;
       this.speed = in.speed;
@@ -67,6 +112,16 @@ public class Entity implements Comparable<Entity>
       */
     }
 
+    /**
+     * The most basic version of creating an entity.
+     * 
+     * @param name The name of the super
+     * @param speed The starting speed of the superhero.
+     * @param health The health & max health of this superhero.
+     * @param shieldHealth The starting amount of shield this character has.
+     * @param defaultState The default state this should be in. Check the state class for more information.
+     * @param creator The entity that created this one.
+     */
     public Entity(
         String name, 
         int speed, 
@@ -90,10 +145,15 @@ public class Entity implements Comparable<Entity>
         this.creator = creator;
         ArrayList<String> abstogive = new ArrayList<String>();
         abstogive.add("pass turn");
-        AbilityManager.giveAbilities(this, abstogive);
+//        AbilityManager.giveAbilities(this, abstogive);
     }
 
 
+    /**
+     * Give this character some abilities, effects, and shields they start with.
+     * 
+     * @param in The info item that contains all of the names.
+     */
     private void setStuffFromEII(EntityInfoItem in){
       this.abilities = new ArrayList<>();
       this.effects = new ArrayList<>();
@@ -102,15 +162,15 @@ public class Entity implements Comparable<Entity>
         this.abilities.add(AbilityManager.getAbility(t));
       }
         
-            for(Effects.Name t: in.effects){
-                this.effects.add(Effects.getEffect(t));
-            }
+//            for(String t: in.effects){
+//                this.effects.add(Effects.getEffect(t));
+//            }
         
       
         
-            for(Shields.Name t: in.shields){
-                this.shields.add(Shields.getShield(t));
-            }
+//            for( t: in.shields){
+//                this.shields.add(Shields.getShield(t));
+//            }
         
 
     }
@@ -155,6 +215,10 @@ public class Entity implements Comparable<Entity>
 
 
   
+    /**
+     * The method for getting the creator.
+     * @return the creator.
+     */
     protected Entity getCreator()
     {
         return this.creator;
@@ -162,6 +226,8 @@ public class Entity implements Comparable<Entity>
 
     /**
      * Provides information on what the Entity does
+     * 
+     * It first lists the will / speed, then the abilities, then state, then effects, then shields, then all basic stats.
      */
     @Override
     public String toString() 
@@ -255,6 +321,12 @@ public class Entity implements Comparable<Entity>
     }
 
 
+    /**
+     * I'm unsure why this method exists.
+     * 
+     * @return a basic string with name and the speed?
+     */
+    
     /*
      * Writes this Entity to a Single Line so that its usable by Fileiothing also
      * should health/shieldHealth be persistent? // not entirely sure, maybe for
@@ -270,6 +342,11 @@ public class Entity implements Comparable<Entity>
     }
 
 
+    /**
+     * Method for getting the name
+     * 
+     * @return the name of this entity
+     */
     public String getName() 
     {
         return this.name;
@@ -279,19 +356,35 @@ public class Entity implements Comparable<Entity>
     /*
      * Methods involving a player's ability/abilities
      */
+    /**
+     * Add an ability to this player.
+     * 
+     * @param newAbility the new ability to add.
+     */
     public void addAbility(
         Ability newAbility) 
     {
         abilities.add(newAbility);
     }
+    
+   
 
-
+    /**
+     * Get all of the abilities of this player.
+     * 
+     * @return the abilities of this player.
+     */
     public ArrayList<Ability> getAbilities() 
     {
         return this.abilities;
     }
 
-
+    /**
+     * Get a specific ability when getting an ability. 
+     * 
+     * @param name the name of the ability.
+     * @return an ability if this has it: otherwise, it returns null.
+     */
     public Ability getAbility(
         String name) 
     {
@@ -314,20 +407,35 @@ public class Entity implements Comparable<Entity>
         return null;
     }
 
-
+    /**
+     * Does this have the ability? 
+     * 
+     * @param ability the ability to look out for.
+     * @return if it has this ability.
+     */
     public boolean hasAbility(
         Ability ability) 
     {
         return abilities.contains(ability);
     }
     
+    /**
+     * Is this specific ability a group ability?
+     * 
+     * @param name the name of the ability
+     * @return if it has a group modifier (only done if it does have a group ability)
+     */
     public boolean hasGroupAbility(String name)
     {
-        return getAbility(name).hasModifier(Ability.Modifier.GROUP);
+        return getAbility(name).getTargetAmount() != 1;
     }
     
     /*
      * Methods involving a player's health
+     */
+    /**
+     * Add some shield health
+     * @param shield extra shield to add
      */
     public void addShieldHealth(int shield) 
     {
@@ -335,18 +443,28 @@ public class Entity implements Comparable<Entity>
     }
 
 
+    /**
+     * Get the amount of shield this character has.
+     * @return How much shield they have.
+     */
     public int getShieldHealth() 
     {
         return this.shieldHealth;
     }
 
-
+    /**
+     * See if the character has their shield.
+     * @return if their shield is 0.
+     */
     public boolean hasShield() 
     {
         return this.shieldHealth == 0;
     }
 
-
+    /**
+     * Heal the health of this entity.
+     * @param healed Amount to add.
+     */
     public void healHealth(
         int healed) 
     {
@@ -357,38 +475,61 @@ public class Entity implements Comparable<Entity>
         }
     }
 
-
+    /**
+     * Get the amount of health of this entity
+     * @return the amount of health remaining.
+     */
     public int getHealth() 
     {
         return this.health;
     }
 
+    /**
+     * Increase the MAXIMUM amount of health, along with adding more health.
+     * @param addHealth How much to increase both amounts by.
+     */
     public void addMaxHealth(int addHealth)
     {   
         maxHealth += addHealth;
         health += addHealth;
     }
 
-    public boolean isHealthZero(BattleLog log) 
+    /**
+     * Is the health of this character 0? Also do a check for death shields.
+     * @param log a battlelog to record if any players died.
+     * @return if the health is 0 AFTER any death shields have been triggered.
+     */
+    public boolean isHealthZero(BattleLog log, Game g) 
     {
         if (this.health <= 0)
         {
-            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, log);
+            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), creator, this, g, log);
         }
         return this.health <= 0;
     }
 
     /**
-     * deals damage to the target based on the attacks stregth, the casters base
+     * deals damage to the target based on the attacks strength, the casters base
      * attack and the targets base defense.
+     * This also triggers a few type of shields: 
+     * * Attack (whenever hp is taken)
+     * * ShieldBreak (when shield reaches 0)
+     * * Death (when hp is less than 0) 
      *
      * @param damageDealt    the total damage of the attack
      *
      * @param isPiercing     whether the attack ignores shield health
      *
      * @param ignoresDefense whether the attack ignores the base defense
-     *
-     * @return     if the player can keep attacking
+     * 
+     * @param caster 		 Whoever cast the ability.
+     * 
+     * @param e				The element of this attack.
+     * 
+     * @param g				the game class
+     * @param log			The battle log to record an event.
+     * 
+     * @return     			{name, shieldDamageDone, ShieldLeft, healthDamageDone, HealthLeft, canKeepAttacking}
      */
  public Object[] dealDamage(
         int damageDealt, 
@@ -396,6 +537,7 @@ public class Entity implements Comparable<Entity>
         boolean ignoresDefense,
         Entity caster,
         Element e,
+        Game g,
         BattleLog log) 
     {   
         Object[] logValues = new Object[]{this.name, 0, 0, 0, 0, false};
@@ -419,8 +561,8 @@ public class Entity implements Comparable<Entity>
         {
             if (type != null)
             {
-                System.out.println();
-                endAttack = searchForShield(type, e, this, caster, log);
+//                System.out.println();
+                endAttack = searchForShield(type, e, this, caster, g, log);
             }
             if (endAttack){
                 logValues[5] = true;
@@ -443,10 +585,10 @@ public class Entity implements Comparable<Entity>
             logValues[4] = 0;
             damageDealt -= shieldHealth;
             shieldHealth = 0;
-            endAttack = searchForShield(Shield.Trigger.SHIELD_BREAK, e, this, caster, log);
+            endAttack = searchForShield(Shield.Trigger.SHIELD_BREAK, e, this, caster, g, log);
             if (type != null)
             {
-                endAttack = endAttack || searchForShield(type, e, this, caster, log);
+                endAttack = endAttack || searchForShield(type, e, this, caster, g, log);
             }
             if (endAttack){
                 logValues[5] = true;
@@ -460,11 +602,18 @@ public class Entity implements Comparable<Entity>
         if (health < 0) 
         {
             health = 0;
-            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), this, creator, log);
+            searchForShield(Shield.Trigger.DEATH, Elements.getElement(Elements.Name.ALL), this, creator, g, log);
         }
         return logValues;
     }
 
+ 	/** 
+ 	 * A separate method for effects to deal damage. It just won't break shields.
+ 	 * @param damageDealt How much damage to deal
+ 	 * @param isPiercing Whether this effect should ignore shield.
+ 	 * @param ignoresDefense Whether this effect should ignore defense.
+ 	 * @return Unsure what this is supposed to do.
+ 	 */
     public boolean dealEffectDamage(
         int damageDealt,
         boolean isPiercing,
@@ -508,12 +657,21 @@ public class Entity implements Comparable<Entity>
     /*
      * Methods for adding/removing Effects
      */
+    /** 
+     * Add an effect to this entity
+     * @param newEffect the effect to add.
+     */
     public void addEffect(
         Effect newEffect) 
     {
         effects.add(newEffect);
     }
-
+    
+    /**
+     * Apply an effect on this entity. 
+     * @param e the effect to use.
+     * @param log The log to store what happened.
+     */
     public void applyEffect(
         Effect e,
         BattleLog log
@@ -522,6 +680,10 @@ public class Entity implements Comparable<Entity>
         e.useEffect(this, log);
     }
 
+    /**
+     * Remove an effect from this entity
+     * @param removed The effect to remove.
+     */
     public void removeEffect(
         Effect removed) 
     {
@@ -529,6 +691,11 @@ public class Entity implements Comparable<Entity>
     }
 
 
+    /** 
+     * A method for removing effects based on their element
+     * @param elementID The element to remove.
+     * @param log The battlelog to record all removed effects.
+     */
     public void removeEffects(
         Elements.Name elementID,
         BattleLog log)
@@ -556,21 +723,31 @@ public class Entity implements Comparable<Entity>
     /*
     * Methods for adding/removing shields
     */
-
+    
+    /**
+     * Give this hero a shield
+     * @param s the shield to give.
+     */
     public void addShield(
         Shield s)
     {
         shields.add(s);
     }
 
-
+    /**
+     * Remove a shield from this entity.
+     * @param s the shield to remove.
+     */
     public void removeShield(
         Shield s)
     {
         shields.remove(s);
     }
 
-
+    /**
+     * Reduce the shield durations and remove any that have expired.
+     * @param log the battle log for storing any shields that happened to be removed.
+     */
     public void reduceShieldDurations(BattleLog log)
     {
         for (int i = shields.size() - 1; i >= 0; i--)
@@ -579,21 +756,31 @@ public class Entity implements Comparable<Entity>
         }
     }
 
-
+    /**
+     * A search for shields that will trigger any that happen to be relevant.
+     * @param trigger The type of trigger to look for.
+     * @param element The elemental trigger of this at.
+     * @param target The one who would be targeted. For death ones though, this will be the creator.
+     * @param caster The person who did the the thing, if applicable. For death ones, it will be this entity (since they are the ones dying)
+     * @param log the battle log to record any triggers happening.
+     * @return if this should nullify any future attacks
+     */
     public boolean searchForShield(
         Shield.Trigger trigger, 
         Element element,
         Entity target, 
         Entity caster,
+        Game g,
         BattleLog log)
     {
         boolean nullifyEffect = false;
         for (int i = shields.size() - 1; i >= 0; i--)
         {
             Shield s = shields.get(i);
+//            System.out.println(s.getName());
             if (s.wouldTrigger(trigger, element))
             {
-                boolean nullify = s.triggerShield(target, caster, log);
+                boolean nullify = s.triggerShield(target, caster, g, log);
                 if (nullify)
                 {
                     nullifyEffect = true;
@@ -606,17 +793,31 @@ public class Entity implements Comparable<Entity>
     /*
     * Methods for speed
     */
+    
+    /**
+     * Add some speed 
+     * @param speed the amount of speed to add.
+     */
     public void addSpeed(
         int speed)
     {
         this.speed += speed;
     }
 
+    /**
+     * get the speed of this entity
+     * @return the speed of this entity.
+     */
     public int getSpeed()
     {
         return this.speed;
     }
 
+    /**
+     * A way to order the entities, bsed on speed.
+     * @param other the other entity
+     * @return the differences in speed.
+     */
      @Override
     public int compareTo(
         Entity other) 
@@ -628,6 +829,11 @@ public class Entity implements Comparable<Entity>
     /*
      * Methods for adding/getting attack or defense
      */
+     
+     /**
+      * Add defense
+      * @param defense the amount of defense to add.
+      */
     public void addDefense(
         int defense) 
     {
@@ -635,6 +841,10 @@ public class Entity implements Comparable<Entity>
     }
 
 
+    /**
+     * Add attack
+     * @param attack the amount of attack to add.
+     */
     public void addAttack(
         int attack) 
     {
@@ -642,12 +852,19 @@ public class Entity implements Comparable<Entity>
     }
 
 
+    /**
+     * Get base attack
+     * @return the base attack
+     */
     public int getBaseAttack() 
     {
         return baseAttack;
     }
 
-
+    /**
+     * Get base defense
+     * @return the base defense.
+     */
     public int getBaseDefense() 
     {
         return baseDefense;
@@ -658,10 +875,18 @@ public class Entity implements Comparable<Entity>
      * terrain 
     */
 
+    /**
+     * Set the terrain of this entity.
+     * @param t the terrain.
+     */
     public void setTerrain(Terrain t){
       this.t = t;
     }
 
+    /** 
+     * Get the terrain of this entity
+     * @return this entity's terrain
+     */
     public Terrain getTerrain(){
       return t;
     }
@@ -669,6 +894,12 @@ public class Entity implements Comparable<Entity>
     /*
     * Getting an action 
     */
+    /**
+     * Get the actions this entity will do.
+     * @param allHeros All of the heros that are possible targets.
+     * @param inputReader the input system to get some things.
+     * @return all actions this entity will do on their turn.
+     */
     public List<Action> getActions(
         List<Entity> allHeros,
         InputSystem inputReader)
@@ -685,7 +916,7 @@ public class Entity implements Comparable<Entity>
             Action a = null;
             while (a == null || !a.isLegalAction())
             {
-                System.out.println("Getting action");
+//                System.out.println("Getting action");
                 Entity target = inputReader.getSingleTarget();
                 String name = inputReader.getAbilityName();
                 a = new Action(target, this, name, allHeros, inputReader);
@@ -695,6 +926,12 @@ public class Entity implements Comparable<Entity>
         return actions;
     }
 
+    /**
+     * Actions to get on this entity's turn
+     * @param fighters the fighters that are going to be possible targets.
+     * @param scanInput the input system
+     * @return all actions.
+     */
     public List<Action> onTurn(ArrayList<Entity> fighters, InputSystem scanInput){
       System.out.println(this);
         List<Action> playerActions = this.getActions(fighters, scanInput);
@@ -703,6 +940,11 @@ public class Entity implements Comparable<Entity>
     /*
     *
     */
+    /**
+     * Get a given statistic
+     * @param stat the statistic to use
+     * @return the int representing that statistic.
+     */
     public int getStatistic(Statistic stat)
     {
         switch (stat)
@@ -726,16 +968,27 @@ public class Entity implements Comparable<Entity>
     /*
     * Changing state
     */
+    /**
+     * Change the state of this entity
+     * @param newState the new state of this entity
+     */
     public void replaceState(State newState)
     {
         this.state = newState;
     }
 
+    /**
+     * Get current state
+     * @return the current state.
+     */
     public State getState()
     {
         return this.state;
     }
 
+    /**
+     * Reset the state of this entity
+     */
     public void resetState()
     {
         this.state = defaultState;
@@ -744,7 +997,15 @@ public class Entity implements Comparable<Entity>
     /*
      * Actions done at the end of the turn
      */
-     public void endOfTurn(BattleLog log) 
+    /**
+     * Do some things at the end of this player's turn:
+     *  * Use effects
+     *  * reduce cooldowns and effect durations.
+     *  * reduce the state's duration
+     *  * See if the health is 0
+     * @param log for recording all of these events.
+     */
+     public void endOfTurn(BattleLog log, Game g) 
     {
         Object[] contents = new Object[]{name};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.END_OF_TURN, contents));
@@ -753,7 +1014,7 @@ public class Entity implements Comparable<Entity>
         reduceCooldowns(log);
         reduceShieldDurations(log);
         reduceStateDurations();
-        isHealthZero(log);
+        isHealthZero(log, g);
 
         contents = new Object[]{name, state.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.CURRENT_STATE, contents));
@@ -764,7 +1025,10 @@ public class Entity implements Comparable<Entity>
         return;
     }
 
-
+    /**
+      *	Use all of the effects this entity has 
+      * @param log the log to record actions
+     */
     public void useEffects(BattleLog log) 
     {
         for (int i = effects.size() - 1; i >= 0; i--) 
@@ -774,6 +1038,10 @@ public class Entity implements Comparable<Entity>
         }
     }
 
+    /**
+     * Reduce the ability cooldowns
+     * @param log unused for now.
+     */
     public void reduceCooldowns(BattleLog log) 
     {
         for (Ability a : abilities) 
@@ -782,14 +1050,35 @@ public class Entity implements Comparable<Entity>
         }
     }
 
+    /**
+     *Reduce the duration of the state.
+     */
     public void reduceStateDurations()
     {
         state.reduceDuration(this);
     }
     
+    /**
+     * A method for if one can target this entity.
+     * @return Always true.
+     */
     public boolean isTargettable()
     {
     	return true;
     }
+    
+    private void setName(String newName)
+    {
+    	this.name = newName;
+    }
 
+    public int getTeamID()
+    {
+    	return teamID;
+    }
+    
+    public void setTeamID(int newID)
+    {
+    	this.teamID = newID;
+    }
 }

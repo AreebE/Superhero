@@ -5,8 +5,8 @@ import java.util.*;
 
 import battlesystem.Ability;
 import battlesystem.Entity;
-import battlesystem.databaseImpls.*;
 import battlesystem.State;
+import battlesystem.objectMapImpls.*;
 //this thing is kinda nuts and needs some work also it no longer 
 // deals with files so i dont think it needs to be in FileParsing
 public class CustomMaker {
@@ -48,16 +48,16 @@ public class CustomMaker {
     int str =  s.nextInt();
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");
     String t = s.next();
-    Ability.Type a = null;
+    Ability.Category a = null;
     switch(t){
       case "ATTACK":
-        a= Ability.Type.ATTACK;
+        a= Ability.Category.ATTACK;
         break;
       case "DEFENSE":
-        a= Ability.Type.DEFENSE;
+        a= Ability.Category.DEFENSE;
         break;
       case "SUPPORT":
-        a=Ability.Type.SUPPORT;
+        a=Ability.Category.SUPPORT;
         break;
     }
     System.out.println("Enter your new Abilities Type: (NOT IMPLEMENTED PROPERLY YET...) ");

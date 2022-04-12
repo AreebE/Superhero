@@ -1,8 +1,12 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.EnumMap;
+import java.util.Iterator;
+
+import org.json.JSONArray;
 
 import battlesystem.infoItemImpls.AIInfoItem;
+import battlesystem.objectMapImpls.Shields.Name;
 
 import java.util.ArrayList;
 
@@ -31,11 +35,16 @@ public final class Spawnables
                 {{
                     add("laser");
                 }},
-                new ArrayList<Effects.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Effects.Name.CURSE);
+                    add("curse");
+
                 }},
-                null,
+                new ArrayList<String>()
+                {{
+
+                }},
+                "relaxed",
                 10,
                 10,
                 new ArrayList<String>()
@@ -57,11 +66,15 @@ public final class Spawnables
                 {{
                     add("scratch");
                 }},
-                null,
-                new ArrayList<Shields.Name>()
+                new ArrayList<String>()
                 {{
-                    add(Shields.Name.GIFT);
+                	
                 }},
+                new ArrayList<String>()
+                {{
+                    add("gift");
+                }},
+                "relaxed",
                 1,
                 0,
                 new ArrayList<String>()
@@ -71,21 +84,32 @@ public final class Spawnables
                 true
             )
         );
-        /*
-            String name,
-            int speed,
-            ArrayList<String> abilityNames,
-            ArrayList<Effects.Name> startingEffects,
-            ArrayList<Shields.Name> startingShields,
-            int maxHealth,
-            int shieldHealth,
-            ArrayList<String> attackPattern,
-            boolean isTargettable*/
+//        /*
+//            String name,
+//            int speed,
+//            ArrayList<String> abilityNames,
+//            ArrayList<Effects.Name> startingEffects,
+//            ArrayList<Shields.Name> startingShields,
+//            int maxHealth,
+//            int shieldHealth,
+//            ArrayList<String> attackPattern,
+//            boolean isTargettable*/
     }};
-
+//
     public static AIInfoItem get(Name name)
     {
         System.out.println(ENTITIES);
         return ENTITIES.get(name);
+    }
+    
+    public static JSONArray loadSpawnables()
+    {
+    	JSONArray json = new JSONArray();
+    	Iterator<Name> spawnables = ENTITIES.keySet().iterator();
+    	while (spawnables.hasNext())
+    	{
+    		json.put(ENTITIES.get(spawnables.next()).toJson());
+    	}
+		return json;
     }
 }

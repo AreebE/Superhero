@@ -1,4 +1,4 @@
-package battlesystem.databaseImpls;
+package battlesystem.objectMapImpls;
 
 import java.util.ArrayList;
 import java.io.*;
