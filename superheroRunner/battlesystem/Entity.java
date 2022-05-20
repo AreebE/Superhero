@@ -143,8 +143,8 @@ public class Entity implements Comparable<Entity>
         this.baseAttack = 0;
         this.baseDefense = 0;
         this.creator = creator;
-        ArrayList<String> abstogive = new ArrayList<String>();
-        abstogive.add("pass turn");
+        // ArrayList<String> abstogive = new ArrayList<String>();
+        // abstogive.add("pass turn");
 //        AbilityManager.giveAbilities(this, abstogive);
     }
 

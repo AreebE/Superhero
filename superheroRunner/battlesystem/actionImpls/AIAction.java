@@ -5,7 +5,7 @@ import java.util.List;
 import battlesystem.Action;
 import battlesystem.Entity;
 import battlesystem.InputSystem;
-import battlesystem.entityImpls.AIEntity;
+import battlesystem.entityImpls.ControllableAutoEntity;
 
 /**
  * An action used for AI entities only.
@@ -13,19 +13,19 @@ import battlesystem.entityImpls.AIEntity;
  */
 public class AIAction extends Action
 {
-    private AIEntity caster;
+    private ControllableAutoEntity caster;
 
     /**
      * A basic constructor for the AI Action
      * 
      * @param target the target to attack
-     * @param caster the AI entity
+     * @param caster the Auto entity
      * @param allHeros the other heros here
      * @param inputReader the inputReader to get certain attributes.
      */
     public AIAction(
         Entity target, 
-        AIEntity caster, 
+        ControllableAutoEntity caster, 
         List<Entity> allHeros,
         InputSystem inputReader)
     {

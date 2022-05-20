@@ -16,10 +16,10 @@ import battlesystem.State;
 import battlesystem.actionImpls.AIAction;
 
 /**
- * An AIEntity used for some entities that don't have predictable patterns
+ * An ControllableAutoEntity used for some entities that don't have predictable patterns
  *
  */
-public class AIEntity extends Entity
+public class ControllableAutoEntity extends Entity
 {
     int currentAbility;
     // Entity creator;
@@ -37,7 +37,7 @@ public class AIEntity extends Entity
      * @param attackPattern *NEW* What abilities it will use and in what order
      * @param isTargettable *NEW* If it can be targetted by other characters
      */
-    public AIEntity(
+    public ControllableAutoEntity(
         String name, 
         int speed, 
         int health, 
@@ -65,7 +65,7 @@ public class AIEntity extends Entity
     @Override
   public List<Action> onTurn(ArrayList<Entity> fighters, InputSystem scanInput){
     System.out.println(this);
-//    System.out.println("WOOOO Look at me go i have gained sentience(AiEntity needs to be figured out)");
+//    System.out.println("WOOOO Look at me go i have gained sentience(ControllableAutoEntity needs to be figured out)");
     List<Action> playerActions = this.getActions(fighters, scanInput);
     return playerActions;
   } 

@@ -6,7 +6,8 @@ package battlesystem;
  */
 
 
-public class Element {
+public class Element 
+{
   //private int type;
   
   private String name;

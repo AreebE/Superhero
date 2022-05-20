@@ -7,7 +7,9 @@ import org.json.JSONObject;
 /**
  * A class used to modify certain abilities
  */
-public interface AbilityModifier {
+public interface AbilityModifier 
+    extends Saveable
+{
 	public static final String TYPE_KEY = "type";
   public boolean triggerModifier(List<Entity> target, Entity caster, Ability holder, Game g, BattleLog Log);
   public int getPriority();

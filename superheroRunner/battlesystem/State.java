@@ -9,6 +9,7 @@ import org.json.JSONObject;
  *
  */
 public abstract class State 
+    implements Saveable
 {
 	
 	public static final String TYPE_KEY = "type";

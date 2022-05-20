@@ -12,7 +12,7 @@ import battlesystem.EntityInfoItem;
 import battlesystem.Game;
 import battlesystem.Shield;
 import battlesystem.State;
-import battlesystem.entityImpls.AIEntity;
+import battlesystem.entityImpls.ControllableAutoEntity;
 import battlesystem.objectMapImpls.Effects;
 import battlesystem.objectMapImpls.Shields;
 import battlesystem.objectMapImpls.States;
@@ -21,14 +21,14 @@ import battlesystem.objectMapImpls.States;
  * This is for creating an AI info item
  *
  */
-public class AIInfoItem extends EntityInfoItem {
+public class ControllableAutoEntityInfoItem extends EntityInfoItem {
 
 	private static final String TARGETTABLE_KEY = "is targettable";
 	private static final String ATTACK_PATTERN_KEY = "attack pattern";
   private boolean isTargettable;
   private ArrayList<String> attackPattern;
   
-  public AIInfoItem(JSONObject json) {
+  public ControllableAutoEntityInfoItem(JSONObject json) {
 	  super(json);
 	  isTargettable = json.getBoolean(TARGETTABLE_KEY);
 	  attackPattern = new ArrayList<>();
@@ -52,7 +52,7 @@ public class AIInfoItem extends EntityInfoItem {
    * @param attackPattern the attack pattern this has
    * @param isTargettable if it is targettable
    */
-  public AIInfoItem(
+  public ControllableAutoEntityInfoItem(
 		  String name, 
 		  int speed, 
 		  ArrayList<String> abilityNames, 
@@ -82,7 +82,7 @@ public class AIInfoItem extends EntityInfoItem {
 		  Entity creator,
 		  Game g) 
   {
-    AIEntity ai = new AIEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), g.getState(super.defaultState),
+    ControllableAutoEntity ai = new ControllableAutoEntity(getName(), getSpeed(), getMaxHealth(), getShieldHealth(), g.getState(super.defaultState),
         creator, attackPattern, isTargettable);
     super.addItems(ai, g);
     return ai;
@@ -92,7 +92,7 @@ public class AIInfoItem extends EntityInfoItem {
   public JSONObject toJson()
   {
 	  JSONObject item = super.toJson();
-	  item.put(TYPE_KEY, InfoItemReader.PATTERN_AI_INFO);
+	  item.put(TYPE_KEY, InfoItemReader.PATTERN_CONTROLLABLE_AI_INFO);
 	  item.put(TARGETTABLE_KEY, isTargettable);
 	  
 	  JSONArray pattern = new JSONArray();

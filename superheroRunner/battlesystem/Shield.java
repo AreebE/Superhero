@@ -11,6 +11,7 @@ import org.json.JSONObject;
  *  
  */
 public abstract class Shield
+    implements Saveable
 {
 	public static final String TYPE_KEY = "type";
 	private static final String NAME_KEY = "name";

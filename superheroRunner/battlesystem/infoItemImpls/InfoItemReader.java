@@ -20,8 +20,9 @@ import battlesystem.effectImpls.OneTimeEffect;
 import battlesystem.effectImpls.PassiveEffect;
 
 public class InfoItemReader {
-	public static final String PATTERN_AI_INFO = "simple ai";
-	
+	public static final String PATTERN_CONTROLLABLE_AI_INFO = "simple controllable ai";
+	public static final String SIMPLE_AI_INFO_ITEM = "simple ai";
+    
 	public static HashMap<String, EntityInfoItem> parseJSONFile(String src) throws FileNotFoundException
 	{
 		Scanner fileReader = new Scanner(new File(src));
@@ -53,10 +54,19 @@ public class InfoItemReader {
 	{
 		switch(json.getString(EntityInfoItem.TYPE_KEY))
 		{
-			case PATTERN_AI_INFO:
-				return new AIInfoItem(json);
+			case PATTERN_CONTROLLABLE_AI_INFO:
+				return new ControllableAutoEntityInfoItem(json);
 			default:
 				return new EntityInfoItem(json);
 		}
 	}
+
+    public static MoveItem loadMoveItem(JSONObject json)
+    {
+        switch (json.getString(MoveItem.TYPE_KEY))
+        {
+            
+        }
+        return null;
+    }
 }

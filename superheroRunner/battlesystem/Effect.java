@@ -12,6 +12,7 @@ import org.json.JSONObject;
  * Acts as a long-lasting thing that will affect an entity
  */
 public class Effect 
+    implements Saveable
 {
 	public static final String TYPE_KEY = "type";
 	private static final String STRENGTH_KEY = "strength";

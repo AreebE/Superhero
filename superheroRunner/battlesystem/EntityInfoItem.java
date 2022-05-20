@@ -12,6 +12,7 @@ import org.json.JSONObject;
  *
  */
 public class EntityInfoItem
+    implements Saveable
 {
 
 	public static final String TYPE_KEY = "type";
@@ -63,7 +64,7 @@ public class EntityInfoItem
     	}
     }
     /**
-     * a basic constructor for an entity
+     * a basic constructor for an entity info item
      * @param name the name of the entity
      * @param speed the speed of the entity
      * @param abilityNames the abilities it starts with

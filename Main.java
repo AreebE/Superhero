@@ -11,6 +11,14 @@ import game.OuterGame;
 
 class Main {
   public static void main(String[] args) {
-   new OuterGame();
+      	 String[] fileSources = new String[6];
+	 fileSources[OuterGame.ABILITIES_INDEX] = "res/abilities.json";
+	 fileSources[OuterGame.EFFECTS_INDEX] = "res/effects.json";
+	 fileSources[OuterGame.SHIELDS_INDEX] = "res/shields.json";
+	 fileSources[OuterGame.SPAWNABLES_INDEX] = "res/entities.json";
+	 fileSources[OuterGame.STATES_INDEX] = "res/states.json";
+	 fileSources[OuterGame.HEROES_INDEX] = "res/heroes.json";
+	  
+	  new OuterGame(fileSources);
   }
 }

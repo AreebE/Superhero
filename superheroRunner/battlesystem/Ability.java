@@ -15,6 +15,7 @@ import java.util.Comparator;
  *
  */
 public abstract class Ability 
+    implements Saveable
 {
 	
 	
