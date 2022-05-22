@@ -109,9 +109,9 @@ public class DefenseAbility extends Ability
         Game g,
         BattleLog log) 
     {
-        target.addShield(g.getShield(shield));
         Object[] contents = new Object[]{target.getName(), shield};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.DEFENSE, contents));
+        target.addShield(g.getShield(shield), log, caster, g);
         return;
     }
 

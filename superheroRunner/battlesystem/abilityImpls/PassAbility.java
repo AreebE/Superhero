@@ -73,6 +73,7 @@ public class PassAbility extends Ability
     {
         Object[] contents = new Object[]{caster.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.PASS, contents));
+        caster.pass(log, g);
         return;
     }  
     

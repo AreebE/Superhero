@@ -37,35 +37,21 @@ public class OuterGame {
 //  ScannerInput system;
   private AbilityManager abilityMan = new AbilityManager();
   private Scanner sc = new Scanner(System.in);
-  private HashMap<String, Ability> abilities;
+    private Storage storage;
+    private HashMap<String, Ability> abilities;
   private HashMap<String, Effect> effects;
   private HashMap<String, Shield> shields;
   private HashMap<String, EntityInfoItem> spawnables;
   private HashMap<String, State> states;
-  
-  public static final int ABILITIES_INDEX = 0;
-  public static final int EFFECTS_INDEX = 1;
-  public static final int SHIELDS_INDEX = 2;
-  public static final int SPAWNABLES_INDEX = 3;
-  public static final int STATES_INDEX = 4;
-  public static final int HEROES_INDEX = 5;
+
   
   public OuterGame(String[] files) {
-//    this.superheros = JsonIoThing.loadSuperheroArr("FileParsing/save.json");
-    try 
+   this.superheros = new ArrayList<>();
+    String[] items = new String[]{"EEEEEE", "Joe", "BeepBoop", "TestSubject", "SecondestSubject"}
+      try 
     {
-        this.abilities = AbilityLoader.parseJSONFile(files[ABILITIES_INDEX]);
-        this.effects = EffectLoader.parseJSONFile(files[EFFECTS_INDEX]);
-        this.shields = ShieldLoader.parseJSONFile(files[SHIELDS_INDEX]);
-        this.spawnables = InfoItemReader.parseJSONFile(files[SPAWNABLES_INDEX]);
-        this.states = StateLoader.parseJSONFile(files[STATES_INDEX]);
-        HashMap<String, EntityInfoItem> heroes = InfoItemReader.parseJSONFile(files[HEROES_INDEX]);  	  
-  	  	Iterator<String> heroNames = heroes.keySet().iterator();
-  	  	this.superheros = new ArrayList<>();
-	  	  while (heroNames.hasNext())
-	  	  {
-	  		  superheros.add(heroes.get(heroNames.next()));
-	  	  }
+        storage = new Storage(files);
+        
     }
     catch(FileNotFoundException fnfe)
     {
@@ -95,7 +81,7 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        InnerGame iG = new InnerGame(superheros, abilities, effects, spawnables, shields, states, g);
+        InnerGame iG = new InnerGame(superheros, storage, g);
         iG.startFight();
         //going to add exploration here soon
 //        iG.Fight(superheros);

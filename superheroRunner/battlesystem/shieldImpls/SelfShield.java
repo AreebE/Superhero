@@ -93,7 +93,7 @@ public class SelfShield extends Shield
     {
         Object[] contents = new Object[]{victim.getName(), getUses() - 1, victim.getName(), selfApply, null, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        victim.addEffect(g.getEffect(selfApply));
+        victim.addEffect(caster, g, log, g.getEffect(selfApply));
     }
 
     @Override

@@ -81,7 +81,6 @@ public class Action {
     public void performAction(BattleLog log, Game g)
     {
         // System.out.println("perform action");
-        caster.searchForShield(Shield.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), mainTarget, caster, g, log);
         otherTargets.add(0, mainTarget);
         ability.useAbility(otherTargets, caster, g, log);
         caster.endOfTurn(log, g);

@@ -12,7 +12,13 @@ import game.Storage;
 //this thing is kinda nuts and needs some work also it no longer 
 // deals with files so i dont think it needs to be in FileParsing
 public class CustomMaker {
-
+    private interface InputSystem
+    {
+        public boolean askForBoolean(String[] prompts);
+        public int askForInteger(int min, int max, String[] prompts);
+        public String askForItem(String[] prompts, Storage items);
+    }
+    
     private static final int MAX_HEALTH = 2000;
     private static final int MIN_HEALTH = 200;
     private static final int MIN_SHIELD = 50;
@@ -63,7 +69,9 @@ public class CustomMaker {
   CustomMaker() {
   }
     
-  public static Entity askNMakeSuperhero(Storage storage) {
+  public static Entity askNMakeSuperhero(
+      Storage storage) 
+    {
     Scanner sc = new Scanner(System.in);
     System.out.println("And so, the summoning sigil beckons you. \n \n");
     System.out.println("First, we must pick a name.");
@@ -124,6 +132,10 @@ public class CustomMaker {
                                                "That is alright. It may be better to go with what is already made.",
                                                ""
                                            });
+        if (usePreloadedState)
+        {
+            
+        }
                 
     }
     ArrayList<String> abilityNames = new ArrayList<String>();
@@ -150,7 +162,11 @@ public class CustomMaker {
       return null;
   }
 
-    private static int askUserForInteger(Scanner input, int min, int max, String[] prompts)
+    private static int askUserForInteger(
+        Scanner input, 
+        int min, 
+        int max, 
+        String[] prompts)
     {
         int result = -1;
                     System.out.println(prompts[QUESTION]);
@@ -186,13 +202,15 @@ public class CustomMaker {
         return result;
     }
 
-    private static boolean askForBoolean(Scanner input, String[] prompts)
+    private static boolean askForBoolean(
+        Scanner input, 
+        String[] prompts)
     {
         System.out.println(prompts[QUESTION]);
         String answer = null;
         while (answer == null)
         {
-            answer = input.next();
+            answer = input.next().toLowerCase();
             if (!YES_INPUT.contains(answer)
                 && !NO_INPUT.contains(answer))
             {
@@ -206,8 +224,13 @@ public class CustomMaker {
         return YES_INPUT.contains(answer);
     }
 
-    private static String askForString(String[] prompt)
+    private static String askForItem(
+        String[] prompts, 
+        Storage items,
+        int category)
     {
-        return null;
+        
+        String result = "";
+        return result;
     }
 }

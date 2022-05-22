@@ -472,10 +472,10 @@ public DecayEffect(
         {
             return;
         }
-        for (Name n: names)
-        {
-            e.addEffect(getEffect(n).copy());
-        }
+        // for (Name n: names)
+        // {
+        //     e.addEffect(getEffect(n).copy());
+        // }
     }
     
     public static JSONArray loadEffects()

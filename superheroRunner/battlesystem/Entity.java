@@ -23,6 +23,7 @@ public class Entity implements Comparable<Entity>
 {
     // free will between 1 and 20;
     private transient Entity creator;
+    private Effect mostRecentEffect;
     private String name;
     private int speed;
     private transient ArrayList<Ability> abilities;
@@ -657,16 +658,28 @@ public class Entity implements Comparable<Entity>
     /*
      * Methods for adding/removing Effects
      */
+    
     /** 
      * Add an effect to this entity
      * @param newEffect the effect to add.
      */
     public void addEffect(
+        Entity caster,
+        Game g,
+        BattleLog log,
         Effect newEffect) 
     {
         effects.add(newEffect);
+        mostRecentEffect = newEffect;
+        searchForShield(Shield.Trigger.EFFECT_APPLIED, newEffect.getElement(), this, caster, g, log);
     }
-    
+
+    public void addStartingEffect(
+        Effect e
+    )
+    {
+        effects.add(e);
+    }
     /**
      * Apply an effect on this entity. 
      * @param e the effect to use.
@@ -680,6 +693,10 @@ public class Entity implements Comparable<Entity>
         e.useEffect(this, log);
     }
 
+    public void gaveEffect(Game g, BattleLog log)
+    {
+        this.searchForShield(Shield.Trigger.GIVE_EFFECT, Elements.getElement(Elements.Name.ALL), this, this, g, log);
+    }
     /**
      * Remove an effect from this entity
      * @param removed The effect to remove.
@@ -698,6 +715,8 @@ public class Entity implements Comparable<Entity>
      */
     public void removeEffects(
         Elements.Name elementID,
+        Game g,
+        Entity caster,
         BattleLog log)
     {
         List<String> effectsRemoved = new ArrayList<>();
@@ -717,9 +736,18 @@ public class Entity implements Comparable<Entity>
         }
         Object[] contents = new Object[]{name, effectsRemoved.toArray(new String[0])};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.CLEANSE, contents));
+        searchForShield(Shield.Trigger.CLEANSE, Elements.getElement(elementID), this, caster, g, log);
     }
     //
 
+    /**
+     * Get the most recent effect applied to this target.
+     * @return the most recent effect.
+    */
+    public Effect getMostRecentEffect()
+    {
+        return mostRecentEffect;
+    }
     /*
     * Methods for adding/removing shields
     */
@@ -729,7 +757,18 @@ public class Entity implements Comparable<Entity>
      * @param s the shield to give.
      */
     public void addShield(
-        Shield s)
+        Shield s,
+        BattleLog log,
+        Entity caster,
+        Game g)
+    {
+        shields.add(s);
+        searchForShield(Shield.Trigger.SHIELD_ADDED, Elements.getElement(Elements.Name.ALL), this, caster, g, log);
+    }
+
+    public void addStartingShield(
+        Shield s
+    )
     {
         shields.add(s);
     }
@@ -937,6 +976,36 @@ public class Entity implements Comparable<Entity>
         List<Action> playerActions = this.getActions(fighters, scanInput);
         return playerActions;
     } 
+
+    public void pass(
+        BattleLog log,
+        Game g
+    )
+    {
+        searchForShield(Shield.Trigger.PASS, Elements.getElement(Elements.Name.ALL), this, this, g, log);
+    }
+
+    public void spawnedObject(
+        BattleLog log,
+        Entity caster,
+        Game g
+    )
+    {
+        searchForShield(Shield.Trigger.SPAWN, Elements.getElement(Elements.Name.ALL), this, caster, g, log);
+    }
+    
+    public void performAction(
+        BattleLog log,
+        Game g
+    )
+    {
+        searchForShield(Shield.Trigger.ANY_ACTION, Elements.getElement(Elements.Name.ALL), this, this, g, log);
+    }
+
+    public void hasAttacked(BattleLog log, Game g)
+    {
+        searchForShield(Shield.Trigger.ATTACKING, Elements.getElement(Elements.Name.ALL), this, this, g, log);    
+    }
     /*
     *
     */
@@ -972,9 +1041,10 @@ public class Entity implements Comparable<Entity>
      * Change the state of this entity
      * @param newState the new state of this entity
      */
-    public void replaceState(State newState)
+    public void replaceState(State newState, Entity caster, BattleLog log, Game g)
     {
         this.state = newState;
+        searchForShield(Shield.Trigger.STATE_CHANGE, Elements.getElement(Elements.Name.ALL), this, caster, g, log);       
     }
 
     /**

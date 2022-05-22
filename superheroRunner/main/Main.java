@@ -27,6 +27,7 @@ import battlesystem.objectMapImpls.Spawnables;
 import battlesystem.objectMapImpls.States;
 import battlesystem.shieldImpls.ShieldLoader;
 import battlesystem.stateImpls.StateLoader;
+import game.Storage;
 import game.InnerGame;
 import game.OuterGame;
 
@@ -79,12 +80,12 @@ class Main {
 //	  System.out.println(states);
 //	  new InnerGame(initialHeroes, abilities, effects, spawnables, shields, states, null).startFight();
 	 String[] fileSources = new String[6];
-	 fileSources[OuterGame.ABILITIES_INDEX] = "res/abilities.json";
-	 fileSources[OuterGame.EFFECTS_INDEX] = "res/effects.json";
-	 fileSources[OuterGame.SHIELDS_INDEX] = "res/shields.json";
-	 fileSources[OuterGame.SPAWNABLES_INDEX] = "res/entities.json";
-	 fileSources[OuterGame.STATES_INDEX] = "res/states.json";
-	 fileSources[OuterGame.HEROES_INDEX] = "res/heroes.json";
+	 fileSources[Storage.ABILITIES] = "res/abilities.json";
+	 fileSources[Storage.EFFECTS] = "res/effects.json";
+	 fileSources[Storage.SHIELDS] = "res/shields.json";
+	 fileSources[Storage.SPAWNABLES] = "res/entities.json";
+	 fileSources[Storage.STATES] = "res/states.json";
+	 fileSources[Storage.ENTITIES] = "res/heroes.json";
 	  new OuterGame(fileSources);
   }
 }

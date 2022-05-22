@@ -244,7 +244,8 @@ public abstract class Ability
         keepGoing = true;
         Object[] contents = new Object[]{caster.getName(), targets.get(0).getName(), name, targets.size() - 1};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
-        
+        caster.performAction(log, g);
+
         turnsSinceUse -= cooldown;
         
        

@@ -166,6 +166,7 @@ public class AttackAbility extends Ability
         {
             super.stopAttack();
         }
+        caster.hasAttacked(log, g);
         return;
     }
 

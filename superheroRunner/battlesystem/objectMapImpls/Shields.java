@@ -149,19 +149,19 @@ public final class Shields
         return SHIELDS.get(name);
     }
 
-    public static void giveShields(
-        Entity e,
-        List<Name> shields)
-    {
-        if (shields == null)
-        {
-            return;
-        }
-        for (Name n: shields)
-        {
-            e.addShield(getShield(n).copy());
-        }
-    }
+    // public static void giveShields(
+    //     Entity e,
+    //     List<Name> shields)
+    // {
+    //     if (shields == null)
+    //     {
+    //         return;
+    //     }
+    //     for (Name n: shields)
+    //     {
+    //         e.addBeginningShields(getShield(n).copy());
+    //     }
+    // }
     
     public static JSONArray loadShields()
     {

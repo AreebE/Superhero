@@ -123,10 +123,9 @@ public class AttackStatusAbility extends AttackAbility
     {
         super.castAbility(target, caster, g, log);
         
-            target.addEffect(g.getEffect(sideEffect));
-            Object[] contents = new Object[]{target.getName(), sideEffect};
-            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
-        
+        Object[] contents = new Object[]{target.getName(), sideEffect};
+        log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
+        target.addEffect(caster, g, log, g.getEffect(sideEffect));        
         return;
     }
 

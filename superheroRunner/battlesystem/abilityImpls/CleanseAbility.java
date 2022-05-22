@@ -95,7 +95,7 @@ public class CleanseAbility extends SupportAbility
         Game g,
         BattleLog log) 
     {
-        target.removeEffects(getElement().getID(), log);
+        target.removeEffects(getElement().getID(), g, caster, log);
         return;
     }
 

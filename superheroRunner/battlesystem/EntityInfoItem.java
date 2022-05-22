@@ -126,12 +126,12 @@ public class EntityInfoItem
         for (String ef: effects)
         {
 //        	System.out.println(ef);
-        	e.addEffect(g.getEffect(ef));
+        	e.addStartingEffect(g.getEffect(ef));
         }
         for (String s: shields)
         {
 //        	System.out.println(s);
-        	e.addShield(g.getShield(s));
+        	e.addStartingShield(g.getShield(s));
         }
     }
 

@@ -109,8 +109,9 @@ public class DualShield extends Shield
     {
         Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), casterApply, selfApply, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        victim.addEffect(g.getEffect(selfApply));
-        caster.addEffect(g.getEffect(casterApply));
+
+        victim.addEffect(caster, g, log, g.getEffect(selfApply));
+        caster.addEffect(caster, g, log, g.getEffect(casterApply));
     }
 
     /**

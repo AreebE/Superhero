@@ -88,7 +88,7 @@ public class TrapShield extends Shield
         Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), counter, null, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
                 // System.out.println("Apply " + isNullifies());
-        caster.addEffect(g.getEffect(counter));
+        caster.addEffect(caster, g, log, g.getEffect(counter));
     }
 
     @Override

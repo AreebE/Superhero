@@ -30,6 +30,7 @@ public class Storage
     public static final int ENTITIES = 4;
     public static final int SPAWNABLES = 5;
 
+    private String[] originalSrcs;
     private HashMap<String, Ability> abilities;
     private HashMap<String, Effect> effects;
     private HashMap<String, Shield> shields;
@@ -39,6 +40,7 @@ public class Storage
 
     public Storage(String[] files) throws FileNotFoundException
     {
+        originalSrcs = files;
         this.abilities = AbilityLoader.parseJSONFile(files[ABILITIES]);
         this.effects = EffectLoader.parseJSONFile(files[EFFECTS]);
         this.shields = ShieldLoader.parseJSONFile(files[SHIELDS]);
@@ -149,6 +151,12 @@ public class Storage
         return true;
     }
 
+    public boolean hasItem(String name, int category)
+    {
+        HashMap<String, Saveable> mapToUse = getSaveables(category);
+        return mapToUse.containsKey(name);
+    }
+    
     public HashMap<String, Saveable> getSaveables(int category)
     {
         switch(category)
@@ -190,7 +198,15 @@ public class Storage
 
     public void saveAllToFiles(String[] fileNames)
     {
-        
+        for (int i = 0; i < SPAWNABLES; i++)
+            {
+                saveToFile(fileNames[i], i);
+            }
+    }
+
+    public void saveAllToFiles()
+    {
+        saveAllToFiles(originalSrcs);
     }
    
 }

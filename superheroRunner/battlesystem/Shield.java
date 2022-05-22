@@ -36,9 +36,9 @@ public abstract class Shield
         ATTACKING("attacking"), // When attacking another player
         CLEANSE("cleanse"), // When cleansing oneself
         DEATH("death"), // Upon this player's death
-        DEFENSE("defense"), // Upon using a defense skill
-        // EFFECT_APPLIED, // Upon being given an effect
+        EFFECT_APPLIED("effect applied"), // Upon being given an effect
         SHIELD_BREAK("shieldBreak"), // Upon shield breaking
+        SHIELD_ADDED("shieldAdded"), // Upon adding a shield
         SPAWN("spawn"), // Upon spawning another thing
         STATE_CHANGE("changeState"), // Upon changing state
         GIVE_EFFECT("giveEffect"), // Upon giving an effect
@@ -65,8 +65,10 @@ public abstract class Shield
         			return CLEANSE;
         		case "death":
         			return DEATH;
-        		case "defense":
-        			return DEFENSE;
+                case "effect applied":
+                    return EFFECT_APPLIED;
+        		case "shieldAdded":
+        			return SHIELD_ADDED;
         		case "shieldBreak":
         			return SHIELD_BREAK;
         		case "spawn":

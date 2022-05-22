@@ -24,6 +24,8 @@ public class ShieldLoader {
 	public static final String SELF_DEATH = "self death";
 	public static final String SELF = "self";
 	public static final String TRAP = "trap";
+    public static final String REFLECTIVE = "reflective";
+    
 	public static HashMap<String, Shield> parseJSONFile(String src) throws FileNotFoundException
 	{
 		Scanner fileReader = new Scanner(new File(src));
@@ -65,7 +67,9 @@ public class ShieldLoader {
 				return new SelfShield(json);
 			case TRAP:
 				return new TrapShield(json);
-		}
+            case REFLECTIVE:
+                // return new ReflectiveShield(json);
+        }
 		return null;
 	}
 }
