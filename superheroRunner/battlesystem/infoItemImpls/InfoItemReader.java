@@ -52,6 +52,7 @@ public class InfoItemReader {
 	
 	public static EntityInfoItem loadItem(JSONObject json)
 	{
+//		System.out.println(json.getString(EntityInfoItem.TYPE_KEY) + ", " + json.getString("name"));
 		switch(json.getString(EntityInfoItem.TYPE_KEY))
 		{
 			case PATTERN_CONTROLLABLE_AI_INFO:
@@ -65,8 +66,8 @@ public class InfoItemReader {
     {
         switch (json.getString(MoveItem.TYPE_KEY))
         {
-            
+            default:
+            	return new MoveItem(json);
         }
-        return null;
     }
 }

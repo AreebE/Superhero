@@ -131,7 +131,9 @@ public class EntityInfoItem
         for (String s: shields)
         {
 //        	System.out.println(s);
+//        	System.out.println("e");
         	e.addStartingShield(g.getShield(s));
+//        	System.out.println("f");
         }
     }
 

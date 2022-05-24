@@ -107,10 +107,11 @@ public class SpawnableAbility extends DefenseAbility
         Game g,
         BattleLog log) 
     {
+    	System.out.println(template);
         Entity ai = g.getSpawnable(template).create(target, g);
         Object[] contents = new Object[]{target.getName(), ai.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SPAWN, contents));
-        caster.spawnedObject(log, caster, g);
+        target.spawnedObject(log, caster, g);
         g.addMember(ai, target.getTeamID());
         return;
     }

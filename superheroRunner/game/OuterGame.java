@@ -17,6 +17,7 @@ import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
 import battlesystem.Shield;
 import battlesystem.State;
+import battlesystem.Storage;
 import battlesystem.abilityImpls.AbilityLoader;
 import battlesystem.effectImpls.EffectLoader;
 import battlesystem.infoItemImpls.InfoItemReader;
@@ -47,10 +48,15 @@ public class OuterGame {
   
   public OuterGame(String[] files) {
    this.superheros = new ArrayList<>();
-    String[] items = new String[]{"EEEEEE", "Joe", "BeepBoop", "TestSubject", "SecondestSubject"}
+    String[] items = new String[]{"EEEEEE", "Joe", "BeepBoop", "TestSubject", "SecondestSubject"};
       try 
     {
         storage = new Storage(files);
+        for (int i = 0; i < items.length; i++)
+        {
+        	superheros.add(storage.getEntity(items[i]));
+//        	System.out.println(storage.getEntity(items[i]));
+        }
         
     }
     catch(FileNotFoundException fnfe)
@@ -81,7 +87,8 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        InnerGame iG = new InnerGame(superheros, storage, g);
+        String testName = "Joe";
+        InnerGame iG = new InnerGame(storage.getEncounter("beta"), storage, g, testName);
         iG.startFight();
         //going to add exploration here soon
 //        iG.Fight(superheros);

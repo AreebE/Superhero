@@ -1,9 +1,12 @@
 package battlesystem.infoItemImpls;
 
 import org.json.*;
+
+import battlesystem.Game;
+
 import java.lang.Comparable;
 
-public abstract class MoveItem<T> implements Comparable<MoveItem<T>>
+public class MoveItem implements Comparable<MoveItem>
 {
     public static final String TYPE_KEY = "type";
     
@@ -48,9 +51,12 @@ public abstract class MoveItem<T> implements Comparable<MoveItem<T>>
         return priority;
     }
 
-    public abstract void adjustPriority(T conditions);
+    public void adjustPriority(Game g)
+    {
+    	
+    }
 
-    public int compareTo(MoveItem<T> other)
+    public int compareTo(MoveItem other)
     {
         return this.getPriority() - other.getPriority();
     }

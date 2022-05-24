@@ -1,19 +1,15 @@
-package game;
+package battlesystem;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import battlesystem.Ability;
-import battlesystem.Effect;
-import battlesystem.Shield;
-import battlesystem.State;
-import battlesystem.Saveable;
-import battlesystem.EntityInfoItem;
 import battlesystem.abilityImpls.AbilityLoader;
 import battlesystem.effectImpls.EffectLoader;
+import battlesystem.encounterImpls.EncounterLoader;
 import battlesystem.infoItemImpls.InfoItemReader;
 import battlesystem.shieldImpls.ShieldLoader;
 import battlesystem.stateImpls.StateLoader;
@@ -29,6 +25,7 @@ public class Storage
     public static final int STATES = 3;
     public static final int ENTITIES = 4;
     public static final int SPAWNABLES = 5;
+    public static final int ENCOUNTERS = 6;
 
     private String[] originalSrcs;
     private HashMap<String, Ability> abilities;
@@ -37,16 +34,19 @@ public class Storage
     private HashMap<String, State> states;
     private HashMap<String, EntityInfoItem> entities;
     private HashMap<String, EntityInfoItem> spawnables;
+    private HashMap<String, Encounter> encounters;
 
     public Storage(String[] files) throws FileNotFoundException
     {
         originalSrcs = files;
+//        System.out.println(Arrays.toString(files) + " = files");
         this.abilities = AbilityLoader.parseJSONFile(files[ABILITIES]);
         this.effects = EffectLoader.parseJSONFile(files[EFFECTS]);
         this.shields = ShieldLoader.parseJSONFile(files[SHIELDS]);
         this.spawnables = InfoItemReader.parseJSONFile(files[SPAWNABLES]);
         this.states = StateLoader.parseJSONFile(files[STATES]);
         this.entities = InfoItemReader.parseJSONFile(files[ENTITIES]);  	  
+        this.encounters = EncounterLoader.parseJSONFile(files[ENCOUNTERS]);
     }
 
     public Storage(
@@ -55,7 +55,8 @@ public class Storage
         HashMap<String, Shield> shields,
         HashMap<String, State> states,
         HashMap<String, EntityInfoItem> entities,
-        HashMap<String, EntityInfoItem> spawnables
+        HashMap<String, EntityInfoItem> spawnables,
+        HashMap<String, Encounter> encounters
     )
     {
         this.abilities = abilities;
@@ -64,40 +65,49 @@ public class Storage
         this.states = states;
         this.entities = entities;
         this.spawnables = spawnables;
+        this.encounters = encounters;
     }
 
     public Ability getAbility(String name)
     {
-        return abilities.get(name);
+        return abilities.get(name.toLowerCase());
     }
 
     public Effect getEffect(String name)
     {
-        return effects.get(name);
+//    	System.out.println(name + " , " + effects.get(name.toLowerCase()));
+
+        return effects.get(name.toLowerCase());
     }
 
     public Shield getShield(String name)
     {
-        return shields.get(name);
+        return shields.get(name.toLowerCase());
     }
 
     public State getState(String name)
     {
-        return states.get(name);
+        return states.get(name.toLowerCase());
     }
 
     public EntityInfoItem getEntity(String name)
     {
-        return entities.get(name);
+        return entities.get(name.toLowerCase());
     }
 
     public EntityInfoItem getSpawnable(String name)
     {
-        return spawnables.get(name);
+        return spawnables.get(name.toLowerCase());
+    }
+    
+    public Encounter getEncounter(String name)
+    {
+    	return encounters.get(name.toLowerCase());
     }
 
     public boolean addItem(int type, String name, Object item)
     {
+    	name = name.toLowerCase();
         switch (type)
         {
             case ABILITIES:

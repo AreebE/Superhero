@@ -1,14 +1,12 @@
 package battlesystem.objectMapImpls;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
 
 import org.json.JSONArray;
 
-import battlesystem.infoItemImpls.AIInfoItem;
-import battlesystem.objectMapImpls.Shields.Name;
-
-import java.util.ArrayList;
+import battlesystem.infoItemImpls.ControllableAutoEntityInfoItem;
 
 public final class Spawnables
 {
@@ -21,13 +19,13 @@ public final class Spawnables
         SQUIRREL
     }
 
-    private final static EnumMap<Name, AIInfoItem> ENTITIES = new EnumMap<Name, AIInfoItem>(Name.class)
+    private final static EnumMap<Name, ControllableAutoEntityInfoItem> ENTITIES = new EnumMap<Name, ControllableAutoEntityInfoItem>(Name.class)
     {{
         System.out.println("Created spawnables");
         put
         (
             Name.CRYSTAL,
-            new AIInfoItem
+            new ControllableAutoEntityInfoItem
             (
                 "Crystal",
                 1,
@@ -58,7 +56,7 @@ public final class Spawnables
         put
         (
             Name.SQUIRREL,
-            new AIInfoItem
+            new ControllableAutoEntityInfoItem
             (
                 "Squirrel",
                 1,
@@ -96,7 +94,7 @@ public final class Spawnables
 //            boolean isTargettable*/
     }};
 //
-    public static AIInfoItem get(Name name)
+    public static ControllableAutoEntityInfoItem get(Name name)
     {
         System.out.println(ENTITIES);
         return ENTITIES.get(name);

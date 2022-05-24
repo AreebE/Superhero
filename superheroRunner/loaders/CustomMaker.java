@@ -7,8 +7,8 @@ import battlesystem.Ability;
 import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
 import battlesystem.State;
+import battlesystem.Storage;
 import battlesystem.objectMapImpls.*;
-import game.Storage;
 //this thing is kinda nuts and needs some work also it no longer 
 // deals with files so i dont think it needs to be in FileParsing
 public class CustomMaker {

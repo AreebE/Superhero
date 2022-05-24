@@ -8,7 +8,7 @@ import battlesystem.InputSystem;
 import battlesystem.entityImpls.ControllableAutoEntity;
 
 /**
- * An action used for AI entities only.
+ * An action used for Controllable entities only.
  *
  */
 public class AIAction extends Action

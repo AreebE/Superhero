@@ -110,7 +110,7 @@ public class SupportAbility extends Ability
     	System.out.println(template);
         Object[] contents = new Object[]{target.getName(), template};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_APPLIED, contents));
-        target.addEffect(caster, g, log, g.getEffect(template));
+        target.addEffect(caster, g, log, g.getEffect(template.toLowerCase()));
         caster.gaveEffect(g, log);
         return;
     }

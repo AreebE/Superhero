@@ -13,7 +13,6 @@ import org.json.JSONTokener;
 import battlesystem.Effect;
 import battlesystem.EntityInfoItem;
 import battlesystem.State;
-import battlesystem.infoItemImpls.AIInfoItem;
 
 public class StateLoader {
 	

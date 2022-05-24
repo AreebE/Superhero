@@ -92,7 +92,7 @@ public class StateChangeAbility extends SupportAbility
         String oldStateName = target.getState().getName();
         Object[] contents = new Object[]{target.getName(), oldStateName, template};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.STATE_CHANGE, contents));
-        target.replaceState(g.getState(template), caster, log, g);
+        target.replaceState(g.getState(template.toLowerCase()), caster, log, g);
         return; 
     }
 

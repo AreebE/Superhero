@@ -1151,4 +1151,9 @@ public class Entity implements Comparable<Entity>
     {
     	this.teamID = newID;
     }
+
+	public void appendNumber(int countOfSpawn) {
+		this.name += "." + countOfSpawn;
+		
+	}
 }

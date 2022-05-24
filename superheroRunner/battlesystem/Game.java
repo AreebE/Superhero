@@ -6,9 +6,11 @@ import java.util.HashMap;
 
 import battlesystem.battlelogImpls.StringBattleLog;
 
-public class Game {
+public abstract class Game {
 	
 
+	int countOfSpawn = 0;
+	
 	public enum Type
 	{
 		ABILITY,
@@ -17,12 +19,15 @@ public class Game {
 		SHIELD,
 		STATE
 	}
-	public class Team
+	
+	public static class Team
 	{
 		private ArrayList<Entity> members;
+		private final int id;
 	
-		public Team()
+		public Team(int id)
 		{
+			this.id = id;
 			members = new ArrayList<Entity>();
 		}
 		
@@ -35,33 +40,84 @@ public class Game {
 		{
 			members.add(members.size(), member);
 		}
+		
+		protected void removeMember(Entity member)
+		{
+			members.remove(member);
+		}
+		
+		protected int getNumberOfMembers()
+		{
+			return members.size();
+		}
+		
+		@Override
+		public String toString()
+		{
+			StringBuilder list = new StringBuilder();
+			for (int i = 0; i < members.size(); i++)
+			{
+				list.append("* ")
+					.append(members.get(i).getName())
+					.append("\n");
+			}
+			return list.toString();
+		}
+		
+		public int getID()
+		{
+			return id;
+		}
 	}
 	
-	private HashMap<String, Ability> abilities;
-	private HashMap<String, Effect> effects;
-	private HashMap<String, EntityInfoItem> spawnables;
-	private HashMap<String, Shield> shields;
-	private HashMap<String, State> states;
+	
 	private InputSystem input;
 	
 	private ArrayList<Entity> allFighters;
+	private Storage s;
 	private ArrayList<Team> teams;
 	private BattleLog log;
 	
 	public Game(
+			Encounter encounter,
+			Storage s,
+			BattleLog log,
+			String protagonist
+	)
+	{
+		ArrayList<Encounter.ProposedTeam> propositions = encounter.getTeams();
+		this.teams = new ArrayList<>();
+		this.s = s;
+		this.allFighters = new ArrayList<>();
+		this.log = log;
+		for (int i = 0; i < propositions.size(); i++)
+		{
+			ArrayList<String> names = propositions.get(i).getNames();
+			Team team = new Team(i);
+			teams.add(team);
+			for (int j = 0; j < names.size(); j++)
+			{
+				String currentName = names.get(j);
+				if (currentName.equals(Encounter.PROTAGONIST))
+				{
+					Entity e = s.getEntity(protagonist.toLowerCase()).create(null, this);
+					this.addMember(e, team.getID());
+				}
+				else 
+				{
+					Entity e = s.getEntity(currentName.toLowerCase()).create(null, this);
+					this.addMember(e, team.getID());
+				}
+			}
+		}
+	}
+	
+	public Game(
 			ArrayList<EntityInfoItem> initialFighters,
-			HashMap<String, Ability> abilities,
-			HashMap<String, Effect> effects,
-			HashMap<String, EntityInfoItem> spawnables,
-			HashMap<String, Shield> shields,
-			HashMap<String, State> states,
+			Storage s,
 			BattleLog log)
 	{
-		this.abilities = abilities;
-		this.effects = effects;
-		this.spawnables = spawnables;
-		this.shields = shields;
-		this.states = states;
+		this.s = s;
 		this.input = input;
 		this.teams = new ArrayList<>();
 		this.allFighters = new ArrayList<>();
@@ -70,14 +126,15 @@ public class Game {
 		{
 //			System.out.println(initialFighters.get(i).defaultState);
 			Entity e = initialFighters.get(i).create(null, this);
-			Team t = new Team();
+//			System.out.println("E");
+			Team t = new Team(i);
 			t.addMember(e);
 			e.setTeamID(i);
 			teams.add(t);
 			allFighters.add(e);
 		}
 	}
-	
+
 	public void setInputSystem(InputSystem input)
 	{
 		this.input = input;
@@ -85,32 +142,43 @@ public class Game {
 	
 	public Ability getAbility(String name)
 	{
-		return abilities.get(name).copy();
+		return s.getAbility(name.toLowerCase()).copy();
 	}
 	
 	public EntityInfoItem getSpawnable(String name)
 	{
-		return spawnables.get(name);
+		return s.getSpawnable(name.toLowerCase());
 	}
 	
 	public Effect getEffect(String name)
 	{
-		return effects.get(name).copy();
+		return s.getEffect(name.toLowerCase()).copy();
 	}
 	
 	public Shield getShield(String name)
 	{
-		return shields.get(name).copy();
+//		System.out.println(name);
+		return s.getShield(name.toLowerCase()).copy();
 	}
 	
 	public State getState(String name)
 	{
-		return states.get(name).copy();
+		return s.getState(name.toLowerCase()).copy();
 	}
+
 
 	public void addMember(Entity created, int teamToJoin)
 	{
 		teams.get(teamToJoin).addMember(created);
+		created.setTeamID(teamToJoin);
+		for (int i = 0; i < allFighters.size(); i++)
+		{
+			if (allFighters.get(i).getName().equals(created.getName()))
+			{
+				created.appendNumber(countOfSpawn);
+				countOfSpawn++;
+			}
+		}
 		allFighters.add(created);
 	}
 	
@@ -120,27 +188,43 @@ public class Game {
 	    t.setsTerrianElement(Elements.getElement(Elements.Name.ICE));
 	    ArrayList<Action> actionsToPreform = new ArrayList<Action>();
 //	    allFighters.get(0).setTerrain(t);
+	    Collections.sort(allFighters);
+	      Collections.reverse(allFighters);
 //	    allFighters.get(1).setTerrain(t);
-	    while (allFighters.size() > 1) {
+	    
+	      while (teams.size() > 1) {
 	      //asks players for what actions to preform
-	      for (int i = 0; i < allFighters.size(); i++) {
-	        Entity currentPlayer = allFighters.get(i);
-	        for(Action a: currentPlayer.onTurn(allFighters, input)){
-	          actionsToPreform.add(a);
-	        }
-	        
-	      }
-	      
+	    		System.out.println("Current Teams:\n");
+		    	for (int i = 0; i < teams.size(); i++)
+		    	{
+		    		System.out.println(teams.get(i));
+		    	}
+	    	
+			    for (int i = 0; i < allFighters.size(); i++) {
+			       Entity currentPlayer = allFighters.get(i);
+			       for(Action a: currentPlayer.onTurn(allFighters, input)){
+			          actionsToPreform.add(a);
+			       }
+			        
+			     }
+			      
+			    System.out.println("e" + allFighters.size());
 	      //executes actionsToPreform
-	      for (Action q : actionsToPreform) {
-	        q.performAction(log, this);
-	        System.out.println();
-	      }
+		      for (Action q : actionsToPreform) {
+		        q.performAction(log, this);
+		        System.out.println();
+		      }
 	      
 	      //checks for dead people
 	      for (int i = allFighters.size() - 1; i >= 0; i--) {
 	        if (allFighters.get(i).isHealthZero(log, this)) {
 	          Entity target = allFighters.remove(i);
+	          Team targetTeam = teams.get(target.getTeamID());
+	          targetTeam.removeMember(target);
+	          if (targetTeam.getNumberOfMembers() == 0)
+	          {
+	        	  teams.remove(targetTeam);
+	          }
 	          System.out.println(target.getName() + " was eliminated. " + target.toString());
 	        }
 	      }
@@ -164,9 +248,6 @@ public class Game {
 		return allFighters;
 	}
 
-	protected void printLog(BattleLog log)
-	{
-		
-	}
+	protected abstract void printLog(BattleLog log);
 
 }

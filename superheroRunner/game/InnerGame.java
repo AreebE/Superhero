@@ -11,28 +11,27 @@ import battlesystem.Action;
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
+import battlesystem.Encounter;
 import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
 import battlesystem.Game;
 import battlesystem.InputSystem;
 import battlesystem.Shield;
 import battlesystem.State;
+import battlesystem.Storage;
 import battlesystem.Terrain;
 import battlesystem.battlelogImpls.StringBattleLog;
-import battlesystem.infoItemImpls.AIInfoItem;
 
 public class InnerGame extends Game{
+	
 	
 	private GUI g;
   public InnerGame(
 		  ArrayList<EntityInfoItem> fighters, 
-		  HashMap<String, Ability> abilities, 
-		  HashMap<String, Effect> effects, 
-		  HashMap<String, EntityInfoItem> spawnables,
-		  HashMap<String, Shield> shields,
-		  HashMap<String, State> states,
+		  Storage s,
 		  GUI g) {
-	  super(fighters, abilities, effects, spawnables, shields, states, new StringBattleLog());
+	  super(fighters, s, new StringBattleLog());
+	  
 //    System.out.println(fighters.size());
 	  ScannerInput input = new ScannerInput();
 	  input.assignFighters(super.getFighters());
@@ -40,6 +39,19 @@ public class InnerGame extends Game{
 	  this.g = g;
   }
 
+  
+  public InnerGame(
+		  Encounter e, 
+		  Storage s,
+		  GUI g,
+		  String protag)
+  {
+	  super(e, s, new StringBattleLog(), protag);
+	  ScannerInput input = new ScannerInput();
+	  input.assignFighters(super.getFighters());
+	  this.setInputSystem(input);
+	  this.g = g;
+  }
 
 
 
