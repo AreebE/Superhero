@@ -84,11 +84,7 @@ public class StringBattleLog extends BattleLog<ArrayList<String>>
                     String shieldEffect = (String) contents[3];
                     String shieldEffectDuo = (String) contents[4];
                     String shieldName = (String) contents[5];
-                    Boolean reflective = false;
-                    if (contents.length > 5)
-                    {
-                        reflective = (Boolean) contents[6];
-                    }
+    
                     logEntry.append("* ")
                             .append(targetName)
                             .append("\'s shield ")
@@ -118,10 +114,10 @@ public class StringBattleLog extends BattleLog<ArrayList<String>>
                                 .append(".");
 
                     }
-                    if (reflective)
-                    {
-                        logEntry.append("The same effect was lost by " + targetName);
-                    }
+                    // if (reflective)
+                    // {
+                    //     logEntry.append("The same effect was lost by " + targetName);
+                    // }
                     break;
 
                 case INTERRUPTED:

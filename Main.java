@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import game.OuterGame;
-import game.Storage;
+import battlesystem.Storage;
 
 
 //should we make like a "main menu" type of thing so that
@@ -12,13 +12,15 @@ import game.Storage;
 
 class Main {
   public static void main(String[] args) {
-      	 String[] fileSources = new String[6];
+      	 String[] fileSources = new String[7];
 	 fileSources[Storage.ABILITIES] = "res/abilities.json";
 	 fileSources[Storage.EFFECTS] = "res/effects.json";
 	 fileSources[Storage.SHIELDS] = "res/shields.json";
 	 fileSources[Storage.SPAWNABLES] = "res/entities.json";
 	 fileSources[Storage.STATES] = "res/states.json";
 	 fileSources[Storage.ENTITIES] = "res/heroes.json";
+	 fileSources[Storage.ENCOUNTERS] = "res/encounters.json";
+        
 	  
 	  new OuterGame(fileSources);
   }

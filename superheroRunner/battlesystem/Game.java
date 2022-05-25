@@ -50,7 +50,25 @@ public abstract class Game {
 		{
 			return members.size();
 		}
-		
+
+        public String getAllMembers()
+        {
+            StringBuilder memberString = new StringBuilder();
+            for (int i = 0; i < members.size(); i++)
+            {
+                memberString.append(members.get(i).getName());
+                if (i == members.size() - 2)
+                {
+                    memberString.append(", and");
+                }
+                else if (i < members.size() - 1)
+                {
+                    memberString.append(", ");
+                }
+            }
+            return memberString.toString();
+        }
+        
 		@Override
 		public String toString()
 		{
@@ -152,6 +170,7 @@ public abstract class Game {
 	
 	public Effect getEffect(String name)
 	{
+        System.out.println(name);
 		return s.getEffect(name.toLowerCase()).copy();
 	}
 	
@@ -239,7 +258,7 @@ public abstract class Game {
 	    // scanInput.close();
 	    // System.out.println(allFighters.get(0).getHealth() + ", " +
 	    // allFighters.get(1).getHealth() + ", " + allFighters.get(2).getHealth());
-	    System.out.println(allFighters.get(0).getName() + " won!");
+	    System.out.println(teams.get(0).getAllMembers() + " won!");
 
 	}
 

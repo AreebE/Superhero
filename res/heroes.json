@@ -11,7 +11,7 @@
 }, {
   "abilities" : [ "snowball", "protect", "defense up", "counter", "wide slash" ],
   "shield" : 40,
-  "shields" : [ "deathly defiance" ],
+  "shields" : [ ],
   "effects" : [ "curse" ],
   "max health" : 100,
   "name" : "Joe",

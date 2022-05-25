@@ -3,7 +3,7 @@
   "stat" : "attack",
   "strength" : 2,
   "permanent" : true,
-  "name" : "attack up",
+  "name" : "Attack Boost",
   "type" : "instant",
   "desc" : "Boosts the base attack of all abilities by 2, except Pass",
   "element" : "null"
@@ -21,7 +21,7 @@
   "stat" : "defense",
   "strength" : 2,
   "permanent" : true,
-  "name" : "defense up",
+  "name" : "Defense Up",
   "type" : "instant",
   "desc" : "Reduces all future damage the character takes by 2",
   "element" : "null"

@@ -179,7 +179,7 @@ public class GroupEffect extends Effect
         }
         if (groupDuration <= 0) 
         {
-            Object[] contents = new Object[]{target.getName(), 0, 0, 0, 0, 0, 0};
+            Object[] contents = new Object[]{target.getName(), new String[]{super.getName()}};
             log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.EFFECT_REMOVED, contents));
             target.removeEffect(this);
         }

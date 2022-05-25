@@ -38,7 +38,8 @@ public class EffectLoader {
 			{
 				Effect e = loadEffect(json);
 				listOfEffects.put(e.getName().toLowerCase(), e);
-			}
+			    // System.out.println(e.getName() + ", " + e);
+            }
 			catch(JSONException|NullPointerException jsone)
 			{
 				System.out.println(jsone + " , " + json.toString());
