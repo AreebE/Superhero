@@ -7,6 +7,7 @@ import battlesystem.Game;
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
+import battlesystem.Storage;
 
  public class ReflectiveShield 
      extends Shield
@@ -42,5 +43,10 @@ import battlesystem.Elements;
 		// TODO Auto-generated method stub
 		
 	}
-    
+
+       @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
  }

@@ -122,7 +122,8 @@ public abstract class State
      * @return the copy of this state.
      */
     public abstract State copy();
-    
+
+    @Override
     public JSONObject toJson() 
     {
     	JSONObject start = new JSONObject();
@@ -131,5 +132,11 @@ public abstract class State
 		start.put(DURATION_KEY, getDuration());
 //		System.out.println(start);
 		return start;
+    }
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
     }
 }   

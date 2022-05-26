@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import org.json.JSONObject;
 
+import battlesystem.Storage;
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
@@ -109,5 +110,11 @@ public class SelfShield extends Shield
     	json.put(TYPE_KEY, ShieldLoader.SELF);
     	json.put(SELF_APPLY_KEY, selfApply);
     	return json;
+    }
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getEffect(selfApply) != null;
     }
 }

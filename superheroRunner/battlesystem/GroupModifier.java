@@ -62,5 +62,10 @@ public class GroupModifier implements AbilityModifier
 		modifier.put(PERCENTAGE_KEY, percentage);
 		return modifier;
 	}
-    
+
+    @Override 
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }

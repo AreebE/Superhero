@@ -13,6 +13,7 @@ import battlesystem.Effect;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
+import battlesystem.Storage;
 
 /**
  * This extension of attack ability is going to add an effect to the target.
@@ -156,4 +157,10 @@ public class AttackStatusAbility extends AttackAbility
 		ability.put(SIDE_EFFECT_KEY, sideEffect);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getEffect(sideEffect) != null;
+    }
 }

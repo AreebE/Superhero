@@ -52,6 +52,7 @@ public class OuterGame {
       try 
     {
         storage = new Storage(files);
+        storage.verifyAllItems();
         for (int i = 0; i < items.length; i++)
         {
         	superheros.add(storage.getEntity(items[i]));

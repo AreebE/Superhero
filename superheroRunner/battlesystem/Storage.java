@@ -1,6 +1,7 @@
 package battlesystem;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -157,14 +158,50 @@ public class Storage
                 }
                 spawnables.put(name, (EntityInfoItem) item);
                 break;
+            case ENCOUNTERS:
+                if (encounters.containsKey(name))
+                {
+                    return false;   
+                }
+                encounters.put(name, (Encounter) item);
+                break;
         }
         return true;
+    }
+
+    private void removeItem(int category, String name)
+    {
+        name = name.toLowerCase();
+        switch(category)
+        {
+            case ABILITIES:
+                abilities.remove(name);
+                return;
+            case EFFECTS:
+                effects.remove(name);
+                return;
+            case SHIELDS:
+                shields.remove(name);
+                return;
+            case SPAWNABLES:
+                spawnables.remove(name);
+                return;
+            case ENTITIES:
+                entities.remove(name);
+                return;
+            case ENCOUNTERS:
+                encounters.remove(name);
+                return;
+            case STATES:
+                encounters.remove(name);
+                return;
+        }
     }
 
     public boolean hasItem(String name, int category)
     {
         HashMap<String, Saveable> mapToUse = getSaveables(category);
-        return mapToUse.containsKey(name);
+        return mapToUse.containsKey(name.toLowerCase());
     }
     
     public HashMap<String, Saveable> getSaveables(int category)
@@ -183,6 +220,8 @@ public class Storage
                 return new HashMap<String, Saveable>(entities);
             case SPAWNABLES:
                 return new HashMap<String, Saveable>(spawnables);
+            case ENCOUNTERS:
+                return new HashMap<String, Saveable>(encounters);
         }
         return null;
     }
@@ -217,6 +256,44 @@ public class Storage
     public void saveAllToFiles()
     {
         saveAllToFiles(originalSrcs);
+    }
+
+    public void verifyAllItems()
+    {
+        checkSaveables(EFFECTS);
+        checkSaveables(STATES);
+        checkSaveables(SHIELDS);
+        int countRemoved = 1;
+        while (countRemoved > 0)
+        {
+            countRemoved = 0;
+            countRemoved += checkSaveables(ABILITIES);
+            countRemoved += checkSaveables(ENTITIES);
+            countRemoved += checkSaveables(SPAWNABLES);
+            System.out.println("e " + countRemoved);
+        }
+        checkSaveables(ENCOUNTERS);
+    }
+
+    private int checkSaveables(int category)
+    {
+        ArrayList<String> names = new ArrayList<>();
+        HashMap<String, Saveable> saveables = getSaveables(category);
+        Iterator<String> allKeys = saveables.keySet().iterator();
+        while (allKeys.hasNext())
+        {
+            String name = allKeys.next();
+            if (!saveables.get(name).verifyValidity(this))
+            {
+                System.out.println(name);
+                names.add(name);
+            }
+        }
+        for (int i = 0; i < names.size(); i++)
+            {
+                removeItem(category, names.get(i));
+            }
+        return names.size();
     }
    
 }

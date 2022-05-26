@@ -89,4 +89,6 @@ public class SelfDeathShield extends DeathShield
     	shield.put(TYPE_KEY, ShieldLoader.SELF_DEATH);
     	return shield;
     }
+
+  
 }

@@ -10,6 +10,7 @@ import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Game;
 import battlesystem.Shield;
+import battlesystem.Storage;
 
 /**
  * When this shield triggers, then it gives an effect to the caster.
@@ -104,5 +105,11 @@ public class TrapShield extends Shield
     	json.put(TYPE_KEY, ShieldLoader.TRAP);
     	json.put(COUNTER_KEY, counter);
     	return json;
+    }
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getEffect(counter) != null;
     }
 }

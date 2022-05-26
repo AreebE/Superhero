@@ -6,6 +6,7 @@ import java.util.Random;
 import org.json.JSONObject;
 
 import battlesystem.abilityImpls.AbilityLoader;
+import battlesystem.Storage;
 
 public class RandomModifier implements AbilityModifier{
   private static final Random randomizer = new Random();
@@ -49,5 +50,9 @@ public class RandomModifier implements AbilityModifier{
 		return modifier;
 	}
   
-  
+      @Override 
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }

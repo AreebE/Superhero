@@ -9,6 +9,7 @@ import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
+import battlesystem.Storage;
 
 /**
  * A pass ability intended to pass turns. For the sake of convenience, it is recorded as an attack skill.
@@ -91,4 +92,10 @@ public class PassAbility extends Ability
 		ability.put(TYPE_KEY, AbilityLoader.PASS);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }

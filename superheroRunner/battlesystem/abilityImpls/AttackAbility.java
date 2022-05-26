@@ -13,6 +13,7 @@ import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
 import battlesystem.Terrain;
+import battlesystem.Storage;
 
 
 /**
@@ -239,5 +240,11 @@ public class AttackAbility extends Ability
 		ability.put(PIERCING_KEY, isPiercing);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }
 //

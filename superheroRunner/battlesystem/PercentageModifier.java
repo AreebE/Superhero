@@ -64,4 +64,11 @@ public class PercentageModifier implements AbilityModifier
 		modifier.put(STAT_KEY, stat.name);
 		return modifier;
 	}
+
+    @Override 
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
+    
 }

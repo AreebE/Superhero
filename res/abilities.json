@@ -161,7 +161,7 @@
   "desc" : "The user will be warned not to break your shield",
   "element" : "null"
 }, {
-  "shield" : "witch curse",
+  "shield" : "witch's curse",
   "strength" : 0,
   "cooldown" : 3,
   "name" : "Witch spell",
@@ -245,7 +245,7 @@
   "element" : "fire"
 }, {
   "strength" : 0,
-  "effect" : "instant shield x",
+  "effect" : "mega instant shield",
   "cooldown" : 3,
   "name" : "Counterstrike",
   "modifiers" : [ ],

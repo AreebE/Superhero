@@ -11,6 +11,7 @@ import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.EntityInfoItem;
 import battlesystem.Game;
+import battlesystem.Storage;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -141,4 +142,10 @@ public class SpawnableAbility extends DefenseAbility
 		ability.put(SPAWNABLE_KEY, template);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getSpawnable(template) != null;
+    }
 }

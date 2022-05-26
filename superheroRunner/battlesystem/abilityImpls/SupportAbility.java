@@ -13,6 +13,7 @@ import battlesystem.Effect;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
+import battlesystem.Storage;
 
 /**
  * This ability is intended to give an effect to an entity
@@ -140,6 +141,12 @@ public class SupportAbility extends Ability
 		ability.put(EFFECT_KEY, (template == null)? "": template);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getEffect(template) != null;
+    }
 }
 
 

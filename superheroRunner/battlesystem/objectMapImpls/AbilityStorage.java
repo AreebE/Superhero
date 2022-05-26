@@ -181,7 +181,7 @@ public class AbilityStorage{
           "Witch spell", 
           "When attacked, cast a curse on whoever attacked you", 
           3, 
-          "witch curse",
+          "witch\'s curse",
           Elements.getElement(Elements.Name.NULL)
       ),
 
@@ -262,7 +262,7 @@ public class AbilityStorage{
           "Counterstrike", 
           "Adds a lot of shield",
           3, 
-          "instant shield x",
+          "mega instant shield",
           Elements.getElement(Elements.Name.NULL)
       ),
 

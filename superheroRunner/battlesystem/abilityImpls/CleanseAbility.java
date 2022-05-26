@@ -12,6 +12,7 @@ import battlesystem.BattleLog;
 import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
+import battlesystem.Storage;
 
 /**
  * This ability is intended to cleanse some effects, based on elemental attributes..
@@ -123,4 +124,10 @@ public class CleanseAbility extends SupportAbility
     	ability.put(TYPE_KEY, AbilityLoader.CLEANSE);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }

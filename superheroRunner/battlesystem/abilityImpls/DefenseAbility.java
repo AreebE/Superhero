@@ -13,6 +13,7 @@ import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
 import battlesystem.Shield;
+import battlesystem.Storage;
 
 /**
  * The defense ability used to produce a shield and give it to a player.
@@ -139,6 +140,12 @@ public class DefenseAbility extends Ability
 		ability.put(SHIELD_KEY, (shield == null)? "": shield);
 		return ability;
 	}
+
+      @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getShield(shield) != null;
+    }
 }
 
 // regeneration, heal, and shields/ resistance effects

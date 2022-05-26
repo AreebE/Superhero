@@ -470,4 +470,10 @@ public class Effect
     	}
     	return effect;
     }
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }

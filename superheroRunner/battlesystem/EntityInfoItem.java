@@ -213,4 +213,31 @@ public class EntityInfoItem
     	infoItem.put(SHIELDS_KEY, shields);
     	return infoItem;
     }
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        for (int i = 0; i < effects.size(); i++)
+        {
+            if (s.getEffect(effects.get(i)) == null)
+            {
+                return false;    
+            }
+        }
+        for (int i = 0; i < shields.size(); i++)
+        {
+            if (s.getShield(shields.get(i)) == null)
+            {
+                return false;    
+            }    
+        }
+        for (int i = 0; i < abilities.size(); i++)
+        {
+            if (s.getAbility(abilities.get(i)) == null)
+            {
+                return false;
+            }
+        }
+        return s.getState(defaultState) != null;
+    }
 }

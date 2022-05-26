@@ -13,7 +13,7 @@ import battlesystem.Element;
 import battlesystem.Entity;
 import battlesystem.Game;
 import battlesystem.State;
-
+import battlesystem.Storage;
 /**
  * An ability meant to change the state of an entity
  *
@@ -122,4 +122,10 @@ public class StateChangeAbility extends SupportAbility
 		ability.put(STATE_KEY, template);
 		return ability;
 	}
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getState(template) != null;
+    }
 }

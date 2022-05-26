@@ -2,12 +2,14 @@ package battlesystem.shieldImpls;
 
 import org.json.JSONObject;
 
+import battlesystem.Storage;
 import battlesystem.BattleLog;
 import battlesystem.Effect;
 import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Game;
 import battlesystem.Shield;
+import battlesystem.Storage;
 
 /**
  * This shield is triggered whenever this character is about to die.
@@ -99,5 +101,11 @@ public class DeathShield extends Shield
     	shield.put(TYPE_KEY, ShieldLoader.DEATH);
     	shield.put(EFFECT_KEY, effect);
     	return shield;
+    }
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getEffect(effect) != null;
     }
 }

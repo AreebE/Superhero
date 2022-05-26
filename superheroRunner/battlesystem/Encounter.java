@@ -96,4 +96,24 @@ public abstract class Encounter
 		json.put(TEAM_LAYOUT, teamLayout);
 		return json;
 	}
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        for (int i = 0; i < teams.size(); i++)
+        {
+            ArrayList<String> names = teams.get(i).getNames();
+            for (int j = 0; j < names.size(); j++)
+            {
+                String name = names.get(j);
+                if (s.getEntity(name) == null 
+                    && s.getSpawnable(name) == null 
+                    && !name.equals(PROTAGONIST))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

@@ -55,4 +55,10 @@ public class MultiCastModifier implements AbilityModifier{
 	  modifier.put(TIMES_KEY, times);
 	  return modifier;
   }
+    
+    @Override 
+    public boolean verifyValidity(Storage s)
+    {
+        return true;
+    }
 }

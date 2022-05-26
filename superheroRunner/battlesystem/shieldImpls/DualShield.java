@@ -10,6 +10,7 @@ import battlesystem.Elements;
 import battlesystem.Entity;
 import battlesystem.Game;
 import battlesystem.Shield;
+import battlesystem.Storage;
 
 /**
  * A dual shield to apply two effects.
@@ -132,5 +133,11 @@ public class DualShield extends Shield
     	shield.put(CASTER_APPLY_EFFECT_KEY, casterApply);
     	shield.put(SELF_APPLY_EFFECT_KEY, selfApply);
     	return shield;
+    }
+
+    @Override
+    public boolean verifyValidity(Storage s)
+    {
+        return s.getEffect(casterApply) != null && s.getEffect(selfApply) != null;
     }
 }
