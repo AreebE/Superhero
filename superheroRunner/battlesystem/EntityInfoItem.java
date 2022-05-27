@@ -33,7 +33,15 @@ public class EntityInfoItem
     public String defaultState;
     public int maxHealth;
     public int shieldHealth;
-   
+
+    public static final int ABILITY = 0;
+    public static final int EFFECT = 1;
+    public static final int SHIELD = 2;
+    public static final int STATE = 3;
+    public static final int MAX_HEALTH = 4;
+    public static final int SHIELD_HEALTH = 5;
+    public static final int SPEED = 6;
+    
     public EntityInfoItem(JSONObject json)
     {
     	name = json.getString(NAME_KEY);
@@ -41,14 +49,13 @@ public class EntityInfoItem
     	defaultState = json.getString(STATE_KEY);
     	maxHealth = json.getInt(MAX_HEALTH_KEY);
     	shieldHealth = json.getInt(SHIELD_HEALTH_KEY);
-    	
     	abilities = new ArrayList<>();
     	JSONArray jsonAbilities = json.getJSONArray(ABILITIES_KEY);
     	for (int i = 0; i < jsonAbilities.length(); i++)
     	{
     		abilities.add(jsonAbilities.getString(i).toLowerCase());
     	}
-    	
+
     	shields = new ArrayList<>();
     	JSONArray jsonShields = json.getJSONArray(SHIELDS_KEY);
     	for (int i = 0; i < jsonShields.length(); i++)
@@ -235,9 +242,82 @@ public class EntityInfoItem
         {
             if (s.getAbility(abilities.get(i)) == null)
             {
+                // System.out.println(abilities.get(i));
                 return false;
             }
         }
         return s.getState(defaultState) != null;
+    }
+
+    public void swapItems(String oldName, Object thingToChange, int attribute)
+    {
+        ArrayList<String> itemsToChange = null;
+        switch(attribute)
+        {
+            case ABILITY:
+                itemsToChange = abilities;
+                break;
+            case EFFECT:
+                itemsToChange = effects;
+                for (int i = 0; i < effects.size(); i++)
+                {
+                    if (effects.get(i).equals(oldName))
+                    {
+                        effects.remove(i);
+                        if (thingToChange != null)
+                        {
+                            effects.add(i, (String) thingToChange);                        
+                        }
+                    }
+                }
+                break;
+            case SHIELD:
+                itemsToChange = shields;
+                for (int i = 0; i < shields.size(); i++)
+                {
+                    if (shields.get(i).equals(oldName))
+                    {
+                        shields.remove(i);
+                        if (thingToChange != null)
+                        {
+                            shields.add(i, (String) thingToChange);                        
+                        }
+                    }
+                }
+                break;
+            case STATE:
+                defaultState = (String) thingToChange;
+                return;
+            case MAX_HEALTH:
+                maxHealth += (Integer) thingToChange;
+                break;
+            case SHIELD_HEALTH:
+                shieldHealth += (Integer) thingToChange;
+                break;
+            case SPEED:
+                speed += (Integer) thingToChange;
+                break;
+            
+        }
+        if(itemsToChange == null)
+        {
+            return;
+        }
+        if (oldName == null)
+        {
+            itemsToChange.add((String) thingToChange);
+            return;
+        }
+        for (int i = 0; i < itemsToChange.size(); i++)
+        {
+            if (itemsToChange.get(i).equals(oldName))
+            {
+                itemsToChange.remove(i);
+                if (itemsToChange != null)
+                {
+                    itemsToChange.add(i, (String) thingToChange);                        
+                }
+            }
+        }
     }
 }

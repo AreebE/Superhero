@@ -44,7 +44,7 @@ public class InfoItemReader {
 			}
 			catch(JSONException|NullPointerException jsone)
 			{
-				System.out.println(jsone + ", kmolk" + json.getString("name"));
+				System.out.println(jsone + ", " + json.getString("name"));
 			}
 		}
 		return listOfEntities;
@@ -53,11 +53,15 @@ public class InfoItemReader {
 	public static EntityInfoItem loadItem(JSONObject json)
 	{
 //		System.out.println(json.getString(EntityInfoItem.TYPE_KEY) + ", " + json.getString("name"));
-		switch(json.getString(EntityInfoItem.TYPE_KEY))
+		System.out.println(json.getString("name") + ", " + json.getString(EntityInfoItem.TYPE_KEY));
+        switch(json.getString(EntityInfoItem.TYPE_KEY))
 		{
 			case PATTERN_CONTROLLABLE_AI_INFO:
 				return new ControllableAutoEntityInfoItem(json);
-			default:
+            case SIMPLE_AI_INFO_ITEM:
+                // System.out.println("create");
+                return new BaseAIInfoItem(json);
+            default:
 				return new EntityInfoItem(json);
 		}
 	}
@@ -66,8 +70,9 @@ public class InfoItemReader {
     {
         switch (json.getString(MoveItem.TYPE_KEY))
         {
-            default:
+            case "basic":
             	return new MoveItem(json);
         }
+        return null;
     }
 }

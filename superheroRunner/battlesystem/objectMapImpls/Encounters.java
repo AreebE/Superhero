@@ -15,20 +15,27 @@ public class Encounters {
 	
 	private static final HashMap<String, Encounter> ENCOUNTERS = new HashMap<String, Encounter>()
 			{{
+                String title = "beta";
 				ArrayList<String> firstEnemyEncounter = new ArrayList<>();
 				firstEnemyEncounter.add("BeepBoop");
 				firstEnemyEncounter.add("EEEEEE");
 				firstEnemyEncounter.add("TestSubject");
-				this.put("beta", new OneVAll(firstEnemyEncounter, "beta"));
-				
+				this.put(title, new OneVAll(firstEnemyEncounter, title));
+
+                title = "beta free";
 				ArrayList<String> firstFreeForAll = new ArrayList<>();
 				firstFreeForAll.add("BeepBoop");
 				firstFreeForAll.add("EEEEEE");
 				firstFreeForAll.add("TestSubject");
 				firstFreeForAll.add("SecondestSubject");
-				this.put("beta free", new FreeForAll(firstFreeForAll, "beta free"));
+				this.put(title, new FreeForAll(firstFreeForAll, title));
 				
-				
+				ArrayList<String> duel = new ArrayList<>();
+                duel.add("The Goblin");
+                duel.add("Joe");
+                title = "duel";
+                this.put(title, new FreeForAll(duel, title));
+
 			}};
 			
 	public static JSONArray saveEncounters()

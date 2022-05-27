@@ -88,8 +88,8 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        String testName = "Joe";
-        InnerGame iG = new InnerGame(storage.getEncounter("beta"), storage, g, testName);
+        EntityInfoItem testItem = "Joe";
+        InnerGame iG = new InnerGame(storage.getEncounter("duel"), storage, g, testName);
         iG.startFight();
         //going to add exploration here soon
 //        iG.Fight(superheros);
@@ -97,6 +97,7 @@ public class OuterGame {
 
         case "ss":
         case "save superheros":
+        storage.saveAllToFiles();
 //        JsonIoThing.saveSuperheroArr(this.superheros,"FileParsing/save.json");
         break;
 
@@ -128,7 +129,12 @@ public class OuterGame {
         askAndAddAbilityToHero();
         break;
 
-        case "pa":
+        case "rc":
+          case "run campaign":
+
+              break;
+        
+          case "pa":
         case "print absolute abilities names":
         abilityMan.printAllNames();
         break;

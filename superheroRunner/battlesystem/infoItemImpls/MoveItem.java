@@ -64,6 +64,7 @@ public class MoveItem implements Comparable<MoveItem>
     public JSONObject toJson()
     {
         JSONObject json = new JSONObject();
+        json.put(TYPE_KEY, "basic");
         json.put(PRIORITY_KEY, priority);
         json.put(MOVE_KEY, move);
         json.put(CATEGORY_KEY, category);

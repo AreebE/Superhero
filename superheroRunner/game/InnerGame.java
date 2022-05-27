@@ -44,7 +44,7 @@ public class InnerGame extends Game{
 		  Encounter e, 
 		  Storage s,
 		  GUI g,
-		  String protag)
+		  EntityInfoItem protag)
   {
 	  super(e, s, new StringBattleLog(), protag);
 	  ScannerInput input = new ScannerInput();

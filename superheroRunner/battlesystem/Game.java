@@ -100,7 +100,7 @@ public abstract class Game {
 			Encounter encounter,
 			Storage s,
 			BattleLog log,
-			String protagonist
+			EntityInfoItem protagonist
 	)
 	{
 		ArrayList<Encounter.ProposedTeam> propositions = encounter.getTeams();
@@ -118,12 +118,17 @@ public abstract class Game {
 				String currentName = names.get(j);
 				if (currentName.equals(Encounter.PROTAGONIST))
 				{
-					Entity e = s.getEntity(protagonist.toLowerCase()).create(null, this);
-					this.addMember(e, team.getID());
+                    EntityInfoItem item = protagonist.create(null, this);
+                    this.addMember(e, team.getID());
 				}
 				else 
 				{
-					Entity e = s.getEntity(currentName.toLowerCase()).create(null, this);
+                    EntityInfoItem item = s.getEntity(currentName.toLowerCase());
+                    if (item == null)
+                    {
+                        item = s.getSpawnable(currentName.toLowerCase());
+                    }
+					Entity e = item.create(null, this);
 					this.addMember(e, team.getID());
 				}
 			}

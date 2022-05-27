@@ -11,6 +11,7 @@ public class BasicAIAction extends Action{
 
 	public BasicAIAction(BasicAIEntity caster, List<Entity> allHeros, BasicAIEntity.TargettingSystem input) {
 		super(input.getSingleTarget(), caster, input.getAbilityName(), allHeros, input);
+        
 		// TODO Auto-generated constructor stub
 	}
 

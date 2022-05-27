@@ -7,6 +7,9 @@ import java.util.Iterator;
 import org.json.JSONArray;
 
 import battlesystem.infoItemImpls.ControllableAutoEntityInfoItem;
+import battlesystem.infoItemImpls.BaseAIInfoItem;
+import battlesystem.EntityInfoItem;
+import battlesystem.infoItemImpls.MoveItem;
 
 public final class Spawnables
 {
@@ -16,10 +19,12 @@ public final class Spawnables
     public static enum Name
     {
         CRYSTAL,
-        SQUIRREL
+        SQUIRREL,
+        BABA,
+        THE_GOBLIN
     }
 
-    private final static EnumMap<Name, ControllableAutoEntityInfoItem> ENTITIES = new EnumMap<Name, ControllableAutoEntityInfoItem>(Name.class)
+    private final static EnumMap<Name, EntityInfoItem> ENTITIES = new EnumMap<Name, EntityInfoItem>(Name.class)
     {{
         System.out.println("Created spawnables");
         put
@@ -82,6 +87,69 @@ public final class Spawnables
                 true
             )
         );
+
+        put
+        (
+            Name.BABA,
+            new BaseAIInfoItem
+            (
+                "Baba",
+                101,
+                new ArrayList<String>()
+                {{
+                    
+                }},
+                new ArrayList<String>()
+                {{
+
+                }},
+                new ArrayList<String>()
+                {{
+                    
+                }},
+                "relaxed",
+                400,
+                400,
+                new ArrayList<MoveItem>()
+                {{
+                    add(new MoveItem(0, MoveItem.POSITIVE, "test"));
+                }}
+            )
+        );
+
+        put
+        (
+            Name.THE_GOBLIN,
+            new BaseAIInfoItem
+            (
+                "The Goblin",
+                100,
+                new ArrayList<String>()
+                {{
+                    add("bash");
+                    add("pebble shot");
+                    add("rally");
+                }},
+                new ArrayList<String>()
+                {{
+                }},
+                new ArrayList<String>()
+                {{
+                }},
+                "relaxed",
+                100,
+                100,
+                new ArrayList<MoveItem>()
+                {{
+                    add(new MoveItem(0, MoveItem.NEGATIVE, "bash"));
+                    add(new MoveItem(0, MoveItem.POSITIVE, "rally"));
+                    add(new MoveItem(0, MoveItem.NEGATIVE, "bash"));
+                    add(new MoveItem(0, MoveItem.NEGATIVE, "pebble shot"));
+                    add(new MoveItem(0, MoveItem.NEGATIVE, "bash"));
+                    add(new MoveItem(0, MoveItem.POSITIVE, "rally"));
+                }}
+            )
+        );
 //        /*
 //            String name,
 //            int speed,
@@ -94,7 +162,7 @@ public final class Spawnables
 //            boolean isTargettable*/
     }};
 //
-    public static ControllableAutoEntityInfoItem get(Name name)
+    public static EntityInfoItem get(Name name)
     {
         System.out.println(ENTITIES);
         return ENTITIES.get(name);

@@ -13,7 +13,36 @@
   "type" : "attack",
   "desc" : "Ram yourself into your opponent",
   "element" : "null"
-}, {
+},
+{
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 2,
+  "name" : "Bash",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Hit the opponent with a club.",
+  "element" : "null"
+},
+    {
+  "pierces" : false,
+  "strength" : 5,
+  "cooldown" : 5,
+  "name" : "Pebble Shot",
+  "ignores defense" : false,
+  "modifiers" : [
+      {
+        "percentage" : 100,
+        "limit" : 5,
+        "type" : "group"
+      }
+  ],
+  "type" : "attack",
+  "desc" : "Chuck some small pebbles at the opponent.",
+  "element" : "null"
+},
+    {
   "pierces" : true,
   "strength" : 10,
   "cooldown" : 1,
@@ -225,7 +254,18 @@
   "type" : "support",
   "desc" : "Gives the opponent an infection",
   "element" : "null"
-}, {
+},
+{
+  "strength" : 0,
+  "effect" : "war cry",
+  "cooldown" : 9,
+  "name" : "Rally",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Let out a battle cry, bolstering the target's resolve.",
+  "element" : "null"
+},
+{
   "strength" : 0,
   "effect" : "instant shield",
   "cooldown" : 3,

@@ -26,15 +26,15 @@ public class BasicAIEntity extends Entity
     public static class TargettingSystem implements InputSystem
     {
     	private String name;
-    	private int priority;
+    	private int category;
     	private List<Entity> entities;
     	private Entity selectedTarget;
     	private int casterTeamID;
     	
-    	public TargettingSystem(String name, int casterTeamID, int priority, List<Entity> entities)
+    	public TargettingSystem(String name, int casterTeamID, int category, List<Entity> entities)
     	{
     		this.name = name;
-    		this.priority = priority;
+    		this.category = category;
     		this.entities = entities;
     		this.casterTeamID = casterTeamID;
     	}
@@ -56,16 +56,18 @@ public class BasicAIEntity extends Entity
 			int chosenNum = r.nextInt(entities.size());
 			while (
 						(entities.get(chosenNum).getTeamID() == casterTeamID
-						&& priority == MoveItem.NEGATIVE)
+						&& category == MoveItem.NEGATIVE)
 					||
 						(entities.get(chosenNum).getTeamID() != casterTeamID
-						&& priority == MoveItem.POSITIVE)
+						&& category == MoveItem.POSITIVE)
 					|| 
 						!entities.get(chosenNum).isTargettable()
 			)
 			{
+                // System.out.println(entities.get(chosenNum).getName() + ", " + category);
 				chosenNum = r.nextInt(entities.size());
 			}
+            // System.out.println(entities.get(chospenNum).getName() + ", " + category);
 			if (primaryTarget)
 			{
 				this.selectedTarget = entities.get(chosenNum);
@@ -130,9 +132,8 @@ public class BasicAIEntity extends Entity
     		int startingPoint = currentItem;
     		boolean firstTime = true;
     		while (moveIsUnavailable(item)
-    				&& 
-    				(startingPoint == currentItem	
-    				|| firstTime)
+    				&& (startingPoint != currentItem	
+    				&& firstTime)
     			)
     		{
     			currentItem = (currentItem + 1) % moves.size();
@@ -148,9 +149,8 @@ public class BasicAIEntity extends Entity
     			}
     			return actions;
     		}
-			Entity target = getTarget(item.getPriority(), allEntities);
-			TargettingSystem targettingSystem = new TargettingSystem(item.getMove(), super.getTeamID(), item.getPriority(), allEntities);
-    		for (int i = 0; i < actionsToMake; i++)
+			TargettingSystem targettingSystem = new TargettingSystem(item.getMove(), super.getTeamID(), item.getCategory(), allEntities);
+            for (int i = 0; i < actionsToMake; i++)
     		{
     			actions.add(new BasicAIAction(this, allEntities, targettingSystem));
     		}
@@ -160,14 +160,11 @@ public class BasicAIEntity extends Entity
     
     private boolean moveIsUnavailable(MoveItem item) {
 		// TODO Auto-generated method stub
-    	String abilityName = item.getMove();
-		return super.getAbility(abilityName).ableToUseAbility();
+    	String abilityName = item.getMove().toLowerCase();
+        
+		return super.getAbility(abilityName) == null;
 	}
 
-	private Entity getTarget(int priority, List<Entity> allEntities) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
     public void endOfTurn(

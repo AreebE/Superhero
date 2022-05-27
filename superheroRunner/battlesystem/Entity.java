@@ -392,11 +392,12 @@ public class Entity implements Comparable<Entity>
         
         for (Ability a : abilities) 
         {
-            name = name.replace('_', ' ');
+            System.out.println(name + ", " + a.getName());
             if (name.toLowerCase().equals(a.getName().toLowerCase())) 
             {
                 if (a.ableToUseAbility()) 
                 {
+                    System.out.println("is it.");
                     return a;
                 } 
                 else 

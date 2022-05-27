@@ -1,6 +1,10 @@
 package battlesystem.infoItemImpls;
 
 import battlesystem.EntityInfoItem;
+import battlesystem.entityImpls.BasicAIEntity;
+import battlesystem.Game;
+import battlesystem.Entity;
+
 import org.json.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,10 +18,13 @@ public class BaseAIInfoItem extends EntityInfoItem
     public BaseAIInfoItem(JSONObject json)
     {
         super(json);    
+
         JSONArray jsonMoves = json.getJSONArray(MOVES_KEY);
         moves = new ArrayList<>(jsonMoves.length());
         for (int i = 0; i < jsonMoves.length(); i++)
         {
+                        	    	// System.out.println("basic attributes");
+
         	moves.add(InfoItemReader.loadMoveItem(jsonMoves.getJSONObject(i)));
         }
     }
@@ -38,6 +45,33 @@ public class BaseAIInfoItem extends EntityInfoItem
         this.moves = moves;
     }
 
+    @Override
+  public Entity create(
+		  Entity creator,
+		  Game g) 
+  {
+      /*
+public BasicAIEntity(
+        String name, 
+        int speed, 
+        int health, 
+        int shieldHealth,
+        State defaultState,
+        Entity creator,
+        List<MoveItem> moves
+    )
+    {*/
+    BasicAIEntity ai = new BasicAIEntity(
+        getName(), 
+        getSpeed(), 
+        getMaxHealth(),                                  
+        getShieldHealth(), 
+        g.getState(super.defaultState),
+        creator, 
+        moves);
+    super.addItems(ai, g);
+    return ai;
+  }
     
     @Override
     public JSONObject toJson()
@@ -48,7 +82,9 @@ public class BaseAIInfoItem extends EntityInfoItem
         {
             moveArray.put(i, moves.get(i).toJson());        
         }
+        json.put(EntityInfoItem.TYPE_KEY, InfoItemReader.SIMPLE_AI_INFO_ITEM);
         json.put(MOVES_KEY, moveArray);
+        System.out.println(json);
         return json;
     }
 }

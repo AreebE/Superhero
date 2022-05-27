@@ -298,7 +298,20 @@
   "pierces shield" : true,
   "desc" : "Deals damage with an explosion",
   "element" : "null"
-}, {
+},
+    {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "War Cry",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Increases the target's attack.",
+  "element" : "null"
+},
+    {
   "stat" : "damage",
   "strength" : 1,
   "turn decay starts" : -1,
