@@ -118,7 +118,7 @@ public abstract class Game {
 				String currentName = names.get(j);
 				if (currentName.equals(Encounter.PROTAGONIST))
 				{
-                    EntityInfoItem item = protagonist.create(null, this);
+                    Entity e = protagonist.create(null, this);
                     this.addMember(e, team.getID());
 				}
 				else 

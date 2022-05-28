@@ -88,8 +88,8 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        EntityInfoItem testItem = "Joe";
-        InnerGame iG = new InnerGame(storage.getEncounter("duel"), storage, g, testName);
+        EntityInfoItem testItem = storage.getEntity("Joe");
+        InnerGame iG = new InnerGame(storage.getEncounter("duel"), storage, g, testItem);
         iG.startFight();
         //going to add exploration here soon
 //        iG.Fight(superheros);

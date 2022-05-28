@@ -132,12 +132,12 @@ public class BasicAIEntity extends Entity
     		int startingPoint = currentItem;
     		boolean firstTime = true;
     		while (moveIsUnavailable(item)
-    				&& (startingPoint != currentItem	
-    				&& firstTime)
+    				&& ((startingPoint != currentItem	
+    				|| firstTime))
     			)
     		{
-    			currentItem = (currentItem + 1) % moves.size();
-    			item = moves.get(currentItem);
+    			startingPoint = (startingPoint + 1) % moves.size();
+    			item = moves.get(startingPoint);
     			firstTime = false;
     		}
     		
@@ -173,7 +173,7 @@ public class BasicAIEntity extends Entity
     )
     {
     	super.endOfTurn(log, g);
-    	currentItem++;
+    	currentItem = (currentItem + 1) % moves.size();
     }
     
 }
