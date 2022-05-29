@@ -1,9 +1,10 @@
 package game;
 
 import javax.swing.*;
-import java.awt.*;
 
-import battlesystem.Entity;
+import gameSystem.Entity;
+
+import java.awt.*;
 
 public class GUI{
 

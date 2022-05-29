@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-
-import battlesystem.Ability;
-import battlesystem.Effect;
-import battlesystem.Entity;
-import battlesystem.EntityInfoItem;
-import battlesystem.Shield;
-import battlesystem.State;
-import battlesystem.Storage;
-import battlesystem.abilityImpls.AbilityLoader;
-import battlesystem.effectImpls.EffectLoader;
-import battlesystem.infoItemImpls.InfoItemReader;
-import battlesystem.objectMapImpls.*;
-import battlesystem.shieldImpls.ShieldLoader;
-import battlesystem.stateImpls.StateLoader;
+import gameSystem.Ability;
+import gameSystem.Campaign;
+import gameSystem.Effect;
+import gameSystem.Entity;
+import gameSystem.EntityInfoItem;
+import gameSystem.Shield;
+import gameSystem.State;
+import gameSystem.Storage;
+import gameSystem.abilityImpls.AbilityLoader;
+import gameSystem.battlelogImpls.StringBattleLog;
+import gameSystem.effectImpls.EffectLoader;
+import gameSystem.infoItemImpls.InfoItemReader;
+import gameSystem.objectMapImpls.*;
+import gameSystem.shieldImpls.ShieldLoader;
+import gameSystem.stateImpls.StateLoader;
 import loaders.CustomMaker;
 import loaders.JsonIoThing;
 //The outer game is going to be in charge 
@@ -53,6 +53,7 @@ public class OuterGame {
     {
         storage = new Storage(files);
         storage.verifyAllItems();
+//        storage.saveAllToFiles();
         for (int i = 0; i < items.length; i++)
         {
         	superheros.add(storage.getEntity(items[i]));
@@ -88,9 +89,14 @@ public class OuterGame {
         case "p":
         case "play":
         System.out.println("Playing Game!");
-        EntityInfoItem testItem = storage.getEntity("Joe");
-        InnerGame iG = new InnerGame(storage.getEncounter("duel"), storage, g, testItem);
-        iG.startFight();
+//        EntityInfoItem testItem = storage.getEntity("Joe");
+//        InnerGame iG = new InnerGame(storage.getEncounter("duel"), storage, g, testItem);
+//        iG.startFight("Joe");
+        Campaign c = storage.getCampaign("Too many Jokes");
+        InnerGame.ScannerInput system = new InnerGame.ScannerInput(new Scanner(System.in));
+        c.setInput(system);
+        c.setOutput(system);
+        c.beginCampaign(storage, new StringBattleLog());
         //going to add exploration here soon
 //        iG.Fight(superheros);
         break;

@@ -3,12 +3,12 @@ package loaders;
 import java.io.*;
 import java.util.*;
 
-import battlesystem.Ability;
-import battlesystem.Entity;
-import battlesystem.EntityInfoItem;
-import battlesystem.State;
-import battlesystem.Storage;
-import battlesystem.objectMapImpls.*;
+import gameSystem.Ability;
+import gameSystem.Entity;
+import gameSystem.EntityInfoItem;
+import gameSystem.State;
+import gameSystem.Storage;
+import gameSystem.objectMapImpls.*;
 //this thing is kinda nuts and needs some work also it no longer 
 // deals with files so i dont think it needs to be in FileParsing
 public class CustomMaker {

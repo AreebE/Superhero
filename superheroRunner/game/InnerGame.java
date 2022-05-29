@@ -3,26 +3,30 @@ package game;
 import java.util.List;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import battlesystem.Ability;
-import battlesystem.Action;
-import battlesystem.BattleLog;
-import battlesystem.Effect;
-import battlesystem.Elements;
-import battlesystem.Encounter;
-import battlesystem.Entity;
-import battlesystem.EntityInfoItem;
-import battlesystem.Game;
-import battlesystem.InputSystem;
-import battlesystem.Shield;
-import battlesystem.State;
-import battlesystem.Storage;
-import battlesystem.Terrain;
-import battlesystem.battlelogImpls.StringBattleLog;
+import gameSystem.Ability;
+import gameSystem.Action;
+import gameSystem.BattleLog;
+import gameSystem.Effect;
+import gameSystem.Elements;
+import gameSystem.Encounter;
+import gameSystem.Entity;
+import gameSystem.EntityInfoItem;
+import gameSystem.Event;
+import gameSystem.Game;
+import gameSystem.InputSystem;
+import gameSystem.OutputSystem;
+import gameSystem.Shield;
+import gameSystem.State;
+import gameSystem.Storage;
+import gameSystem.Terrain;
+import gameSystem.battlelogImpls.StringBattleLog;
 
-public class InnerGame extends Game{
+public class InnerGame extends Game
+{
 	
 	
 	private GUI g;
@@ -36,6 +40,7 @@ public class InnerGame extends Game{
 	  ScannerInput input = new ScannerInput();
 	  input.assignFighters(super.getFighters());
 	  this.setInputSystem(input);
+	  this.setOutputSystem(input);
 	  this.g = g;
   }
 
@@ -50,6 +55,7 @@ public class InnerGame extends Game{
 	  ScannerInput input = new ScannerInput();
 	  input.assignFighters(super.getFighters());
 	  this.setInputSystem(input);
+	  this.setOutputSystem(input);
 	  this.g = g;
   }
 
@@ -64,7 +70,8 @@ public class InnerGame extends Game{
     return null;
   }
 
-  public static class ScannerInput implements InputSystem {
+  public static class ScannerInput 
+  	implements InputSystem, OutputSystem {
     private Scanner inputReader;
     private Entity target;
     private ArrayList<Entity> fighters;
@@ -128,6 +135,39 @@ public class InnerGame extends Game{
       }
       return otherTargets;
     }
+
+	@Override
+	public int getChoice(String prompt, ArrayList<String[]> choices) {
+		Integer result = null;
+		while (result == null)
+		{
+			for (int i = 0; i < choices.size(); i++)
+			{
+				System.out.println(choices.get(i)[Event.DESCRIPTION]);
+			}
+			System.out.println(prompt);
+			String answer = inputReader.next();
+			try
+			{
+				result = Integer.parseInt(answer);				
+				if (result <= 0 || result > choices.size())
+				{
+					result = null;
+				}
+			}
+			catch (InputMismatchException tme)
+			{
+				result = null;
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public void displayString(String event, int type) {
+		// TODO Auto-generated method stub
+		System.out.println(event);
+	}  
   }
 
   @Override 
@@ -140,4 +180,15 @@ public class InnerGame extends Game{
 		System.out.println(entries.get(i));
 	}
   }
-}
+  
+  public class StringOutput implements OutputSystem
+  {
+
+	@Override
+	public void displayString(String event, int type) {
+		// TODO Auto-generated method stub
+		System.out.println(event);
+	}  
+  }
+  }
+

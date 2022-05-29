@@ -106,12 +106,12 @@
   "element" : "null"
 }, {
   "pierces" : true,
-  "strength" : 3,
+  "strength" : 20,
   "cooldown" : 1,
   "name" : "Snowball",
   "ignores defense" : false,
   "modifiers" : [ {
-    "times" : 4,
+    "times" : 5,
     "type" : "multi cast"
   } ],
   "type" : "attack",
