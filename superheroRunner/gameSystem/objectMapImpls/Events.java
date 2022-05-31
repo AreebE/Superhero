@@ -7,6 +7,9 @@ import org.json.JSONArray;
 
 import gameSystem.Event;
 import gameSystem.eventImpls.BattleEvent;
+import gameSystem.eventImpls.TradeEvent;
+import gameSystem.EntityInfoItem;
+
 
 public class Events {
 	private static final ArrayList<Event> EVENTS = new ArrayList<Event>()
@@ -44,6 +47,9 @@ public class Events {
 									
 							)
 				);
+				
+				
+				
 				add
 				(
 						new BattleEvent
@@ -74,6 +80,88 @@ public class Events {
 								"You lose, which causes you to consider the fact that a child beat you. Maybe this wasn't such a good idea..."
 						)
 				);
+				
+				add
+				(
+						/*
+						 *String title, 
+			ArrayList<String> preludeLines, 
+			ArrayList<ArrayList<String>> postludeLines,
+			ArrayList<String[]> choices, 
+			String prompt 
+			
+			public static final int GIVING = 1;
+	public static final int GIVING_CATEGORY = 2;
+	public static final int RECIEVING = 3;
+	public static final int RECIEVING_CATEGORY = 4;
+	
+						 */
+						new TradeEvent
+						(
+								"Stock Trade", 
+								new ArrayList<String>()
+								{{
+									add("The portal from earlier appears once more.");
+									add("This time, it's come to bargain.");
+									add("A few choices are presented before you.");
+								}}, 
+								new ArrayList<ArrayList<String>>()
+								{{
+									add(new ArrayList<String>()
+									{{
+										add("With that, the portal disappates.");
+										add("Your snowball then lights on fire.");
+										add("You get the feeling that this violates some law of physics.");
+									}});
+									add(new ArrayList<String>()
+									{{
+										add("The portal then disappates.");
+										add("With that, you lost your defense up skill.");
+										add("However, the attack of your character has been buffed.");
+									}});
+									add(new ArrayList<String>()
+									{{
+										add("Your portal friend snaps their fingers.");
+										add("The lingering curse that had been following you disappears.");
+										add("Furthermore, you think your health has improved.");
+									}});
+								}}, 
+								new ArrayList<String[]>()
+								{{
+									add(new String[]
+											{
+													"* They recieve: A snowball. You Recieve: A flaming snowball.",
+													"snowball",
+													EntityInfoItem.ABILITY + "",
+													"flaming snowball",
+													EntityInfoItem.ABILITY + "",
+											}
+									);
+									add(new String[]
+											{
+													"* They recieve: A defense boost. You recieve: A high base attack.",
+													"defense up",
+													EntityInfoItem.ABILITY + "",
+													"attack boost x",
+													EntityInfoItem.EFFECT + ""
+											}
+									);
+									add(new String[]
+											{
+													"* They recieve: A curse. You recieve: More Health",
+													"curse",
+													EntityInfoItem.EFFECT + "",
+													"40",
+													EntityInfoItem.MAX_HEALTH + ""
+											}
+									);
+									
+
+								}}, 
+								"Which will you choose?"
+						)
+				);
+				
 				add
 				(
 						new BattleEvent

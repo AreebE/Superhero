@@ -141,11 +141,17 @@ public class InnerGame extends Game
 		Integer result = null;
 		while (result == null)
 		{
+			
 			for (int i = 0; i < choices.size(); i++)
 			{
 				System.out.println(choices.get(i)[Event.DESCRIPTION]);
 			}
 			System.out.println(prompt);
+			if (choices.size() == 1)
+			{
+				inputReader.nextLine();
+				return 1;
+			}
 			String answer = inputReader.next();
 			try
 			{
@@ -155,7 +161,7 @@ public class InnerGame extends Game
 					result = null;
 				}
 			}
-			catch (InputMismatchException tme)
+			catch (InputMismatchException|NumberFormatException tme)
 			{
 				result = null;
 			}

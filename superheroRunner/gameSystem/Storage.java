@@ -299,7 +299,7 @@ public class Storage
             countRemoved += checkSaveables(ABILITIES);
             countRemoved += checkSaveables(ENTITIES);
             countRemoved += checkSaveables(SPAWNABLES);
-            System.out.println("e " + countRemoved);
+//            System.out.println("e " + countRemoved);
         }
         checkSaveables(ENCOUNTERS);
         checkSaveables(EVENTS);

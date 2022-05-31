@@ -1,6 +1,7 @@
 package gameSystem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,6 +61,8 @@ public abstract class Event
 			}
 			choices.add(choiceOptions);
 		}
+		
+//		System.out.println(choices);
 	}
 	
 	public Event(

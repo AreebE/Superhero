@@ -153,6 +153,20 @@
   "desc" : "Poisons the enemy upon hit",
   "element" : "null"
 }, {
+  "pierces" : false,
+  "side effect" : "burn",
+  "strength" : 25,
+  "cooldown" : 1,
+  "name" : "Flaming Snowball",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    	"times" : 5,
+    	"type" : "multi cast"
+  } ],
+  "type" : "attack status",
+  "desc" : "Throw some snowballs that are on fire.",
+  "element" : "fire"
+}, {
   "strength" : 0,
   "cooldown" : 0,
   "name" : "Pass turn",

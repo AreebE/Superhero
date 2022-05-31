@@ -22,7 +22,7 @@ public class AttackStatusAbility extends AttackAbility
 {
 	private static final String SIDE_EFFECT_KEY = "side effect";
     private String sideEffect;
-    
+    private boolean inMiddleofCast;
     public AttackStatusAbility(JSONObject json)
     {
     	super(json);
@@ -64,6 +64,7 @@ public class AttackStatusAbility extends AttackAbility
             modifiers
         );
         this.sideEffect = sideEffect;
+        this.inMiddleofCast = false;
     }
 
 
@@ -122,8 +123,7 @@ public class AttackStatusAbility extends AttackAbility
         Game g,
         BattleLog log) 
     {
-        super.castAbility(target, caster, g, log);
-        
+        super.performCast(target, caster, g, log);
         Object[] contents = new Object[]{target.getName(), sideEffect};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
         target.addEffect(caster, g, log, g.getEffect(sideEffect));        

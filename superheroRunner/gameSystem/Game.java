@@ -168,7 +168,7 @@ public abstract class Game {
 	public void setOutputSystem(OutputSystem output)
 	{
 		this.output = output;
-		System.out.println(output);
+//		System.out.println(output);
 	}
 	
 	public Ability getAbility(String name)
@@ -183,7 +183,7 @@ public abstract class Game {
 	
 	public Effect getEffect(String name)
 	{
-        System.out.println(name);
+//        System.out.println(name);
 		return s.getEffect(name.toLowerCase()).copy();
 	}
 	

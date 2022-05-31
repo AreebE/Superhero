@@ -17,6 +17,17 @@
   "desc" : "Buffs the attack by a lot",
   "element" : "null"
 }, {
+  "duration" : 3,
+  "stat" : "damage",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Burn",
+  "type" : "standard",
+  "pierces defense": false,
+  "pierces shield": true,
+  "desc" : "Burns the opponent",
+  "element" : "fire"
+}, {
   "duration" : 0,
   "stat" : "defense",
   "strength" : 2,

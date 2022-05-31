@@ -127,6 +127,8 @@ public class EntityInfoItem
         for (String a: abilities)
         {
 //        	System.out.println(a);
+//        	System.out.println(a + ", " + g.getAbility(a));
+//        	System.out.println(abilities);
         	e.addAbility(g.getAbility(a));
         }
         e.addAbility(g.getAbility("pass turn"));
@@ -252,6 +254,7 @@ public class EntityInfoItem
     public void adjustItems(String thingToChange, int attribute, boolean remove)
     {
         ArrayList<String> itemsToChange = null;
+        System.out.println(attribute + ", " + thingToChange);
         switch(attribute)
         {
             case ABILITY:
@@ -265,11 +268,14 @@ public class EntityInfoItem
                 break;
             case STATE:
                 defaultState = thingToChange;
-                return;
+                break;
             case MAX_HEALTH:
+            	System.out.println("here");
                 maxHealth += Integer.parseInt(thingToChange);
                 break;
             case SHIELD_HEALTH:
+            	System.out.println("here");
+
                 shieldHealth += Integer.parseInt(thingToChange);
                 break;
             case SPEED:
@@ -284,13 +290,19 @@ public class EntityInfoItem
         if (!remove)
         {
         	itemsToChange.add((String) thingToChange);
+//        	System.out.println(itemsToChange);
+//        	System.out.println(abilities);
+        
         }
-        for (int i = 0; i < itemsToChange.size(); i++)
+        else 
         {
-            if (itemsToChange.get(i).equals(thingToChange))
-            {
-                itemsToChange.remove(i);
-            }
+        	 for (int i = 0; i < itemsToChange.size(); i++)
+             {
+                 if (itemsToChange.get(i).equals(thingToChange))
+                 {
+                     itemsToChange.remove(i);
+                 }
+             }
         }
     }
     

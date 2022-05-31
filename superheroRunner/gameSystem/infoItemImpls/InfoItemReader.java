@@ -53,7 +53,7 @@ public class InfoItemReader {
 	public static EntityInfoItem loadItem(JSONObject json)
 	{
 //		System.out.println(json.getString(EntityInfoItem.TYPE_KEY) + ", " + json.getString("name"));
-		System.out.println(json.getString("name") + ", " + json.getString(EntityInfoItem.TYPE_KEY));
+//		System.out.println(json.getString("name") + ", " + json.getString(EntityInfoItem.TYPE_KEY));
         switch(json.getString(EntityInfoItem.TYPE_KEY))
 		{
 			case PATTERN_CONTROLLABLE_AI_INFO:

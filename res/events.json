@@ -15,6 +15,13 @@
   "type" : "battle",
   "prompt" : "You're not sure if your rapping skills are the best, so maybe it's better to sing with attacks?"
 }, {
+  "postludes" : [ [ "With that, the portal disappates.", "Your snowball then lights on fire.", "You get the feeling that this violates some law of physics." ], [ "The portal then disappates.", "With that, you lost your defense up skill.", "However, the attack of your character has been buffed." ], [ "Your portal friend snaps their fingers.", "The lingering curse that had been following you disappears.", "Furthermore, you think your shield has increased." ] ],
+  "name" : "Stock Trade",
+  "prelude" : [ "The portal from earlier appears once more.", "This time, it's come to bargain.", "A few choices are presented before you." ],
+  "choices" : [ [ "* They recieve: A snowball. You Recieve: A flaming snowball.", "snowball", "0", "flaming snowball", "0" ], [ "* They recieve: A defense boost. You recieve: A high base attack.", "defense up", "0", "attack boost x", "1" ], [ "* They recieve: A curse. You recieve: More Health", "curse", "1", "40", "4" ] ],
+  "type" : "trade",
+  "prompt" : "Which will you choose?"
+}, {
   "loss line" : "The engineer laughs before aiming the sentry, then firing.",
   "postludes" : [ [ "The engineer's buildings self-destruct and, he cowers before you.", "He pleads for his life, even offering to build you a spaceship to get to the final destination.", "You oblige, since you weren't too keen on being that drastic." ] ],
   "name" : "Engineering a Meme",

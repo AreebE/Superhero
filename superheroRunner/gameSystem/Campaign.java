@@ -48,11 +48,12 @@ public class Campaign
 			BattleLog log)
 	{
 		EntityInfoItem protagonist = s.getEntity(protagName).copy();
-		output.displayString(name, 0);
+		output.displayString(name + "\n", 0);
 		for (int i = 0; i < events.size(); i++)
 		{
 			Event current = s.getEvent(events.get(i));
 			boolean isGameOver = current.executeEvent(protagonist, output, input, s, log);
+			output.displayString("\n", i);
 			if (isGameOver)
 			{
 				return;

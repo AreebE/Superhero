@@ -1,6 +1,7 @@
 package gameSystem.eventImpls;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 import org.json.JSONArray;
@@ -15,17 +16,15 @@ import gameSystem.Storage;
 
 public class TradeEvent extends Event {
 
-	public static final int GIVING = 1;
-	public static final int GIVING_CATEGORY = 2;
+	public static final int REMOVING = 1;
+	public static final int REMOVING_CATEGORY = 2;
 	public static final int RECIEVING = 3;
 	public static final int RECIEVING_CATEGORY = 4;
 	
-	private static final String CATEGORY_KEY = "category";
 	
 	public TradeEvent(JSONObject json)
 	{
 		super(json);
-		JSONArray categoriesJson = json.getJSONArray(CATEGORY_KEY);
 	}
 	
 	public TradeEvent(
@@ -33,8 +32,7 @@ public class TradeEvent extends Event {
 			ArrayList<String> preludeLines, 
 			ArrayList<ArrayList<String>> postludeLines,
 			ArrayList<String[]> choices, 
-			String prompt,
-			int[] categories) {
+			String prompt) {
 		super(title, preludeLines, postludeLines, choices, prompt);
 	}
 
@@ -47,6 +45,7 @@ public class TradeEvent extends Event {
 			try
 			{
 				String[] currentChoice = choices.get(i);
+//				System.out.println(Arrays.toString(currentChoice));
 				int recievingCategory = EntityInfoItem.getCategory(Integer.parseInt(currentChoice[RECIEVING_CATEGORY]));
 				if (recievingCategory == -1)
 				{
@@ -66,27 +65,28 @@ public class TradeEvent extends Event {
 					}
 				}
 				
-				int sendingCategory = EntityInfoItem.getCategory(Integer.parseInt(currentChoice[GIVING_CATEGORY]));
+				int sendingCategory = EntityInfoItem.getCategory(Integer.parseInt(currentChoice[REMOVING_CATEGORY]));
 				if (sendingCategory == -1)
 				{
 					return false;
 				}
 				else if (sendingCategory == Integer.MAX_VALUE)
 				{
-					Integer.parseInt(currentChoice[GIVING]);
+					Integer.parseInt(currentChoice[REMOVING]);
 				}
 				else 
 				{
 					if (
 							!s.getSaveables(sendingCategory)
-							.containsKey(currentChoice[GIVING]))
+							.containsKey(currentChoice[REMOVING]))
 					{
 						return false;
 					}
 				}
 			}
-			catch (InputMismatchException ime)
+			catch (InputMismatchException|NumberFormatException ime)
 			{
+				System.out.println(ime);
 				return false;
 			}
 			
@@ -104,12 +104,12 @@ public class TradeEvent extends Event {
 			OutputSystem output) 
 	{
 //		protag.
-		int recievingCategory = EntityInfoItem.getCategory(Integer.parseInt(choice[RECIEVING_CATEGORY]));
+		int recievingCategory = Integer.parseInt(choice[RECIEVING_CATEGORY]);
 		String recieved = choice[RECIEVING];
 		protag.adjustItems(recieved, recievingCategory, false);
-		int sendingCategory = EntityInfoItem.getCategory(Integer.parseInt(choice[GIVING_CATEGORY]));
-		String sending = choice[GIVING];
-		protag.adjustItems(sending, sendingCategory, true);
+		int removingCategory = Integer.parseInt(choice[REMOVING_CATEGORY]);
+		String removing = choice[REMOVING];
+		protag.adjustItems(removing, removingCategory, true);
 		return false;
 	}
 	
