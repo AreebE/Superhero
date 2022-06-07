@@ -34,7 +34,7 @@
   "postludes" : [ [ "With that, your ship has become decontaminated.", "You inspect the imposter's belongings to discover that he was sent to sabotage your mission.", "Seems like they failed.", "Now... one left." ] ],
   "name" : "Imposter",
   "prelude" : [ "You board the ship the Engineer constructed.", "While you haven't boarded a spaceship before, the controls are fairly intuitive.", "As you start to fly in distant space, you get the feeling something is watching you.", "There are little walking beans in the spaceship you hadn't noticed earlier.", "The reddest among them goes into the electrical, so you decided to follow them in.", "Soon enough, the lights turn off, so you go to fix the wiring.", "You then hear a vent open." ],
-  "choices" : [ [ "You turn around to see the imposter pull out a knife.", "So, so Sussy" ] ],
+  "choices" : [ [ "You turn around to see the imposter pull out a knife.", "Fairly Sus" ] ],
   "type" : "battle",
   "prompt" : "You narrowly dodge the first stab, but you suspect there will be more to come."
 }, {

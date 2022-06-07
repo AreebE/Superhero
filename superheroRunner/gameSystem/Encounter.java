@@ -105,11 +105,12 @@ public abstract class Encounter
             ArrayList<String> names = teams.get(i).getNames();
             for (int j = 0; j < names.size(); j++)
             {
-                String name = names.get(j);
+                String name = names.get(j).toLowerCase();
                 if (s.getEntity(name) == null 
                     && s.getSpawnable(name) == null 
                     && !name.equals(PROTAGONIST))
                 {
+                    System.out.println(name);
                     return false;
                 }
             }

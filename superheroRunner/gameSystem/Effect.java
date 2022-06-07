@@ -24,7 +24,8 @@ public class Effect
 	private static final String ELEMENT_KEY = "element";
 	private static final String PIERCES_DEFENSE_KEY = "pierces defense";
 	private static final String PIERCES_SHIELD_KEY = "pierces shield";
-	
+	private static final String STACK_NAME_KEY = "stack name";
+    
     private final static int PIERCES_DEFENSE_INDEX = 0;
     private final static int PIERCES_SHIELD_INDEX = 1;
     private int strength;
@@ -35,6 +36,7 @@ public class Effect
     private String desc;
     private Element element;
     private boolean[] pierces;
+    private String stack;
     
     /**
      * A basic enum for the types of effects.
@@ -49,6 +51,7 @@ public class Effect
         SHIELD("shield"), 
         DAMAGE("damage"), 
         SPEED("speed"),
+        STACK("stack"),
         GROUP("");
 
         public final String name;
@@ -77,6 +80,8 @@ public class Effect
         			return DAMAGE;
         		case "speed":
         			return SPEED;
+                case "stack":
+                    return STACK;
         		case "":
         			return GROUP;
         		
@@ -101,6 +106,10 @@ public class Effect
     	{
         	this.pierces = new boolean[] {json.getBoolean(PIERCES_DEFENSE_KEY), json.getBoolean(PIERCES_SHIELD_KEY)};
     	}
+        if (json.has(STACK_NAME_KEY))
+        {
+            this.stack = json.getString(STACK_NAME_KEY);
+        }
     }
     /**
      * A basic constructor for Effect.
@@ -131,6 +140,55 @@ public class Effect
             name, 
             desc, 
             element, 
+            null,
+            null
+        );
+    }
+
+    public Effect(
+        int strength, 
+        Type type, 
+        int duration, 
+        boolean permanent, 
+        String name, 
+        String desc,
+        Element element,
+        boolean[] pierces) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            duration,
+            permanent, 
+            name, 
+            desc, 
+            element, 
+            null,
+            pierces
+        );
+    }
+
+    public Effect(
+        int strength, 
+        Type type, 
+        int duration, 
+        boolean permanent, 
+        String name, 
+        String desc,
+        String stack,
+        Element element) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            duration,
+            permanent, 
+            name, 
+            desc, 
+            element, 
+            stack,
             null
         );
     }
@@ -156,6 +214,7 @@ public class Effect
         String name, 
         String desc,
         Element element, 
+        String stack,
         boolean[] pierces) 
     {
         this.strength = strength;
@@ -166,8 +225,6 @@ public class Effect
         this.desc = desc;
         this.element = element;
         this.pierces = pierces;
-      
-   
     }
 
 
@@ -198,7 +255,7 @@ public class Effect
     {
         int power = this.strength;
 
-        Object[] contents = new Object[]{target.getName(), typeOfEffect, power, name};
+        Object[] contents = new Object[]{target.getName(), typeOfEffect, power, name, stack};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.APPLY_EFFECT, contents));
         // System.out.println("Applied " + name + ", " + type power + " " + percent);
         this.applyEffect(target, power);
@@ -242,6 +299,8 @@ public class Effect
                     pierces[PIERCES_SHIELD_INDEX]
                 );
                 break;
+            case STACK:
+                target.addStack(stack, power);
         }
     }
 
@@ -319,6 +378,7 @@ public class Effect
                     name, 
                     desc, 
                     element, 
+                    stack,
                     pierces
                 );
     }
@@ -339,6 +399,7 @@ public class Effect
                     name, 
                     desc, 
                     element, 
+                    stack,
                     pierces
                 );
     }
@@ -436,6 +497,11 @@ public class Effect
         return this.element;
     }
 
+    public String getStack()
+    {
+        return stack;
+    }
+
     /**
      * The string version of this effect.
      * @return the name, then the description, then how many turns are left.
@@ -468,6 +534,10 @@ public class Effect
     		effect.put(PIERCES_DEFENSE_KEY, pierces[PIERCES_DEFENSE_INDEX]);
         	effect.put(PIERCES_SHIELD_KEY, pierces[PIERCES_SHIELD_INDEX]);
     	}
+        if (stack != null)
+        {
+            effect.put(STACK_NAME_KEY, stack);
+        }
     	return effect;
     }
 

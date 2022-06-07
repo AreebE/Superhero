@@ -34,6 +34,7 @@ public class PassiveEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        String stack,
         boolean[] pierces) 
     {
         super
@@ -45,6 +46,7 @@ public class PassiveEffect extends Effect
             name,
             desc, 
             element, 
+            stack,
             pierces
         );
     }
@@ -73,6 +75,47 @@ public class PassiveEffect extends Effect
             name,
             desc, 
             element, 
+            null,
+            null
+        );
+    }
+
+    public PassiveEffect(
+        int strength, 
+        Effect.Type type, 
+        String name, 
+        String desc, 
+        Element element,
+        boolean[] pierces) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            name,
+            desc, 
+            element, 
+            null,
+            pierces
+        );
+    }
+
+    public PassiveEffect(
+        int strength, 
+        Effect.Type type, 
+        String name, 
+        String desc, 
+        Element element,
+        String stack) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            name,
+            desc, 
+            element, 
+            stack,
             null
         );
     }
@@ -104,6 +147,7 @@ public class PassiveEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getStack(),
                     getPierces()
                 );
     }
@@ -122,6 +166,7 @@ public class PassiveEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getStack(),
                         getPierces()
                     );
         }

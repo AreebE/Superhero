@@ -10,5 +10,22 @@
 		"Engineering a Meme",
 		"Imposter",
 		"Intervention at Sawcon"]
-	}
+    },
+    {
+        "protag": "Lyn",
+        "name": "The Revolutionary's Warpath",
+        "type":"basic",
+        "events":
+        [
+            "Allyship",
+            "Nipping a Bud",
+            "Military Funding",
+            "Pick a Side",
+            "Second Solstice",
+            "Tough Negotiations",
+            "Noise in the Forest",
+            "",
+            "Big Brother"
+        ]
+    }
 ]

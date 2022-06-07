@@ -44,6 +44,7 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
+            null,
             null
         );
     }
@@ -76,6 +77,52 @@ public class InstantEffect extends Effect
             name, 
             desc, 
             element,
+            null,
+            pierces
+        );
+    }
+
+    public InstantEffect(
+        int strength, 
+        Effect.Type type, 
+        String name, 
+        String desc, 
+        Element element,
+        String stack) 
+    {
+        super
+        (
+            strength, 
+            type, 
+            0, 
+            true, 
+            name, 
+            desc, 
+            element,
+            stack,
+            null
+        );
+    } 
+    
+    public InstantEffect(
+        int strength, 
+        Effect.Type type, 
+        String name, 
+        String desc, 
+        Element element,
+        String stack,
+        boolean[] pierces) 
+    {
+        super
+        (
+            strength, 
+            type, 
+            0, 
+            true, 
+            name, 
+            desc, 
+            element,
+            stack,
             pierces
         );
     }
@@ -106,6 +153,7 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getStack(),
                         getPierces()
                     );
     }
@@ -124,6 +172,7 @@ public class InstantEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getStack(),
                         getPierces()
                     );
     }

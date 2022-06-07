@@ -51,7 +51,35 @@ public class DecayEffect extends Effect{
         String desc,
         Element element)
     {
-        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null);
+        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null, null);
+    }
+
+    public DecayEffect(
+        int basePower,
+        int decayRate, 
+        int turnDecayStarts,
+        Effect.Type type, 
+        int duration,  
+        String name, 
+        String desc,
+        Element element,
+        boolean[] pierces)
+    {
+        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, null, pierces);
+    }
+
+    public DecayEffect(
+        int basePower,
+        int decayRate, 
+        int turnDecayStarts,
+        Effect.Type type, 
+        int duration,  
+        String name, 
+        String desc,
+        Element element,
+        String stack)
+    {
+        this(basePower, decayRate, turnDecayStarts, type, duration, name, desc, element, stack, null);
     }
     
     /**
@@ -76,9 +104,10 @@ public class DecayEffect extends Effect{
         String name, 
         String desc,
         Element element,
+        String stack,
         boolean[] pierces)
     {
-        super(basePower, type, duration, true, name, desc, element, pierces);
+        super(basePower, type, duration, true, name, desc, element, stack, pierces);
         this.decayRate = decayRate;
         this.count = 0;
         this.turnDecayStarts = turnDecayStarts;
@@ -137,6 +166,7 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getStack(),
                     getPierces()
                 );
     }
@@ -159,6 +189,7 @@ public class DecayEffect extends Effect{
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getStack(),
                     getPierces()
                 );
     }

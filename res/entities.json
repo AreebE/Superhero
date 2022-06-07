@@ -1,84 +1,86 @@
 [ {
-  "abilities" : [ "laser" ],
-  "is targettable" : true,
-  "shield" : 10,
-  "shields" : [ ],
-  "effects" : [ "curse" ],
-  "max health" : 10,
-  "attack pattern" : [ "laser" ],
-  "name" : "Crystal",
-  "state" : "relaxed",
-  "type" : "simple controllable ai",
-  "speed" : 1
+    "abilities":["laser"],
+    "is targettable":true,
+    "shield":10,
+    "shields":[],
+    "effects":["curse"],
+    "max health":10,
+    "attack pattern":["laser"],
+    "name":"Crystal",
+    "state":"relaxed",
+    "type":"simple controllable ai",
+    "speed":1
 }, {
-  "abilities" : [ "scratch" ],
-  "is targettable" : true,
-  "shield" : 0,
-  "shields" : [ "gift" ],
-  "effects" : [ ],
-  "max health" : 1,
-  "attack pattern" : [ "scratch" ],
-  "name" : "Squirrel",
-  "state" : "relaxed",
-  "type" : "simple controllable ai",
-  "speed" : 1
+    "abilities":["scratch"],
+    "is targettable":true,
+    "shield":0,
+    "shields":["gift"],
+    "effects":[],
+    "max health":1,
+    "attack pattern":["scratch"],
+    "name":"Squirrel",
+    "state":"relaxed",
+    "type":"simple controllable ai",
+    "speed":1
 }, {
-  "abilities" : [ ],
-  "shield" : 400,
-  "shields" : [ ],
-  "effects" : [ ],
-  "max health" : 400,
-  "moves" : [ {
-    "move" : "test",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : 1
-  } ],
-  "name" : "Baba",
-  "state" : "relaxed",
-  "type" : "simple ai",
-  "speed" : 101
+    "abilities":[],
+    "shield":400,
+    "shields":[],
+    "effects":[],
+    "max health":400,
+    "moves":
+    [{
+        "move":"test",
+        "type":"basic",
+        "priority":0,
+        "category":1
+    }],
+    "name":"Baba",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":101
 }, {
-  "abilities" : [ "bash", "pebble shot", "rally" ],
-  "shield" : 100,
-  "shields" : [ ],
-  "effects" : [ ],
-  "max health" : 100,
-  "moves" : [ {
-    "move" : "bash",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : -1
-  }, {
-    "move" : "rally",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : 1
-  }, {
-    "move" : "bash",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : -1
-  }, {
-    "move" : "pebble shot",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : -1
-  }, {
-    "move" : "bash",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : -1
-  }, {
-    "move" : "rally",
-    "type" : "basic",
-    "priority" : 0,
-    "category" : 1
-  } ],
-  "name" : "The Goblin",
-  "state" : "relaxed",
-  "type" : "simple ai",
-  "speed" : 100
+    "abilities":["bash","pebble shot","rally"],
+    "shield":100,
+    "shields":[],
+    "effects":[],
+    "max health":100,
+    "moves":[
+        {
+            "move":"bash",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"rally",
+            "type":"basic",
+            "priority":0,
+            "category":1
+        }, {
+            "move":"bash",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"pebble shot",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"bash",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"rally",
+            "type":"basic",
+            "priority":0,
+            "category":1
+        }],
+    "name":"The Goblin",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":100
 }, {
   "abilities" : [ ],
   "shield" : 50,
@@ -161,5 +163,4 @@
   "speed" : 101
 }
 
-
- ]
+]

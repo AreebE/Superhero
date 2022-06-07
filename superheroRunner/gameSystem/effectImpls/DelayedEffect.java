@@ -47,7 +47,51 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element, 
+            null,
             null
+        );
+    }
+
+    public DelayedEffect(
+        int strength, 
+        Effect.Type type, 
+        int timer, 
+        String name, 
+        String desc, 
+        Element element,
+        String stack) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            timer, 
+            name, 
+            desc, 
+            element, 
+            stack,
+            null
+        );
+    }
+
+    public DelayedEffect(
+        int strength, 
+        Effect.Type type, 
+        int timer, 
+        String name, 
+        String desc, 
+        Element element,
+        boolean[] pierces) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            timer, 
+            name, 
+            desc, 
+            element, 
+            pierces
         );
     }
     
@@ -69,6 +113,7 @@ public class DelayedEffect extends Effect
         String name, 
         String desc, 
         Element element,
+        String stack,
         boolean[] pierces) 
     {
         super
@@ -80,6 +125,7 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element,
+            stack,
             pierces
         );
     }
@@ -128,6 +174,7 @@ public class DelayedEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(), 
+                        getStack(),
                         getPierces()
                     );
     }
@@ -148,6 +195,7 @@ public class DelayedEffect extends Effect
                     getName(), 
                     getDesc(), 
                     getElement(),
+                    getStack(),
                     getPierces()
                 );
     }

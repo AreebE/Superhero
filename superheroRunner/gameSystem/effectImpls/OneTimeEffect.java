@@ -38,6 +38,7 @@ public class OneTimeEffect extends Effect
         String name, 
         String desc,
         Element element,
+        String stack,
         boolean[] pierces) 
     {
         super
@@ -49,7 +50,54 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
+            stack,
             pierces
+        );
+    }
+
+    public OneTimeEffect(
+        int strength, 
+        Effect.Type type, 
+        int duration, 
+        String name, 
+        String desc,
+        Element element,
+        boolean[] pierces) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            duration,
+            false, 
+            name, 
+            desc, 
+            element, 
+            null,
+            pierces
+        );
+    }
+
+    public OneTimeEffect(
+        int strength, 
+        Effect.Type type, 
+        int duration, 
+        String name, 
+        String desc,
+        Element element,
+        String stack) 
+    {
+        this
+        (
+            strength, 
+            type, 
+            duration,
+            false, 
+            name, 
+            desc, 
+            element, 
+            stack,
+            null
         );
     }
 
@@ -78,6 +126,7 @@ public class OneTimeEffect extends Effect
             name, 
             desc, 
             element, 
+            null,
             null
         );
     }
@@ -143,6 +192,7 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getStack(),
                         getPierces()
                     );
     }
@@ -162,6 +212,7 @@ public class OneTimeEffect extends Effect
                         getName(), 
                         getDesc(), 
                         getElement(),
+                        getStack(),
                         getPierces()
                     );
     }
