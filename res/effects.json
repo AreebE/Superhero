@@ -38,6 +38,16 @@
   "element" : "null"
 }, {
   "duration" : 0,
+  "stat" : "stack",
+  "strength" : 4,
+  "permanent" : true,
+  "name" : "Coinage",
+  "type" : "instant",
+  "desc" : "Collect some coins",
+  "stack name": "Coin",
+  "element" : "null"
+}, {
+  "duration" : 0,
   "stat" : "defense",
   "strength" : 7,
   "permanent" : true,

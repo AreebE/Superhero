@@ -13,6 +13,8 @@ import gameSystem.objectMapImpls.States;
 import gameSystem.objectMapImpls.Effects.Name;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 /**
  * 
  * @author Areeb Emran
@@ -37,6 +39,7 @@ public class Entity implements Comparable<Entity>
     private int baseAttack;
     private int baseDefense;
     private int teamID;
+    private HashMap<String, Integer> stacks;
     private static transient Terrain t;
 
 
@@ -144,6 +147,7 @@ public class Entity implements Comparable<Entity>
         this.baseAttack = 0;
         this.baseDefense = 0;
         this.creator = creator;
+        this.stacks = new HashMap<>();
         // ArrayList<String> abstogive = new ArrayList<String>();
         // abstogive.add("pass turn");
 //        AbilityManager.giveAbilities(this, abstogive);
@@ -301,7 +305,21 @@ public class Entity implements Comparable<Entity>
                 }
             }
         }
-        EntityString.append("\u001B[34m")
+        if (stacks.size() != 0)
+        {
+        	EntityString.append("\u001B[32m")
+        			.append("The stacks are:");
+        	Iterator<String> stackNames = stacks.keySet().iterator();
+        	while (stackNames.hasNext())
+        	{
+        		String name = stackNames.next();
+        		EntityString.append("\n * ")
+        				.append(stacks.get(name))
+        				.append(" counts of ")
+        				.append(name);
+        	}
+        }
+        EntityString.append("\n\u001B[34m")
                         .append("* health - ")
                         .append(health)
                         .append("/")
@@ -675,6 +693,26 @@ public class Entity implements Comparable<Entity>
         searchForShield(Shield.Trigger.EFFECT_APPLIED, newEffect.getElement(), this, caster, g, log);
     }
 
+
+    public int getNumOfEffects(String name)
+    {
+    	int numFound = 0;
+    	name = name.toLowerCase();
+    	for (int i = 0; i < effects.size(); i++)
+    	{
+    		if (effects.get(i).getName().toLowerCase().equals(name))
+    		{
+    			numFound++;
+    		}
+    	}
+    	return numFound;
+    }
+	public int getNumOfEffects() {
+		// TODO Auto-generated method stub
+		return effects.size();
+	}
+	
+	
     public void addStartingEffect(
         Effect e
     )
@@ -930,6 +968,34 @@ public class Entity implements Comparable<Entity>
     public Terrain getTerrain(){
       return t;
     }
+    
+    /*
+     * Anything to do with stacks.
+     */
+    
+	public void changeStack(String stack, int power) {
+		// TODO Auto-generated method stub
+		if (stacks.get(stack) == null)
+		{
+			stacks.put(stack, power);
+		}
+		else 
+		{
+			stacks.put(stack, stacks.get(stack) + power);
+		}
+	}
+
+	public int getStackNumber(String name)
+	{
+		try 
+		{
+			return stacks.get(name).intValue();
+		}
+		catch (NullPointerException npe)
+		{
+			return 0;
+		}
+	}
 
     /*
     * Getting an action 
@@ -1154,7 +1220,6 @@ public class Entity implements Comparable<Entity>
     }
 
 	public void appendNumber(int countOfSpawn) {
-		this.name += "." + countOfSpawn;
-		
+		this.name += "." + countOfSpawn;	
 	}
 }

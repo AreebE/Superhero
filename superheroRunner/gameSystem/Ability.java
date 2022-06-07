@@ -20,11 +20,11 @@ public abstract class Ability
 	
 	
 	
-	
+	public static final int NECESSARY_PRIORITY  =   -1;
 	public static final int HIT_PRIORITY 		= 	0;
 	public static final int ADJUSTMENT_PRIORITY	= 	1;
 	public static final int ATTACK_PRIORITY 	=  	2;
-			
+	public static final int SUCCESS_PRIORITY 	=   3;
 	
     
     /**
@@ -61,6 +61,7 @@ public abstract class Ability
     public transient static final int MAX_CHANCE = 256;
     
     private boolean keepGoing;
+	private boolean willSetCooldown;
     
     public Ability(JSONObject json)
     {
@@ -212,6 +213,10 @@ public abstract class Ability
         return strength;
     }
 
+    public int getAdditionalStrength()
+    {
+    	return additionalStrength;
+    }
     /**
      * get element
      * @return the element this ability belongs to.
@@ -241,12 +246,12 @@ public abstract class Ability
         BattleLog log) 
     {
     	haveCastedAbility = false;
+    	willSetCooldown = true;
         keepGoing = true;
         Object[] contents = new Object[]{caster.getName(), targets.get(0).getName(), name, targets.size() - 1};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ABILITY, contents));
         caster.performAction(log, g);
 
-        turnsSinceUse -= cooldown;
         
        
         
@@ -263,7 +268,11 @@ public abstract class Ability
 //        	System.out.println("casting ability " + name);
         	castAbility(targets.get(0), caster, g, log);
         }
-        
+        if (willSetCooldown)
+        {
+            turnsSinceUse -= cooldown;        	
+        }
+        additionalStrength = 0;
     }
 
    
@@ -403,6 +412,11 @@ public abstract class Ability
     	return keepGoing;
     }
     
+    public void doNotSetCooldown()
+    {
+    	this.willSetCooldown = false;
+    }
+    
     /**
      * Get how many people this can target, though return 1 at most, but -1 if hitting eve ryone.
      * @return the number of targets.
@@ -412,24 +426,35 @@ public abstract class Ability
     	
     	try 
     	{
-    		return ((GroupModifier) modifiers.get(modifiers.size() - 1)).getLimit();
+    		for (int i = modifiers.size() - 1; i >= 0; i++)
+    		{
+    			if (modifiers.get(i).getPriority() == Ability.ATTACK_PRIORITY)
+    			{
+    	    		return ((GroupModifier) modifiers.get(i)).getLimit();
+    			}
+    			else if (modifiers.get(i).getPriority() < Ability.ATTACK_PRIORITY)
+    			{
+    				return 1;
+    			}
+    		}
     	}
     	catch (NullPointerException|ClassCastException|IndexOutOfBoundsException npe)
     	{
     		return 1;
     	}
+		return 1;
     }
     
     protected void setCategory(Category c)
     {
     	this.category = c;
     }
-    /**
-     * 
-     */
+
     public void adjustAdditionalStrength(int number, boolean isPercentage)
     {
-    	
+//    	System.out.println(number + "," + isPercentage);
+    	additionalStrength += (isPercentage)? strength * (number / 100 - 1): number; 
+//    	System.out.println(additionalStrength);
     }
     
     /**

@@ -69,7 +69,7 @@
   "name" : "Earthquake",
   "ignores defense" : false,
   "modifiers" : [ {
-    "percentage" : 100,
+    "percentage" : 50,
     "limit" : -1,
     "type" : "group"
   } ],
@@ -258,6 +258,15 @@
   "modifiers" : [ ],
   "type" : "support",
   "desc" : "boosts defense for x amount of time",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "Coinage",
+  "cooldown" : 4,
+  "name" : "Tax Collection",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Collects the opponent's taxes, earning some money.",
   "element" : "null"
 }, {
   "strength" : 0,

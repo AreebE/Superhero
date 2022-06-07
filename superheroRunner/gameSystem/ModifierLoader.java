@@ -1,5 +1,7 @@
 package gameSystem;
 
+import java.util.Collection;
+
 import org.json.JSONObject;
 
 public class ModifierLoader {
@@ -8,6 +10,7 @@ public class ModifierLoader {
 	public static final String MULTI_CAST = "multi cast";
 	public static final String PERCENTAGE = "percentage";
 	public static final String RANDOM = "random";
+	public static final String CONDITIONAL = "conditional";
 	
 	public static AbilityModifier loadModifier(JSONObject json)
 	{
@@ -21,6 +24,8 @@ public class ModifierLoader {
 				return new RandomModifier(json);
 			case PERCENTAGE:
 				return new PercentageModifier(json);
+			case CONDITIONAL:
+				return new ConditionModifier(json);
 		}
 		return null;
 	}

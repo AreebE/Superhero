@@ -91,6 +91,7 @@ public class DelayedEffect extends Effect
             name, 
             desc, 
             element, 
+            null,
             pierces
         );
     }

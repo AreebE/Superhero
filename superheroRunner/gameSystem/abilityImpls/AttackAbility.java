@@ -139,7 +139,7 @@ public class AttackAbility extends Ability
 //         " + target.getName());
         int currentIndex = log.getCurrentIndex(); 
 
-        int attackStrength = getStrength() + caster.getBaseAttack();
+        int attackStrength = getStrength() + caster.getBaseAttack() + this.getAdditionalStrength();
         if (attackStrength < 0) 
         {
             attackStrength = 0;

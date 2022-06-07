@@ -3,19 +3,101 @@ package gameSystem.eventImpls;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import gameSystem.BattleLog;
 import gameSystem.EntityInfoItem;
 import gameSystem.Event;
 import gameSystem.InputSystem;
 import gameSystem.OutputSystem;
+import gameSystem.Saveable;
 import gameSystem.Storage;
 
 public class TradeEvent extends Event {
 
+	public class TradeItem implements Saveable
+	{
+		private static final String CATEGORY_KEY = "category";
+		private static final String IS_NEGATIVE_KEY = "is negative";
+		private static final String NAME_KEY = "name";
+		private static final String AMOUNT_TO_REDUCE_KEY = "amount to reduce"; 
+		
+		private boolean isNegative;
+		private int category;
+		private String name;
+		private int amountToReduce;
+		
+		public TradeItem(String line)
+		{
+			 this((JSONObject) new JSONTokener(line).nextValue());
+		}
+		
+		public TradeItem(JSONObject json)
+		{
+			this.isNegative = json.getBoolean(IS_NEGATIVE_KEY);
+			this.category = json.getInt(CATEGORY_KEY);
+			this.name = json.getString(NAME_KEY);
+			this.amountToReduce = json.getInt(AMOUNT_TO_REDUCE_KEY);
+		}
+		
+		@Override
+		public JSONObject toJson() {
+			JSONObject json = new JSONObject();
+			json.put(CATEGORY_KEY, category);
+			json.put(IS_NEGATIVE_KEY, isNegative);
+			json.put(NAME_KEY, name);
+			json.put(AMOUNT_TO_REDUCE_KEY, amountToReduce);
+			return json;
+		}
+
+		@Override
+		public boolean verifyValidity(Storage s) {
+			try
+			{
+				int recievingCategory = EntityInfoItem.getCategory(category);
+				if (recievingCategory == -1)
+				{
+					return false;
+				}
+				else if (recievingCategory == Integer.MAX_VALUE)
+				{
+					return true;
+				}
+				else 
+				{
+					if (
+							!s.getSaveables(recievingCategory)
+							.containsKey(name))
+					{
+						return false;
+					}
+				}
+			}
+			catch (InputMismatchException|NumberFormatException ime)
+			{
+				System.out.println(ime);
+				return false;
+			}
+			
+			return true;
+		}
+
+		public void changeProtag(EntityInfoItem protag) {
+			if (amountToReduce == 0)
+			{
+				protag.adjustItems(name, category, isNegative);
+			}
+			else 
+			{
+				protag.adjustItems(amountToReduce + "", category, isNegative);
+			}
+		}
+		
+	}
 	public static final int REMOVING = 1;
 	public static final int REMOVING_CATEGORY = 2;
 	public static final int RECIEVING = 3;
@@ -44,41 +126,13 @@ public class TradeEvent extends Event {
 		{
 			try
 			{
-				String[] currentChoice = choices.get(i);
-//				System.out.println(Arrays.toString(currentChoice));
-				int recievingCategory = EntityInfoItem.getCategory(Integer.parseInt(currentChoice[RECIEVING_CATEGORY]));
-				if (recievingCategory == -1)
+				String[] choiceSet = choices.get(i);
+				boolean isValid = true;
+				for (int j = 1; j < choiceSet.length; j++)
 				{
-					return false;
-				}
-				else if (recievingCategory == Integer.MAX_VALUE)
-				{
-					Integer.parseInt(currentChoice[RECIEVING]);
-				}
-				else 
-				{
-					if (
-							!s.getSaveables(recievingCategory)
-							.containsKey(currentChoice[RECIEVING]))
-					{
-						return false;
-					}
-				}
-				
-				int sendingCategory = EntityInfoItem.getCategory(Integer.parseInt(currentChoice[REMOVING_CATEGORY]));
-				if (sendingCategory == -1)
-				{
-					return false;
-				}
-				else if (sendingCategory == Integer.MAX_VALUE)
-				{
-					Integer.parseInt(currentChoice[REMOVING]);
-				}
-				else 
-				{
-					if (
-							!s.getSaveables(sendingCategory)
-							.containsKey(currentChoice[REMOVING]))
+					System.out.println(choiceSet[j]);
+					isValid = new TradeItem(choiceSet[j]).verifyValidity(s);
+					if (!isValid)
 					{
 						return false;
 					}
@@ -103,13 +157,10 @@ public class TradeEvent extends Event {
 			InputSystem input,
 			OutputSystem output) 
 	{
-//		protag.
-		int recievingCategory = Integer.parseInt(choice[RECIEVING_CATEGORY]);
-		String recieved = choice[RECIEVING];
-		protag.adjustItems(recieved, recievingCategory, false);
-		int removingCategory = Integer.parseInt(choice[REMOVING_CATEGORY]);
-		String removing = choice[REMOVING];
-		protag.adjustItems(removing, removingCategory, true);
+		for (int i = 1; i < choice.length; i++)
+		{
+			new TradeItem(choice[i]).changeProtag(protag);
+		}
 		return false;
 	}
 	

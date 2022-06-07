@@ -48,7 +48,7 @@ class Main {
 //	  File f = new File("res/effects.json");
 //	  File f = new File("res/shields.json");
 //	  File f = new File("res/encounters.json");
-	  File f = new File("res/events.json");
+//	  File f = new File("res/events.json");
 //	  File f = new File("res/campaigns.json");
 //	  try {
 //		f.createNewFile();
@@ -57,7 +57,7 @@ class Main {
 //		e1.printStackTrace();
 //	}
 //	  new RandomModifier(20);
-	  OutputStream o = new FileOutputStream(f);
+//	  OutputStream o = new FileOutputStream(f);
 //	  String fileContents = Heroes.loadHeroes().toString();
 //	  String fileContents = AbilityStorage.loadAbilities().toString();
 //	  String fileContents = Shields.loadShields().toString();
@@ -68,13 +68,13 @@ class Main {
 //	  String fileContents = Campaigns.saveCampaigns().toString();
 
 //	  System.out.println(file);
-	  try {
-		o.write(fileContents.getBytes());
-//		System.out.println("written" + f.getAbsolutePath());
-	} catch (IOException e) {
-//		 TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+//	  try {
+////		o.write(fileContents.getBytes());
+////		System.out.println("written" + f.getAbsolutePath());
+//	} catch (IOException e) {
+////		 TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
 //	  HashMap<String, Ability> abilities = AbilityLoader.parseJSONFile("res/abilities.json");
 ////	  System.out.println(abilities.get("summon squirrel"));
 //	  HashMap<String, Effect> effects = EffectLoader.parseJSONFile("res/effects.json");

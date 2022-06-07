@@ -9,7 +9,7 @@
   "type" : "basic",
   "speed" : 30
 }, {
-  "abilities" : [ "snowball", "protect", "defense up", "counter", "wide slash" ],
+  "abilities" : [ "Tax Collection", "snowball", "protect", "defense up", "counter", "wide slash", "scratch" ],
   "shield" : 40,
   "shields" : [ ],
   "effects" : [ "curse" ],

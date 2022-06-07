@@ -22,8 +22,8 @@
     "desc":"Tired from a neverending job, but determined to carry on. 4 turns each time."
 }, {
     "duration": -1,
-    "name": "A Never Ending Clock":
+    "name": "Endless",
     "type": "vigor",
     "actions": 6,
-    "desc": "It is never enough."
-}
+    "desc": "It was never enough. Perhaps the 6 hour clock will help."
+} ]

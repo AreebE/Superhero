@@ -310,12 +310,13 @@ public class StringBattleLog extends BattleLog<ArrayList<String>>
                     Effect.Type type = (Effect.Type) contents[1];
                     Integer power = (Integer) contents[2];
                     effectName = (String) contents[3];
+                    String stackName = (String) contents[4];
 
                     logEntry
                             .append("* ")
                             .append(victimName)
                             .append("\'s ")
-                            .append(type.name);
+                            .append((type != Effect.Type.STACK)? type.name: stackName);
                     if (type != Effect.Type.DAMAGE && power > 0)
                     {
                         logEntry.append(" increased ");

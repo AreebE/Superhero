@@ -46,6 +46,7 @@ public class PercentageModifier implements AbilityModifier
         Entity source = (useCaster)? caster: targets.get(0);
         int additionalStrength = (int) (source.getStatistic(stat) * percentage / 100.0);
         holder.adjustAdditionalStrength(additionalStrength, false);
+        
         return true;
     }
 

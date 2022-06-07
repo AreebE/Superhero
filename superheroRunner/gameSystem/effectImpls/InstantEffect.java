@@ -68,12 +68,10 @@ public class InstantEffect extends Effect
         Element element,
         boolean[] pierces) 
     {
-        super
+        this
         (
             strength, 
-            type, 
-            0, 
-            true, 
+            type,
             name, 
             desc, 
             element,
@@ -90,12 +88,10 @@ public class InstantEffect extends Effect
         Element element,
         String stack) 
     {
-        super
+        this
         (
             strength, 
             type, 
-            0, 
-            true, 
             name, 
             desc, 
             element,
@@ -125,7 +121,10 @@ public class InstantEffect extends Effect
             stack,
             pierces
         );
+        System.out.println(stack + ", " + super.getStack());
     }
+    
+    
     
     /**
      * Just remove the efffect

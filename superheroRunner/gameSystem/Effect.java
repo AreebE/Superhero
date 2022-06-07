@@ -224,6 +224,7 @@ public class Effect
         this.name = name;
         this.desc = desc;
         this.element = element;
+        this.stack = stack;
         this.pierces = pierces;
     }
 
@@ -300,7 +301,7 @@ public class Effect
                 );
                 break;
             case STACK:
-                target.addStack(stack, power);
+                target.changeStack(stack, power);
         }
     }
 
