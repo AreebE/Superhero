@@ -148,7 +148,7 @@
 },  {
   "abilities" : [ ],
   "shield" : 50,
-  "shields" : [ ],
+  "shields" : ["Temporary Deflection"],
   "effects" : [ ],
   "max health" : 50,
   "moves" : [ {

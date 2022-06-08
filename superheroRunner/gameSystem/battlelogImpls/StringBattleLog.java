@@ -133,9 +133,31 @@ public class StringBattleLog extends BattleLog<ArrayList<String>>
                         case RANDOM:
                             logEntry.append("poor luck.");
                             break;
+                        case NO_CONDITION_MET:
+                            Integer amountNeeded = (Integer) contents[1];
+                            String type = (String) contents[2];
+                            String comparison = (String) contents[3];
+                            int equalStart = comparison.indexOf("equal");
+                            System.out.println(comparison + equalStart);
+                            if (equalStart != -1)
+                            {
+                                comparison = new StringBuilder(comparison.substring(0, equalStart))
+                                            .append("about")
+                                            .toString();
+                            }
+                            logEntry.append("the conditions not being met. (Needed ")
+                                .append(comparison)
+                                .append(" ")
+                                .append(amountNeeded)
+                                .append(" ")
+                                .append(type)
+                                .append(".)");
+                            break;
                     }
                     break;
-                
+                case OVERCHARGED:
+                    logEntry.append("* The ability has now been overcharged, so it can't be used for a while.");
+                    break;
                 case CLEANSE:
                 case EFFECT_REMOVED:
                     targetName = (String) contents[0];
@@ -366,13 +388,25 @@ public class StringBattleLog extends BattleLog<ArrayList<String>>
                 	targetName = (String) contents[0];
                 	casterName = (String) contents[1];
                 	effectName = (String) contents[2];
+                    shieldName = (String) contents[3];
                 	logEntry.append("* ")
                 			.append(effectName)
                 			.append(" was reflected from ")
                 			.append(targetName)
                 			.append(" to ")
-                			.append(casterName);
-                	
+                			.append(casterName)
+                            .append(". (Caused by ")
+                            .append(contents[3])
+                            .append(".)");
+                    break;
+                case REDUCE_AMOUNT:
+                    Integer amount = (Integer) contents[0];
+                    String name = (String) contents[1];
+                    logEntry.append("* ")
+                        .append(amount)
+                        .append(" ")
+                        .append(name)
+                        .append(" was consumed.");
                     
             }
             log.add(log.size(), logEntry.toString());

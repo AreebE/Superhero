@@ -2,6 +2,7 @@ package gameSystem.shieldImpls;
 
 import org.json.JSONObject;
 
+import java.util.HashSet;
 import gameSystem.BattleLog;
 import gameSystem.Effect;
 import gameSystem.Elements;
@@ -15,6 +16,13 @@ import gameSystem.Storage;
  {
 
      public ReflectiveShield(
+         JSONObject json
+     )
+     {
+         super(json);
+     }
+     
+     public ReflectiveShield(
          String name,
          String desc,
          int duration,
@@ -23,6 +31,27 @@ import gameSystem.Storage;
          Elements.Name[] elementNames)
      {
          super(name, desc, duration, nullifies, usesLeft, new Trigger[]{Shield.Trigger.EFFECT_APPLIED}, elementNames);
+     }
+
+     public ReflectiveShield(
+         String name,
+         String desc,
+         int duration,
+         boolean nullifies,
+         int usesLeft,
+         HashSet<Elements.Name> elementNames)
+     {
+         super(
+             name, 
+             desc, 
+             duration, 
+             nullifies, 
+             usesLeft, 
+             new HashSet<Shield.Trigger>()
+             {{
+                 add(Shield.Trigger.EFFECT_APPLIED);
+            }}, 
+            elementNames);
      }
 
      @Override
@@ -36,7 +65,14 @@ import gameSystem.Storage;
      @Override
      public Shield copy()
      {
-         return null;
+         return new ReflectiveShield(
+             getName(),
+             getDesc(),
+             getDuration(),
+             isNullifies(),
+             getUses(),
+             getElementTriggers()
+        );
      }
 
 	@Override
@@ -46,14 +82,15 @@ import gameSystem.Storage;
 		target.removeEffect(reflectedEffect);
 		caster.addStartingEffect(reflectedEffect);
 		log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.REFLECT, 
-				new String[]{
+				new Object[]{
 						target.getName(),
 						caster.getName(),
-						reflectedEffect.getName()
+						reflectedEffect.getName(),
+                    this.getName()
 				}));
 	}
 
-       @Override
+    @Override
     public boolean verifyValidity(Storage s)
     {
         return true;

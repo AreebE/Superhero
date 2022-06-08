@@ -23,13 +23,18 @@ public class ChargeModifier implements AbilityModifier {
 	}
 
 	@Override
-	public boolean triggerModifier(List<Entity> target, Entity caster, Ability holder, Game g, BattleLog Log) {
+	public boolean triggerModifier(List<Entity> target, Entity caster, Ability holder, Game g, BattleLog log) {
 		// TODO Auto-generated method stub
 		currentCharges++;
 		if (currentCharges < maxCharges)
 		{
 			holder.doNotSetCooldown();
 		}
+        else 
+        {
+            Object[] contents = new Object[]{};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.OVERCHARGED, contents));
+        }
 		return true;
 	}
 
@@ -43,7 +48,8 @@ public class ChargeModifier implements AbilityModifier {
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
 		json.put(NUM_OF_CHARGES_KEY, maxCharges);
-		return json;
-	}
+        json.put(AbilityModifier.TYPE_KEY, ModifierLoader.CHARGE);
+        return json;
+    }
 
 }

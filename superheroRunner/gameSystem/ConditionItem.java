@@ -8,7 +8,7 @@ public class ConditionItem
 
 	private static final String NAME_NEEDED = "name needed";
 	private static final String CATEGORY_KEY = "category";
-	private static final String TYPE_OF_COMPARISON_KEY = "type";
+	private static final String TYPE_OF_COMPARISON_KEY = "comparison";
 	private static final String NUMBER_REQUIREMENT_KEY = "number requirement";
 	public static final String TYPE_KEY = "type";
 
@@ -21,11 +21,11 @@ public class ConditionItem
 	public static final String CATEGORY_ATTACK = "attack";
 	public static final String CATEGORY_DEFENSE = "defense";
 	
-	public static final String COMPARE_LESS_THAN = "less";
-	public static final String COMPARE_LESS_OR_EQUAL = "less or equal";
+	public static final String COMPARE_LESS_THAN = "less than";
+	public static final String COMPARE_LESS_OR_EQUAL = "less than or equal";
 	public static final String COMPARE_EQUAL = "equal";
-	public static final String COMPARE_GREATER_OR_EQUAL = "greater or equal";
-	public static final String COMPARE_GREATER_THAN = "greater";
+	public static final String COMPARE_GREATER_OR_EQUAL = "greater than or equal";
+	public static final String COMPARE_GREATER_THAN = "greater than";
 	
 	private String nameNeeded;
 	private String categoryName;
@@ -63,6 +63,7 @@ public class ConditionItem
 				break;
 			case CATEGORY_EFFECT_NUMBER:
 				number = target.getNumOfEffects(nameNeeded);
+                System.out.println(number);
 				break;
 			case CATEGORY_STACK:
 				number = target.getStackNumber(nameNeeded);
@@ -120,10 +121,21 @@ public class ConditionItem
 	}
 
 	public String getName() {
-		return nameNeeded;
+		return 
+            (categoryName.equals(CATEGORY_STACK) 
+             || categoryName.equals(CATEGORY_EFFECT_NUMBER))? 
+                nameNeeded:
+                (categoryName.equals(CATEGORY_EFFECT))?
+                    "effects":
+                    categoryName;
 	}
 
-	public void changeEntity(Entity caster) {
+    public String getComparison()
+    {
+        return comparisonType;
+    }
+    
+	public void changeEntity(Entity caster, BattleLog log) {
 		switch (categoryName)
 		{
 			case CATEGORY_STACK:
@@ -145,6 +157,8 @@ public class ConditionItem
 				caster.addDefense(-numberReq);
 				break;		
 		}
-	}
+        Object[] contents = new Object[]{numberReq, getName()};
+	    log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.REDUCE_AMOUNT, contents));
+    }
     
 }

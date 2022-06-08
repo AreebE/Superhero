@@ -700,8 +700,10 @@ public class Entity implements Comparable<Entity>
     	name = name.toLowerCase();
     	for (int i = 0; i < effects.size(); i++)
     	{
+            System.out.println(effects.get(i).getName().toLowerCase() + ", " + name);
     		if (effects.get(i).getName().toLowerCase().equals(name))
     		{
+                
     			numFound++;
     		}
     	}

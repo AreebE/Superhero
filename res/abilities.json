@@ -53,6 +53,29 @@
   "desc" : "You slam a rock into your opponent",
   "element" : "null"
 }, {
+  "pierces" : true,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "Telekinesis X",
+  "ignores defense" : false,
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "",
+                "category": "health",
+                "comparison": "greater than",
+                "number requirement": 50,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "attack",
+  "desc" : "You slam a few rocks in your opponent, provided you're healthy enough.",
+  "element" : "null"
+}, {
   "pierces" : false,
   "strength" : 3,
   "cooldown" : 1,
@@ -62,6 +85,18 @@
   "type" : "attack",
   "desc" : "Launches a ball of fire",
   "element" : "fire"
+}, {
+  "pierces" : false,
+  "strength" : 20,
+  "cooldown" : 2,
+  "side effect": "Coinage",
+  "name" : "Tax Collection",
+  "ignores defense" : false,
+  "modifiers" : [  ],
+  "type" : "attack status",
+  "on user": true,
+  "desc" : "Collect the opponent's taxes, earning some coins.",
+  "element" : "null"
 }, {
   "pierces" : false,
   "strength" : 50,
@@ -106,17 +141,43 @@
   "element" : "null"
 }, {
   "pierces" : true,
-  "strength" : 20,
-  "cooldown" : 1,
+  "strength" : 3,
+  "cooldown" : 5,
   "name" : "Snowball",
   "ignores defense" : false,
   "modifiers" : [ {
     "times" : 5,
     "type" : "multi cast"
+  }, {
+    "type" : "charge",
+    "charges": "3",
   } ],
   "type" : "attack",
-  "desc" : "Launches a few snowballs. May cause frost or blindness.",
+  "desc" : "Launches a few snowballs.",
   "element" : "ice"
+}, {
+    "pierces" : true,
+    "strength" : 80,
+    "cooldown" : 2,
+    "name" : "Boiling Toxin",
+    "ignores defense" : false,
+    "modifiers" : [
+      {
+            "type": "conditional",
+            "will consume": false,
+            "uses target": true,
+            "item": {
+                "name needed": "poison",
+                "category": "effect #",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+    ],
+    "type" : "attack",
+    "desc" : "Boils the toxin in the enemy, if applicable.",
+    "element" : "ice"
 }, {
   "pierces" : true,
   "strength" : 50,
@@ -150,6 +211,8 @@
   "ignores defense" : false,
   "modifiers" : [ ],
   "type" : "attack status",
+  "on user": false,
+
   "desc" : "Poisons the enemy upon hit",
   "element" : "null"
 }, {
@@ -164,6 +227,8 @@
     	"type" : "multi cast"
   } ],
   "type" : "attack status",
+    "on user": false,
+
   "desc" : "Throw some snowballs that are on fire.",
   "element" : "fire"
 }, {
@@ -183,6 +248,7 @@
   "ignores defense" : true,
   "modifiers" : [ ],
   "type" : "attack status",
+  "on user": false,
   "desc" : "Pulls the user into the ground, cutting them on the rocks and they bleed out over time",
   "element" : "earth"
 }, {
@@ -261,12 +327,25 @@
   "element" : "null"
 }, {
   "strength" : 0,
-  "effect" : "Coinage",
+  "effect" : "Shield Generator",
   "cooldown" : 4,
-  "name" : "Tax Collection",
-  "modifiers" : [ ],
+  "name" : "Supermarket Trip",
+  "modifiers" : [
+        {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "Coin",
+                "category": "stack",
+                "comparison": "equal",
+                "number requirement": 4,
+                "type": "basic"
+            }
+        }
+  ],
   "type" : "support",
-  "desc" : "Collects the opponent's taxes, earning some money.",
+  "desc" : "Buy some instant shield generators... They sell those, right?",
   "element" : "null"
 }, {
   "strength" : 0,

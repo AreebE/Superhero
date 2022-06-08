@@ -68,7 +68,7 @@ public class ShieldLoader {
 			case TRAP:
 				return new TrapShield(json);
             case REFLECTIVE:
-                // return new ReflectiveShield(json);
+                return new ReflectiveShield(json);
         }
 		return null;
 	}

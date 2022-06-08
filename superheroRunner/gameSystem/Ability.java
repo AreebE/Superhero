@@ -416,6 +416,11 @@ public abstract class Ability
     {
     	this.willSetCooldown = false;
     }
+
+    public void doNotCast()
+    {
+        this.haveCastedAbility = true;
+    }
     
     /**
      * Get how many people this can target, though return 1 at most, but -1 if hitting eve ryone.

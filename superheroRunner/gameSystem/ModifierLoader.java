@@ -11,7 +11,8 @@ public class ModifierLoader {
 	public static final String PERCENTAGE = "percentage";
 	public static final String RANDOM = "random";
 	public static final String CONDITIONAL = "conditional";
-	
+    public static final String CHARGE = "charge";
+    
 	public static AbilityModifier loadModifier(JSONObject json)
 	{
 		switch(json.getString(AbilityModifier.TYPE_KEY))
@@ -26,7 +27,9 @@ public class ModifierLoader {
 				return new PercentageModifier(json);
 			case CONDITIONAL:
 				return new ConditionModifier(json);
-		}
+            case CHARGE:
+                return new ChargeModifier(json);
+        }
 		return null;
 	}
 

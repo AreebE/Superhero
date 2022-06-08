@@ -21,12 +21,14 @@ import gameSystem.Storage;
 public class AttackStatusAbility extends AttackAbility 
 {
 	private static final String SIDE_EFFECT_KEY = "side effect";
+    private static final String ON_USER_KEY = "on user";
     private String sideEffect;
-    private boolean inMiddleofCast;
+    private boolean onUser;
     public AttackStatusAbility(JSONObject json)
     {
     	super(json);
     	sideEffect = json.getString(SIDE_EFFECT_KEY).toLowerCase();
+        onUser = json.getBoolean(ON_USER_KEY);
     }
     /**
      * One key difference, compared to the other one:
@@ -50,6 +52,7 @@ public class AttackStatusAbility extends AttackAbility
         boolean ignoresBaseDefense, 
         boolean isPiercing, 
         String sideEffect,
+        boolean onUser,
         AbilityModifier... modifiers) 
     {
         super
@@ -64,7 +67,7 @@ public class AttackStatusAbility extends AttackAbility
             modifiers
         );
         this.sideEffect = sideEffect;
-        this.inMiddleofCast = false;
+        this.onUser = onUser;
     }
 
 
@@ -90,6 +93,7 @@ public class AttackStatusAbility extends AttackAbility
         boolean ignoresBaseDefense, 
         boolean isPiercing,
         String sideEffect,
+        boolean onUser,
         ArrayList<AbilityModifier> modifiers) 
     {
         super
@@ -104,6 +108,7 @@ public class AttackStatusAbility extends AttackAbility
             modifiers
         );
         this.sideEffect = sideEffect;
+        this.onUser = onUser;
     }
 
 
@@ -124,9 +129,17 @@ public class AttackStatusAbility extends AttackAbility
         BattleLog log) 
     {
         super.performCast(target, caster, g, log);
-        Object[] contents = new Object[]{target.getName(), sideEffect};
+        Object[] contents = new Object[]{target.getName(), sideEffect};        
+        if (onUser)
+        {
+            contents[0] = caster.getName();
+            caster.addEffect(caster, g, log, g.getEffect(sideEffect));        
+        }
+        else 
+        {
+            target.addEffect(caster, g, log, g.getEffect(sideEffect));        
+        }
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.ATTACK_STATUS, contents));
-        target.addEffect(caster, g, log, g.getEffect(sideEffect));        
         return;
     }
 
@@ -147,6 +160,7 @@ public class AttackStatusAbility extends AttackAbility
                         doesIgnoreBaseDefense(), 
                         isPiercing(), 
                         sideEffect,
+                        onUser,
                         getModifiers()
                     );
     }
@@ -155,7 +169,8 @@ public class AttackStatusAbility extends AttackAbility
 		JSONObject ability = super.toJson();
 		ability.put(TYPE_KEY, AbilityLoader.ATTACK_STATUS);
 		ability.put(SIDE_EFFECT_KEY, sideEffect);
-		return ability;
+		ability.put(ON_USER_KEY, onUser);
+        return ability;
 	}
 
       @Override

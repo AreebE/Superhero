@@ -225,6 +225,15 @@
   "desc" : "Heals 10 health immediately",
   "element" : "null"
 }, {
+  "duration" : 6,
+  "stat" : "shield",
+  "strength" : 12,
+  "permanent" : true,
+  "name" : "Shield Generator",
+  "type" : "basic",
+  "desc" : "Adds 12 shield each turn",
+  "element" : "null"
+}, {
   "duration" : 0,
   "stat" : "health",
   "strength" : 100,

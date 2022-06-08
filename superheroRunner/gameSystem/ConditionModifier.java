@@ -11,18 +11,22 @@ public class ConditionModifier implements AbilityModifier
 
 	private static final String ITEM_KEY = "item";
 	private static final String USE_KEY = "will consume";
-	
+	private static final String ON_TARGET_KEY = "uses target";
 	private ConditionItem item;
 	private boolean useItems;
+    private boolean onTarget;
 
 	public ConditionModifier(JSONObject json)
 	{
 		item = ConditionLoader.loadConditionItem(json.getJSONObject(ITEM_KEY));
 		useItems = json.getBoolean(USE_KEY);
+        onTarget = json.getBoolean(ON_TARGET_KEY);
 	}
 	
 	public ConditionModifier(
-			ConditionItem item)
+			ConditionItem item,
+            boolean useItems,
+            boolean onTarget)
 	{
 		this.item = item;
 	}
@@ -34,16 +38,19 @@ public class ConditionModifier implements AbilityModifier
 	}
 
 	@Override
-	public boolean triggerModifier(List<Entity> target, Entity caster, Ability holder, Game g, BattleLog Log) {
+	public boolean triggerModifier(List<Entity> target, Entity caster, Ability holder, Game g, BattleLog log) {
 		// TODO Auto-generated method stub
-		boolean canUse = item.meetsRequirements(caster);
+		boolean canUse = item.meetsRequirements((onTarget)? target.get(0): caster);
 		if (!canUse)
 		{
 			holder.doNotSetCooldown();
-		}
+            holder.doNotCast();
+            Object[] contents = new Object[]{BattleLog.Entry.Interruption.NO_CONDITION_MET, item.getNumRequired(), item.getName(), item.getComparison()};
+			log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
+        }
 		else if (useItems)
 		{
-			item.changeEntity(caster);
+			item.changeEntity(caster, log);
 		}
 		return canUse;
 	}

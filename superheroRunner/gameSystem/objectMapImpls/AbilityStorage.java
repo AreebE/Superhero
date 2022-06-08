@@ -137,7 +137,8 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.NULL),
           false,
           false,
-          "poison"
+          "poison",
+          false
       ),
       new PassAbility
       (
@@ -155,7 +156,8 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.EARTH),
           true, 
           true,
-          "bleed"
+          "bleed",
+          false
       ),
 
       new DefenseAbility

@@ -70,4 +70,13 @@
   "event triggers" : [ "death" ],
   "type" : "death",
   "desc" : "Give the creator some extra stats"
-} ]
+}, {
+    "duration" : -1,
+    "element triggers" : [ "all" ],
+    "nullifies" : false,
+    "name" : "Temporary Deflection",
+    "uses" : 2,
+    "event triggers" : [ "effect applied" ],
+    "type" : "reflective",
+    "desc" : "Reflect all effects for a while."
+}]

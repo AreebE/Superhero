@@ -34,6 +34,7 @@ public abstract class BattleLog<T>
             PASS,
             SPAWN,
             STATE_CHANGE,
+            OVERCHARGED,
             EFFECT_APPLIED,
             ABILITY,
             SHIELD_LOST,
@@ -42,7 +43,8 @@ public abstract class BattleLog<T>
             APPLY_EFFECT,
             END_OF_TURN,
             STAT_DISPLAY, 
-            REFLECT
+            REFLECT,
+            REDUCE_AMOUNT
         } 
 
         /**
@@ -52,7 +54,8 @@ public abstract class BattleLog<T>
         public enum Interruption 
         {
             SHIELD,
-            RANDOM
+            RANDOM,
+            NO_CONDITION_MET
         }
 
         /**

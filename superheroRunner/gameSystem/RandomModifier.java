@@ -33,7 +33,8 @@ public class RandomModifier implements AbilityModifier{
     {
     	Object[] contents = new Object[]{BattleLog.Entry.Interruption.RANDOM};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.INTERRUPTED, contents));
-      return false;
+        ability.doNotCast();
+        return false;
     }
   }
 
