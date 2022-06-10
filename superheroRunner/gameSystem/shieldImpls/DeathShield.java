@@ -81,7 +81,7 @@ public class DeathShield extends Shield
         // System.out.println("appltied death shield to " + victim.getName());
         Object[] contents = new Object[]{victim.getName(), getUses() - 1, caster.getName(), effect, null, getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
-        caster.applyEffect(g.getEffect(effect), log);
+        caster.addStartingEffect(g.getEffect(effect));
     }
 
     /**

@@ -113,6 +113,8 @@ public abstract class Event
 			InputSystem input, 
 			OutputSystem output);
 
+    public abstract boolean isBattleEvent();
+    
 	@Override
 	public JSONObject toJson()
 	{

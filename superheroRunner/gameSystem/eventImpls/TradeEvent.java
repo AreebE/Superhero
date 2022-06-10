@@ -148,6 +148,12 @@ public class TradeEvent extends Event {
 		return true;
 	}
 
+    @Override
+    public boolean isBattleEvent()
+    {
+        return false;
+    }
+
 	@Override
 	protected boolean executeAction(
 			String[] choice, 

@@ -20,6 +20,26 @@
   "type" : "dual",
   "desc" : "Deals damage to both the user and the attacker once the shield breaks"
 }, {
+  "duration" : 8,
+  "element triggers" : [ "all" ],
+  "self apply" : "taxed",
+  "nullifies" : false,
+  "name" : "Embargo",
+  "uses" : -1,
+  "event triggers" : [ "effect applied", "shieldAdded", "spawn", "changeState", "giveEffect", "cleanse"],
+  "type" : "self",
+  "desc" : "Get hurt when adding an effect, shield, spawnable, or such."
+}, {
+  "duration" : 8,
+  "element triggers" : [ "all" ],
+  "self apply" : "outlawed",
+  "nullifies" : false,
+  "name" : "Scrutiny",
+  "uses" : -1,
+  "event triggers" : [ "attacking" ],
+  "type" : "self",
+  "desc" : "Get hurt when attacking."
+}, {
   "duration" : 3,
   "element triggers" : [ "all" ],
   "self apply" : "instant heal",

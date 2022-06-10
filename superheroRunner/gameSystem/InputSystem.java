@@ -12,4 +12,5 @@ public interface InputSystem {
     public Entity getSingleTarget();
     public List<Entity> getSecondaryTargets(Integer limit, Entity caster);   
     public int getChoice(String prompt, ArrayList<String[]> choices);
+    public Campaign.Direction getDirection(ArrayList<Campaign.Direction> possibleDirections);
 }

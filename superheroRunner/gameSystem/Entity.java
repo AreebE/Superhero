@@ -991,6 +991,7 @@ public class Entity implements Comparable<Entity>
 	{
 		try 
 		{
+            System.out.println(name + ", ==" + stacks.get(name));
 			return stacks.get(name).intValue();
 		}
 		catch (NullPointerException npe)

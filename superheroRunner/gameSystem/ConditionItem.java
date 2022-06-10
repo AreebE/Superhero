@@ -56,6 +56,7 @@ public class ConditionItem
 	public boolean meetsRequirements(Entity target)
 	{
 		int number = 0;
+        System.out.println(categoryName);
 		switch(categoryName)
 		{
 			case CATEGORY_EFFECT:

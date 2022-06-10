@@ -74,6 +74,12 @@ public class BattleEvent
 		return isGameOver;
 	}
 
+    @Override
+    public boolean isBattleEvent()
+    {
+        return true;
+    }
+
 	@Override
 	public JSONObject toJson()
 	{

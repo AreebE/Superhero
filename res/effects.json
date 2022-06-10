@@ -1,6 +1,37 @@
 [ {
   "duration" : 0,
   "stat" : "attack",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Induction",
+  "type" : "instant",
+  "desc" : "Apply a controlled shock to the target, improving their physical prowess",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 10,
+  "permanent" : true,
+  "name" : "Outlawed",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Punish the opponent for breaking the law.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Taxed",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Tax the opponent for doing a trade.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "attack",
   "strength" : 2,
   "permanent" : true,
   "name" : "Attack Boost",
@@ -120,6 +151,15 @@
   "desc" : "The target begins to increase all of their stats.",
   "element" : "null"
 }, {
+  "duration" : 3,
+  "stat" : "defense",
+  "strength" : 1,
+  "permanent" : false,
+  "name" : "airy response",
+  "type" : "one time",
+  "desc" : "Hold on for a bit longer, healing some HP.",
+  "element" : "null"
+}, {
   "duration" : 5,
   "stat" : "defense",
   "strength" : 4,
@@ -214,6 +254,28 @@
   "pierces defense" : true,
   "pierces shield" : true,
   "desc" : "Generates more shield over time",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 1,
+  "permanent" : true,
+  "delay": 4,
+  "name" : "Proposing Bills",
+  "type" : "delayed passive",
+  "desc" : "Every 4 turns, you get the opportunity to pass a new law.",
+  "stack name": "bill",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 6,
+  "permanent" : true,
+  "name" : "Soldier's Call",
+  "type" : "delayed passive",
+  "delay": 4,
+  "desc" : "Soldiers approach the battlefield, ready to fight.",
+  "stack name": "soldier",
   "element" : "null"
 }, {
   "duration" : 0,

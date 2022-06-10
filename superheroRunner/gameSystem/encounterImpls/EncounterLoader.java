@@ -15,7 +15,8 @@ import gameSystem.Encounter;
 public class EncounterLoader {
 	public static final String ONE_V_ALL = "one v all";
 	public static final String FREE_FOR_ALL = "free for all";
-	
+	public static final String MULTI_TEAM = "multi team";
+    
 	public static HashMap<String, Encounter> parseJSONFile(String src) throws FileNotFoundException
 	{
 		Scanner fileReader = new Scanner(new File(src));
@@ -45,6 +46,8 @@ public class EncounterLoader {
 				return new OneVAll(json);
 			case FREE_FOR_ALL:
 				return new FreeForAll(json);
+            case MULTI_TEAM:
+                return new MultiTeamBattle(json);
 		}
 		return null;
 	}

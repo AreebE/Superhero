@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import gameSystem.Action;
+import gameSystem.Campaign;
 import gameSystem.BattleLog;
 import gameSystem.Entity;
 import gameSystem.Game;
@@ -102,6 +103,12 @@ public class BasicAIEntity extends Entity
 			// TODO Auto-generated method stub
 			return 0;
 		}
+
+         public Campaign.Direction getDirection(ArrayList<Campaign.Direction> possibleDirections)
+        {
+           
+            return null;
+        }
     	
     }
     

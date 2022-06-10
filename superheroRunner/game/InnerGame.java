@@ -10,6 +10,7 @@ import java.util.Scanner;
 import gameSystem.Ability;
 import gameSystem.Action;
 import gameSystem.BattleLog;
+import gameSystem.Campaign;
 import gameSystem.Effect;
 import gameSystem.Elements;
 import gameSystem.Encounter;
@@ -75,6 +76,20 @@ public class InnerGame extends Game
     private Scanner inputReader;
     private Entity target;
     private ArrayList<Entity> fighters;
+
+    private HashMap<String, Campaign.Direction> directionalInput = new HashMap<String, Campaign.Direction>()
+        {{
+            put("up", Campaign.Direction.UP);
+            put("w", Campaign.Direction.UP);
+            put("down", Campaign.Direction.DOWN);
+            put("s", Campaign.Direction.DOWN);
+
+            put("left", Campaign.Direction.LEFT);
+            put("a", Campaign.Direction.LEFT);
+
+            put("right", Campaign.Direction.RIGHT);
+            put("d", Campaign.Direction.RIGHT);
+    }};
 
     public ScannerInput(Scanner inputReader) {
       this.inputReader = inputReader;
@@ -152,7 +167,7 @@ public class InnerGame extends Game
 				inputReader.nextLine();
 				return 1;
 			}
-			String answer = inputReader.next();
+			String answer = inputReader.nextLine();
 			try
 			{
 				result = Integer.parseInt(answer);				
@@ -174,6 +189,27 @@ public class InnerGame extends Game
 		// TODO Auto-generated method stub
 		System.out.println(event);
 	}  
+
+    public Campaign.Direction getDirection(ArrayList<Campaign.Direction> possibleDirections)
+    {
+       Campaign.Direction direction = null;
+        while (direction == null)
+        {
+            System.out.println("Possible movements are: ");
+            for (Campaign.Direction dir: possibleDirections)
+            {
+                System.out.println("* " + dir);
+            }
+            String input = inputReader.nextLine();
+            direction = directionalInput.get(input);
+            if (!possibleDirections.contains(direction))
+            {
+                direction = null;
+            }
+        }
+        return direction;
+    }
+
   }
 
   @Override 

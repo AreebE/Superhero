@@ -7,7 +7,11 @@ import org.json.JSONObject;
 
 public class Campaign 
 	implements Saveable{
-	
+
+    public static enum Direction
+    {
+        UP, DOWN, LEFT, RIGHT
+    }
 	private static final String EVENT_KEY = "events";
 	private static final String PROTAG_NAME = "protag";
 	private static final String NAME_KEY = "name";
@@ -60,7 +64,12 @@ public class Campaign
 			}
 		}
 	}
-	
+
+    protected ArrayList<String> getEvents()
+    {
+        return events;
+    }
+        
 	@Override
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
@@ -98,10 +107,25 @@ public class Campaign
 	{
 		this.output = output;
 	}
+
+    public InputSystem getInput()
+	{
+		return input;
+	}
+	
+	public OutputSystem getOutput()
+	{
+		return output;
+	}
 	
 	public String getName() {
 		// TODO Auto-generated method stub
 		return name;
 	}
+
+    protected String getProtagName()
+    {
+        return protagName;
+    }
 	
 }

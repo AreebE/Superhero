@@ -161,6 +161,18 @@
   "state" : "relaxed",
   "type" : "simple ai",
   "speed" : 101
-}
+}, {
+    "abilities":["Prod"],
+    "is targettable":true,
+    "shield":10,
+    "shields":[],
+    "effects":[],
+    "max health":30,
+    "attack pattern":["prod"],
+    "name":"Makeshift Militia",
+    "state":"relaxed",
+    "type":"simple controllable ai",
+    "speed":50
+},
 
 ]

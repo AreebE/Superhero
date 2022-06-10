@@ -12,6 +12,7 @@ import java.util.Scanner;
 import gameSystem.Ability;
 import gameSystem.Campaign;
 import gameSystem.Effect;
+import gameSystem.Encounter;
 import gameSystem.Entity;
 import gameSystem.EntityInfoItem;
 import gameSystem.Shield;
@@ -86,21 +87,40 @@ public class OuterGame {
          Command.onHelp();
         break;
 
-        case "p":
-        case "play":
-        System.out.println("Playing Game!");
-//        EntityInfoItem testItem = storage.getEntity("Joe");
-//        InnerGame iG = new InnerGame(storage.getEncounter("duel"), storage, g, testItem);
-//        iG.startFight("Joe");
-        Campaign c = storage.getCampaign("Too many Jokes");
-        InnerGame.ScannerInput system = new InnerGame.ScannerInput(new Scanner(System.in));
-        c.setInput(system);
-        c.setOutput(system);
-        c.beginCampaign(storage, new StringBattleLog());
+        case "pe":
+        case "play encounter":
+        // System.out.println("Playing Game!");
+             System.out.println("What encounter will you choose?");
+            String encounterName = sc.nextLine();
+            Encounter e = storage.getEncounter(encounterName);
+            System.out.println("Just to be safe, can you choose a protagonist?");
+            String protagName = sc.nextLine();
+            EntityInfoItem protag = storage.getEntity(protagName);
+            if (e == null || protag == null)
+            {
+                break;
+            }
+            InnerGame.ScannerInput system = new InnerGame.ScannerInput(new Scanner(System.in));
+            InnerGame game = new InnerGame(e, storage, new GUI(), protag);
+            game.startFight(protag.getName());
+       
         //going to add exploration here soon
 //        iG.Fight(superheros);
         break;
-
+        case "pc":
+        case "play campaign":
+            System.out.println("What campaign will you choose?");
+            String campaignName = sc.nextLine();
+            Campaign c = storage.getCampaign(campaignName);
+            if (c == null)
+            {
+                break;
+            }
+            system = new InnerGame.ScannerInput(new Scanner(System.in));
+            c.setInput(system);
+            c.setOutput(system);
+            c.beginCampaign(storage, new StringBattleLog());
+              break;
         case "ss":
         case "save superheros":
         storage.saveAllToFiles();

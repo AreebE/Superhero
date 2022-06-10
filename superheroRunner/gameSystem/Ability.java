@@ -254,7 +254,7 @@ public abstract class Ability
 
         
        
-        
+        System.out.println(willSetCooldown);
 //        System.out.println("using ability " + name);
 //        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent + ", " + group);
         boolean shouldContinue = true;
@@ -262,6 +262,7 @@ public abstract class Ability
         {
 //        	System.out.println("checking modifier " + modifiers.get(i).getClass().toString());
         	shouldContinue = modifiers.get(i).triggerModifier(targets, caster, this, g, log);
+
         }
         if (!haveCastedAbility)
         {

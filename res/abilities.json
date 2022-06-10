@@ -1,7 +1,7 @@
 [ {
   "pierces" : false,
   "strength" : 5,
-  "cooldown" : 1,
+  "cooldown" : 2,
   "name" : "Ram",
   "ignores defense" : false,
   "modifiers" : [ {
@@ -12,6 +12,42 @@
   } ],
   "type" : "attack",
   "desc" : "Ram yourself into your opponent",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 4,
+  "cooldown" : 3,
+  "name" : "Regal Storm",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "percentage" : "100",
+    "limit": 3,
+    "type" : "group",
+  } ],
+  "type" : "attack",
+  "desc" : "Summon a storm that shocks a few people.",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 7,
+  "cooldown" : 2,
+  "name" : "Jolt",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Stab forward quickly, hi",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "Prod",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Prod the opponent to deal some damage.",
   "element" : "null"
 },
 {
@@ -141,7 +177,7 @@
   "element" : "null"
 }, {
   "pierces" : true,
-  "strength" : 3,
+  "strength" : 10,
   "cooldown" : 5,
   "name" : "Snowball",
   "ignores defense" : false,
@@ -270,6 +306,28 @@
   "desc" : "The user will be warned not to break your shield",
   "element" : "null"
 }, {
+  "shield" : "embargo",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Embargo",
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "bill",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "defense",
+  "desc" : "When the target decides to apply something on themselves or others, tax their hp.",
+  "element" : "null"
+}, {
   "shield" : "witch's curse",
   "strength" : 0,
   "cooldown" : 3,
@@ -278,6 +336,27 @@
   "type" : "defense",
   "desc" : "When attacked, cast a curse on whoever attacked you",
   "element" : "null"
+}, {
+  "shield" : "scrutiny",
+  "strength" : 0,
+  "cooldown" : 4,
+  "name" : "Outlaw",
+  "modifiers" : [  {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "bill",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "defense",
+  "desc" : "Formally forbid the opponent from making any attacks against you. Take away their hp upon doing so.",
+  "element" : "light"
 }, {
   "shield" : "illusion",
   "strength" : 0,
@@ -296,6 +375,29 @@
   "type" : "defense",
   "desc" : "Heal oneself upon hit",
   "element" : "null"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 2,
+  "name" : "The Footmen's Call",
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "soldier",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 4,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "spawnable",
+  "desc" : "Call four footmen forward to form a batallion",
+  "element" : "null",
+  "spawnable" : "makeshift militia"
 }, {
   "shield" : "",
   "strength" : 0,
@@ -450,6 +552,29 @@
   "modifiers" : [ ],
   "type" : "support",
   "desc" : "The user decides to be cautious for some time",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "induction",
+  "cooldown" : 6,
+  "name" : "Induct",
+  "modifiers" : [
+      {
+        "type" : "charge",
+        "charges": "4",
+      }
+  ],
+  "type" : "support",
+  "desc" : "Induct a troop to action, giving them extra attack. Careful, as you'll tire out after four uses.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "airy response",
+  "cooldown" : 4,
+  "name" : "Airy Attitude",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Show your ally the pain is bearable, urging them to go on. Higher defense.",
   "element" : "null"
 }, {
   "strength" : 0,

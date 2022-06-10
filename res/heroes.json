@@ -48,4 +48,22 @@
   "state" : "relaxed",
   "type" : "basic",
   "speed" : 300
+}, {
+  "abilities" : [ 
+      "Jolt", 
+      "Regal Storm", 
+      "Outlaw", 
+      "Embargo", 
+      "Airy Attitude", 
+      "Induct",
+      "The Footmen's Call"
+  ],
+  "shield" : 75,
+  "shields" : [ ],
+  "effects" : ["soldier's call", "proposing bills"],
+  "max health" : 350,
+  "name" : "Lyn",
+  "state" : "Overclocked",
+  "type" : "basic",
+  "speed" : 300
 } ]

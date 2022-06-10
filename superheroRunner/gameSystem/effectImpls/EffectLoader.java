@@ -20,7 +20,8 @@ public class EffectLoader {
 	public static final String INSTANT = "instant";
 	public static final String ONE_TIME = "one time";
 	public static final String PASSIVE = "passive";
-	
+	public static final String DELAYED_PASSIVE = "delayed passive";
+    
 	public static HashMap<String, Effect> parseJSONFile(String src) throws FileNotFoundException
 	{
 		Scanner fileReader = new Scanner(new File(src));
@@ -64,6 +65,8 @@ public class EffectLoader {
 				return new OneTimeEffect(json);
 			case PASSIVE:
 				return new PassiveEffect(json);
+            case DELAYED_PASSIVE:
+                return new DelayedPassive(json);
 			default:
 				return new Effect(json);
 		}

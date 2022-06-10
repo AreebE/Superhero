@@ -15,7 +15,8 @@ import gameSystem.Ability;
 import gameSystem.Campaign;
 
 public class CampaignLoader {
-	
+
+    public static final String MAP_CAMPAIGN = "map";
 	public static HashMap<String, Campaign> parseJsonFile(String fileSrc) throws FileNotFoundException
 	{
 		Scanner fileReader = new Scanner(new File(fileSrc));
@@ -47,6 +48,8 @@ public class CampaignLoader {
 	{
 		switch(json.getString(Campaign.TYPE_KEY))
 		{
+            case MAP_CAMPAIGN:
+                return new MapCampaign(json);
 			default:
 				return new Campaign(json);
 		}		
