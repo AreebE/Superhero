@@ -30,6 +30,7 @@ public class EffectLoader {
 		{
 			jsonString.append(fileReader.nextLine());
 		}
+        // System.out.println(jsonString.toString().substring(9600, 9700));
 		JSONArray effects = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
 		HashMap<String, Effect> listOfEffects = new HashMap<>();
 		for (int i = 0; i < effects.length(); i++)

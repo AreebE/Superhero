@@ -67,7 +67,7 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.EARTH),
           false, 
           false,
-          new GroupModifier(100, -1)
+          new GroupModifier(-1)
       ),
 
       new AttackAbility
@@ -125,7 +125,7 @@ public class AbilityStorage{
           Elements.getElement(Elements.Name.NULL),
           false,
           false,
-          new GroupModifier(50, 2)
+          new GroupModifier(2)
       ),
 
       new AttackStatusAbility

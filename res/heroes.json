@@ -9,7 +9,7 @@
   "type" : "basic",
   "speed" : 30
 }, {
-  "abilities" : [ "Telekinesis X", "Boiling Toxin", "Poison", "snowball", "protect", "defense up", "counter", "wide slash", "scratch" ],
+  "abilities" : [  "summon squirrel", "poison slash", "Boiling Toxin", "Poison", "snowball", "protect", "defense up", "counter", "wide slash", "scratch", "earthquake", "alt f4" ],
   "shield" : 40,
   "shields" : [ ],
   "effects" : [ "curse" ],
@@ -39,6 +39,21 @@
   "type" : "basic",
   "speed" : 200
 }, {
+  "abilities" : [ 
+      "mazda crash", 
+      "Calling for Father", 
+      "don't worry about it", 
+      "dodger",  
+      "mach punch" ],
+  "shield" : 0,
+  "shields" : [ ],
+  "effects" : [ "short legged"],
+  "max health" : 400,
+  "name" : "Danial",
+  "state" : "relaxed",
+  "type" : "basic",
+  "speed" : 100
+}, {
   "abilities" : [ "poison slash", "illusion spell", "telekinesis", "earthquake", "defensive stance", "pray" ],
   "shield" : 40,
   "shields" : [ "illusion" ],
@@ -65,5 +80,39 @@
   "name" : "Lyn",
   "state" : "Overclocked",
   "type" : "basic",
-  "speed" : 300
-} ]
+  "speed" : 65
+}, {
+  "abilities" : [ 
+      "Flood", 
+      "Basic Touch", 
+      "Rustic Charm", 
+      "Distillation", 
+      "Refine", 
+      "Acidic Touch"
+  ],
+  "shield" : 75,
+  "shields" : [ ],
+  "effects" : [ ],
+  "max health" : 350,
+  "name" : "Aqua",
+  "state" : "relaxed",
+  "type" : "basic",
+  "speed" : 120
+}, {
+  "abilities" : [ 
+      "Stockpile", 
+      "Starvation Handling", 
+      "Harvest", 
+      "Battery", 
+      "Red's Winter", 
+      "Hammer Down"
+  ],
+  "shield" : 0,
+  "shields" : [ ],
+  "effects" : [ ],
+  "max health" : 300,
+  "name" : "Communist Aayush",
+  "state" : "relaxed",
+  "type" : "basic",
+  "speed" : 25
+}]

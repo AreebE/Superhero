@@ -134,16 +134,13 @@ public class InnerGame extends Game
           }
         }
       }
-      for (int i = 0; i < limit && otherTargets.size() < fighters.size() - 1; i++) {
+      for (int i = 0; i < limit; i++) {
         System.out.println("Who else to target?");
         String name = inputReader.nextLine();
         Entity target = getEntity(name, fighters);
-        while (target == null && otherTargets.contains(target)) {
+        while (target == null) {
           System.out.println("No target specified.");
           name = inputReader.nextLine();
-          if (name.toLowerCase().equals("pass")) {
-            return null;
-          }
           target = getEntity(name, fighters);
         }
         otherTargets.add(target);

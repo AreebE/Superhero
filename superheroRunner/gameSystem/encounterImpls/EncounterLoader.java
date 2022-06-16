@@ -31,7 +31,7 @@ public class EncounterLoader {
 		{
 			JSONObject encounter = encounters.getJSONObject(i);
 			Encounter e = loadEncounter(encounter);
-			System.out.println(encounter);
+			// System.out.println(encounter);
 			listOfEncounters.put(e.getName().toLowerCase(), e);
 			
 		}

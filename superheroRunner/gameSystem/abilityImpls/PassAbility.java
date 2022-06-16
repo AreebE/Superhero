@@ -40,7 +40,7 @@ public class PassAbility extends Ability
     }
 
     /**
-     * For all effects and purposes, this method won't be called. None of the parameters matter too much.
+     * Records the user passing.
      */
     @Override
     protected void performCast
@@ -48,36 +48,16 @@ public class PassAbility extends Ability
         Entity target, 
         Entity caster,
         Game g,
-		BattleLog battleLog
-    )
-    {
-        
-    }
-
-    /**
-     * This method is called just to record the fact the target used an ability
-     * 
-     * @param target Should be the caster
-     * @param caster the caster who is passing
-     * @param otherTargets the other targets here
-     * @param allPlayers can be considered null
-     * @param log the log to record this pass action.
-     */
-    @Override
-    public void useAbility
-    (
-        List<Entity> targets, 
-        Entity caster,
-        Game g,
-        BattleLog log
+		BattleLog log
     )
     {
         Object[] contents = new Object[]{caster.getName()};
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.PASS, contents));
         caster.pass(log, g);
         return;
-    }  
-    
+    }
+
+ 
     /**
      * A simple copy method to copy the pass ability.
      */

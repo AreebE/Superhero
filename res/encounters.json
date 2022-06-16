@@ -2,7 +2,7 @@
 	{
 		"team layout":
 			[
-				["The Goblin"],
+				["Lyn"],
 				["Joe"]
 			],
 		"name":"duel",
@@ -86,5 +86,17 @@
 			],
 		"name":"The Laughing King",
 		"type":"one v all"
+	},
+    {
+		"team layout":
+			[
+                ["Communist Aayush"],
+                ["Danial"],
+                ["Aqua"]
+                ["Lyn"],
+			],
+		"name":"Showtime",
+		"type":"multi team"
 	}
+    
 ]

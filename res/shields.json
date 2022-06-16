@@ -9,6 +9,46 @@
   "type" : "trap",
   "desc" : "Deal some damage when struck"
 }, {
+  "duration" : 2,
+  "element triggers" : [ "all" ],
+  "nullifies" : true,
+  "name" : "Dodge",
+  "uses" : -1,
+  "counter" : "annoyance",
+  "event triggers" : [ "attacked" ],
+  "type" : "trap",
+  "desc" : "Dodge, but annoy the opponent."
+}, {
+  "duration" : 2,
+  "element triggers" : [ "all" ],
+  "nullifies" : true,
+  "name" : "Venting",
+  "uses" : -1,
+  "counter" : "fear",
+  "event triggers" : [ "attacking" ],
+  "type" : "trap",
+  "desc" : "Dodge all attacks for two turns."
+}, {
+  "duration" : 3,
+  "element triggers" : [ "all" ],
+  "nullifies" : true,
+  "name" : "Ubercharge",
+  "uses" : -1,
+  "counter" : "fear",
+  "event triggers" : [ "attacking" ],
+  "type" : "trap",
+  "desc" : "Thanks to a heart implant, you are invincible from all damage."
+}, {
+  "duration" : 2,
+  "element triggers" : [ "all" ],
+  "nullifies" : true,
+  "name" : "Cadence",
+  "uses" : 1,
+  "counter" : "Ego drop",
+  "event triggers" : [ "attacked" ],
+  "type" : "trap",
+  "desc" : "Hurt the attacker for attacking out of tune."
+}, {
   "duration" : 5,
   "element triggers" : [ "all" ],
   "caster apply" : "explode",
@@ -19,6 +59,16 @@
   "event triggers" : [ "shieldBreak" ],
   "type" : "dual",
   "desc" : "Deals damage to both the user and the attacker once the shield breaks"
+}, {
+  "duration" : 8,
+  "element triggers" : [ "all" ],
+  "self apply" : "ego boost",
+  "nullifies" : false,
+  "name" : "Yeah!",
+  "uses" : -1,
+  "event triggers" : ["pass", "attacking"],
+  "type" : "self",
+  "desc" : "Get hurt when adding an effect, shield, spawnable, or such."
 }, {
   "duration" : 8,
   "element triggers" : [ "all" ],

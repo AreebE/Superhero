@@ -239,7 +239,7 @@ public class Effect
         Entity target,
         BattleLog log) 
     {
-        // System.out.println("called super");
+        // System.out.println("called super, "+ name + "----" + target);
         applyEffect(target, log);
         reduceDuration(target, log);
     }

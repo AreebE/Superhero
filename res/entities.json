@@ -23,6 +23,23 @@
     "type":"simple controllable ai",
     "speed":1
 }, {
+    "abilities":["ram"],
+    "shield":0,
+    "shields":[],
+    "effects":[],
+    "max health":30,
+    "moves":
+    [{
+        "move":"ram",
+        "type":"basic",
+        "priority":0,
+        "category":-1
+    }],
+    "name":"Hog Rider",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":100
+},{
     "abilities":[],
     "shield":400,
     "shields":[],
@@ -82,81 +99,272 @@
     "type":"simple ai",
     "speed":100
 }, {
-  "abilities" : [ ],
+  "abilities" : [ "Alt F4", "Snap", "Serve", "Handle"],
   "shield" : 50,
   "shields" : [ ],
   "effects" : [ ],
-  "max health" : 50,
+  "max health" : 400,
   "moves" : [ {
-    "move" : "pass turn",
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
     "type" : "basic",
     "priority" : 0,
     "category" : 1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Pass turn",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Alt F4",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
   } ],
   "name" : "The Manager",
   "state" : "relaxed",
   "type" : "simple ai",
   "speed" : 101
 },  {
-  "abilities" : [ ],
-  "shield" : 50,
+  "abilities" : [
+      "Building a Sentry", 
+      "Building a Dispenser", 
+      "Frontier's Justice", 
+      "Smack",  
+      "Ubercharge Canteen"],
+  "shield" : 63,
   "shields" : [ ],
-  "effects" : [ ],
-  "max health" : 50,
+  "effects" : [ "Metal Regen"],
+  "max health" : 125,
   "moves" : [ {
-    "move" : "pass turn",
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, 
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Ubercharge Canteen",
     "type" : "basic",
     "priority" : 0,
     "category" : 1
-  } ],
+  },
+  {
+    "move" : "Smack",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Building a Dispenser",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+      "move": "Building a Sentry",
+      "type": "basic",
+      "priority": 0,
+      "category": 1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Smack",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }
+  ],
   "name" : "Engineer.jpg",
   "state" : "relaxed",
   "type" : "simple ai",
   "speed" : 101
 },  {
-  "abilities" : [ ],
-  "shield" : 50,
+  "abilities" : ["Backstab", "Vent", "Silencer", "Sabotage"],
+  "shield" : 0,
   "shields" : [ ],
   "effects" : [ ],
-  "max health" : 50,
+  "max health" : 150,
   "moves" : [ {
-    "move" : "pass turn",
+    "move" : "Vent",
     "type" : "basic",
     "priority" : 0,
     "category" : 1
+  }, {
+    "move" : "Silencer",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Backstab",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Backstab",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Sabotage",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Sabotage",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
   } ],
   "name" : "Imposter",
   "state" : "relaxed",
   "type" : "simple ai",
   "speed" : 101
 },  {
-  "abilities" : [ ],
-  "shield" : 50,
-  "shields" : [ ],
+  "abilities" : ["Fire Note", "Illusion Note", "High Note", "Rap"],
+  "shield" : 0,
+  "shields" : ["Yeah!"],
   "effects" : [ ],
-  "max health" : 50,
+  "max health" : 75,
   "moves" : [ {
-    "move" : "pass turn",
+    "move" : "Fire Note",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "High Note",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Illusion Note",
     "type" : "basic",
     "priority" : 0,
     "category" : 1
-  } ],
+  }, {
+    "move" : "Rap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }  ],
   "name" : "Boyfriend.xml",
   "state" : "relaxed",
   "type" : "simple ai",
-  "speed" : 101
+  "speed" : 0
 },  {
-  "abilities" : [ ],
+  "abilities" : ["Hee Hee Haw", "Hog Rider Card", "Fireball"],
   "shield" : 50,
-  "shields" : ["Temporary Deflection"],
-  "effects" : [ ],
-  "max health" : 50,
+  "shields" : [],
+  "effects" : ["Elixer Regen"],
+  "max health" : 200,
   "moves" : [ {
-    "move" : "pass turn",
+    "move" : "Hee Hee Haw",
     "type" : "basic",
     "priority" : 0,
     "category" : 1
-  } ],
+  }, {
+    "move" : "Fireball",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Hog Rider Card",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Pass turn",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  },  ],
   "name" : "King of Clashes",
   "state" : "relaxed",
   "type" : "simple ai",
@@ -173,6 +381,54 @@
     "state":"relaxed",
     "type":"simple controllable ai",
     "speed":50
+}, {
+    "abilities":["Shoot"],
+    "shield":0,
+    "shields":[],
+    "effects":[],
+    "max health":150,
+    "moves":
+    [{
+        "move":"shoot",
+        "type":"basic",
+        "priority":0,
+        "category":-1
+    }],
+    "name":"Sentry",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":101
+}, {
+    "abilities":["Dispense"],
+    "shield":0,
+    "shields":[],
+    "effects":[],
+    "max health":216,
+    "moves":
+    [{
+        "move":"dispense",
+        "type":"basic",
+        "priority":0,
+        "category":1
+    }],
+    "name":"Dispenser",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":200
+}, {
+  "abilities" : [ 
+      "pride", 
+      "encouragement", 
+      "discredit", 
+      "toolshop" ],
+  "shield" : 0,
+  "shields" : [ ],
+  "effects" : [ ],
+  "max health" : 200,
+  "name" : "Dad Chendur",
+  "state" : "relaxed",
+  "type" : "basic",
+  "speed" : 100
 },
 
 ]

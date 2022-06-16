@@ -120,7 +120,7 @@ public class MapCampaign extends Campaign
     {
         StringBuilder gridDisplay = new StringBuilder();
         StringBuilder lineLayout = new StringBuilder();
-        for (int j = 0; j < grid.length; j++)
+        for (int j = 0; j < grid[0].length; j++)
         {
             lineLayout.append("\033[0;37m|---");
         }

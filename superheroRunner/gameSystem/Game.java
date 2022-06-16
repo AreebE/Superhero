@@ -135,6 +135,7 @@ public abstract class Game {
 				}
 			}
 		}
+        Collections.sort(allFighters);
 	}
 	
 	public Game(

@@ -8,27 +8,22 @@ import gameSystem.abilityImpls.AbilityLoader;
 
 public class GroupModifier implements AbilityModifier
 {
-	private static final String PERCENTAGE_KEY = "percentage";
 	private static final String LIMIT_KEY = "limit";
-    private int percentage;
     private int limit;
 
     public GroupModifier(JSONObject json)
     {
-    	percentage = json.getInt(PERCENTAGE_KEY);
     	limit = json.getInt(LIMIT_KEY);
     }
     
-    public GroupModifier(int percentage, int limit)
+    public GroupModifier(int limit)
     {
-        this.percentage = percentage;
         this.limit = limit;
     }
 
     @Override 
     public boolean triggerModifier(List<Entity> targets, Entity caster, Ability holder, Game g, BattleLog log)
     {
-    	holder.adjustAdditionalStrength(percentage, true);
     	for (int i = 0; i < targets.size(); i++)
     	{
     		holder.castAbility(targets.get(i), caster, g, log);
@@ -59,7 +54,6 @@ public class GroupModifier implements AbilityModifier
 		JSONObject modifier = new JSONObject();
 		modifier.put(TYPE_KEY, ModifierLoader.GROUP);
 		modifier.put(LIMIT_KEY, limit);
-		modifier.put(PERCENTAGE_KEY, percentage);
 		return modifier;
 	}
 

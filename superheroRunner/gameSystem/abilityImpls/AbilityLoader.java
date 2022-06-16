@@ -38,6 +38,7 @@ public class AbilityLoader {
 		{
 			jsonString.append(fileReader.nextLine());
 		}
+        // System.out.println(jsonString.substring(10000, 10200));
 		JSONArray abilities = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
 		HashMap<String, Ability> listOfAbilities = new HashMap<>();
 		for (int i = 0; i < abilities.length(); i++)

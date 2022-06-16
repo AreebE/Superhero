@@ -1,3 +1,12 @@
 {
-  "files": {}
+  "files": {
+    "res/campaigns.json": [
+      {
+        "id": "bc2392b7-fc6d-4efa-9d0e-64649cbec14f",
+        "line": 90,
+        "version": 1900,
+        "index": 2193
+      }
+    ]
+  }
 }

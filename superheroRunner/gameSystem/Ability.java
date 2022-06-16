@@ -254,7 +254,7 @@ public abstract class Ability
 
         
        
-        System.out.println(willSetCooldown);
+        // System.out.println(willSetCooldown);
 //        System.out.println("using ability " + name);
 //        System.out.println(recoil + ", " + random + ", " + multi + ", " + percent + ", " + group);
         boolean shouldContinue = true;

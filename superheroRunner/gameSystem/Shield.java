@@ -32,6 +32,7 @@ public abstract class Shield
 
     public static enum Trigger {
         ANY_ACTION("any"), // When making a move
+        BEFORE_ATTACK("before attacked"), // before the person is attacked.
         ATTACK("attacked"), // When the person is attacked
         ATTACKING("attacking"), // When attacking another player
         CLEANSE("cleanse"), // When cleansing oneself
@@ -79,6 +80,8 @@ public abstract class Shield
         			return GIVE_EFFECT;
         		case "pass":
         			return PASS;
+                case "before attack":
+                    return BEFORE_ATTACK;
         		case "all":
         			return ALL;
         	}
