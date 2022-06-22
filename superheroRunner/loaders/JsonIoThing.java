@@ -9,8 +9,8 @@ import java.io.*;
 
 import java.net.URI;
 import game.*;
-import battlesystem.Entity;
-import battlesystem.EntityInfoItem;
+import gameSystem.Entity;
+import gameSystem.EntityInfoItem;
 
 import java.util.Arrays;
 

@@ -1,1 +1,434 @@
-[{"abilities":["laser"],"is targettable":true,"shield":10,"shields":[],"effects":["curse"],"max health":10,"attack pattern":["laser"],"name":"Crystal","state":"relaxed","type":"simple ai","speed":1},{"abilities":["scratch"],"is targettable":true,"shield":0,"shields":["gift"],"effects":[],"max health":1,"attack pattern":["scratch"],"name":"Squirrel","state":"relaxed","type":"simple ai","speed":1}]
+[ {
+    "abilities":["laser"],
+    "is targettable":true,
+    "shield":10,
+    "shields":[],
+    "effects":["curse"],
+    "max health":10,
+    "attack pattern":["laser"],
+    "name":"Crystal",
+    "state":"relaxed",
+    "type":"simple controllable ai",
+    "speed":1
+}, {
+    "abilities":["scratch"],
+    "is targettable":true,
+    "shield":0,
+    "shields":["gift"],
+    "effects":[],
+    "max health":1,
+    "attack pattern":["scratch"],
+    "name":"Squirrel",
+    "state":"relaxed",
+    "type":"simple controllable ai",
+    "speed":1
+}, {
+    "abilities":["ram"],
+    "shield":0,
+    "shields":[],
+    "effects":[],
+    "max health":30,
+    "moves":
+    [{
+        "move":"ram",
+        "type":"basic",
+        "priority":0,
+        "category":-1
+    }],
+    "name":"Hog Rider",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":100
+},{
+    "abilities":[],
+    "shield":400,
+    "shields":[],
+    "effects":[],
+    "max health":400,
+    "moves":
+    [{
+        "move":"test",
+        "type":"basic",
+        "priority":0,
+        "category":1
+    }],
+    "name":"Baba",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":101
+}, {
+    "abilities":["bash","pebble shot","rally"],
+    "shield":100,
+    "shields":[],
+    "effects":[],
+    "max health":100,
+    "moves":[
+        {
+            "move":"bash",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"rally",
+            "type":"basic",
+            "priority":0,
+            "category":1
+        }, {
+            "move":"bash",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"pebble shot",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"bash",
+            "type":"basic",
+            "priority":0,
+            "category":-1
+        }, {
+            "move":"rally",
+            "type":"basic",
+            "priority":0,
+            "category":1
+        }],
+    "name":"The Goblin",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":100
+}, {
+  "abilities" : [ "Alt F4", "Snap", "Serve", "Handle"],
+  "shield" : 50,
+  "shields" : [ ],
+  "effects" : [ ],
+  "max health" : 400,
+  "moves" : [ {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Snap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Handle",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Serve",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Pass turn",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Alt F4",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  } ],
+  "name" : "The Manager",
+  "state" : "relaxed",
+  "type" : "simple ai",
+  "speed" : 101
+},  {
+  "abilities" : [
+      "Building a Sentry", 
+      "Building a Dispenser", 
+      "Frontier's Justice", 
+      "Smack",  
+      "Ubercharge Canteen"],
+  "shield" : 63,
+  "shields" : [ ],
+  "effects" : [ "Metal Regen"],
+  "max health" : 125,
+  "moves" : [ {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, 
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Ubercharge Canteen",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  },
+  {
+    "move" : "Smack",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Building a Dispenser",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+      "move": "Building a Sentry",
+      "type": "basic",
+      "priority": 0,
+      "category": 1
+  },
+  {
+    "move" : "Frontier's Justice",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  },
+  {
+    "move" : "Smack",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }
+  ],
+  "name" : "Engineer.jpg",
+  "state" : "relaxed",
+  "type" : "simple ai",
+  "speed" : 101
+},  {
+  "abilities" : ["Backstab", "Vent", "Silencer", "Sabotage"],
+  "shield" : 0,
+  "shields" : [ ],
+  "effects" : [ ],
+  "max health" : 150,
+  "moves" : [ {
+    "move" : "Vent",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Silencer",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Backstab",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Backstab",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Sabotage",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Sabotage",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  } ],
+  "name" : "Imposter",
+  "state" : "relaxed",
+  "type" : "simple ai",
+  "speed" : 101
+},  {
+  "abilities" : ["Fire Note", "Illusion Note", "High Note", "Rap"],
+  "shield" : 0,
+  "shields" : ["Yeah!"],
+  "effects" : [ ],
+  "max health" : 75,
+  "moves" : [ {
+    "move" : "Fire Note",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "High Note",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Illusion Note",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Rap",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }  ],
+  "name" : "Boyfriend.xml",
+  "state" : "relaxed",
+  "type" : "simple ai",
+  "speed" : 0
+},  {
+  "abilities" : ["Hee Hee Haw", "Hog Rider Card", "Fireball"],
+  "shield" : 50,
+  "shields" : [],
+  "effects" : ["Elixer Regen"],
+  "max health" : 200,
+  "moves" : [ {
+    "move" : "Hee Hee Haw",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Fireball",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : -1
+  }, {
+    "move" : "Hog Rider Card",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  }, {
+    "move" : "Pass turn",
+    "type" : "basic",
+    "priority" : 0,
+    "category" : 1
+  },  ],
+  "name" : "King of Clashes",
+  "state" : "relaxed",
+  "type" : "simple ai",
+  "speed" : 101
+}, {
+    "abilities":["Prod"],
+    "is targettable":true,
+    "shield":10,
+    "shields":[],
+    "effects":[],
+    "max health":30,
+    "attack pattern":["prod"],
+    "name":"Makeshift Militia",
+    "state":"relaxed",
+    "type":"simple controllable ai",
+    "speed":50
+}, {
+    "abilities":["Shoot"],
+    "shield":0,
+    "shields":[],
+    "effects":[],
+    "max health":150,
+    "moves":
+    [{
+        "move":"shoot",
+        "type":"basic",
+        "priority":0,
+        "category":-1
+    }],
+    "name":"Sentry",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":101
+}, {
+    "abilities":["Dispense"],
+    "shield":0,
+    "shields":[],
+    "effects":[],
+    "max health":216,
+    "moves":
+    [{
+        "move":"dispense",
+        "type":"basic",
+        "priority":0,
+        "category":1
+    }],
+    "name":"Dispenser",
+    "state":"relaxed",
+    "type":"simple ai",
+    "speed":200
+}, {
+  "abilities" : [ 
+      "pride", 
+      "encouragement", 
+      "discredit", 
+      "toolshop" ],
+  "shield" : 0,
+  "shields" : [ ],
+  "effects" : [ ],
+  "max health" : 200,
+  "name" : "Dad Chendur",
+  "state" : "relaxed",
+  "type" : "basic",
+  "speed" : 100
+},
+
+]

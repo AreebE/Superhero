@@ -1,45 +1,11 @@
 {
   "files": {
-    "Game/HerosAndAbilities/TypesOfAbilities/AttackAbility.java": [
+    "res/campaigns.json": [
       {
-        "id": "2ae98c4e-0ff1-4a99-bbda-1f0290688b08",
-        "line": 57,
-        "version": 335,
-        "index": 2111
-      }
-    ],
-    "HerosAndAbilities/Entity.java": [
-      {
-        "id": "0783cc98-83f7-4cde-92ea-a459d199b0cf",
-        "line": 12,
-<<<<<<< HEAD
-        "version": 71,
-=======
-        "version": 1,
->>>>>>> PackageOrganization
-        "index": 236
-      }
-    ],
-    "HerosAndAbilities/InfoItemImpl/AIInfoItem.java": [
-      {
-        "id": "18cdba50-fc4c-46cd-9b35-c5a137dc302a",
-<<<<<<< HEAD
-        "line": 5,
-        "version": 3,
-        "index": 100
-=======
-        "line": 7,
-        "version": 9,
-        "index": 114
->>>>>>> PackageOrganization
-      }
-    ],
-    "ablilites/SupportAbility.java": [
-      {
-        "id": "47022145-3afd-43e7-95bc-81bab47c684d",
-        "line": 15,
-        "version": 346,
-        "index": 314
+        "id": "bc2392b7-fc6d-4efa-9d0e-64649cbec14f",
+        "line": 90,
+        "version": 1900,
+        "index": 2193
       }
     ]
   }

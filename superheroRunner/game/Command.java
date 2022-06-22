@@ -26,7 +26,8 @@ class Command{
     out.add(new Command("print all superhero names","prints all the of the superheros names to cons","ps"));
     out.add(new Command("add abilities to hero","allows you to give abilities to heros","ah"));
     out.add(new Command("print absolute abilities names","Prints all names of every known ability in the game","pa"));
-    
+    out.add(new Command("play campaign", "Play a campaign by typing a name", "pc"));
+    out.add(new Command("play encounter", "Play an encounter by typing a name", "pe"));
     return out;
   }
   public static void onHelp(){

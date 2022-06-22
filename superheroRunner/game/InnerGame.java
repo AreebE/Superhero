@@ -3,43 +3,62 @@ package game;
 import java.util.List;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import battlesystem.Ability;
-import battlesystem.Action;
-import battlesystem.BattleLog;
-import battlesystem.Effect;
-import battlesystem.Elements;
-import battlesystem.Entity;
-import battlesystem.EntityInfoItem;
-import battlesystem.Game;
-import battlesystem.InputSystem;
-import battlesystem.Shield;
-import battlesystem.State;
-import battlesystem.Terrain;
-import battlesystem.battlelogImpls.StringBattleLog;
-import battlesystem.infoItemImpls.AIInfoItem;
+import gameSystem.Ability;
+import gameSystem.Action;
+import gameSystem.BattleLog;
+import gameSystem.Campaign;
+import gameSystem.Effect;
+import gameSystem.Elements;
+import gameSystem.Encounter;
+import gameSystem.Entity;
+import gameSystem.EntityInfoItem;
+import gameSystem.Event;
+import gameSystem.Game;
+import gameSystem.InputSystem;
+import gameSystem.OutputSystem;
+import gameSystem.Shield;
+import gameSystem.State;
+import gameSystem.Storage;
+import gameSystem.Terrain;
+import gameSystem.battlelogImpls.StringBattleLog;
 
-public class InnerGame extends Game{
+public class InnerGame extends Game
+{
+	
 	
 	private GUI g;
   public InnerGame(
 		  ArrayList<EntityInfoItem> fighters, 
-		  HashMap<String, Ability> abilities, 
-		  HashMap<String, Effect> effects, 
-		  HashMap<String, EntityInfoItem> spawnables,
-		  HashMap<String, Shield> shields,
-		  HashMap<String, State> states,
+		  Storage s,
 		  GUI g) {
-	  super(fighters, abilities, effects, spawnables, shields, states, new StringBattleLog());
+	  super(fighters, s, new StringBattleLog());
+	  
 //    System.out.println(fighters.size());
 	  ScannerInput input = new ScannerInput();
 	  input.assignFighters(super.getFighters());
 	  this.setInputSystem(input);
+	  this.setOutputSystem(input);
 	  this.g = g;
   }
 
+  
+  public InnerGame(
+		  Encounter e, 
+		  Storage s,
+		  GUI g,
+		  EntityInfoItem protag)
+  {
+	  super(e, s, new StringBattleLog(), protag);
+	  ScannerInput input = new ScannerInput();
+	  input.assignFighters(super.getFighters());
+	  this.setInputSystem(input);
+	  this.setOutputSystem(input);
+	  this.g = g;
+  }
 
 
 
@@ -52,10 +71,25 @@ public class InnerGame extends Game{
     return null;
   }
 
-  public static class ScannerInput implements InputSystem {
+  public static class ScannerInput 
+  	implements InputSystem, OutputSystem {
     private Scanner inputReader;
     private Entity target;
     private ArrayList<Entity> fighters;
+
+    private HashMap<String, Campaign.Direction> directionalInput = new HashMap<String, Campaign.Direction>()
+        {{
+            put("up", Campaign.Direction.UP);
+            put("w", Campaign.Direction.UP);
+            put("down", Campaign.Direction.DOWN);
+            put("s", Campaign.Direction.DOWN);
+
+            put("left", Campaign.Direction.LEFT);
+            put("a", Campaign.Direction.LEFT);
+
+            put("right", Campaign.Direction.RIGHT);
+            put("d", Campaign.Direction.RIGHT);
+    }};
 
     public ScannerInput(Scanner inputReader) {
       this.inputReader = inputReader;
@@ -100,22 +134,79 @@ public class InnerGame extends Game{
           }
         }
       }
-      for (int i = 0; i < limit && otherTargets.size() < fighters.size() - 1; i++) {
+      for (int i = 0; i < limit; i++) {
         System.out.println("Who else to target?");
         String name = inputReader.nextLine();
         Entity target = getEntity(name, fighters);
-        while (target == null && otherTargets.contains(target)) {
+        while (target == null) {
           System.out.println("No target specified.");
           name = inputReader.nextLine();
-          if (name.toLowerCase().equals("pass")) {
-            return null;
-          }
           target = getEntity(name, fighters);
         }
         otherTargets.add(target);
       }
       return otherTargets;
     }
+
+	@Override
+	public int getChoice(String prompt, ArrayList<String[]> choices) {
+		Integer result = null;
+		while (result == null)
+		{
+			
+			for (int i = 0; i < choices.size(); i++)
+			{
+				System.out.println(choices.get(i)[Event.DESCRIPTION]);
+			}
+			System.out.println(prompt);
+			if (choices.size() == 1)
+			{
+				inputReader.nextLine();
+				return 1;
+			}
+			String answer = inputReader.nextLine();
+			try
+			{
+				result = Integer.parseInt(answer);				
+				if (result <= 0 || result > choices.size())
+				{
+					result = null;
+				}
+			}
+			catch (InputMismatchException|NumberFormatException tme)
+			{
+				result = null;
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public void displayString(String event, int type) {
+		// TODO Auto-generated method stub
+		System.out.println(event);
+	}  
+
+    public Campaign.Direction getDirection(ArrayList<Campaign.Direction> possibleDirections)
+    {
+       Campaign.Direction direction = null;
+        while (direction == null)
+        {
+            System.out.println("Possible movements are: ");
+            for (Campaign.Direction dir: possibleDirections)
+            {
+                System.out.println("* " + dir);
+            }
+            String input = inputReader.nextLine();
+            direction = directionalInput.get(input);
+            if (!possibleDirections.contains(direction))
+            {
+                direction = null;
+            }
+        }
+        return direction;
+    }
+
   }
 
   @Override 
@@ -128,4 +219,15 @@ public class InnerGame extends Game{
 		System.out.println(entries.get(i));
 	}
   }
-}
+  
+  public class StringOutput implements OutputSystem
+  {
+
+	@Override
+	public void displayString(String event, int type) {
+		// TODO Auto-generated method stub
+		System.out.println(event);
+	}  
+  }
+  }
+

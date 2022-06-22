@@ -1,1 +1,1209 @@
-[{"pierces":false,"strength":5,"cooldown":1,"name":"Ram","ignores defense":false,"modifiers":[{"stat":"speed","percentage":10,"type":"percentage","use caster":true}],"type":"attack","desc":"Ram yourself into your opponent","element":"null"},{"pierces":true,"strength":10,"cooldown":1,"name":"Telekinesis","ignores defense":false,"modifiers":[],"type":"attack","desc":"You slam a rock into your opponent","element":"null"},{"pierces":false,"strength":3,"cooldown":1,"name":"Fireball","ignores defense":false,"modifiers":[],"type":"attack","desc":"Launches a ball of fire","element":"fire"},{"pierces":false,"strength":50,"cooldown":5,"name":"Earthquake","ignores defense":false,"modifiers":[{"percentage":100,"limit":-1,"type":"group"}],"type":"attack","desc":"Hits everyone","element":"earth"},{"pierces":true,"strength":1,"cooldown":1,"name":"Laser","ignores defense":false,"modifiers":[{"times":10,"type":"multi cast"}],"type":"attack","desc":"Repeatedly attack the opponent","element":"fire"},{"pierces":true,"strength":1,"cooldown":1,"name":"Scratch","ignores defense":true,"modifiers":[{"stat":"speed","percentage":10,"type":"percentage","use caster":true}],"type":"attack","desc":"Do very minor damage","element":"null"},{"pierces":true,"strength":3,"cooldown":1,"name":"Snowball","ignores defense":false,"modifiers":[{"times":4,"type":"multi cast"}],"type":"attack","desc":"Launches a few snowballs. May cause frost or blindness.","element":"ice"},{"pierces":true,"strength":50,"cooldown":9,"name":"Lightning Strike","ignores defense":true,"modifiers":[],"type":"attack","desc":"Has a chance to shock the enemy.","element":"electricity"},{"pierces":false,"strength":10,"cooldown":4,"name":"Wide Slash","ignores defense":false,"modifiers":[{"percentage":50,"limit":2,"type":"group"}],"type":"attack","desc":"Performs a sweeping attack, targetting two other characters","element":"null"},{"pierces":false,"side effect":"poison","strength":2,"cooldown":4,"name":"Poison Slash","ignores defense":false,"modifiers":[],"type":"attack status","desc":"Poisons the enemy upon hit","element":"null"},{"strength":0,"cooldown":0,"name":"Pass turn","modifiers":[],"type":"pass","desc":"Allows the user to skip their turn","element":"null"},{"pierces":true,"side effect":"bleed","strength":10,"cooldown":5,"name":"Ground Suction","ignores defense":true,"modifiers":[],"type":"attack status","desc":"Pulls the user into the ground, cutting them on the rocks and they bleed out over time","element":"earth"},{"shield":"counter","strength":0,"cooldown":3,"name":"Counter","modifiers":[],"type":"defense","desc":"counter the next attack that comes","element":"null"},{"shield":"self destruct","strength":0,"cooldown":3,"name":"Warning","modifiers":[],"type":"defense","desc":"The user will be warned not to break your shield","element":"null"},{"shield":"witch curse","strength":0,"cooldown":3,"name":"Witch spell","modifiers":[],"type":"defense","desc":"When attacked, cast a curse on whoever attacked you","element":"null"},{"shield":"illusion","strength":0,"cooldown":3,"name":"Illusion spell","modifiers":[],"type":"defense","desc":"Create an illusion that retaliates when attacked","element":"light"},{"shield":"self care","strength":0,"cooldown":3,"name":"First aid","modifiers":[],"type":"defense","desc":"Heal oneself upon hit","element":"null"},{"shield":"","strength":0,"cooldown":5,"name":"Summon Squirrel","modifiers":[],"type":"spawnable","desc":"Summon a small squirrel to help you","element":"null","spawnable":"squirrel"},{"shield":"","strength":0,"cooldown":5,"name":"Summon Golem","modifiers":[],"type":"spawnable","desc":"Summon a crystal to help you","element":"null","spawnable":"crystal"},{"strength":0,"effect":"instant heal","cooldown":1,"name":"Heal pulse","modifiers":[],"type":"support","desc":"boosts defense for x amount of time","element":"null"},{"strength":0,"effect":"fungal infection","cooldown":9,"name":"Spore","modifiers":[],"type":"support","desc":"Gives the opponent an infection","element":"null"},{"strength":0,"effect":"instant shield","cooldown":3,"name":"Protect","modifiers":[],"type":"support","desc":"protects the user from any hit","element":"null"},{"strength":0,"effect":"burnout","cooldown":3,"name":"burn up","modifiers":[],"type":"support","desc":"The target will burn up for a short amount of time","element":"fire"},{"strength":0,"effect":"instant shield x","cooldown":3,"name":"Counterstrike","modifiers":[],"type":"support","desc":"Adds a lot of shield","element":"null"},{"strength":0,"effect":"attack boost","cooldown":5,"name":"attack up","modifiers":[],"type":"support","desc":"boosts damage for x amount of time","element":"null"},{"strength":0,"effect":"defense up","cooldown":5,"name":"defense up","modifiers":[],"type":"support","desc":"boosts defense for x amount of time","element":"null"},{"strength":0,"effect":"charge","cooldown":10,"name":"flare up","modifiers":[],"type":"support","desc":"Makes the user charge up their attacks","element":"null"},{"strength":0,"effect":"poison","cooldown":0,"name":"Poison","modifiers":[{"chance":192,"type":"random"}],"type":"support","desc":"Will poison the person targeted","element":"null"},{"strength":0,"effect":"curse","cooldown":4,"name":"Sacrifice","modifiers":[],"type":"support","desc":"Injures the user to cause more damage later","element":"null"},{"strength":0,"effect":"guard","cooldown":3,"name":"Defensive Stance","modifiers":[],"type":"support","desc":"The user decides to be cautious for some time","element":"null"},{"strength":0,"effect":"build up","cooldown":2,"name":"Construct","modifiers":[],"type":"support","desc":"The user starts to build up their stats","element":"null"},{"strength":0,"effect":"","cooldown":2,"name":"Stun Spore","state":"paralyzed","modifiers":[],"type":"state","desc":"Paralyze the target, preventing them from doing anything","element":"null"},{"strength":0,"effect":"","cooldown":2,"name":"Invigorate","state":"energized","modifiers":[],"type":"state","desc":"Energize the target, allowing them to make more moves per turn","element":"null"},{"strength":0,"effect":"","cooldown":5,"name":"Pray","modifiers":[],"type":"cleanse","desc":"cleanse oneself of all effects","element":"all"}]
+[ {
+  "pierces" : false,
+  "strength" : 5,
+  "cooldown" : 2,
+  "name" : "Ram",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "stat" : "speed",
+    "percentage" : 10,
+    "type" : "percentage",
+    "use caster" : true
+  } ],
+  "type" : "attack",
+  "desc" : "Ram yourself into your opponent",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 100,
+  "cooldown" : 1,
+  "name" : "Refine",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Deal a lot of damage, but only if you can cause the opponent to become rusty 5 times.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 30,
+  "cooldown" : 6,
+  "name" : "Mazda Crash",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "stat" : "speed",
+    "percentage" : 50,
+    "type" : "percentage",
+    "use caster" : true
+  } ],
+  "type" : "attack",
+  "desc" : "Ram yourself into your opponent",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 5,
+  "cooldown" : 2,
+  "name" : "Backstab",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "stat" : "speed",
+    "percentage" : 20,
+    "type" : "percentage",
+    "use caster" : true
+  } ],
+  "type" : "attack",
+  "desc" : "Backstab the opponent, doing more damage the faster you are.",
+  "element" : "null"
+},  {
+  "pierces" : false,
+  "strength" : 7,
+  "cooldown" : 3,
+  "name" : "Regal Storm",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "limit": 3,
+    "type" : "group",
+  } ],
+  "type" : "attack",
+  "desc" : "Summon a storm that shocks a few people.",
+  "element" : "null"
+},
+    {
+  "pierces" : false,
+  "strength" : 30,
+  "cooldown" : 3,
+  "name" : "Flood",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "limit": -1,
+    "type" : "group",
+  } ],
+  "type" : "attack",
+  "desc" : "Flood the field with some water.",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 7,
+  "cooldown" : 2,
+  "name" : "Jolt",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Stab forward quickly, dealing light damage.",
+  "element" : "null"
+},
+    {
+  "pierces" : false,
+  "strength" : 5,
+  "cooldown" : 3,
+  "name" : "Toolshop",
+  "ignores defense" : false,
+  "modifiers" : [
+      {
+        "times" : 5,
+        "type" : "multi cast"
+      }
+  ],
+  "type" : "attack",
+  "desc" : "Whack the opponent with some toolshop supplies. Great at... disassembly.",
+  "element" : "null"
+}, 
+    {
+  "pierces" : false,
+  "strength" : 999999,
+  "cooldown" : 2,
+  "name" : "Alt F4",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Delete the opponent from existance.",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "Prod",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Prod the opponent to deal some damage.",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 18,
+  "cooldown" : 3,
+  "name" : "Frontier's Justice",
+  "ignores defense" : false,
+  "modifiers" : [
+        {
+        "type" : "charge",
+            "charges": "3",
+        }      
+  ],
+  "type" : "attack",
+  "desc" : "Shoot the enemy with some old fashioned justice. Only 3 shells in a chamber.",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "Smack",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Whack the enemy with a wrench.",
+  "element" : "null"
+},
+{
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 2,
+  "name" : "Bash",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Hit the opponent with a club.",
+  "element" : "null"
+},
+    {
+  "pierces" : false,
+  "strength" : 5,
+  "cooldown" : 5,
+  "name" : "Pebble Shot",
+  "ignores defense" : false,
+  "modifiers" : [
+      {
+        "limit" : 5,
+        "type" : "group"
+      }
+  ],
+  "type" : "attack",
+  "desc" : "Chuck some small pebbles at the opponent.",
+  "element" : "null"
+},
+    {
+  "pierces" : true,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "Telekinesis",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "You slam a rock into your opponent",
+  "element" : "null"
+}, {
+  "pierces" : true,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "Telekinesis X",
+  "ignores defense" : false,
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "",
+                "category": "health",
+                "comparison": "greater than",
+                "number requirement": 50,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "attack",
+  "desc" : "You slam a few rocks in your opponent, provided you're healthy enough.",
+  "element" : "null"
+}, {
+  "pierces" : true,
+  "strength" : 50,
+  "cooldown" : 5,
+  "name" : "Basic Touch",
+  "ignores defense" : false,
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": false,
+            "uses target": true,
+            "item": {
+                "name needed": "burn",
+                "category": "effect #",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "attack",
+  "desc" : "Pour a basic reaction that only burns when the opponent is burned.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 30,
+  "cooldown" : 1,
+  "name" : "Fireball",
+  "ignores defense" : false,
+  "modifiers" : [
+      {
+          "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "Elixer",
+                "category": "stack",
+                "comparison": "greater than",
+                "number requirement": 3,
+                "type": "basic"
+            }
+      }
+  ],
+  "type" : "attack",
+  "desc" : "Launches a ball of fire",
+  "element" : "fire"
+}, {
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 2,
+  "side effect": "burn",
+  "name" : "Fire Note",
+  "ignores defense" : false,
+  "modifiers" : [  ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Rap so hard that your opponent catches on fire.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 5,
+  "cooldown" : 1,
+  "side effect": "frostbite",
+  "name" : "Red's Winter",
+  "ignores defense" : false,
+  "modifiers" : [
+      {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "charge",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Power a generator with a battery, producing a winter.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 60,
+  "cooldown" : 1,
+  "name" : "Hammer Down",
+  "ignores defense" : false,
+  "modifiers" : [
+      {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "charge",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 3,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "attack",
+  "on user": false,
+  "desc" : "Power a hammer with 3 batteries, dealing a massive amount of damage.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 1,
+  "side effect": "harvest",
+  "name" : "Harvest",
+  "ignores defense" : false,
+  "modifiers" : [  ],
+  "type" : "attack status",
+  "on user": true,
+  "desc" : "Use a sickle to slash at the opponent and harvest some potatoes.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 15,
+  "cooldown" : 4,
+  "side effect": "burn",
+  "name" : "Acidic Touch",
+  "ignores defense" : false,
+  "modifiers" : [  ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Pour an acidic solution onto the opponent, burning them.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 2,
+  "side effect": "mach boost",
+  "name" : "Mach Punch",
+  "ignores defense" : false,
+  "modifiers" : [  ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Punch the opponent and gain some speed for doing so.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 20,
+  "cooldown" : 2,
+  "side effect": "Coinage",
+  "name" : "Tax Collection",
+  "ignores defense" : false,
+  "modifiers" : [  ],
+  "type" : "attack status",
+  "on user": true,
+  "desc" : "Collect the opponent's taxes, earning some coins.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 50,
+  "cooldown" : 5,
+  "name" : "Earthquake",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "limit" : -1,
+    "type" : "group"
+  } ],
+  "type" : "attack",
+  "desc" : "Hits everyone",
+  "element" : "earth"
+}, {
+  "pierces" : true,
+  "strength" : 10,
+  "cooldown" : 1,
+  "name" : "High Note",
+  "ignores defense" : true,
+  "modifiers" : [],
+  "type" : "attack",
+  "desc" : "Sing a long-lasting high note that pierces the air.",
+  "element" : "fire"
+}, {
+  "pierces" : true,
+  "strength" : 5,
+  "cooldown" : 3,
+  "name" : "Silencer",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "times" : 6,
+    "type" : "multi cast"
+  } ],
+  "type" : "attack",
+  "desc" : "Fire six shots from a silenced pistol.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 3,
+  "name" : "Shoot",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "times" : 5,
+    "type" : "multi cast"
+  } ],
+  "type" : "attack",
+  "desc" : "The sentry fires some bullets and 5 shots land.",
+  "element" : "null"
+}, {
+  "pierces" : true,
+  "strength" : 1,
+  "cooldown" : 1,
+  "name" : "Laser",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "times" : 10,
+    "type" : "multi cast"
+  } ],
+  "type" : "attack",
+  "desc" : "Repeatedly attack the opponent",
+  "element" : "fire"
+}, {
+  "pierces" : true,
+  "strength" : 1,
+  "cooldown" : 1,
+  "name" : "Scratch",
+  "ignores defense" : true,
+  "modifiers" : [ {
+    "stat" : "speed",
+    "percentage" : 10,
+    "type" : "percentage",
+    "use caster" : true
+  } ],
+  "type" : "attack",
+  "desc" : "Do very minor damage",
+  "element" : "null"
+}, {
+  "pierces" : true,
+  "strength" : 10,
+  "cooldown" : 5,
+  "name" : "Snowball",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "times" : 5,
+    "type" : "multi cast"
+  }, {
+    "type" : "charge",
+    "charges": "3",
+  } ],
+  "type" : "attack",
+  "desc" : "Launches a few snowballs.",
+  "element" : "ice"
+}, {
+    "pierces" : true,
+    "strength" : 80,
+    "cooldown" : 2,
+    "name" : "Boiling Toxin",
+    "ignores defense" : false,
+    "modifiers" : [
+      {
+            "type": "conditional",
+            "will consume": false,
+            "uses target": true,
+            "item": {
+                "name needed": "poison",
+                "category": "effect #",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+    ],
+    "type" : "attack",
+    "desc" : "Boils the toxin in the enemy, if applicable.",
+    "element" : "ice"
+}, {
+  "pierces" : true,
+  "strength" : 50,
+  "cooldown" : 9,
+  "name" : "Lightning Strike",
+  "ignores defense" : true,
+  "modifiers" : [ ],
+  "type" : "attack",
+  "desc" : "Has a chance to shock the enemy.",
+  "element" : "electricity"
+}, {
+  "pierces" : false,
+  "strength" : 10,
+  "cooldown" : 4,
+  "name" : "Wide Slash",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    "limit" : 2,
+    "type" : "group"
+  } ],
+  "type" : "attack",
+  "desc" : "Performs a sweeping attack, targetting two other characters",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "side effect" : "poison",
+  "strength" : 2,
+  "cooldown" : 4,
+  "name" : "Poison Slash",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Poisons the enemy upon hit",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "side effect" : "disorient",
+  "strength" : 20,
+  "cooldown" : 1,
+  "name" : "Snap",
+  "ignores defense" : false,
+  "modifiers" : [ ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Snap your fingers, disorienting the enemy and dealing some damage.",
+  "element" : "null"
+}, {
+  "pierces" : false,
+  "side effect" : "burn",
+  "strength" : 25,
+  "cooldown" : 1,
+  "name" : "Flaming Snowball",
+  "ignores defense" : false,
+  "modifiers" : [ {
+    	"times" : 5,
+    	"type" : "multi cast"
+  } ],
+  "type" : "attack status",
+    "on user": false,
+
+  "desc" : "Throw some snowballs that are on fire.",
+  "element" : "fire"
+}, {
+  "strength" : 0,
+  "cooldown" : 0,
+  "name" : "Pass turn",
+  "modifiers" : [ ],
+  "type" : "pass",
+  "desc" : "Allows the user to skip their turn",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "cooldown" : 0,
+  "name" : "Rap",
+  "modifiers" : [
+      {
+          "times": 5,
+          "type": "multi cast",
+      }
+  ],
+  "type" : "pass",
+  "desc" : "Throw some bars at the opponent.",
+  "element" : "null"
+}, {
+  "pierces" : true,
+  "side effect" : "bleed",
+  "strength" : 10,
+  "cooldown" : 5,
+  "name" : "Ground Suction",
+  "ignores defense" : true,
+  "modifiers" : [ ],
+  "type" : "attack status",
+  "on user": false,
+  "desc" : "Pulls the user into the ground, cutting them on the rocks and they bleed out over time",
+  "element" : "earth"
+}, {
+  "shield" : "counter",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Counter",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "counter the next attack that comes",
+  "element" : "null"
+}, {
+  "shield" : "dodge",
+  "strength" : 0,
+  "cooldown" : 2,
+  "name" : "Dodger",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "Dodge the next attack that comes, but annoy the opponent.",
+  "element" : "null"
+}, {
+  "shield" : "self destruct",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Warning",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "The user will be warned not to break your shield",
+  "element" : "null"
+}, {
+  "shield" : "embargo",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Embargo",
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "bill",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "defense",
+  "desc" : "When the target decides to apply something on themselves or others, tax their hp.",
+  "element" : "null"
+}, {
+  "shield" : "ubercharge",
+  "strength" : 0,
+  "cooldown" : 999,
+  "name" : "Ubercharge Canteen",
+  "modifiers" : [
+      {
+          "charges": 3,
+          "type": "charge"
+      }
+  ],
+  "type" : "defense",
+  "desc" : "Drink from the canteen to render yourself invincible for a few turns.",
+  "element" : "null"
+}, {
+  "shield" : "witch's curse",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Witch spell",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "When attacked, cast a curse on whoever attacked you",
+  "element" : "null"
+}, {
+  "shield" : "scrutiny",
+  "strength" : 0,
+  "cooldown" : 4,
+  "name" : "Outlaw",
+  "modifiers" : [  {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "bill",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 1,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "defense",
+  "desc" : "Formally forbid the opponent from making any attacks against you. Take away their hp upon doing so.",
+  "element" : "light"
+}, {
+  "shield" : "venting",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Vent",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "Hide in the vents of the ship, protecting yourself from all attacks.",
+  "element" : "null"
+}, {
+  "shield" : "cadence",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Illusion Note",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "Hum a fake note that sounds off, so when your opponent responds, they realize their mistake.",
+  "element" : "light"
+}, {
+  "shield" : "illusion",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Illusion spell",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "Create an illusion that retaliates when attacked",
+  "element" : "light"
+}, {
+  "shield" : "self care",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "First aid",
+  "modifiers" : [ ],
+  "type" : "defense",
+  "desc" : "Heal oneself upon hit",
+  "element" : "null"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 2,
+  "name" : "Hog Rider Card",
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "Elixer",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 5,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "spawnable",
+  "desc" : "Use some elixer to summon a Hog Rider",
+  "element" : "null",
+  "spawnable" : "hog rider"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 999,
+  "name" : "Calling for Father",
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": false,
+            "uses target": false,
+            "item": {
+                "name needed": "health",
+                "category": "health",
+                "comparison": "less than or equal",
+                "number requirement": 120,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "spawnable",
+  "desc" : "When severely injured (< 120), call your father.",
+  "element" : "null",
+  "spawnable" : "dad chendur"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 2,
+  "name" : "The Footmen's Call",
+  "modifiers" : [
+       {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "soldier",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 4,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "spawnable",
+  "desc" : "Call four footmen forward to form a batallion",
+  "element" : "null",
+  "spawnable" : "makeshift militia"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 2,
+  "name" : "Summon Squirrel",
+  "modifiers" : [ ],
+  "type" : "spawnable",
+  "desc" : "Summon a small squirrel to help you",
+  "element" : "null",
+  "spawnable" : "squirrel"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 5,
+  "name" : "Building a sentry",
+  "modifiers" : [ 
+      {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "metal",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 120,
+                "type": "basic"
+            }
+        }],
+  "type" : "spawnable",
+  "desc" : "Start constructing a sentry.",
+  "element" : "null",
+  "spawnable" : "sentry"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 3,
+  "name" : "Building a Dispenser",
+  "modifiers" : [ 
+      {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "metal",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 100,
+                "type": "basic"
+            }
+        }],
+  "type" : "spawnable",
+  "desc" : "Start constructing a dispenser.",
+  "element" : "null",
+  "spawnable" : "dispenser"
+}, {
+  "shield" : "",
+  "strength" : 0,
+  "cooldown" : 5,
+  "name" : "Summon Golem",
+  "modifiers" : [ ],
+  "type" : "spawnable",
+  "desc" : "Summon a crystal to help you",
+  "element" : "null",
+  "spawnable" : "crystal"
+}, {
+  "strength" : 0,
+  "effect" : "Annoyance",
+  "cooldown" : 1,
+  "name" : "Hee Hee Haw",
+  "modifiers" : [
+      {
+        "limit": -1,
+        "type" : "group",
+      } 
+  ],
+  "type" : "support",
+  "desc" : "Laugh, which annoys everyone.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "instant heal",
+  "cooldown" : 1,
+  "name" : "Heal pulse",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "boosts defense for x amount of time",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "stockpile",
+  "cooldown" : 1,
+  "name" : "Stockpile",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Stockpile some potatoes for winter.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "power of potatoes",
+  "cooldown" : 1,
+  "name" : "Starvation Handling",
+  "modifiers" : [
+      {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "potato",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 30,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "support",
+  "desc" : "Eat the potatoes because of the winter season, massively improving stats.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "nonchalant",
+  "cooldown" : 4,
+  "name" : "Don't Worry About It",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Say the catchphrase, then shrug off some future attacks.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "Rust",
+  "cooldown" : 1,
+  "name" : "Rustic Charm",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Spread some rust on the opponent, adding a mark.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "sabotaged",
+  "cooldown" : 1,
+  "name" : "Sabotage",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Sabotage the target's stats.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "Shield Generator",
+  "cooldown" : 4,
+  "name" : "Supermarket Trip",
+  "modifiers" : [
+        {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "Coin",
+                "category": "stack",
+                "comparison": "equal",
+                "number requirement": 4,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "support",
+  "desc" : "Buy some instant shield generators... They sell those, right?",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "potato battery",
+  "cooldown" : 4,
+  "name" : "Battery",
+  "modifiers" : [
+        {
+            "type": "conditional",
+            "will consume": true,
+            "uses target": false,
+            "item": {
+                "name needed": "potato",
+                "category": "stack",
+                "comparison": "greater than or equal",
+                "number requirement": 3,
+                "type": "basic"
+            }
+        }
+  ],
+  "type" : "support",
+  "desc" : "Produce a battery from 3 potatoes.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "fungal infection",
+  "cooldown" : 9,
+  "name" : "Spore",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Gives the opponent an infection",
+  "element" : "null"
+},
+{
+  "strength" : 0,
+  "effect" : "dispense",
+  "cooldown" : 9,
+  "name" : "Dispense",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Give the target some metal and health.",
+  "element" : "null"
+},
+{
+  "strength" : 0,
+  "effect" : "war cry",
+  "cooldown" : 9,
+  "name" : "Rally",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Let out a battle cry, bolstering the target's resolve.",
+  "element" : "null"
+},
+{
+  "strength" : 0,
+  "effect" : "instant shield",
+  "cooldown" : 3,
+  "name" : "Protect",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "protects the user from any hit",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "burnout",
+  "cooldown" : 3,
+  "name" : "burn up",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "The target will burn up for a short amount of time",
+  "element" : "fire"
+}, {
+  "strength" : 0,
+  "effect" : "mega instant shield",
+  "cooldown" : 3,
+  "name" : "Counterstrike",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Adds a lot of shield",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "attack boost",
+  "cooldown" : 5,
+  "name" : "attack up",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "boosts damage for x amount of time",
+  "element" : "null"
+},  {
+  "strength" : 0,
+  "effect" : "bolster",
+  "cooldown" : 1,
+  "name" : "Handle",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Mentally prepare oneself for the situation at hanbd.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "poison",
+  "cooldown" : 5,
+  "name" : "Serve",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Deliver some poisoned food.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "defense up",
+  "cooldown" : 5,
+  "name" : "defense up",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "boosts defense for x amount of time",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "charge",
+  "cooldown" : 10,
+  "name" : "flare up",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Makes the user charge up their attacks",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "poison",
+  "cooldown" : 0,
+  "name" : "Poison",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Will poison the person targeted",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "encourage",
+  "cooldown" : 4,
+  "name" : "Encouragement",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Support the target's ambitions, giving them more attack.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "joyous",
+  "cooldown" : 3,
+  "name" : "Pride",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Show the target you're happy, making them a bit more energetic.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "belittled",
+  "cooldown" : 3,
+  "name" : "Discredit",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Make fun of the target, reducing their attack.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "curse",
+  "cooldown" : 4,
+  "name" : "Sacrifice",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Injures the user to cause more damage later",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "guard",
+  "cooldown" : 3,
+  "name" : "Defensive Stance",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "The user decides to be cautious for some time",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "induction",
+  "cooldown" : 6,
+  "name" : "Induct",
+  "modifiers" : [
+      {
+        "type" : "charge",
+        "charges": "4",
+      }
+  ],
+  "type" : "support",
+  "desc" : "Induct a troop to action, giving them extra attack. Careful, as you'll tire out after four uses.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "airy response",
+  "cooldown" : 4,
+  "name" : "Airy Attitude",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Show your ally the pain is bearable, urging them to go on. Higher defense.",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "build up",
+  "cooldown" : 2,
+  "name" : "Construct",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "The user starts to build up their stats",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "",
+  "cooldown" : 2,
+  "name" : "Stun Spore",
+  "state" : "paralyzed",
+  "modifiers" : [ ],
+  "type" : "state",
+  "desc" : "Paralyze the target, preventing them from doing anything",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "",
+  "cooldown" : 2,
+  "name" : "Invigorate",
+  "state" : "energized",
+  "modifiers" : [ ],
+  "type" : "state",
+  "desc" : "Energize the target, allowing them to make more moves per turn",
+  "element" : "null"
+}, {
+  "strength" : 0,
+  "effect" : "regenerate",
+  "cooldown" : 8,
+  "name" : "Bandage",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Bandage yourself to regenerate some hp.",
+  "element" : "all"
+}, {
+  "strength" : 0,
+  "effect" : "",
+  "cooldown" : 5,
+  "name" : "Pray",
+  "modifiers" : [ ],
+  "type" : "cleanse",
+  "desc" : "cleanse oneself of all effects",
+  "element" : "all"
+}, {
+  "strength" : 0,
+  "effect" : "purification",
+  "cooldown" : 2,
+  "name" : "Distillation",
+  "modifiers" : [ ],
+  "type" : "support",
+  "desc" : "Purify the bottle, healing some damage.",
+  "element" : "all"
+} ]

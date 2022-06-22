@@ -9,20 +9,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-
-import battlesystem.Ability;
-import battlesystem.Effect;
-import battlesystem.Entity;
-import battlesystem.EntityInfoItem;
-import battlesystem.Shield;
-import battlesystem.State;
-import battlesystem.abilityImpls.AbilityLoader;
-import battlesystem.effectImpls.EffectLoader;
-import battlesystem.infoItemImpls.InfoItemReader;
-import battlesystem.objectMapImpls.*;
-import battlesystem.shieldImpls.ShieldLoader;
-import battlesystem.stateImpls.StateLoader;
+import gameSystem.Ability;
+import gameSystem.Campaign;
+import gameSystem.Effect;
+import gameSystem.Encounter;
+import gameSystem.Entity;
+import gameSystem.EntityInfoItem;
+import gameSystem.Shield;
+import gameSystem.State;
+import gameSystem.Storage;
+import gameSystem.abilityImpls.AbilityLoader;
+import gameSystem.battlelogImpls.StringBattleLog;
+import gameSystem.effectImpls.EffectLoader;
+import gameSystem.infoItemImpls.InfoItemReader;
+import gameSystem.objectMapImpls.*;
+import gameSystem.shieldImpls.ShieldLoader;
+import gameSystem.stateImpls.StateLoader;
 import loaders.CustomMaker;
 import loaders.JsonIoThing;
 //The outer game is going to be in charge 
@@ -37,35 +39,28 @@ public class OuterGame {
 //  ScannerInput system;
   private AbilityManager abilityMan = new AbilityManager();
   private Scanner sc = new Scanner(System.in);
-  private HashMap<String, Ability> abilities;
+    private Storage storage;
+    private HashMap<String, Ability> abilities;
   private HashMap<String, Effect> effects;
   private HashMap<String, Shield> shields;
   private HashMap<String, EntityInfoItem> spawnables;
   private HashMap<String, State> states;
-  
-  public static final int ABILITIES_INDEX = 0;
-  public static final int EFFECTS_INDEX = 1;
-  public static final int SHIELDS_INDEX = 2;
-  public static final int SPAWNABLES_INDEX = 3;
-  public static final int STATES_INDEX = 4;
-  public static final int HEROES_INDEX = 5;
+
   
   public OuterGame(String[] files) {
-//    this.superheros = JsonIoThing.loadSuperheroArr("FileParsing/save.json");
-    try 
+   this.superheros = new ArrayList<>();
+    String[] items = new String[]{"EEEEEE", "Joe", "BeepBoop", "TestSubject", "SecondestSubject"};
+      try 
     {
-        this.abilities = AbilityLoader.parseJSONFile(files[ABILITIES_INDEX]);
-        this.effects = EffectLoader.parseJSONFile(files[EFFECTS_INDEX]);
-        this.shields = ShieldLoader.parseJSONFile(files[SHIELDS_INDEX]);
-        this.spawnables = InfoItemReader.parseJSONFile(files[SPAWNABLES_INDEX]);
-        this.states = StateLoader.parseJSONFile(files[STATES_INDEX]);
-        HashMap<String, EntityInfoItem> heroes = InfoItemReader.parseJSONFile(files[HEROES_INDEX]);  	  
-  	  	Iterator<String> heroNames = heroes.keySet().iterator();
-  	  	this.superheros = new ArrayList<>();
-	  	  while (heroNames.hasNext())
-	  	  {
-	  		  superheros.add(heroes.get(heroNames.next()));
-	  	  }
+        storage = new Storage(files);
+        storage.verifyAllItems();
+//        storage.saveAllToFiles();
+        for (int i = 0; i < items.length; i++)
+        {
+        	superheros.add(storage.getEntity(items[i]));
+//        	System.out.println(storage.getEntity(items[i]));
+        }
+        
     }
     catch(FileNotFoundException fnfe)
     {
@@ -92,17 +87,43 @@ public class OuterGame {
          Command.onHelp();
         break;
 
-        case "p":
-        case "play":
-        System.out.println("Playing Game!");
-        InnerGame iG = new InnerGame(superheros, abilities, effects, spawnables, shields, states, g);
-        iG.startFight();
+        case "pe":
+        case "play encounter":
+        // System.out.println("Playing Game!");
+             System.out.println("What encounter will you choose?");
+            String encounterName = sc.nextLine();
+            Encounter e = storage.getEncounter(encounterName);
+            System.out.println("Just to be safe, can you choose a protagonist?");
+            String protagName = sc.nextLine();
+            EntityInfoItem protag = storage.getEntity(protagName);
+            if (e == null || protag == null)
+            {
+                break;
+            }
+            InnerGame.ScannerInput system = new InnerGame.ScannerInput(new Scanner(System.in));
+            InnerGame game = new InnerGame(e, storage, new GUI(), protag);
+            game.startFight(protag.getName());
+       
         //going to add exploration here soon
 //        iG.Fight(superheros);
         break;
-
+        case "pc":
+        case "play campaign":
+            System.out.println("What campaign will you choose?");
+            String campaignName = sc.nextLine();
+            Campaign c = storage.getCampaign(campaignName);
+            if (c == null)
+            {
+                break;
+            }
+            system = new InnerGame.ScannerInput(new Scanner(System.in));
+            c.setInput(system);
+            c.setOutput(system);
+            c.beginCampaign(storage, new StringBattleLog());
+              break;
         case "ss":
         case "save superheros":
+        storage.saveAllToFiles();
 //        JsonIoThing.saveSuperheroArr(this.superheros,"FileParsing/save.json");
         break;
 
@@ -134,7 +155,12 @@ public class OuterGame {
         askAndAddAbilityToHero();
         break;
 
-        case "pa":
+        case "rc":
+          case "run campaign":
+
+              break;
+        
+          case "pa":
         case "print absolute abilities names":
         abilityMan.printAllNames();
         break;
