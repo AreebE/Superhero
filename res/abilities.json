@@ -61,7 +61,7 @@
   "ignores defense" : false,
   "modifiers" : [ {
     "limit": 3,
-    "type" : "group",
+    "type" : "group"
   } ],
   "type" : "attack",
   "desc" : "Summon a storm that shocks a few people.",
@@ -75,7 +75,7 @@
   "ignores defense" : false,
   "modifiers" : [ {
     "limit": -1,
-    "type" : "group",
+    "type" : "group"
   } ],
   "type" : "attack",
   "desc" : "Flood the field with some water.",
@@ -139,7 +139,7 @@
   "modifiers" : [
         {
         "type" : "charge",
-            "charges": "3",
+            "charges": "3"
         }      
   ],
   "type" : "attack",
@@ -460,7 +460,7 @@
     "type" : "multi cast"
   }, {
     "type" : "charge",
-    "charges": "3",
+    "charges": "3"
   } ],
   "type" : "attack",
   "desc" : "Launches a few snowballs.",
@@ -566,7 +566,7 @@
   "modifiers" : [
       {
           "times": 5,
-          "type": "multi cast",
+          "type": "multi cast"
       }
   ],
   "type" : "pass",
@@ -854,7 +854,7 @@
   "modifiers" : [
       {
         "limit": -1,
-        "type" : "group",
+        "type" : "group"
       } 
   ],
   "type" : "support",
@@ -1135,7 +1135,7 @@
   "modifiers" : [
       {
         "type" : "charge",
-        "charges": "4",
+        "charges": "4"
       }
   ],
   "type" : "support",

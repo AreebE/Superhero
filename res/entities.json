@@ -364,7 +364,7 @@
     "type" : "basic",
     "priority" : 0,
     "category" : 1
-  },  ],
+  }  ],
   "name" : "King of Clashes",
   "state" : "relaxed",
   "type" : "simple ai",
@@ -429,6 +429,5 @@
   "state" : "relaxed",
   "type" : "basic",
   "speed" : 100
-},
-
+}
 ]

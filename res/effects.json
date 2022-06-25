@@ -246,7 +246,7 @@
       "type" : "one time",
       "desc" : "",
       "element" : "null"
-    },],
+    } ],
   "type" : "group",
   "desc" : "Heal a bit, then keep some defense for a bit.",
   "element" : "null"
