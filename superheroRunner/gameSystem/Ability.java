@@ -434,7 +434,7 @@ public abstract class Ability
     	{
     		for (int i = modifiers.size() - 1; i >= 0; i++)
     		{
-    			if (modifiers.get(i).getPriority() == Ability.ATTACK_PRIORITY)
+    			if (modifiers.get(i).getClass().equals(GroupModifier.class))
     			{
     	    		return ((GroupModifier) modifiers.get(i)).getLimit();
     			}

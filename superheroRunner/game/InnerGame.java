@@ -127,6 +127,7 @@ public class InnerGame extends Game
     @Override
     public List<Entity> getSecondaryTargets(Integer limit, Entity currentPlayer) {
       ArrayList<Entity> otherTargets = new ArrayList<>();
+      System.out.println(limit);
       if (limit == -1) {
         for (int i = 0; i < fighters.size(); i++) {
           if (!fighters.get(i).equals(currentPlayer) && !fighters.get(i).equals(target)) {
@@ -145,6 +146,7 @@ public class InnerGame extends Game
         }
         otherTargets.add(target);
       }
+      System.out.println(otherTargets.size());
       return otherTargets;
     }
 
