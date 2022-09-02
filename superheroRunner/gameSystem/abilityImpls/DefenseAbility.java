@@ -7,13 +7,13 @@ import java.util.List;
 import org.json.JSONObject;
 
 import gameSystem.Ability;
-import gameSystem.AbilityModifier;
 import gameSystem.BattleLog;
 import gameSystem.Element;
 import gameSystem.Entity;
 import gameSystem.Game;
 import gameSystem.Shield;
 import gameSystem.Storage;
+import modifiers.abilityMods.AbilityModifier;
 
 /**
  * The defense ability used to produce a shield and give it to a player.

@@ -828,11 +828,11 @@ public class Entity implements Comparable<Entity>
      * Reduce the shield durations and remove any that have expired.
      * @param log the battle log for storing any shields that happened to be removed.
      */
-    public void reduceShieldDurations(BattleLog log)
+    public void reduceShieldDurations(BattleLog log, Game g)
     {
         for (int i = shields.size() - 1; i >= 0; i--)
         {
-            shields.get(i).passTurn(this, log);
+            shields.get(i).passTurn(this, g, log);
         }
     }
 
@@ -1152,7 +1152,7 @@ public class Entity implements Comparable<Entity>
 
         useEffects(log);
         reduceCooldowns(log);
-        reduceShieldDurations(log);
+        reduceShieldDurations(log, g);
         reduceStateDurations();
         isHealthZero(log, g);
 

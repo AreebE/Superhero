@@ -1,8 +1,8 @@
-package gameSystem;
-
-import java.util.Collection;
+package modifiers.abilityMods;
 
 import org.json.JSONObject;
+
+import gameSystem.GroupModifier;
 
 public class ModifierLoader {
 	

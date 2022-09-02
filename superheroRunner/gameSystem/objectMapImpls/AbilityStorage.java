@@ -10,11 +10,11 @@ import gameSystem.Ability;
 import gameSystem.Elements;
 import gameSystem.Entity;
 import gameSystem.GroupModifier;
-import gameSystem.MultiCastModifier;
-import gameSystem.PercentageModifier;
-import gameSystem.RandomModifier;
 import gameSystem.abilityImpls.*;
 import gameSystem.objectMapImpls.Effects.Name;
+import modifiers.abilityMods.MultiCastModifier;
+import modifiers.abilityMods.PercentageModifier;
+import modifiers.abilityMods.RandomModifier;
 
 public class AbilityStorage{
   AbilityStorage(){

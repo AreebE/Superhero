@@ -2,6 +2,7 @@ package gameSystem.shieldImpls;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -25,6 +26,7 @@ public class ShieldLoader {
 	public static final String SELF = "self";
 	public static final String TRAP = "trap";
     public static final String REFLECTIVE = "reflective";
+	public static final String CONDITIONAL = "conditional";
     
 	public static HashMap<String, Shield> parseJSONFile(String src) throws FileNotFoundException
 	{
@@ -69,6 +71,8 @@ public class ShieldLoader {
 				return new TrapShield(json);
             case REFLECTIVE:
                 return new ReflectiveShield(json);
+            case CONDITIONAL:
+            	return new ConditionalShield(json);
         }
 		return null;
 	}

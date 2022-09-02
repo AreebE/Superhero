@@ -16,7 +16,6 @@ import gameSystem.Ability;
 import gameSystem.Effect;
 import gameSystem.Encounter;
 import gameSystem.EntityInfoItem;
-import gameSystem.RandomModifier;
 import gameSystem.Shield;
 import gameSystem.State;
 import gameSystem.Storage;
@@ -35,6 +34,7 @@ import gameSystem.objectMapImpls.Spawnables;
 import gameSystem.objectMapImpls.States;
 import gameSystem.shieldImpls.ShieldLoader;
 import gameSystem.stateImpls.StateLoader;
+import modifiers.abilityMods.RandomModifier;
 
 
 //should we make like a "main menu" type of thing so that

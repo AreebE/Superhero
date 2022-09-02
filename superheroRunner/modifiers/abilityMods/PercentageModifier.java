@@ -1,9 +1,15 @@
-package gameSystem;
+package modifiers.abilityMods;
 
 import java.util.List;
 
 import org.json.JSONObject;
 
+import gameSystem.Ability;
+import gameSystem.BattleLog;
+import gameSystem.Entity;
+import gameSystem.Game;
+import gameSystem.Storage;
+import gameSystem.Entity.Statistic;
 import gameSystem.abilityImpls.AbilityLoader;
 
 public class PercentageModifier implements AbilityModifier

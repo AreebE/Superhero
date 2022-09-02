@@ -241,6 +241,7 @@ public abstract class Shield
      */
     public void passTurn(
         Entity target, 
+        Game g,
         BattleLog log)
     {
         if (duration != -1)
@@ -406,5 +407,7 @@ public abstract class Shield
     	return shield;
     }
 
+
+	
     
 }

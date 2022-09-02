@@ -1,10 +1,12 @@
 package gameSystem;
 
-import java.util.EnumMap;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import modifiers.abilityMods.AbilityModifier;
+import modifiers.abilityMods.ModifierLoader;
 
 import java.util.ArrayList;
 import java.util.Collections;

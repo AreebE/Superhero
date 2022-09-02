@@ -1,11 +1,18 @@
-package gameSystem;
+package modifiers.abilityMods;
 
 import java.util.List;
 import java.util.Random;
 
 import org.json.JSONObject;
 
+import gameSystem.Ability;
+import gameSystem.BattleLog;
+import gameSystem.Entity;
+import gameSystem.Game;
 import gameSystem.Storage;
+import gameSystem.BattleLog.Entry;
+import gameSystem.BattleLog.Entry.Interruption;
+import gameSystem.BattleLog.Entry.Type;
 import gameSystem.abilityImpls.AbilityLoader;
 
 public class RandomModifier implements AbilityModifier{

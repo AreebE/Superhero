@@ -9,11 +9,11 @@ import java.util.Scanner;
 import org.json.JSONTokener;
 
 import gameSystem.Ability;
-import gameSystem.AbilityModifier;
 import gameSystem.GroupModifier;
-import gameSystem.MultiCastModifier;
-import gameSystem.PercentageModifier;
-import gameSystem.RandomModifier;
+import modifiers.abilityMods.AbilityModifier;
+import modifiers.abilityMods.MultiCastModifier;
+import modifiers.abilityMods.PercentageModifier;
+import modifiers.abilityMods.RandomModifier;
 
 import org.json.JSONArray;
 import org.json.JSONException;

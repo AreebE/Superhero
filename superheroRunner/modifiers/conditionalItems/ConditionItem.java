@@ -1,6 +1,14 @@
-package gameSystem;
+package modifiers.conditionalItems;
 
 import org.json.JSONObject;
+
+import gameSystem.BattleLog;
+import gameSystem.Entity;
+import gameSystem.Saveable;
+import gameSystem.Storage;
+import gameSystem.BattleLog.Entry;
+import gameSystem.BattleLog.Entry.Type;
+import gameSystem.Entity.Statistic;
 
 public class ConditionItem
     implements Saveable
@@ -9,7 +17,7 @@ public class ConditionItem
 	private static final String NAME_NEEDED = "name needed";
 	private static final String CATEGORY_KEY = "category";
 	private static final String TYPE_OF_COMPARISON_KEY = "comparison";
-	private static final String NUMBER_REQUIREMENT_KEY = "number requirement";
+	protected static final String NUMBER_REQUIREMENT_KEY = "number requirement";
 	public static final String TYPE_KEY = "type";
 
 	public static final String CATEGORY_EFFECT = "effect";
@@ -55,36 +63,9 @@ public class ConditionItem
 
 	public boolean meetsRequirements(Entity target)
 	{
-		int number = 0;
-        System.out.println(categoryName);
-		switch(categoryName)
-		{
-			case CATEGORY_EFFECT:
-				number = target.getNumOfEffects();
-				break;
-			case CATEGORY_EFFECT_NUMBER:
-				number = target.getNumOfEffects(nameNeeded);
-                System.out.println(number);
-				break;
-			case CATEGORY_STACK:
-				number = target.getStackNumber(nameNeeded);
-				break;
-			case CATEGORY_HEALTH:
-				number = target.getStatistic(Entity.Statistic.HEALTH);
-				break;
-			case CATEGORY_SHIELD:	
-				number = target.getStatistic(Entity.Statistic.SHIELD);
-				break;
-			case CATEGORY_SPEED:
-				number = target.getStatistic(Entity.Statistic.SPEED);
-				break;
-			case CATEGORY_ATTACK:
-				number = target.getStatistic(Entity.Statistic.BASE_ATTACK);
-				break;
-			case CATEGORY_DEFENSE:
-				number = target.getStatistic(Entity.Statistic.BASE_DEFENSE);
-				break;		
-		}
+		int number = getNumber(target);
+//        System.out.println(categoryName);
+		
 		switch (comparisonType)
 		{
 			case COMPARE_LESS_THAN:
@@ -99,6 +80,30 @@ public class ConditionItem
 				return number > numberReq;
 		}
 		return false;
+	}
+	
+	public int getNumber(Entity target)
+	{
+		switch(categoryName)
+		{
+			case CATEGORY_EFFECT:
+				return target.getNumOfEffects();
+			case CATEGORY_EFFECT_NUMBER:
+				return target.getNumOfEffects(nameNeeded);
+			case CATEGORY_STACK:
+				return target.getStackNumber(nameNeeded);
+			case CATEGORY_HEALTH:
+				return target.getStatistic(Entity.Statistic.HEALTH);
+			case CATEGORY_SHIELD:	
+				return target.getStatistic(Entity.Statistic.SHIELD);
+			case CATEGORY_SPEED:
+				return target.getStatistic(Entity.Statistic.SPEED);
+			case CATEGORY_ATTACK:
+				return target.getStatistic(Entity.Statistic.BASE_ATTACK);
+			case CATEGORY_DEFENSE:
+				return target.getStatistic(Entity.Statistic.BASE_DEFENSE);
+		}
+		return 0;
 	}
 	
 	@Override
