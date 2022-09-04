@@ -31,6 +31,7 @@ public class Storage
     public static final int ENCOUNTERS = 6;
     public static final int EVENTS = 7;
     public static final int CAMPAIGNS = 8;
+    public static final int STACKS = 9;
     public static final int UNDEF = Integer.MAX_VALUE;
     
     
@@ -44,6 +45,7 @@ public class Storage
     private HashMap<String, Encounter> encounters;
     private HashMap<String, Event> events;
     private HashMap<String, Campaign> campaigns;
+    private HashMap<String, ItemStack> stacks;
 
     public Storage(String[] files) throws FileNotFoundException
     {

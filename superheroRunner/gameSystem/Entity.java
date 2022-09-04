@@ -39,7 +39,7 @@ public class Entity implements Comparable<Entity>
     private int baseAttack;
     private int baseDefense;
     private int teamID;
-    private HashMap<String, Integer> stacks;
+    private HashMap<String, ItemStack> stacks;
     private static transient Terrain t;
 
 
@@ -975,7 +975,7 @@ public class Entity implements Comparable<Entity>
      * Anything to do with stacks.
      */
     
-	public void changeStack(String stack, int power) {
+	public void changeStack(String stack, int change, Game g) {
 		// TODO Auto-generated method stub
 		if (stacks.get(stack) == null)
 		{
