@@ -238,6 +238,16 @@ public class GroupEffect extends Effect
                 );
     }
     
+    @Override 
+    public void setName(String newName)
+    {
+    	super.setName(newName);
+    	for (int i = 0; i < listOfEffects.size(); i++)
+    	{
+    		listOfEffects.get(i).setName(newName);
+    	}
+    }
+    
     /**
      * Get the duration of this effect.
      * @return the total group duration.

@@ -1,8 +1,7 @@
-package gameSystem.shieldImpls;
+package gameSystem.stackImpls;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,22 +12,17 @@ import org.json.JSONTokener;
 
 import gameSystem.Effect;
 import gameSystem.Shield;
-import gameSystem.State;
-import gameSystem.stateImpls.NormalState;
-import gameSystem.stateImpls.StunState;
-import gameSystem.stateImpls.VigorState;
+import gameSystem.ItemStack;
+import gameSystem.shieldImpls.ConditionalShield;
+import gameSystem.shieldImpls.DeathShield;
+import gameSystem.shieldImpls.DualShield;
+import gameSystem.shieldImpls.ReflectiveShield;
+import gameSystem.shieldImpls.SelfDeathShield;
+import gameSystem.shieldImpls.SelfShield;
+import gameSystem.shieldImpls.TrapShield;
 
-public class ShieldLoader {
-	
-	public static final String DEATH = "death";
-	public static final String DUAL = "dual";
-	public static final String SELF_DEATH = "self death";
-	public static final String SELF = "self";
-	public static final String TRAP = "trap";
-    public static final String REFLECTIVE = "reflective";
-	public static final String CONDITIONAL = "conditional";
-    
-	public static HashMap<String, Shield> parseJSONFile(String src) throws FileNotFoundException
+public class StackLoader {
+	public static HashMap<String, ItemStack> parseJSONFile(String src) throws FileNotFoundException
 	{
 		Scanner fileReader = new Scanner(new File(src));
 		StringBuilder jsonString = new StringBuilder();
@@ -55,7 +49,7 @@ public class ShieldLoader {
 		return listOfShields;
 	}
 	
-	public static Shield loadItem(JSONObject json)
+	public static ItemStack loadItem(JSONObject json)
 	{
 		switch(json.getString(Effect.TYPE_KEY))
 		{

@@ -5,6 +5,8 @@ import java.util.List;
 import org.json.JSONObject;
 
 import gameSystem.abilityImpls.AbilityLoader;
+import modifiers.abilityMods.AbilityModifier;
+import modifiers.abilityMods.ModifierLoader;
 
 public class GroupModifier implements AbilityModifier
 {

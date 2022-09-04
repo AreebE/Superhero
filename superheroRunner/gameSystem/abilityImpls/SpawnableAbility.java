@@ -5,13 +5,13 @@ import java.util.List;
 import org.json.JSONObject;
 
 import gameSystem.Ability;
-import gameSystem.AbilityModifier;
 import gameSystem.BattleLog;
 import gameSystem.Element;
 import gameSystem.Entity;
 import gameSystem.EntityInfoItem;
 import gameSystem.Game;
 import gameSystem.Storage;
+import modifiers.abilityMods.AbilityModifier;
 
 import java.util.ArrayList;
 import java.util.EnumMap;

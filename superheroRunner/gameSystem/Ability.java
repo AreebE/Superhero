@@ -1,10 +1,12 @@
 package gameSystem;
 
-import java.util.EnumMap;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import modifiers.abilityMods.AbilityModifier;
+import modifiers.abilityMods.ModifierLoader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -434,7 +436,7 @@ public abstract class Ability
     	{
     		for (int i = modifiers.size() - 1; i >= 0; i++)
     		{
-    			if (modifiers.get(i).getPriority() == Ability.ATTACK_PRIORITY)
+    			if (modifiers.get(i).getClass().equals(GroupModifier.class))
     			{
     	    		return ((GroupModifier) modifiers.get(i)).getLimit();
     			}

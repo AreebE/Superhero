@@ -96,7 +96,24 @@ public class SelfShield extends Shield
         log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
         victim.addStartingEffect(g.getEffect(selfApply));
     }
-
+    
+    protected void applyShield(
+            Entity victim, 
+            Entity caster, 
+            Game g,
+            BattleLog log,
+            Effect otherEffect)
+        {
+            Object[] contents = new Object[]{victim.getName(), getUses() - 1, victim.getName(), otherEffect.getName(), null, getName()};
+            log.addEntry(new BattleLog.Entry(BattleLog.Entry.Type.SHIELD_TRIGGER, contents));
+            victim.addStartingEffect(otherEffect);
+        }
+    
+    public String getSelfApply()
+    {
+    	return selfApply;
+    }
+    
     @Override
     public Shield copy()
     {

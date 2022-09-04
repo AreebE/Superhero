@@ -1,36 +1,17 @@
 package game;
 
-import java.util.List;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-import gameSystem.Ability;
 import gameSystem.Campaign;
-import gameSystem.Effect;
 import gameSystem.Encounter;
 import gameSystem.Entity;
 import gameSystem.EntityInfoItem;
-import gameSystem.Shield;
-import gameSystem.State;
 import gameSystem.Storage;
-import gameSystem.abilityImpls.AbilityLoader;
 import gameSystem.battlelogImpls.StringBattleLog;
-import gameSystem.effectImpls.EffectLoader;
-import gameSystem.infoItemImpls.InfoItemReader;
-import gameSystem.objectMapImpls.*;
-import gameSystem.shieldImpls.ShieldLoader;
-import gameSystem.stateImpls.StateLoader;
-import loaders.CustomMaker;
-import loaders.JsonIoThing;
-//The outer game is going to be in charge 
-//of things like saving loading creating and editing  
-//abilities and heros and stuff like that 
-// while innergame is for the actual gameplay like fighting and stuff
+import gameSystem.objectMapImpls.AbilityManager;
+import gameSystem.objectMapImpls.States;
 
 public class OuterGame {
 
@@ -40,11 +21,7 @@ public class OuterGame {
   private AbilityManager abilityMan = new AbilityManager();
   private Scanner sc = new Scanner(System.in);
     private Storage storage;
-    private HashMap<String, Ability> abilities;
-  private HashMap<String, Effect> effects;
-  private HashMap<String, Shield> shields;
-  private HashMap<String, EntityInfoItem> spawnables;
-  private HashMap<String, State> states;
+
 
   
   public OuterGame(String[] files) {

@@ -7,13 +7,13 @@ import java.util.List;
 import org.json.JSONObject;
 
 import gameSystem.Ability;
-import gameSystem.AbilityModifier;
 import gameSystem.BattleLog;
 import gameSystem.Effect;
 import gameSystem.Element;
 import gameSystem.Entity;
 import gameSystem.Game;
 import gameSystem.Storage;
+import modifiers.abilityMods.AbilityModifier;
 
 /**
  * This extension of attack ability is going to add an effect to the target.
