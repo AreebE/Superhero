@@ -1,0 +1,102 @@
+[
+	{
+		"team layout":
+			[
+				["Lyn"],
+				["Joe"]
+			],
+		"name":"duel",
+		"type":"free for all"
+	},
+	{
+		"team layout":
+			[
+				["BeepBoop"],
+				["EEEEEE"],
+				["TestSubject"],
+				["SecondestSubject"]
+			],
+		"name":"beta free",
+		"type":"free for all"
+	},
+	{
+		"team layout":
+			[
+				[
+					"BeepBoop",
+					"EEEEEE",
+					"TestSubject"
+				],
+				["protagonist"]
+			],
+		"name":"beta",
+		"type":"one v all"
+	},
+	{
+		"team layout":
+			[
+				[
+					"The Manager"
+				],
+				["protagonist"]
+			],
+		"name":"Talking to the Manager",
+		"type":"one v all"
+	},
+	{
+		"team layout":
+			[
+				[
+					"Engineer.jpg"
+				],
+				["protagonist"]
+			],
+		"name":"Texan Showdown",
+		"type":"one v all"
+	},
+	{
+		"team layout":
+			[
+				[
+					"Imposter"
+				],
+				["protagonist"]
+			],
+		"name":"Fairly Sus",
+		"type":"one v all"
+	},
+	{
+		"team layout":
+			[
+				[
+					"Boyfriend.xml"
+				],
+				["protagonist"]
+			],
+		"name":"A Funky Battle",
+		"type":"one v all"
+	},
+	{
+		"team layout":
+			[
+				[
+					"King of Clashes"
+				],
+				["protagonist"]
+			],
+		"name":"The Laughing King",
+		"type":"one v all"
+	},
+    {
+		"team layout":
+			[
+                ["Communist Aayush"],
+                ["Danial"],
+                ["Aqua"],
+                ["Lyn"]
+			],
+		"name":"Showtime",
+		"type":"multi team"
+	}
+    
+]

@@ -1,0 +1,721 @@
+[ 
+{
+  "duration" : 0,
+  "stat" : "",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Dispense",
+  "all effects" : [ {
+    "duration" : 0,
+    "stat" : "stack",
+    "stack name": "metal",
+    "strength" : 20,
+    "permanent" : true,
+    "name" : "Dispense",
+    "type" : "standard",
+    "desc" : " ",
+    "element" : "null"
+  }, {
+    "duration" : 20,
+    "stat" : "health",
+    "strength" : 1,
+    "permanent" : true,
+    "name" : "Dispense",
+    "type" : "instant",
+    "desc" : " ",
+    "element" : "null"
+  } ],
+  "type" : "group",
+  "desc" : "The target recovers some HP and metal.",
+  "element" : "null"
+},
+{
+  "duration" : 0,
+  "stat" : "defense",
+  "strength" : 4,
+  "permanent" : true,
+  "name" : "Sabotaged",
+  "type" : "instant",
+  "desc" : "Reduce the opponent's defense by a good amount.",
+  "element" : "null"
+}, 
+    {
+  "duration" : 0,
+  "stat" : "speed",
+  "strength" : 10,
+  "permanent" : true,
+  "name" : "mach boost",
+  "type" : "instant",
+  "desc" : "Give yourself a quick boost.",
+  "element" : "null"
+},
+{
+  "duration" : 0,
+  "stat" : "speed",
+  "strength" : 3,
+  "permanent" : true,
+  "name" : "Joyous",
+  "type" : "instant",
+  "desc" : "Give yourself a quick boost.",
+  "element" : "null"
+},
+    {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Encourage",
+  "type" : "instant",
+  "desc" : "Give yourself a quick attack boost.",
+  "element" : "null"
+},
+    {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : -1,
+  "permanent" : true,
+  "name" : "belittled",
+  "type" : "instant",
+  "desc" : "The target feels bad and less sure of their attacks.",
+  "element" : "null"
+},
+{
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Induction",
+  "type" : "instant",
+  "desc" : "Apply a controlled shock to the target, improving their physical prowess",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Fear",
+  "type" : "instant",
+  "desc" : "Worry about what the opponent will do now.",
+  "element" : "null"
+},  {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 10,
+  "permanent" : true,
+  "name" : "Outlawed",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Punish the opponent for breaking the law.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Taxed",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Tax the opponent for doing a trade.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "Attack Boost",
+  "type" : "instant",
+  "desc" : "Boosts the base attack of all abilities by 2, except Pass",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 7,
+  "permanent" : true,
+  "name" : "Attack boost X",
+  "type" : "instant",
+  "desc" : "Buffs the attack by a lot",
+  "element" : "null"
+}, {
+  "duration" : 3,
+  "stat" : "damage",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Burn",
+  "type" : "standard",
+  "pierces defense": false,
+  "pierces shield": true,
+  "desc" : "Burns the opponent",
+  "element" : "fire"
+}, {
+  "duration" : 0,
+  "stat" : "defense",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "Defense Up",
+  "type" : "instant",
+  "desc" : "Reduces all future damage the character takes by 2",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 4,
+  "permanent" : true,
+  "name" : "Coinage",
+  "type" : "instant",
+  "desc" : "Collect some coins",
+  "stack name": "Coin",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "Harvest",
+  "type" : "instant",
+  "desc" : "Harvest some potatoes.",
+  "stack name": "potato",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "defense",
+  "strength" : 7,
+  "permanent" : true,
+  "name" : "Defense Boost X",
+  "type" : "instant",
+  "desc" : "Buffs the defense",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "speed",
+  "strength" : 20,
+  "permanent" : true,
+  "name" : "Speed Boost X",
+  "type" : "instant",
+  "desc" : "Buffs speed",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "health",
+  "strength" : 20,
+  "permanent" : true,
+  "name" : "Purification",
+  "type" : "instant",
+  "desc" : "Heal back some hp after purifying yourself.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "max health",
+  "strength" : 20,
+  "permanent" : true,
+  "name" : "Max Health X",
+  "type" : "instant",
+  "desc" : "Buffs health",
+  "element" : "null"
+}, {
+  "duration" : 5,
+  "stat" : "attack",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Charge",
+  "type" : "standard",
+  "desc" : "Will increase the base attack of the user by one each turn",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Nonchalant",
+  "all effects" : [  {
+    "duration" : 0,
+    "stat" : "health",
+    "strength" : 10    ,
+    "permanent" : true,
+    "name" : "Nonchalant",
+    "type" : "instant",
+    "desc" : "",
+    "element" : "null"
+  }, {
+      "duration" : 4,
+      "stat" : "defense",
+      "strength" : 4,
+      "permanent" : false,
+      "name" : "Nonchalant",
+      "type" : "one time",
+      "desc" : "",
+      "element" : "null"
+    } ],
+  "type" : "group",
+  "desc" : "Heal a bit, then keep some defense for a bit.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Build up",
+  "all effects" : [ {
+    "duration" : 5,
+    "stat" : "attack",
+    "strength" : 1,
+    "permanent" : true,
+    "name" : "Build up",
+    "type" : "standard",
+    "desc" : "Will increase the base attack of the user by one each turn",
+    "element" : "null"
+  }, {
+    "duration" : 0,
+    "stat" : "defense",
+    "strength" : 2,
+    "permanent" : true,
+    "name" : "Build up",
+    "type" : "instant",
+    "desc" : "Reduces all future damage the character takes by 2",
+    "element" : "null"
+  }, {
+    "duration" : 5,
+    "stat" : "health",
+    "strength" : 1,
+    "permanent" : true,
+    "name" : "Build up",
+    "type" : "standard",
+    "desc" : "The player will recover health for ten turns, 1 health per turn. ",
+    "element" : "null"
+  } ],
+  "type" : "group",
+  "desc" : "The target begins to increase all of their stats.",
+  "element" : "null"
+}, {
+  "duration" : 3,
+  "stat" : "defense",
+  "strength" : 1,
+  "permanent" : false,
+  "name" : "Airy Response",
+  "type" : "one time",
+  "desc" : "Hold on for a bit longer, healing some HP.",
+  "element" : "null"
+}, {
+  "duration" : 5,
+  "stat" : "defense",
+  "strength" : 4,
+  "permanent" : false,
+  "name" : "Guard",
+  "type" : "one time",
+  "desc" : "Will let the user adopt a defensive stance",
+  "element" : "null"
+}, {
+  "duration" : 14,
+  "stat" : "attack",
+  "strength" : 10,
+  "permanent" : true,
+  "turn decay starts" : 1,
+  "name" : "Burnout",
+  "count" : 0,
+  "decay" : 1,
+  "type" : "decay",
+  "desc" : "Gives the user immediate attack, then it slowly burns out",
+  "element" : "fire"
+}, {
+  "duration" : 0,
+  "stat" : "",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Sacrificial Gift",
+  "all effects" : [ {
+    "duration" : 0,
+    "stat" : "attack",
+    "strength" : 7,
+    "permanent" : true,
+    "name" : "Sacrificial Gift",
+    "type" : "instant",
+    "desc" : "Buffs the attack by a lot",
+    "element" : "null"
+  }, {
+    "duration" : 0,
+    "stat" : "defense",
+    "strength" : 7,
+    "permanent" : true,
+    "name" : "Sacrificial Gift",
+    "type" : "instant",
+    "desc" : "Buffs the defense",
+    "element" : "null"
+  }, {
+    "duration" : 0,
+    "stat" : "max health",
+    "strength" : 20,
+    "permanent" : true,
+    "name" : "Sacrificial Gift",
+    "type" : "instant",
+    "desc" : "Buffs health",
+    "element" : "null"
+  }, {
+    "duration" : 0,
+    "stat" : "speed",
+    "strength" : 20,
+    "permanent" : true,
+    "name" : "Sacrificial Gift",
+    "type" : "instant",
+    "desc" : "Buffs speed",
+    "element" : "null"
+  } ],
+  "type" : "group",
+  "desc" : "The target gets some extreme buffs",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Power of Potatoes",
+  "all effects" : [ {
+    "duration" : 0,
+    "stat" : "attack",
+    "strength" : 10,
+    "permanent" : true,
+    "name" : "Power of Potato",
+    "type" : "instant",
+    "desc" : "",
+    "element" : "null"
+  }, {
+    "duration" : 0,
+    "stat" : "defense",
+    "strength" : 10,
+    "permanent" : true,
+    "name" : "Power of Potato",
+    "type" : "instant",
+    "desc" : "",
+    "element" : "null"
+  } ],
+  "type" : "group",
+  "desc" : "The target gets a good amount of attack and defense by eating well.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "shield",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Instant Shield",
+  "type" : "instant",
+  "desc" : "Adds 10 shield immediately",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "shield",
+  "strength" : 50,
+  "permanent" : true,
+  "name" : "Mega Instant Shield",
+  "type" : "instant",
+  "desc" : "Adds 50 shield immediately",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "shield",
+  "strength" : 0,
+  "permanent" : true,
+  "name" : "Exponential Shield",
+  "type" : "passive",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Generates more shield over time",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 1,
+  "permanent" : true,
+  "delay": 4,
+  "name" : "Rust",
+  "type" : "instant",
+  "desc" : "Apply some rust onto the opponent.",
+  "stack name": "rust",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 1,
+  "permanent" : true,
+  "delay": 4,
+  "name" : "Proposing Bills",
+  "type" : "delayed passive",
+  "desc" : "Every 4 turns, you get the opportunity to pass a new law.",
+  "stack name": "bill",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 6,
+  "permanent" : true,
+  "name" : "Soldier's Call",
+  "type" : "delayed passive",
+  "delay": 4,
+  "desc" : "Soldiers approach the battlefield, ready to fight.",
+  "stack name": "soldier",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "health",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "Ego Boost",
+  "type" : "instant",
+  "desc" : "Heals 2 health per successful note",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 6,
+  "permanent" : true,
+  "name" : "Stockpile",
+  "type" : "instant",
+  "desc" : "Earn a good number of potatoes",
+  "element" : "null",
+  "stack name" : "potato"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Potato Battery",
+  "type" : "instant",
+  "desc" : "Use some potatoes to create a battery.",
+  "element" : "null",
+  "stack name" : "charge"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 10,
+  "permanent" : true,
+  "name" : "Ego Drop",
+  "pierces defense" : false,
+  "pierces shield" : false,
+  "type" : "instant",
+  "desc" : "Deals 10 damage for failing to sing in tune.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Frostbite",
+  "pierces defense" : false,
+  "pierces shield" : true,
+  "type" : "instant",
+  "desc" : "Suffer from frostbite.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "health",
+  "strength" : 10,
+  "permanent" : true,
+  "name" : "Instant heal",
+  "type" : "instant",
+  "desc" : "Heals 10 health immediately",
+  "element" : "null"
+}, {
+  "duration" : 6,
+  "stat" : "shield",
+  "strength" : 12,
+  "permanent" : true,
+  "name" : "Shield Generator",
+  "type" : "basic",
+  "desc" : "Adds 12 shield each turn",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "health",
+  "strength" : 100,
+  "permanent" : true,
+  "name" : "Resurrect",
+  "type" : "instant",
+  "desc" : "Resurrect the person from beyond the grave",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "health",
+  "strength" : 35,
+  "permanent" : true,
+  "name" : "regenerate",
+  "type" : "instant",
+  "desc" : "Regenerate some hp.",
+  "element" : "null"
+}, {
+  "duration" : 5,
+  "stat" : "health",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Regen",
+  "type" : "standard",
+  "desc" : "The player will recover health for ten turns, 1 health per turn. ",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Elixer Regen",
+  "type" : "passive",
+  "desc" : "Regenerate some",
+  "stack name": "Elixer",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "stack",
+  "strength" : 4,
+  "permanent" : true,
+  "name" : "Metal Regen",
+  "type" : "passive",
+  "desc" : "Regenerate some",
+  "stack name": "Metal",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "speed",
+  "strength" : 5,
+  "permanent" : true,
+  "name" : "Short Legged",
+  "type" : "passive",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Take pride in your short legs and start to run faster.",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "health",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Permanent regeneration",
+  "type" : "passive",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Just as the name says.",
+  "element" : "null"
+}, {
+  "duration" : 5,
+  "stat" : "damage",
+  "strength" : 1,
+  "permanent" : true,
+  "name" : "Poison",
+  "type" : "standard",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Will decrease the health of the player by one.",
+  "element" : "null"
+}, {
+  "duration" : 4,
+  "stat" : "damage",
+  "strength" : 20,
+  "permanent" : true,
+  "name" : "Curse",
+  "type" : "delay",
+  "pierces defense" : false,
+  "pierces shield" : false,
+  "desc" : "Deals a hefty amount of damage after some time has passed",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 4,
+  "permanent" : true,
+  "name" : "Retaliate",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Does some damage in retaliation",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 30,
+  "permanent" : true,
+  "name" : "Illusionary blast",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "An illusion attacks the person",
+  "element" : "light"
+}, {
+  "duration" : 5,
+  "stat" : "attack",
+  "strength" : 3,
+  "permanent" : false,
+  "name" : "Bleed",
+  "type" : "standard",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "The opponent starts to suffer from blood loss",
+  "element" : "null"
+}, {
+  "duration" : 0,
+  "stat" : "damage",
+  "strength" : 10,
+  "permanent" : true,
+  "name" : "Explode",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Deals damage with an explosion",
+  "element" : "null"
+},
+{
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "Annoyance",
+  "type" : "instant",
+  "desc" : "Wanting to get this battle over already, the target recieves some attack.",
+  "element" : "null"
+},
+{
+  "duration" : 0,
+  "stat" : "speed",
+  "strength" : -10,
+  "permanent" : true,
+  "name" : "Disorient",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Decreases the target's attack.",
+  "element" : "null"
+},
+{
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "Bolster",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "The preparation paid off.",
+  "element" : "null"
+},
+    {
+  "duration" : 0,
+  "stat" : "attack",
+  "strength" : 2,
+  "permanent" : true,
+  "name" : "War Cry",
+  "type" : "instant",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "desc" : "Increases the target's attack.",
+  "element" : "null"
+},
+    {
+  "stat" : "damage",
+  "strength" : 1,
+  "turn decay starts" : -1,
+  "count" : 0,
+  "decay" : 0,
+  "type" : "decay",
+  "pierces defense" : true,
+  "pierces shield" : true,
+  "duration" : 10,
+  "permanent" : true,
+  "name" : "Fungal infection",
+  "desc" : "A type of infection that deals more damage over time",
+  "element" : "null"
+} ]
